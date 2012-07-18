@@ -1,0 +1,24 @@
+%h1 Company Profiles
+%br
+.span9
+  .row
+    - unless @error.nil?
+      .span9{:class => "alert alert-error"}= @error
+
+    - unless @employers.nil?
+      - @employers.each do |emp|
+        .row
+          .span2
+          - if emp.photo.nil?
+            %img{:src => "/images/companylogos/nologo.png", :class => "span2 pull-left"}
+          - else
+            %a{:href => "/employers/#{emp.handle}"}
+              %img{:src => "/images/companylogos/#{emp.photo}", :class => "span2 pull-left"}
+          .span7
+            %a{:href => "/employers/#{emp.handle}"}
+              %b= emp.name
+            %p= emp.description
+            %div
+              %a{:href => "#{emp.url}"}
+                Visit website
+            %br

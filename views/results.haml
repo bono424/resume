@@ -1,0 +1,56 @@
+.row
+  .span9
+  - unless @error.nil
+    %div{:class => "alert alert-error"}= @error
+%br
+%h3 Showing search results for:
+%a{:href => "#"} &larr; Search for something else
+%br
+%br
+
+/ text-only table
+%table{:class => "table"}
+  %thead
+    %tr
+      %th Name
+      %th School
+      %th Class year
+      %th Major
+      %th Minor
+      %th GPA
+  %tbody
+    %tr
+      %td
+        %a{:href => "#"} Scott Sansovich
+      %td Harvard University
+      %td 2013
+      %td English
+      %td Computer Science
+      %td 4.999999
+
+%br
+%br
+%br
+/ pretty table
+%table{:class => "table"}
+  %tbody
+    %tr
+      %td
+        %a{:href => "#"}
+          %img{:src => "/images/scott.jpg", :class => "photothmb"}
+      %td 
+        %a{:href => "#"} Scott Sansovich
+      %td School
+      %td Class year
+      %td Major
+      %td Minor
+      %td GPA
+    %tr
+      %td
+        %img{:src => "/images/scott.jpg", :class => "photothmb"}
+      %td Scott Sansovich
+      %td Harvard University
+      %td 2013
+      %td English
+      %td Computer Science
+      %td 4.999

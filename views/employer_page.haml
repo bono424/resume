@@ -1,0 +1,42 @@
+.row
+  .span3
+    - if @employer.photo.nil?
+      %img.employer-logo.span2{:src => "/images/companylogos/nologo.png"}
+    - else
+      %img.employer-logo.span2{:src => "/images/companylogos/#{@employer.photo}"}
+  .span4
+    %h1= @employer.name
+    %a{:href => "#{@employer.url}"}= @employer.url
+.row
+  .span10
+    %h2 About
+    %br
+.row
+  .span8
+    %p= @employer.description
+    .row
+      .span4
+        %b= @employer.name
+        %p
+          =@employer.address
+          %br
+          = "#{@employer.city}, #{@employer.state} #{@employer.zipcode}"
+%br
+
+.row
+  .span9
+    %h2 Job and Internship Listings
+%br
+
+- if @employer.postings.length.zero?
+  %p No job listings are currently available.
+- @employer.postings.each do |post|
+  .row
+    .span8
+      %h4= post.name
+      %p= post.desc
+      %p{:class => "green"}
+        Deadline:
+        = post.deadline
+      %a{:href => "#"} Read more >>
+  %br

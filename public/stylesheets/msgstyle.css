@@ -1,0 +1,66 @@
+/* ==== Common ==== */
+.center {
+	text-align:center;
+}
+
+.green {
+	color:#468847;
+}
+
+.yellow {
+	color:#c09853;
+}
+
+.red {
+	color:#b94a48;
+}
+
+/* ==== Navbar ==== */
+
+
+/* ==== Header ==== */
+
+.navbar-inner {
+	margin:0px 0px 25px 0px;
+	padding:20px 0px 15px 0px;	
+}
+
+/* ===== Body ===== */
+
+.failimg {
+	margin:0px 40px 25px 0px;
+	width:350px;
+}
+
+input {
+	padding:10px;
+	font-size:20px;
+	color:#999;
+}
+
+.login-btn {
+	font-size:20px;
+	padding:6px 10px;
+	position:relative;
+}
+
+/* ==== Footer ==== */
+
+footer {
+	text-align:center;
+	width:520px;
+	margin:0px auto;
+}
+
+.copyright {
+	position:relative;
+	top:9px;
+	left:14px;
+}
+
+/* ==== Search ==== */
+
+.photothmb {
+	max-width:80px;
+	max-height:80px;
+}

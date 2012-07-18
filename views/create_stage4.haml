@@ -1,0 +1,68 @@
+%h1{:class => "center"} Step 3 of 4:Extracurriculars
+%br
+%h3 Same as before, but for extracurriculars.
+%br
+.row
+  .span9
+  - unless @error.nil
+    %div{:class => "alert alert-error"}= @error
+%br
+%form{:method => "POST", :action => "#"}
+  .row
+    .span3
+      %input{:name => "position", :type => "text", :value => "Position"}
+  %br
+  .row
+    .span3
+      %input{:name => "place", :type => "text", :value => "Place"}
+  %br  
+  .row
+    .span1
+      %h3{:class => "center"} FROM
+    .span2
+      %select{:name => "startmonth", :class => "span2"}
+        %option January
+        %option
+    .span1
+      %input{:name => "startyear", :type => "text", :value => "Year", :class => "span1"}
+  %br
+  .row
+    .span1
+      %h3{:class => "center"} TO
+    .span2
+      %select{:name => "endmonth", :class => "span2"}
+        %option January
+        %option
+    .span1
+      %input{:name => "endyear", :type => "text", :value => "Year", :class =>"span1"}
+  %br
+  .row
+    .span6
+      %label Please provide a description of the position, what you did, what you accomplished, etc.
+      %textarea{:class => "span6"}
+  %br
+  .row
+    %div{:class => "span6"}
+      %a{:class => "btn btn-success", :href => "#"}
+        Add this position
+        %i{:class => "icon-plus icon-white"}
+  
+  / submitted experience      
+  %br
+  %br
+    .row
+      .span6
+        %strong President at Harvard Investment Association
+        %span (May 2011 - July 2011)
+        %a:{:href => "#", :class => "btn pull-right"}
+          %i{:class => "icon-pencil"}
+        .row
+          .span6
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer consequat nulla vel purus ultricies ullamcorper. Aliquam nisl odio, gravida id sodales sed, mollis cursus ipsum. Pellentesque pellentesque, nibh sit amet ornare facilisis, leo metus ultrices ligula, vel dictum tellus augue sed lectus.
+  
+  %br
+  %br
+  .row
+    %div{:class => "pull-right"}
+      %a{:class => "btn btn-large", :href => "/update/skip"} Skip this step
+      %a{:class => "btn btn-primary btn-large", :href => "#"} Save and continue

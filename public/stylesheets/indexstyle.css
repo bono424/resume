@@ -1,0 +1,75 @@
+/* ==== Common ==== */
+.center {
+	text-align:center;
+}
+
+.light-header {
+	color:#ccc;
+}
+
+/* ==== Header ==== */
+
+.navbar-inner {
+	margin:0px 0px 25px 0px;
+	padding:10px 0px;
+}
+
+.logo {
+	margin:5px 0px 0px 0px;
+}
+
+.login-btn {
+	padding:4px 7px 3px 7px;
+	position:relative;
+	top:-2px;
+}
+
+/* ===== Body ===== */
+
+.videocontainer {
+	position:relative;
+}
+
+.video {
+	padding:10px;
+	border:1px solid #ccc;
+}
+
+.videocontainer .btn {
+	position:absolute;
+	top:35%;
+	left:42%;
+	font-size:50px;
+	padding:15px 30px 10px 30px;
+	text-shadow: 0px 1px 0px #e1e1e8;
+}
+
+#register input {
+	font-size:20px;
+	padding:10px;
+}
+
+.cologo {
+	display:inline;
+	height:45px;
+	margin:0px 20px;
+}
+
+#morelogos {
+	font-size:1.7em;
+	padding:11px 13px;
+}
+
+/* ==== Footer ==== */
+
+footer {
+	text-align:center;
+	width:520px;
+	margin:0px auto;
+}
+
+.copyright {
+	position:relative;
+	top:9px;
+	left:14px;
+}

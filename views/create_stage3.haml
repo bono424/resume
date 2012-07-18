@@ -1,0 +1,28 @@
+%h1{:class => "center"} Step 3 of 3: Uploads
+%br
+%h3 You're almost done, but we highly recommend you upload a profile picture and a PDF of your resume.
+%br
+.row
+  .span9
+  - unless @error.nil
+    %div{:class => "alert alert-error"}= @error
+%br
+%form{:method => "POST", :action => "#"}
+  .row
+    .span6
+      %p{:class => "help-block"} Please upload your resume. PDF only.
+      %br
+      %input{:name => "resume", :type => "file"}
+  %br
+  .row
+    .span6
+      %p{:class => "help-block"} Please upload a headshot.
+      %br
+      %input{:name => "photo", :type => "file"}
+  
+  %br
+  %br
+  .row
+    %div{:class => "pull-right"}
+      %a{:class => "btn btn-large", :href => "/update/skip"} Skip this step
+      %a{:class => "btn btn-primary btn-large", :href => "#"} Save and continue

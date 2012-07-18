@@ -1,0 +1,46 @@
+.container
+  .row
+    / leftpane
+    .span6{:class => "videocontainer"}
+      %img{:src => "/images/videothmb.png", :class => "video"}
+      %button{:class => "btn btn-large"}
+        &#9654;
+
+    / rightpane
+    .span5{:class => "offset1"}
+      %h4 Ready to get hired? Sign up now.
+      - unless @error.nil?
+        %div{:class => "alert alert-error"}= @error
+      - unless @success.nil?
+        %div{:class => "alert alert-success"}= @success
+      %br
+      %form{:id => "register", :action => "/", :method => "POST"}
+        .row
+          .span4
+            %input{:type => "text", :placeholder => "Name", :class => "span4", :name => "name"}
+            %input{:type => "text", :placeholder => "University Email", :class => "span4", :name => "email"}
+            %input{:type => "password", :placeholder => "Password", :class => "password span4", :name => "password"}
+            .row
+              %input{:type => "submit", :value => "Sign up", :class => "pull-right btn btn-success btn-large"}
+
+  %br
+  %br
+  / employers
+  .row
+    .span12
+      %img{:class => "pagebreak center", :src => "/images/pagebreak.png"}
+  %br
+  %br
+  .row
+    .span12
+      %h2{:class => "center"} We're helping connect the best. Check them out. More to come soon!
+  %br
+  .row
+    .span9
+      .row
+        %img{:src => "/images/companylogos/oracle.jpg", :class => "cologo"}
+        %img{:src => "/images/companylogos/rapleaf.png", :class => "cologo"}
+        %img{:src => "/images/companylogos/facebook.jpg", :class => "cologo"}
+    .span3
+      %a{:src => "#", :class => "btn btn-primary btn-large", :id => "morelogos"}
+        I want to see more!

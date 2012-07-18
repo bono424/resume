@@ -1,0 +1,19 @@
+!!!
+%html{html_attrs}
+  %head
+    %meta{:'http-equiv' => "Content-Type", :content => "text/html; charset=utf-8"}
+    %meta{:name => "lang", :content => "en"}
+    %title The Resume Drop
+    - unless @title.nil?
+      >
+      = @title
+    %link{:href=>'/stylesheets/bootstrap/css/bootstrap.css', :rel => 'stylesheet', :media => "screen", :type => "text/css"}
+    %link{:href=>'/stylesheets/indexstyle.css', :rel => 'stylesheet', :media => "screen", :type => "text/css"}
+    %script{:type => "text/javascript", :src => "http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"}
+  %body
+    #top{:class => "navbar"}
+      = partial :_index_header
+    #content
+      = yield
+    = partial :_footer
+    = partial :_analytics

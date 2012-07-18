@@ -1,0 +1,67 @@
+.row
+  .span6
+    %h1 Create employer account
+    .row
+      .span6
+      - if !@success.nil?
+        %br
+        .span5{:class => "alert alert-success"}= @success
+
+      - elsif !@error.nil?
+        %br
+        .span5{:class => "alert alert-error"}= @error
+
+    %br
+
+    %form{:method => "POST", :action => "", :id => "employer_subscribe"}
+      .row
+        .span3
+          %input{:name => "name", :type => "text", :placeholder => "Company name"}
+      %br
+      .row
+        .span6
+          %input{:name => "url", :type => "text", :placeholder => "Company website"}
+          %p{:class => "help-block"} Ex. http://www.theresumedrop.com
+      %br
+      .row
+        .span6
+          %input{:name => "handle", :type => "text", :placeholder => "Handle"}
+          %p{:class => "help-block"} Ex. http://www.theresumedrop.com/employers/YOUR_HANDLE
+      %br
+      .row
+        .span6
+          %input{:name => "email", :type => "text", :placeholder => "Email"}
+          %p{:class => "help-block"} Please enter the email address of the primary contact for this account.
+      %br
+      .row
+        .span6
+          %input{:name => "phone", :type => "text", :placeholder => "Phone number"}
+          %p{:class => "help-block"} Please enter the phone number of the primary contact for this account. Please do not use the corporate phone number if this is not applicable.
+      %br
+      .row
+        .span3
+          %input{:name => "password", :type => "password", :placeholder => "Password"}
+      %br
+      .row
+        .well{:class => "span3"}
+          %h3 Credit card
+          %br
+          .row
+            .span3
+              %input{:class => "card-number", :type => "text", :placeholder => "Credit card number"}
+          .row
+            .span2
+              %input{:class => "span2 card-expiry", :type => "text", :placeholder => "Exp. date (MM/YY)"}
+            .span1
+              %input{:class => "span1 card-cvc", :type => "text", :placeholder => "CCV"}
+
+      %br
+      .row
+        %button{:type => "submit", :class => "btn btn-large btn-success span3 submit-button"}
+          Submit and continue
+          %i{:class => "icon-white icon icon-play"}
+      %br
+  .span3
+    .well
+      %h3 Info
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel magna elit, at pharetra erat. Aenean dignissim malesuada orci, eu mollis purus suscipit vitae. Etiam ut leo purus. Etiam sed pulvinar tellus. Aenean varius imperdiet felis nec tempus. Praesent ornare orci quis nisl molestie quis adipiscing dolor commodo. Nullam sit amet lectus enim. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec augue nisl, porta ultricies dapibus vel, molestie sed massa.

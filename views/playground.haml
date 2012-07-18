@@ -1,0 +1,57 @@
+!!!
+%html{html_attrs}
+  %head
+    %meta{:'http-equiv' => "Content-Type", :content => "text/html; charset=utf-8"}
+    %meta{:name => "lang", :content => "en"}
+    %title The Resume Drop // @title
+    %link{:href=>'../public/stylesheets/bootstrap/css/bootstrap.css', :rel => 'stylesheet', :media => "screen", :type => "text/css"}
+    %link{:href=>'../public/stylesheets/pagestyle.css', :rel => 'stylesheet', :media => "screen", :type => "text/css"}
+    %script{:type => "text/javascript", :src => "http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"}
+    %script{:type => "text/javascript", :src => "../public/javascripts/application.js"}
+  %body
+    #top{:class => "navbar"}
+      .navbar-inner
+        .container
+          .span4
+            %img{:src => "../public/images/logo.png", :title => "TRD logo", :class => "logo"}
+    .container
+      #left{:class => "span2 well sidebar-nav"}
+        %img{:src => "../public/images/scott.jpg", :class => "profilepic"}
+        %ul{:class => "nav nav-list"}
+          %li{:class => "nav-header"} Scott Sansovich
+          %li
+            %a{:href => "#"}
+              %i{:class => "icon-user"}
+              Profile
+          %li
+            %a{:href => "/employers"}
+              %i{:class => "icon-map-marker"}
+              Employers
+          %li
+            %a{:href => "/jobs"}
+              %i{:class => "icon-lock"}
+              Jobs / Internships
+          %li
+            %a{:href => "/about"}
+              %i{:class => "icon-info-sign"}
+              About
+          %li
+            %a{:href => "/logout"}
+              %i{:class => "icon-off"}
+              Logout
+              
+      #right{:class => "span9"}
+        .row.workexperience-info
+          .row.span8
+            %span.larger
+              %strong Intern
+              %span.gray at
+              %strong Goldman
+            .pull-right
+              /= "#{extracurricular.start_date.strftime('%B %Y')} to #{extracurricular.end_date.strftime('%B %Y')}"
+              (March 2010 - February 2060)
+              %a{:class => "remove", :href => "profile/delete?id=id"}
+                %i{:class => "icon-remove"}
+          .row.span8
+            .gray Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sed velit quis odio volutpat consectetur vel id lectus. Aliquam consectetur lorem eu lorem tempor ut egestas nulla commodo. Morbi consequat ante at orci tincidunt vel interdum velit rhoncus. Etiam fermentum risus quis elit faucibus eleifend. Integer ac elit quis tortor varius ultrices sed nec purus. Pellentesque rutrum elit vitae libero sollicitudin nec eleifend arcu scelerisque. Nunc quam lectus, interdum ac molestie quis, sodales at nisi. Integer feugiat ligula quis nisi pharetra porta.
+        %br

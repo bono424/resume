@@ -1,0 +1,18 @@
+%h1{:class => "center"} Job and Internship Listings
+%br
+
+- employers.each do { |emp|
+  .row{:class => "span9"}
+    .row
+      .span2
+        %a{:href => "#"}
+          %img{:src => "/images/companylogos/oracle.jpg", :class => "pull-left"}
+      .span7
+        %table{:class => "table"}
+          %tbody
+            - emp.postings.each do { |post|
+              %tr
+                %td
+                  %a{:href => "#"}= @post.name
+                %td{:class => "span4"}= @post.desc
+                %td= @post.location

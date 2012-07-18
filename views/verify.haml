@@ -1,0 +1,10 @@
+- unless @error.nil?
+  %b{:class => "yellow center"}= @error
+- unless @success.nil?
+  %b{:class => "green center"}= @success
+%br
+%br
+- unless @error.nil?
+  %form{:class => "form-inline form-horizontal center"}
+    %input{:type => "text", :value => "Verification key", :class => "span3"}
+    %input{:type => "submit", :class => "btn btn-primary btn-large login-btn", :value => "Send"}

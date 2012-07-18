@@ -1,0 +1,34 @@
+%h1{:class => "center"} Step 2 of 3: Education
+%br
+%h3 Employers will use this information to search for you.
+%br
+.row
+  .span9
+  - unless @error.nil
+    %div{:class => "alert alert-error"}= @error
+%br
+%form{:method => "POST", :action => "#"}
+  .row
+    .span3
+      %input{:name => "school", :type => "text", :placeholder => "School"}
+  %br
+  .row
+    .span3
+      %input{:name => "major", :type => "text", :placeholder => "Major / Concentration"}
+  %br
+  .row
+    .span3
+      %input{:name => "minor", :type =>"text", :placeholder => "Minor / Secondary"}
+  %br
+  .row
+    .span2
+      %input{:name => "class", :type => "text", :placeholder => "Year", :class => "span1"}
+  %br
+  .row
+    .span1
+      %input{:name => "gpa", :type => "text", :placeholder => "GPA", :class => "span1"}
+  %br 
+  .row
+    %div{:class => "pull-right"}
+      %a{:class => "btn btn-large", :href => "/update/skip"} Skip this step
+      %a{:class => "btn btn-primary btn-large", :href => "#"} Save and continue

@@ -1,0 +1,1 @@
+class TrdError < StandardError; end

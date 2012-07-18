@@ -1,0 +1,52 @@
+.row
+  .span9
+  - unless @error.nil?
+    %div{:class => "alert alert-error"}= @error
+%br
+%h1 Search Candidates
+%br
+%h2 Include any and all information you would like to select for.
+%br
+
+%form{:method => "POST", :action => "#"}
+  .row
+    .span3
+      %input{:name => "school", :type => "text", :value => "School"}
+  %br
+  .row
+    .span2
+      %input{:name => "year", :type => "text", :value => "Class", :class => "span1"}
+  %br    
+  .row
+    .span3
+      %input{:name => "last_name", :type => "text", :value => "Last name"}
+    .span3
+      %input{:name => "first_name", :type => "text", :value => "First name"}
+  %br    
+  .row
+    .span3
+      %input{:name => "major", :type => "text", :value => "Major"}
+    .span3
+      %input{:name => "minor", :type => "text", :value => "Minor"}
+  %br
+  .row
+    .span2
+      %input{:name => "gpa", :type => "text", :value => "Minimum GPA", :class => "span2"}
+  %br
+  .row
+    .span3
+      %select{:name => "interest1"}
+        %option Interest One
+        %option
+    .span3
+      %select{:name => "interest2"}
+        %option Interest Two
+        %option
+    .span3
+      %select{:name => "interest3"}
+        %option Interest Three
+        %option
+  %br
+  .row
+    .span3
+      %button{:type => "submit", :class => "btn btn-success btn-large"} Search

@@ -1,0 +1,143 @@
+:javascript
+  function editSection(section) {
+    $("#" + section).hide();
+    $("#" + section + "-edit").show();
+  }
+
+  function addListing() {
+    $("#listing-add").show();
+  }
+
+.row
+  .span9
+  - unless @error.nil?
+    %div{:class => "alert alert-error"}= @error
+%br
+.row
+  .span3
+    %img{:src => "/images/companylogos/#{@user.photo}"}
+  .span5
+    %h1= @user.name
+    %a{:href => "#{@user.url}"}= @user.url
+
+%br
+.row
+  .span6
+    %h2
+      About
+      %a.edit{:href => "#", :onClick => "editSection('about')"}
+        %i{:class => "icon-pencil"}
+%br
+.row
+  .span8
+    #about
+      %p= @user.description
+      .row
+        .span4
+          %b= @user.name
+          %p
+            =@user.address
+            %br
+            = "#{@user.city}, #{@user.state} #{@user.zipcode}"
+        .span4
+          %b Founded
+          %br= @user.founded
+    
+    - if @user.is_employer
+      %form{:method => "POST", :action => "#"}
+        %input{:type => "hidden", :name => "action", :value => "info"}
+        #about-edit{:style => "display:none"}
+          %label Description
+          %textarea{:name => "description", :class => "span8"}
+            =@user.description
+          %br
+          %hr
+          %label
+            Address
+            %input{:type => "text", :value => "#{@user.address}", :name => "address"}
+          %label
+            City
+            %input{:type => "text", :value => "#{@user.city}", :name => "city"}
+          %label
+            State
+            %br
+            %input{:type => "text", :value => "#{@user.state}", :name => "state", :class => "span1"}
+          %label
+            Zipcode
+            %input{:type => "text", :value => "#{@user.zipcode}", :name => "zipcode", :class => "span1"}
+          %hr
+          %label Founded
+          %input{:type => "text", :value => "#{@user.founded}", :name => "founded"}
+          %br
+          %br
+          .row{:class => "button"}
+            .span5
+              %button{:type => "submit", :class => "btn btn-success"} Save these changes
+        
+%br
+
+.row
+  .span9
+    %h2
+      Job and Internship Listings
+      %a.edit{:onClick => "addListing()"}
+        %i{:class => "icon-plus"}
+%br
+
+  #listing-info
+  - if @user.postings.length.zero?
+    %p No job listings are currently available.
+  - @user.postings.each do |post|
+    .row
+      .row
+        .span8
+          %h4= post.name
+          .pull-right
+            %a{:class => "remove", :href => "profile/delete?id=#{exp.id}"}
+              %i{:class => "icon-remove"}
+      .row
+        .span8
+          %p= post.desc
+          %p{:class => "green"}
+            Deadline:
+            = post.deadline
+          %a{:href => "#"} Read more >>
+    %br
+    / work experience add form
+  #listing-add{:style => "display:none"}
+    %form{:method => "POST", :action => "#"}
+      %input{:type => "hidden", :name => "action", :value => "listing"}
+      %hr
+      %h4 Add a listing
+      %br
+      .row
+        .span2
+          %input{:type => "text", :placeholder => "Position", :name => "position", :class => "span2"}
+        .span2
+          %input{:type => "text", :placeholder => "Place", :name => "place", :class => "span2"}
+        .span2{:class => "input-prepend"}
+          %span{:class => "add-on"} Start
+          %input{:type => "text", :placeholder => "MM/YYYY", :name => "start_date", :class => "dateinput"}
+        .span2{:class => "input-prepend"}
+          %span{:class => "add-on"} End
+          %input{:type => "text", :placeholder => "MM/YYYY", :name => "end_date", :class => "dateinput"}
+        %br
+        .span8
+          %textarea{:class => "span8", :name => "desc", :placeholder => "Description" }
+        %br
+        .span8
+          %textarea{:class => "span8", :name => "qualifications", :placeholder => "Qualifications" }
+        %br
+      .row
+        .span2
+          %input{:type => "text", :placeholder => "Minimum class year", :name => "class", :class => "span2"}
+      .row
+        .span3
+          %input{:type => "text", :placeholder => "Contact name", :name => "contactname", :class => "span3"}
+        .span3
+          %input{:type => "text", :placeholder => "Contact email", :name => "contactemail", :class => "span3"}
+      %br
+      .row
+        .span5
+          %button{:type => "submit", :class => "btn btn-success"} Save changes
+      %hr

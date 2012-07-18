@@ -1,0 +1,29 @@
+%h1= @employer.name
+%a{:href => "@employer.url"}= @employer.
+%br
+%br
+.row
+  .span10
+    %h2 About
+.row
+  .span8
+    %p= @employer.about
+    %p= Founded {#employer.founded}
+    %p
+      @employer.address
+      %br
+      {#employer.city}, {#employer.state} {#employer.zipcode}
+%br
+
+.row
+  .span10
+    %h2 Job and Internship Listings
+%br
+- employer.postings.each do { |post|
+  .row
+    .span8
+      %h4= @post.name
+      %p= @post.description
+      %p{:class => "green"}= Deadline: {#post.deadline}
+      %a{:href => "#"} Read more >>
+  %br
