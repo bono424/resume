@@ -32,12 +32,20 @@ module Trd
                 :desc => "I sat at my desk all day, created Lolcats, posted reviews of Lolcats on the site (Pitchfork-style).",
                 :start_date => DateTime.parse("03/2012"),
                 :end_date => DateTime.parse("05/2012")),
-            Experience.new(
-              :position => "Lolcat manager",
-              :place => "icanhazcheezburger",
-              :desc => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ultricies vestibulum placerat. Quisque placerat ipsum ut ante sodales luctus. Sed gravida purus sit amet mi tempus tincidunt viverra nibh consectetur. Donec ac turpis vitae lorem sollicitudin bibendum ac ac nunc. Etiam sodales augue et elit luctus porttitor varius et diam. Proin eget sapien et lorem tristique interdum. Nullam adipiscing tristique lorem. Fusce tincidunt lacinia faucibus. In hac habitasse platea dictumst. Aliquam ut dolor arcu, sit amet rhoncus lectus. Nam elementum ullamcorper sapien in pellentesque. Duis ac purus vestibulum nisi consectetur facilisis id at tellus. Phasellus id leo vitae sem fringilla mollis ut at eros. Morbi quis velit sem, blandit mattis erat. Maecenas quis elit augue, quis scelerisque velit. Donec placerat aliquet justo, vitae vestibulum diam pellentesque ut. In id facilisis urna. Praesent quis tellus venenatis lorem eleifend scelerisque. In hac habitasse platea dictumst.",
-              :start_date => DateTime.parse("03/2012"),
-              :end_date => DateTime.parse("05/2012"))
+              Experience.new(
+                :position => "Lolcat manager",
+                :place => "icanhazcheezburger",
+                :desc => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ultricies vestibulum placerat. Quisque placerat ipsum ut ante sodales luctus. Sed gravida purus sit amet mi tempus tincidunt viverra nibh consectetur. Donec ac turpis vitae lorem sollicitudin bibendum ac ac nunc. Etiam sodales augue et elit luctus porttitor varius et diam. Proin eget sapien et lorem tristique interdum. Nullam adipiscing tristique lorem. Fusce tincidunt lacinia faucibus. In hac habitasse platea dictumst. Aliquam ut dolor arcu, sit amet rhoncus lectus. Nam elementum ullamcorper sapien in pellentesque. Duis ac purus vestibulum nisi consectetur facilisis id at tellus. Phasellus id leo vitae sem fringilla mollis ut at eros. Morbi quis velit sem, blandit mattis erat. Maecenas quis elit augue, quis scelerisque velit. Donec placerat aliquet justo, vitae vestibulum diam pellentesque ut. In id facilisis urna. Praesent quis tellus venenatis lorem eleifend scelerisque. In hac habitasse platea dictumst.",
+                :start_date => DateTime.parse("03/2012"),
+                :end_date => DateTime.parse("05/2012"))
+            ],
+            :extracurriculars => [
+              Extracurricular.new(
+                :position => "Lolcat manager",
+                :place => "icanhazcheezburger",
+                :desc => "I sat at my desk all day, created Lolcats, posted reviews of Lolcats on the site (Pitchfork-style).",
+                :start_date => DateTime.parse("03/2012"),
+                :end_date => DateTime.parse("05/2012"))
             ]
           )
           output += "Student created for chandras@fas.harvard.edu."

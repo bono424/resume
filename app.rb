@@ -137,6 +137,7 @@ post '/profile' do
       case params[:action]
       when "education"
         @user.update(:school => params[:school], :major => params[:major], :minor => params[:minor], :class => params[:class], :gpa => params[:gpa])
+      
       when "personal"
         # make sure interests are valid
         [:interest1, :interest2, :interest3].each do |i|
@@ -146,13 +147,15 @@ post '/profile' do
         end
         # updatasaurus
         @user.update(:secondary_email => params[:secondary_email], :interest1 => params[:interest1], :interest2 => params[:interest2], :interest3 => params[:interest3])
+        
       when "work"
+        puts "Hello, works!"
         [:position, :place, :start_date, :end_date, :desc].each do |i|
           raise TrdError.new("Please enter all the fields.") if params[i].nil? || params[i] == ""
         end
         work = @user.experiences.new
         work.position = params[:position]
-        work.place = params[:position]
+        work.place = params[:place]
         begin
           work.start_date = Date.strptime(params[:start_date], "%m/%Y")
           work.end_date = Date.strptime(params[:end_date], "%m/%Y")
@@ -162,13 +165,15 @@ post '/profile' do
         work.desc = params[:desc]
         work.save
         @user.save
+        
       when "extracurricular"
+        puts "Hello, extracurriculars!"
         [:position, :place, :start_date, :end_date, :desc].each do |i|
           raise TrdError.new("Please enter all the fields.") if params[i].nil? || params[i] == ""
         end
         exp = @user.extracurriculars.new
         exp.position = params[:position]
-        exp.place = params[:position]
+        exp.place = params[:place]
         begin
           exp.start_date = Date.strptime(params[:start_date], "%m/%Y")
           exp.end_date = Date.strptime(params[:end_date], "%m/%Y")
@@ -180,6 +185,7 @@ post '/profile' do
         @user.save
       end
       haml :profile, :layout => :'layouts/application'
+      
     else
       case params[:action]
       when "info"
@@ -209,6 +215,16 @@ post '/profile' do
     @success = nil
     haml :profile, :layout => :'layouts/application'
   end
+end
+
+get '/profile/delete/:type/:id' do
+  if params[:type] == 'work'
+    Experience.get(params[:id]).destroy
+  end
+  if params[:type] == 'extracurricular'
+    Extracurricular.get(params[:id]).destroy
+  end
+  redirect to('/profile')
 end
 
 post '/login' do

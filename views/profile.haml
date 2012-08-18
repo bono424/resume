@@ -142,7 +142,7 @@
             %strong= exp.place
           .pull-right
             = "#{exp.start_date.strftime('%B %Y')} to #{exp.end_date.strftime('%B %Y')}"
-            %a{:class => "remove", :href => "profile/delete?id=#{exp.id}"}
+            %a{:class => "remove", :href => "profile/delete/work/#{exp.id}"}
               %i{:class => "icon-remove"}
         .row.span8
           .gray= exp.desc
@@ -174,7 +174,7 @@
 %hr
 
 / extra curriculars
-%form{:method => "GET", :action => "#"}
+%form{:method => "POST", :action => "#"}
   %input{:type => "hidden", :name => "action", :value => "extracurricular"}
   .row
     .span5
@@ -197,7 +197,7 @@
             %strong= extracurricular.place
           .pull-right
             = "#{extracurricular.start_date.strftime('%B %Y')} to #{extracurricular.end_date.strftime('%B %Y')}"
-            %a{:class => "remove", :href => "profile/delete?id=#{extracurricular.id}"}
+            %a{:class => "remove", :href => "profile/delete/extracurricular/#{extracurricular.id}"}
               %i{:class => "icon-remove"}
         .row.span8
           .gray= extracurricular.desc
