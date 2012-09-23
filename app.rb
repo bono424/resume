@@ -191,17 +191,21 @@ post '/profile' do
       when "info"
         @user.update(:url => params[:url], :founded => params[:founded], :description => params[:description], :address => params[:address], :city => params[:city], :state => params[:state], :zipcode => params[:zipcode], :phone => params[:phone])
       when "listing"
-        [:name, :description, :class, :qualifications, :location, :deadline, :contact].each do |i|
+        [:position, :place, :start_date, :end_date, :description, :class, :qualifications, :contact_name, :contact_email].each do |i|
           raise TrdError.new("Please enter all the fields.") if params[i].nil? || params[i] == ""
         end
         posting = @user.postings.new
-        postion.name = params[:name]
+        posting.position = params[:position]
+        posting.place = params[:place]
         posting.description = params[:description]
         posting.class = params[:class]
-        posting.qualifications = params[:qualification]
-        posting.location = params[:location]
+        posting.qualifications = params[:qualifications]
+        posting.contact_name = params[:contact_name]
+        posting.contact_email = params[:contact_email]
         begin
-          posting.deadline = Date.strptime(params[:deadline], "%d/m/%Y")
+          posting.deadline = Date.strptime(params[:deadline], "%d/%m/%Y")
+          posting.start_date= Date.strptime(params[:start_date], "%d/%m/%Y")
+          posting.end_date = Date.strptime(params[:end_date], "%d/%m/%Y")
         rescue
           raise TrdError.new("Invalid date (DD/MM/YYYY required).")
         end
@@ -209,11 +213,16 @@ post '/profile' do
         posting.save
         @user.save
       end
+      haml :employer_profile, :layout => :'layouts/application'
     end
   rescue TrdError => e
     @error= e.message
     @success = nil
-    haml :profile, :layout => :'layouts/application'
+    if @user.type == Student
+      haml :profile, :layout => :'layouts/application'
+    else
+      haml :employer_profile, :layout => :'layouts/application'
+    end
   end
 end
 
@@ -223,6 +232,9 @@ get '/profile/delete/:type/:id' do
   end
   if params[:type] == 'extracurricular'
     Extracurricular.get(params[:id]).destroy
+  end
+  if params[:type] == 'posting'
+    Posting.get(params[:id]).destroy
   end
   redirect to('/profile')
 end

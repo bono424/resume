@@ -85,25 +85,31 @@
 %br
 
   #listing-info
-  - if @user.postings.length.zero?
+  - if @user.postings.nil?
     %p No job listings are currently available.
-  - @user.postings.each do |post|
-    .row
+  - else
+    - @user.postings.each do |post|
       .row
         .span8
-          %h4= post.name
-          .pull-right
-            %a{:class => "remove", :href => "profile/delete?id=#{exp.id}"}
-              %i{:class => "icon-remove"}
-      .row
-        .span8
-          %p= post.desc
-          %p{:class => "green"}
-            Deadline:
-            = post.deadline
-          %a{:href => "#"} Read more >>
-    %br
-    / work experience add form
+          %h4= post.position
+          %p= post.description
+          %p
+            Duration:
+            %span= post.start_date.strftime("%B %d, %Y")
+            %span &mdash;
+            %span= post.end_date.strftime("%B %d, %Y")
+          - if post.class.nil?
+            %p All classes are being accepted.
+          - else
+            %p Minimum class year: #{post.class}
+          %p Qualifications expected: #{post.qualifications}
+          - if post.deadline < Date.today
+            %p.red Sorry, the deadline has already passed.
+          - else
+            %p.green= post.deadline.strftime("Deadline: %B %d, %Y")
+      %br
+
+    / listing add form
   #listing-add{:style => "display:none"}
     %form{:method => "POST", :action => "#"}
       %input{:type => "hidden", :name => "action", :value => "listing"}
@@ -117,13 +123,13 @@
           %input{:type => "text", :placeholder => "Place", :name => "place", :class => "span2"}
         .span2{:class => "input-prepend"}
           %span{:class => "add-on"} Start
-          %input{:type => "text", :placeholder => "MM/YYYY", :name => "start_date", :class => "dateinput"}
+          %input{:type => "text", :placeholder => "DD/MM/YYYY", :name => "start_date", :class => "dateinput"}
         .span2{:class => "input-prepend"}
           %span{:class => "add-on"} End
-          %input{:type => "text", :placeholder => "MM/YYYY", :name => "end_date", :class => "dateinput"}
+          %input{:type => "text", :placeholder => "DD/MM/YYYY", :name => "end_date", :class => "dateinput"}
         %br
         .span8
-          %textarea{:class => "span8", :name => "desc", :placeholder => "Description" }
+          %textarea{:class => "span8", :name => "description", :placeholder => "Description" }
         %br
         .span8
           %textarea{:class => "span8", :name => "qualifications", :placeholder => "Qualifications" }
@@ -131,11 +137,14 @@
       .row
         .span2
           %input{:type => "text", :placeholder => "Minimum class year", :name => "class", :class => "span2"}
+        .span4{:class => "input-prepend"}
+          %span{:class => "add-on"} Application Deadline
+          %input{:type => "text", :placeholder => "DD/MM/YYYY", :name => "deadline", :class => "dateinput"}
       .row
         .span3
-          %input{:type => "text", :placeholder => "Contact name", :name => "contactname", :class => "span3"}
+          %input{:type => "text", :placeholder => "Contact name", :name => "contact_name", :class => "span3"}
         .span3
-          %input{:type => "text", :placeholder => "Contact email", :name => "contactemail", :class => "span3"}
+          %input{:type => "text", :placeholder => "Contact email", :name => "contact_email", :class => "span3"}
       %br
       .row
         .span5

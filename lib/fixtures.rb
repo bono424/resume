@@ -66,7 +66,7 @@ module Trd
               :founded => 2011,
               :address => "33 Oxford Street",
               :state => "Cambridge, MA",
-              :zipcode => "02138".to_i,
+              :zipcode => "02138",
               :photo => "logo.png",
               :phone => "6179997094"
             )
@@ -91,7 +91,7 @@ module Trd
               :founded => 2004,
               :address => "1 Infinity Lane,",
               :state => "San Francisco, CA",
-              :zipcode => "94116".to_i,
+              :zipcode => "94116",
               :photo => "facebook.jpg",
               :phone => "6179997094"
             )

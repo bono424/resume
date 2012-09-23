@@ -61,7 +61,7 @@ class Employer < User
   property :address,      String
   property :city,        String
   property :state,        String
-  property :zipcode,      Integer
+  property :zipcode,      String
   property :photo,        String
   property :phone,        String
 
@@ -100,13 +100,16 @@ class Posting
   belongs_to :employer
 
   property :id,             Serial, :key => true
-  property :name,           String
+  property :position,       String
+  property :place,          String
   property :description,    String
+  property :start_date,     Date
+  property :end_date,       Date
+  property :deadline,       Date
   property :class,          String
   property :qualifications, String
-  property :location,       String
-  property :deadline,       Date
-  property :contact,        String
+  property :contact_name,   String
+  property :contact_email,  String
 end
 
 class Subscription

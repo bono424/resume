@@ -4,13 +4,10 @@
       %img.employer-logo.span2{:src => "/images/companylogos/nologo.png"}
     - else
       %img.employer-logo.span2{:src => "/images/companylogos/#{@employer.photo}"}
+.row
   .span4
     %h1= @employer.name
     %a{:href => "#{@employer.url}"}= @employer.url
-.row
-  .span10
-    %h2 About
-    %br
 .row
   .span8
     %p= @employer.description
@@ -33,10 +30,21 @@
 - @employer.postings.each do |post|
   .row
     .span8
-      %h4= post.name
-      %p= post.desc
-      %p{:class => "green"}
-        Deadline:
-        = post.deadline
-      %a{:href => "#"} Read more >>
+      %h4= post.position
+      %p= post.description
+      %p
+        Duration:
+        %span= post.start_date.strftime("%B %d, %Y")
+        %span &mdash;
+        %span= post.end_date.strftime("%B %d, %Y")
+      - if post.class.nil?
+        %p All classes are being accepted.
+      - else
+        %p Minimum class year: #{post.class}
+      %p Qualifications expected: #{post.qualifications}
+      - if post.deadline < Date.today
+        %p.red
+          Sorry, the deadline has already passed.
+      - else
+        %p.green= post.deadline.strftime("Deadline: %B %d, %Y")
   %br
