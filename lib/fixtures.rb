@@ -21,6 +21,7 @@ module Trd
             :interest2 => "Haxxors",
             :interest3 => "Art History",
             :major => "Computer Science",
+            :photo => "scott.jpg",
             :minor => "Philosophy",
             :class => "2012",
             :has_done_stages => true,

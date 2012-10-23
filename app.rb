@@ -366,9 +366,42 @@ error do
 end
 
 get '/search' do
-  if @user.type == Employer
-    haml :search, :layout => :'layouts/application'
-  else
-    redirect '/profile'
+  begin
+    if @user.type == Employer
+      if params.empty?
+        haml :search, :layout => :'layouts/application'
+      else
+        
+        # Generate query string. I know this sucks. Bear with me.
+        @results = Student.all(:name.like => "%#{params[:name]}%")
+        @results = @results.all(:school.like => "%#{params[:school]}%")
+        if not params[:class].empty?
+          @results = @results.all(:class => params[:class])
+        end
+        if not params[:gpa].empty?
+          @results = @results.all(:gpa => params[:gpa])
+        end
+        @results = @results.all(:major.like => "%#{params[:major]}%")
+        @results = @results.all(:minor.like => "%#{params[:minor]}%")
+        if not params[:interest1] == 'Interest One'
+          @results = @results.all(:interest1 => "%#{params[:interest1]}%")
+        end
+        if not params[:interest2] == 'Interest Two'
+          @results = @results.all(:interest2 => "%#{params[:interest2]}%")
+        end
+        if not params[:interest3] == 'Interest Three'
+          @results = @results.all(:interest3 => "%#{params[:interest3]}%")
+        end
+  
+        # if no results found, show error.
+        raise TrdError.new("Sorry, we couldn't find anything with the parameters you specified.") if @results.empty?
+        haml :search, :layout => :'layouts/application'
+      end
+    else
+      redirect '/profile'
+    end
+  rescue TrdError => e
+      @error = e.message
+      haml :search, :layout => :'layouts/application'
   end
 end

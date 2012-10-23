@@ -107,6 +107,8 @@
             %p.red Sorry, the deadline has already passed.
           - else
             %p.green= post.deadline.strftime("Deadline: %B %d, %Y")
+          %a{:class => "red", :href => "profile/delete/posting/#{post.id}"}
+            Delete this entry
       %br
 
     / listing add form
