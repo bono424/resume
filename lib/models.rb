@@ -9,7 +9,7 @@ include Trd
 # todo(siddarth): make sure that DM can be easily migrated
 # to mongo or SQL without major changes.
 if (ENV["RACK_ENV"] == "production")
-  DataMapper.setup( :default, "sqlite3://#{Dir.pwd}/trd.db" )
+ DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://localhost/trd_test")
 else
   # DataMapper.setup( :default, "sqlite3://#{Dir.pwd}/trd.test.db" )
  DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://localhost/trd_test")
