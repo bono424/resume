@@ -11,7 +11,8 @@ include Trd
 if (ENV["RACK_ENV"] == "production")
   DataMapper.setup( :default, "sqlite3://#{Dir.pwd}/trd.db" )
 else
-  DataMapper.setup( :default, "sqlite3://#{Dir.pwd}/trd.test.db" )
+  # DataMapper.setup( :default, "sqlite3://#{Dir.pwd}/trd.test.db" )
+ DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://localhost/trd_test")
 end
 
 DataMapper::Model.raise_on_save_failure = true
