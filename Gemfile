@@ -8,7 +8,7 @@ gem "datamapper", "~> 1.2.0"
 gem "dm-postgres-adapter", "~> 1.2.0"
 gem "do_postgres", "~> 0.10.10"
 gem "grid-coordinates", "~> 1.1.4"
-gem "mail", "~> 2.4.1"
+gem "mail", "~> 2.4.4"
 gem "stripe", "~> 1.5.17"
 gem "rake", "~> 0.9.2.2"
 

@@ -6,6 +6,18 @@ module Trd
     SIGNUP = '"Scott Sansovich" <ssansovich@gmail.com>, "Siddarth Chandrasekaran" <chandrasekaran.siddarth@gmail.com>'
     ALL = '"Scott Sansovich" <ssansovich@gmail.com>, "Siddarth Chandrasekaran" <chandrasekaran.siddarth@gmail.com>'
 
+    def self.send_test_email()
+        mail = Mail.new do
+            from 'bot@theresumedrop.com'
+            to 'ssansovich@gmail.com'
+            subject 'This is a test'
+            body 'I said this was a test.'
+        end
+
+        mail.delivery_method :sendmail
+        mail.deliver!
+    end
+
     def self.send_subscription_notification(s)
       subject = "[TheResumeDrop] Subscription notification"
       body = <<EOS
