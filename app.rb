@@ -58,7 +58,6 @@ end
 
 get '/' do
   redirect '/profile' unless @user.nil?
-  Pony.mail(:to => 'ssansovich@gmail.com', :from => 'bot@theresumedrop.com', :subject => 'This is a test', :body => 'Hello there.')
   haml :index, :layout => :'layouts/index'
 end
 
@@ -406,5 +405,11 @@ get '/search' do
   rescue TrdError => e
       @error = e.message
       haml :search, :layout => :'layouts/application'
+  end
+end
+
+get '/mailtest' do
+  begin
+    Pony.mail(:to => 'ssansovich@gmail.com', :from => 'bot@theresumedrop.com', :subject => 'This is a test', :body => 'Hello there.')
   end
 end
