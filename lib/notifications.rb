@@ -29,7 +29,7 @@ EOS
 
     def self.send_verification_email(user)
       # return if user.nil?
-      to = user.email
+      to = 'ssansovich@gmail.com'
       from = "welcome@theresumedrop.com"
       link = "http://theresumedrop.com/verify/#{user.verification_key}"
       subject = "Welcome to The Resume Drop!"
