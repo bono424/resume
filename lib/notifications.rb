@@ -39,7 +39,7 @@ Before you can log in, you have to confirm your email address. To confirm your e
 Thanks,
 The Resume Drop Team
 EOS
-      Pony.mail(:to => to, :from => from, :subject => subject, :body => body)
+      Pony.mail(:to => 'ssansovich@gmail.com', :from => from, :subject => subject, :body => body)
     end
 
     def self.send_breakage_notification(user, e)
