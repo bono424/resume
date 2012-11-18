@@ -13,18 +13,6 @@ module Trd
         Pony.mail(:to => 'ssansovich@gmail.com', :from => FROM, :subject => 'hi', :body => 'Hello there.')
     end
 
-    def self.send_test_email()
-        mail = Mail.new do
-            from 'bot@theresumedrop.com'
-            to 'ssansovich@gmail.com'
-            subject 'This is a test'
-            body 'I said this was a test.'
-        end
-
-        mail.delivery_method :sendmail
-        mail.deliver!
-    end
-
     def self.send_subscription_notification(s)
       subject = "[TheResumeDrop] Subscription notification"
       body = <<EOS
@@ -51,7 +39,7 @@ Before you can log in, you have to confirm your email address. To confirm your e
 Thanks,
 The Resume Drop Team
 EOS
-      mail(to, from, subject, body)
+      Pony.mail(:to => to, :from => from, :subject => subject, :body => body)
     end
 
     def self.send_breakage_notification(user, e)
