@@ -10,7 +10,7 @@ module Trd
     FROM = '"Resume Drop" <info@theresumedrop.com>'
 
     def self.pony_send_test()
-        Pony.mail(:to => 'you@example.com', :from => FROM, :subject => 'hi', :body => 'Hello there.')
+        Pony.mail(:to => 'ssansovich@gmail.com', :from => FROM, :subject => 'hi', :body => 'Hello there.')
     end
 
     def self.send_test_email()
