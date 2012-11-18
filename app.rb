@@ -80,8 +80,8 @@ post '/' do
     verification_key = random_string(32)
 
     # Create profile and send email
-    user = Student.create(:email => params[:email], :password => hash, :salt => salt, :verification_key => verification_key, :name => params[:name], :email => params[:email])
-    Notifications.send_verification_email(user)
+    Student.create(:email => params[:email], :password => hash, :salt => salt, :verification_key => verification_key, :name => params[:name], :email => params[:email])
+    # Notifications.send_verification_email(user)
 
     @success = "You've successfully registered. Check your email for a verification email."
 
