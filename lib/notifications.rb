@@ -28,7 +28,7 @@ EOS
     end
 
     def self.send_verification_email(user)
-      return if user.nil?
+      # return if user.nil?
       to = user.email
       from = "welcome@theresumedrop.com"
       link = "http://theresumedrop.com/verify/#{user.verification_key}"
