@@ -1,3 +1,5 @@
+require 'pony'
+
 Pony.options = {
     :via => :smtp,
     :via_options => {
