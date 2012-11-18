@@ -31,7 +31,7 @@ EOS
       # return if user.nil?
       to = 'ssansovich@gmail.com'
       from = "welcome@theresumedrop.com"
-      link = "http://theresumedrop.com/verify/#{user.verification_key}"
+      link = "http://theresumedrop.com/verify/"
       subject = "Welcome to The Resume Drop!"
       body = <<EOS
 Before you can log in, you have to confirm your email address. To confirm your email address, click here: #{link}
