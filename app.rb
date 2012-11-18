@@ -2,11 +2,13 @@ require 'rubygems'
 require 'sinatra'
 require 'haml'
 require 'stripe'
+require 'pony'
 
 # Helpers
 require './lib/render_partial'
 require File.expand_path('lib/exceptions', File.dirname(__FILE__))
 require File.expand_path('lib/notifications', File.dirname(__FILE__))
+require File.expand_path('lib/mail', File.dirname(__FILE__))
 require File.expand_path('lib/fixtures', File.dirname(__FILE__))
 require File.expand_path('lib/models', File.dirname(__FILE__))
 
@@ -408,6 +410,6 @@ get '/search' do
   end
 end
 
-# get '/mailtest' do
-#   Pony.mail(:to => 'ssansovich@gmail.com', :from => 'bot@theresumedrop.com', :subject => 'This is a test', :body => 'Hello there.')
-# end
+get '/mailtest' do
+    Notifications.pony_send_test()
+end

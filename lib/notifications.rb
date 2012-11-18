@@ -1,10 +1,17 @@
 require 'mail'
+require 'pony'
+
 
 module Trd
   class Notifications
-    DEV = '"Scott Sansovich" <ssansovich@gmail.com>, "Siddarth Chandrasekaran" <chandrasekaran.siddarth@gmail.com>'
-    SIGNUP = '"Scott Sansovich" <ssansovich@gmail.com>, "Siddarth Chandrasekaran" <chandrasekaran.siddarth@gmail.com>'
-    ALL = '"Scott Sansovich" <ssansovich@gmail.com>, "Siddarth Chandrasekaran" <chandrasekaran.siddarth@gmail.com>'
+    DEV = '"Scott Sansovich" <ssansovich@gmail.com>'
+    SIGNUP = '"Scott Sansovich" <ssansovich@gmail.com>'
+    ALL = '"Scott Sansovich" <ssansovich@gmail.com>'
+    FROM = '"Resume Drop" <info@theresumedrop.com>'
+
+    def self.pony_send_test()
+        Pony.mail(:to => 'you@example.com', :from => FROM, :subject => 'hi', :body => 'Hello there.')
+    end
 
     def self.send_test_email()
         mail = Mail.new do
