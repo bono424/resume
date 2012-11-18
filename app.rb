@@ -58,7 +58,7 @@ end
 
 get '/' do
   redirect '/profile' unless @user.nil?
-  Notifications.send_test_email()
+  Pony.mail(:to => 'ssansovich@gmail.com', :from => 'bot@theresumedrop.com', :subject => 'This is a test', :body => 'Hello there.')
   haml :index, :layout => :'layouts/index'
 end
 
