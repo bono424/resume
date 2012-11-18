@@ -2,6 +2,8 @@ require 'rubygems'
 require 'sinatra'
 require 'haml'
 require 'stripe'
+require 'pony'
+require 'rubygems'
 
 # Helpers
 require './lib/render_partial'
@@ -409,7 +411,5 @@ get '/search' do
 end
 
 get '/mailtest' do
-  begin
-    Pony.mail(:to => 'ssansovich@gmail.com', :from => 'bot@theresumedrop.com', :subject => 'This is a test', :body => 'Hello there.')
-  end
+  Pony.mail(:to => 'ssansovich@gmail.com', :from => 'bot@theresumedrop.com', :subject => 'This is a test', :body => 'Hello there.')
 end
