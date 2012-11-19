@@ -93,7 +93,7 @@ post '/' do
   end
 end
 
-get '/verify' do
+get '/verify/:key' do
   begin
     redirect '/profile' unless @user.nil?
     e = TrdError.new("Invalid verification key.")
