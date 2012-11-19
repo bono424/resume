@@ -71,8 +71,8 @@ post '/' do
     #   raise TrdError.new("Sorry, only students can register with The Resume Drop.")
     # end
 
-    user = Student.first(:email => params[:email])
-    raise TrdError.new("Email is already registered.") unless user.nil?
+    @user = Student.first(:email => params[:email])
+    raise TrdError.new("Email is already registered.") unless @user.nil?
 
     salt = random_string(6)
     hash = hash(params[:password], salt)
@@ -80,8 +80,8 @@ post '/' do
     verification_key = random_string(32)
 
     # Create profile and send email
-    Student.create(:email => params[:email], :password => hash, :salt => salt, :verification_key => verification_key, :name => params[:name], :email => params[:email])
-    # Notifications.send_verification_email(user)
+    @user = Student.create(:email => params[:email], :password => hash, :salt => salt, :verification_key => verification_key, :name => params[:name], :email => params[:email])
+    Notifications.send_verification_email(@user)
 
     @success = "You've successfully registered. Check your email for a verification email."
 
@@ -90,6 +90,8 @@ post '/' do
     @error = e.message
     @success = nil
     haml :index, :layout => :'layouts/index'
+
+
   end
 end
 
