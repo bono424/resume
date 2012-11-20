@@ -123,5 +123,5 @@ class Subscription
 end
 
 # Create tables if they don't exist.
-DataMapper.auto_migrate!
+DataMapper.auto_upgrade!
 DataMapper.finalize
