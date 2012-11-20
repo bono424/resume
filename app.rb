@@ -94,6 +94,17 @@ post '/' do
   end
 end
 
+post '/uploadphoto' do
+    File.open('uploads/' + params['photo'][:filename], "w") do |f|
+        f.write(params['photo'][:tempfile].read)
+      # photo = File.open(params['photo'][:tempfile].read)
+      photo = File.open(f)
+      uploader = Uploader.new
+      uploader.store!(photo)
+      redirect '/profile' unless @user.nil?
+  end
+end
+
 get '/verify/:key' do
   begin
     redirect '/profile' unless @user.nil?

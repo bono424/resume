@@ -1,5 +1,9 @@
+# encoding: UTF-8
+
 require 'data_mapper'
 require 'digest/sha2'
+require 'carrierwave'
+require 'fog'
 
 # Just log to STDOUT for now.
 DataMapper::Logger.new($stdout, :debug)
@@ -16,6 +20,10 @@ else
 end
 
 DataMapper::Model.raise_on_save_failure = true
+
+class Uploader < CarrierWave::Uploader::Base
+  storage :fog
+end
 
 class User
   include DataMapper::Resource

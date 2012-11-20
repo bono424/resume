@@ -27,8 +27,9 @@
     Complete all the fields below so that employers can find you easily!
 
 /upload photo
-%form{:method => "POST", :action => "/uploadphoto", :multipart => "true"}
+%form{:method => "POST", :action => "/uploadphoto", :enctype => "multipart/form-data"}
   %input{:name => 'photo', :type => 'file'}
+  %button{:type => "submit", :class => "btn btn-success"} Save these changes
 
 /education
 %form{:method => "POST", :action => "#"}

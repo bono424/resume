@@ -15,6 +15,9 @@ gem "pony", "~> 1.4"
 gem "stripe", "~> 1.5.17"
 gem "rake", "~> 0.9.2.2"
 
+gem "carrierwave", "~> 0.7.1"
+gem "fog", "~> 1.7.0"
+
 group :production do
   # gems specifically for Heroku go here
   gem "pg"
