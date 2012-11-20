@@ -8,10 +8,11 @@ require 'pony'
 require './lib/render_partial'
 require File.expand_path('lib/exceptions', File.dirname(__FILE__))
 require File.expand_path('lib/notifications', File.dirname(__FILE__))
-require File.expand_path('lib/mail', File.dirname(__FILE__))
 require File.expand_path('lib/fixtures', File.dirname(__FILE__))
 require File.expand_path('lib/models', File.dirname(__FILE__))
 
+require File.expand_path('lib/mail', File.dirname(__FILE__))
+# require File.expand_path('lib/production', File.dirname(__FILE__))
 # Set Sinatra variables
 set :app_file, __FILE__
 set :root, File.dirname(__FILE__)
@@ -80,8 +81,8 @@ post '/' do
     verification_key = random_string(32)
 
     # Create profile and send email
-    @user = Student.create(:email => params[:email], :password => hash, :salt => salt, :verification_key => verification_key, :name => params[:name], :email => params[:email])
-    Notifications.send_verification_email(@user)
+    user = Student.create(:email => params[:email], :password => hash, :salt => salt, :verification_key => verification_key, :name => params[:name], :email => params[:email])
+    Notifications.send_verification_email(user.email, user.verification_key)
 
     @success = "You've successfully registered. Check your email for a verification email."
 
@@ -90,12 +91,10 @@ post '/' do
     @error = e.message
     @success = nil
     haml :index, :layout => :'layouts/index'
-
-
   end
 end
 
-get '/verify' do
+get '/verify/:key' do
   begin
     redirect '/profile' unless @user.nil?
     e = TrdError.new("Invalid verification key.")

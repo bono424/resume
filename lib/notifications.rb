@@ -27,11 +27,11 @@ EOS
       email(ALL, "bot@theresumedrop.com", subject, body)
     end
 
-    def self.send_verification_email(user)
+    def self.send_verification_email(email, verification_key)
       # return if user.nil?
-      to = @user.email
+      to = email
       from = "welcome@theresumedrop.com"
-      link = "http://theresumedrop.com/verify/#{@user.verification_key}"
+      link = "http://theresumedrop.com/verify/#{verification_key}"
       subject = "Welcome to The Resume Drop!"
       body = <<EOS
 Before you can log in, you have to confirm your email address. To confirm your email address, click here: #{link}

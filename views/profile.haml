@@ -26,6 +26,10 @@
   .alert.alert-warning.span8
     Complete all the fields below so that employers can find you easily!
 
+/upload photo
+%form{:method => "POST", :action => "/uploadphoto", :multipart => "true"}
+  %input{:name => 'photo', :type => 'file'}
+
 /education
 %form{:method => "POST", :action => "#"}
   %input{:type => "hidden", :name => "action", :value => "education"}

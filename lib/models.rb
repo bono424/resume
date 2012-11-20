@@ -19,13 +19,14 @@ DataMapper::Model.raise_on_save_failure = true
 
 class User
   include DataMapper::Resource
-  property :id, Serial, :key => true
-  property :email, String
-  property :password, String, :length => 256
-  property :salt, String
-  property :verification_key, String
-  property :is_verified, Boolean, :default => false
-  property :type, Discriminator
+  property :id,                 Serial, :key => true
+  property :email,              String
+  property :password,           String, :length => 256
+  property :salt,               String
+  property :verification_key,   String
+  property :is_verified,        Boolean, :default => false
+  property :type,               Discriminator
+  property :photo,               String
 end
 
 class Student < User
@@ -41,7 +42,6 @@ class Student < User
   property :interest2,        String
   property :interest3,        String
   property :class,            Integer
-  property :photo,            String
   property :resume,           String
   property :has_done_stages, Boolean, :default => false
   property :is_employer, Boolean, :default => false
@@ -63,7 +63,6 @@ class Employer < User
   property :city,        String
   property :state,        String
   property :zipcode,      String
-  property :photo,        String
   property :phone,        String
 
   has n, :postings
@@ -124,5 +123,5 @@ class Subscription
 end
 
 # Create tables if they don't exist.
-DataMapper.auto_upgrade!
+DataMapper.auto_migrate!
 DataMapper.finalize
