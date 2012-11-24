@@ -1,5 +1,9 @@
+# encoding: UTF-8
+
 require 'data_mapper'
 require 'digest/sha2'
+require 'carrierwave'
+require 'fog'
 
 # Just log to STDOUT for now.
 DataMapper::Logger.new($stdout, :debug)
@@ -17,6 +21,10 @@ end
 
 DataMapper::Model.raise_on_save_failure = true
 
+class Uploader < CarrierWave::Uploader::Base
+  storage :fog
+end
+
 class User
   include DataMapper::Resource
   property :id,                 Serial, :key => true
@@ -26,6 +34,7 @@ class User
   property :verification_key,   String
   property :is_verified,        Boolean, :default => false
   property :type,               Discriminator
+  property :photo,               String
 end
 
 class Student < User
@@ -42,7 +51,6 @@ class Student < User
   property :interest3,        String
   property :class,            Integer
   property :resume,           String
-  property :photo,               String
   property :has_done_stages, Boolean, :default => false
   property :is_employer, Boolean, :default => false
 

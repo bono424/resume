@@ -3,6 +3,13 @@ require 'sinatra'
 require 'haml'
 require 'stripe'
 require 'pony'
+require 'aws/s3'
+
+# s3
+set :bucket, 'trd-assets'
+set :s3_key, 'AKIAIQGNVCLXSVJ6JI4Q'
+set :s3_secret, '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'
+
 
 # Helpers
 require './lib/render_partial'
@@ -95,14 +102,24 @@ post '/' do
 end
 
 post '/uploadphoto' do
-    File.open('uploads/' + params['photo'][:filename], "w") do |f|
-        f.write(params['photo'][:tempfile].read)
-      # photo = File.open(params['photo'][:tempfile].read)
-      photo = File.open(f)
-      uploader = Uploader.new
-      uploader.store!(photo)
-      redirect '/profile' unless @user.nil?
-  end
+    unless params['photo'] && (tmpfile = params['photo'][:tempfile]) && (name = params['photo'][:filename])
+        haml :index, :layout => :'layouts/index'
+    end
+
+    # generate image name
+    name = "#{(Time.now.to_i.to_s + Time.now.usec.to_s).ljust(16, '0')}#{File.extname(params['photo'][:filename])}"
+
+    while blk = tmpfile.read(65536)
+        AWS::S3::Base.establish_connection!(
+        :access_key_id     => settings.s3_key,
+        :secret_access_key => settings.s3_secret)
+        AWS::S3::S3Object.store(name,open(tmpfile),settings.bucket,:access => :public_read)     
+    end
+
+    # if successful, set user as profile image
+    @user.update(:photo => name) 
+
+    redirect '/profile' unless @user.nil?
 end
 
 get '/verify/:key' do
