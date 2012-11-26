@@ -26,10 +26,6 @@
   .alert.alert-warning.span8
     Complete all the fields below so that employers can find you easily!
 
-/upload photo
-%form{:method => "POST", :action => "/uploadphoto", :enctype => "multipart/form-data"}
-  %input{:name => 'photo', :type => 'file'}
-  %button{:type => "submit", :class => "btn btn-success"} Save these changes
 
 /education
 %form{:method => "POST", :action => "#"}
@@ -295,3 +291,14 @@
       .row{:class => "button"}
         .span5
           %button{:type => "submit", :class => "btn btn-success"} Save these changes
+%hr
+
+/upload photo
+%form{:method => "POST", :action => "/uploadphoto", :enctype => "multipart/form-data"}
+  .row
+    .span5
+      %h4 Upload new profile picture
+      %br
+      %input{:name => 'photo', :type => 'file'}
+      %br
+      %button{:type => "submit", :class => "btn btn-success"} Upload

@@ -1,15 +1,9 @@
-.navbar-inner
-  .container
-    .row
-      .span4
-        %img{:src => "/images/logo.png", :title => "TRD logo", :class => "logo"}
-      .span8
-        %form{:action => "/login", :method => "POST", :class => "form-inline form-horizontal pull-right"}
-          %input{:type => "text", :placeholder => "Email", :class => "span2", :name => "email"}
-          %input{:type => "password", :placeholder => "Password", :class => "password span2", :name => "password"}
-          %button{:type => "submit", :class => "btn login-btn"}
-            %i{:class => "icon-share-alt"}
-    .row
-      .span12
-        %h2{:class => "center light-header"}
-          We’re all about connecting student with employers. Top talent for the top spots.
+.container
+  .row
+    .span4
+      %img{:src => "/images/logo.png", :title => "TRD logo", :class => "logo"}
+    .span8
+      %form{:action => "/login", :method => "POST", :class => "form-inline form-horizontal pull-right"}
+        %input{:type => "text", :placeholder => "Email", :class => "span2", :name => "email"}
+        %input{:type => "password", :placeholder => "Password", :class => "password span2", :name => "password"}
+        %button{:type => "submit", :class => "btn"} Log in
