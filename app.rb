@@ -183,6 +183,8 @@ post '/profile' do
   begin
     student_actions = %w{personal work education extracurricular}
 
+    look(@user)
+
     if @user.type == Student
       look(@user)
       look(params)
@@ -204,6 +206,7 @@ post '/profile' do
         @user.update(:secondary_email => params[:secondary_email], :interest1 => params[:interest1], :interest2 => params[:interest2], :interest3 => params[:interest3])
         
       when "work"
+
         puts "Hello, works!"
         [:position, :place, :start_date, :end_date, :desc].each do |i|
           raise TrdError.new("Please enter all the fields.") if params[i].nil? || params[i] == ""
