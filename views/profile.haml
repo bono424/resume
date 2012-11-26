@@ -18,9 +18,9 @@
   .row
     .span9
       %div{:class => "alert alert-success"}= @success
-%br
+%br/
 %h1= @user.name
-%br
+%br/
 
 .row
   .alert.alert-warning.span8
@@ -36,7 +36,7 @@
         Education
         %a.edit{:href => "#", :onClick => "editSection('education')"}
           %i{:class => "icon-pencil"}
-      %br
+      %br/
 
     - if @user.school.nil? && @user.major.nil? && @user.minor.nil? && @user.class.nil? && @user.gpa.nil?
       #education-edit.span8{:style => "display:block;"}
@@ -128,7 +128,7 @@
         Work Experience
         %a.edit{:onClick => "editExp('workexperience' ,'add')"}
           %i{:class => "icon-plus"}
-  %br
+  %br/
 
   - if @user.experiences.length.zero?
     .workexperience-info
@@ -147,13 +147,13 @@
               %i{:class => "icon-remove"}
         .row.span8
           .gray= exp.desc
-      %br
+      %br/
 
   / work experience add form
   #workexperience-add{:style => "display:none"}
     %hr
     %h4 Add work experience
-    %br
+    %br/
     .row
       .span2
         %input{:type => "text", :placeholder => "Position", :name => "position", :class => "span2"}
@@ -165,10 +165,10 @@
       .span2{:class => "input-prepend"}
         %span{:class => "add-on"} End
         %input{:type => "text", :placeholder => "MM/YYYY", :name => "end_date", :class => "dateinput"}
-      %br
+      %br/
       .span8
         %textarea{:class => "span8", :name => "desc", :placeholder => "Description" }
-      %br
+      %br/
       .span5
         %button{:type => "submit", :class => "btn btn-success"} Save changes
 
@@ -183,7 +183,7 @@
         Extracurricular Activites
         %a.edit{:onClick => "editExp('extracurricular' ,'add')"}
           %i{:class => "icon-plus"}
-  %br
+  %br/
 
   - if @user.extracurriculars.length.zero?
     .extracurricular-info
@@ -202,13 +202,13 @@
               %i{:class => "icon-remove"}
         .row.span8
           .gray= extracurricular.desc
-      %br
+      %br/
 
   / extracurricular add form
   #extracurricular-add{:style => "display:none"}
     %hr
     %h4 Add an extracurricular activity
-    %br
+    %br/
     .row
       .span2
         %input{:type => "text", :placeholder => "Position", :name => "position", :class => "span2"}
@@ -220,10 +220,10 @@
       .span2{:class => "input-prepend"}
         %span{:class => "add-on"} End
         %input{:type => "text", :placeholder => "MM/YYYY", :name => "end_date", :class => "dateinput"}
-      %br
+      %br/
       .span8
         %textarea{:class => "span8", :name => "desc", :placeholder => "Description" }
-      %br
+      %br/
       .span5
         %button{:type => "submit", :class => "btn btn-success"} Save changes
 
@@ -238,59 +238,60 @@
         Personal
         %a.edit{:href => "#", :onClick => "editSection('personal')"}
           %i{:class => "icon-pencil"}
-  %br
-    #personal
+  %br/
+  #personal
+    .row
+      .bold.span2 Primary email
+      .span4= @user.email
+    - unless @user.secondary_email.nil?
       .row
-        .bold.span2 Primary email
-        .span4= @user.email
-      - unless @user.secondary_email.nil?
-        .row
-          .bold.span2 Personal email
-          .span4= @user.secondary_email
-      - unless @user.interest1.nil?
-        .row
-          .bold.span2 Interest one
-          .span4= @user.interest1
-      - unless @user.interest2.nil?
-        .row
-          .bold.span2 Interest two
-          .span4= @user.interest2
-      - unless @user.interest3.nil?
-        .row
-          .bold.span2 Interest three
-          .span4= @user.interest3
+        .bold.span2 Personal email
+        .span4= @user.secondary_email
+    - unless @user.interest1.nil?
+      .row
+        .bold.span2 Interest one
+        .span4= @user.interest1
+    - unless @user.interest2.nil?
+      .row
+        .bold.span2 Interest two
+        .span4= @user.interest2
+    - unless @user.interest3.nil?
+      .row
+        .bold.span2 Interest three
+        .span4= @user.interest3
 
-    #personal-edit{:style => "display:none;"}
-      .row{:style => "padding-bottom:18px;"}
-        .span2.bold Primary email
-        .span4= @user.email
-      .row
-        .span2.bold Personal email
-        .span3
-          %input{:type => "text", :value => "#{@user.secondary_email}", :name => "secondary_email"}
-      .row
-        .span2.bold Interest one
-        .span3
-          %select{:name => "interest1"}
-            - @interests.each do |i|
-              %option{:value => "#{i}"}= i
+  #personal-edit{:style => "display:none;"}
+    .row{:style => "padding-bottom:18px;"}
+      .span2.bold Primary email
+      .span4= @user.email
+    .row
+      .span2.bold Personal email
+      .span3
+        %input{:type => "text", :value => "#{@user.secondary_email}", :name => "secondary_email"}
+    .row
+      .span2.bold Interest one
+      .span3
+        %select{:name => "interest1"}
+          - @interests.each do |i|
+            %option{:value => "#{i}"}= i
 
-      .row
-        .span2.bold Interest two
-        .span3
-          %select{:name => "interest2"}
-            - @interests.each do |i|
-              %option{:value => "#{i}"}= i
-      .row
-        .span2.bold Interest three
-        .span3
-          %select{:name => "interest3"}
-            - @interests.each do |i|
-              %option{:value => "#{i}"}= i
+    .row
+      .span2.bold Interest two
+      .span3
+        %select{:name => "interest2"}
+          - @interests.each do |i|
+            %option{:value => "#{i}"}= i
+    .row
+      .span2.bold Interest three
+      .span3
+        %select{:name => "interest3"}
+          - @interests.each do |i|
+            %option{:value => "#{i}"}= i
 
-      .row{:class => "button"}
-        .span5
-          %button{:type => "submit", :class => "btn btn-success"} Save these changes
+    .row{:class => "button"}
+      .span5
+        %button{:type => "submit", :class => "btn btn-success"} Save these changes
+
 %hr
 
 /upload photo
@@ -298,7 +299,7 @@
   .row
     .span5
       %h4 Upload new profile picture
-      %br
+      %br/
       %input{:name => 'photo', :type => 'file'}
-      %br
+      %br/
       %button{:type => "submit", :class => "btn btn-success"} Upload

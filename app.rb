@@ -5,6 +5,8 @@ require 'stripe'
 require 'pony'
 require 'aws/s3'
 
+require 'logger'
+
 # s3
 set :bucket, 'trd-assets'
 set :s3_key, 'AKIAIQGNVCLXSVJ6JI4Q'
@@ -58,6 +60,24 @@ helpers do
   def all_interests()
     ['Advertising / PR', 'Consulting', 'Education', 'Entrepreneurship', 'Finance', 'Government / Military', 'Healthcare', 'Media / Entertainment', 'Non-Profit', 'Other', 'Real Estate', 'Technology']
   end
+end
+
+# used for debugging
+configure do
+    LOGGER = Logger.new("sinatra.log")
+end
+ 
+helpers do
+    def logger
+        LOGGER
+    end
+    def look(object)
+        if not ENV['RACK_ENV'] == 'production'
+            logger.info "#{object.inspect}"
+        else
+            puts "#{object.inspect}"
+        end
+    end
 end
 
 before do
@@ -164,6 +184,8 @@ post '/profile' do
     student_actions = %w{personal work education extracurricular}
 
     if @user.type == Student
+      look(@user)
+      look(params)
       unless student_actions.include? params[:action]
           raise TrdError.new("")
       end
