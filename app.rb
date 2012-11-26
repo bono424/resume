@@ -439,6 +439,6 @@ get '/search' do
   end
 end
 
-get '/mailtest' do
-    Notifications.pony_send_test()
+get '/splash' do
+    haml :splash, :layout => :'layouts/index'
 end

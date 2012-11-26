@@ -9,44 +9,34 @@
 
 /* ==== Header ==== */
 
-.navbar-inner {
-	margin:0px 0px 25px 0px;
-	padding:10px 0px;
+#top {
+    padding:16px 0px;
+    margin-bottom:30px;
 }
 
 .logo {
 	margin:5px 0px 0px 0px;
 }
 
-.login-btn {
-	padding:4px 7px 3px 7px;
-	position:relative;
-	top:-2px;
-}
-
 /* ===== Body ===== */
 
-.videocontainer {
-	position:relative;
+h1 {
+    font-size:5em;
+    line-height:1.2em;
 }
 
-.video {
-	padding:10px;
-	border:1px solid #ccc;
-}
-
-.videocontainer .btn {
-	position:absolute;
-	top:35%;
-	left:42%;
-	font-size:50px;
-	padding:15px 30px 10px 30px;
-	text-shadow: 0px 1px 0px #e1e1e8;
+#register {
+    margin-top:10px;
 }
 
 #register input {
 	font-size:20px;
+    line-height:1.2em;
 	padding:10px;
+}
+
+.splash img {
+    margin:20px 0px;
 }
 
 .cologo {
@@ -65,7 +55,7 @@
 footer {
 	text-align:center;
 	width:520px;
-	margin:0px auto;
+	margin:30px auto 0px auto;
 }
 
 .copyright {
