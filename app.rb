@@ -193,7 +193,18 @@ post '/profile' do
       end
       case params[:action]
       when "education"
-        @user.update(:school => params[:school], :major => params[:major], :minor => params[:minor], :class => params[:class], :gpa => params[:gpa])
+        # validate inputs
+        if params[:gpa].is_a? Numeric
+          raise TrdError.new("Your GPA must be a number.")
+        end
+
+        begin
+            class_year = Date.strptime(params[:class], "%Y")
+        rescue
+            raise TrdError.new("Your class year must be a valid, numeric date (YYYY).")
+        end
+
+        @user.update(:school => params[:school], :major => params[:major], :minor => params[:minor], :class => class_year, :gpa => params[:gpa])
       
       when "personal"
         # make sure interests are valid
@@ -206,8 +217,6 @@ post '/profile' do
         @user.update(:secondary_email => params[:secondary_email], :interest1 => params[:interest1], :interest2 => params[:interest2], :interest3 => params[:interest3])
         
       when "work"
-
-        puts "Hello, works!"
         [:position, :place, :start_date, :end_date, :desc].each do |i|
           raise TrdError.new("Please enter all the fields.") if params[i].nil? || params[i] == ""
         end

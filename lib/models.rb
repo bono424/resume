@@ -40,7 +40,7 @@ class Student < User
   property :interest1,        String
   property :interest2,        String
   property :interest3,        String
-  property :class,            Integer
+  property :class,            Date
   property :resume,           String
   property :photo,               String
   property :has_done_stages, Boolean, :default => false

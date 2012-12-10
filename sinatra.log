@@ -9,3 +9,91 @@ I, [2012-11-26T01:01:25.295927 #3689]  INFO -- : Education actiontype passed
 I, [2012-11-26T01:21:09.710522 #3785]  INFO -- : #<Student @id=1 @email="ssansovich@gmail.com" @password="47468b72ab33d9753951db2d4fe3c51a0aff53bc408557891a8a4b99f1dfd93b" @salt="ttXsS1" @verification_key="SakJSjPkyZqClis3ccP8sZkYasmnaIWJ" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded> @has_done_stages=<not loaded> @is_employer=<not loaded>>
 I, [2012-11-26T01:22:44.071664 #3799]  INFO -- : #<Student @id=1 @email="ssansovich@gmail.com" @password="47468b72ab33d9753951db2d4fe3c51a0aff53bc408557891a8a4b99f1dfd93b" @salt="ttXsS1" @verification_key="SakJSjPkyZqClis3ccP8sZkYasmnaIWJ" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded> @has_done_stages=<not loaded> @is_employer=<not loaded>>
 I, [2012-11-26T01:22:44.071989 #3799]  INFO -- : {"action"=>"education", "school"=>"Harvard College", "major"=>"English", "minor"=>"Computer Science", "class"=>"2013", "gpa"=>"3.6"}
+I, [2012-11-26T01:35:11.070125 #3978]  INFO -- : #<Student @id=1 @email="ssansovich@gmail.com" @password="47468b72ab33d9753951db2d4fe3c51a0aff53bc408557891a8a4b99f1dfd93b" @salt="ttXsS1" @verification_key="SakJSjPkyZqClis3ccP8sZkYasmnaIWJ" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded> @has_done_stages=<not loaded> @is_employer=<not loaded>>
+I, [2012-11-26T01:35:11.070511 #3978]  INFO -- : #<Student @id=1 @email="ssansovich@gmail.com" @password="47468b72ab33d9753951db2d4fe3c51a0aff53bc408557891a8a4b99f1dfd93b" @salt="ttXsS1" @verification_key="SakJSjPkyZqClis3ccP8sZkYasmnaIWJ" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded> @has_done_stages=<not loaded> @is_employer=<not loaded>>
+I, [2012-11-26T01:35:11.070690 #3978]  INFO -- : {"action"=>"education", "school"=>"Harvard University", "major"=>"English", "minor"=>"Computer Science", "class"=>"2013", "gpa"=>"3.6"}
+I, [2012-11-26T01:55:42.771215 #4093]  INFO -- : #<Student @id=1 @email="ssansovich@gmail.com" @password="47468b72ab33d9753951db2d4fe3c51a0aff53bc408557891a8a4b99f1dfd93b" @salt="ttXsS1" @verification_key="SakJSjPkyZqClis3ccP8sZkYasmnaIWJ" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded> @has_done_stages=<not loaded> @is_employer=<not loaded>>
+I, [2012-11-26T01:55:42.771592 #4093]  INFO -- : #<Student @id=1 @email="ssansovich@gmail.com" @password="47468b72ab33d9753951db2d4fe3c51a0aff53bc408557891a8a4b99f1dfd93b" @salt="ttXsS1" @verification_key="SakJSjPkyZqClis3ccP8sZkYasmnaIWJ" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded> @has_done_stages=<not loaded> @is_employer=<not loaded>>
+I, [2012-11-26T01:55:42.771749 #4093]  INFO -- : {"action"=>"education", "school"=>"Harvard University", "major"=>"English", "minor"=>"Computer Science", "class"=>"2a", "gpa"=>"3.6"}
+ArgumentError - invalid date:
+ /Users/scottsansovich/.rvm/rubies/ruby-1.9.2-p318/lib/ruby/1.9.1/date.rb:809:in `civil'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/dm-do-adapter-1.2.0/lib/dm-do-adapter/adapter.rb:153:in `next!'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/dm-do-adapter-1.2.0/lib/dm-do-adapter/adapter.rb:153:in `block in read'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/dm-do-adapter-1.2.0/lib/dm-do-adapter/adapter.rb:276:in `with_connection'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/dm-do-adapter-1.2.0/lib/dm-do-adapter/adapter.rb:141:in `read'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/dm-core-1.2.0/lib/dm-core/repository.rb:162:in `read'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/dm-core-1.2.0/lib/dm-core/collection.rb:1117:in `lazy_load'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/dm-core-1.2.0/lib/dm-core/support/lazy_array.rb:409:in `each'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/dm-core-1.2.0/lib/dm-core/collection.rb:504:in `each'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/dm-core-1.2.0/lib/dm-core/collection.rb:1323:in `map'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/dm-core-1.2.0/lib/dm-core/collection.rb:1323:in `resources_added'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/dm-core-1.2.0/lib/dm-core/collection.rb:701:in `replace'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/dm-core-1.2.0/lib/dm-core/collection.rb:80:in `reload'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/dm-core-1.2.0/lib/dm-core/resource.rb:875:in `eager_load'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/dm-core-1.2.0/lib/dm-core/resource.rb:858:in `lazy_load'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/dm-core-1.2.0/lib/dm-core/property.rb:664:in `lazy_load'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/dm-core-1.2.0/lib/dm-core/resource/persistence_state/persisted.rb:23:in `lazy_load'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/dm-core-1.2.0/lib/dm-core/resource/persistence_state/persisted.rb:8:in `get'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/dm-core-1.2.0/lib/dm-core/model/property.rb:209:in `name'
+ views/profile.haml:22:in `evaluate_source'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/tilt-1.3.3/lib/tilt/template.rb:209:in `instance_eval'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/tilt-1.3.3/lib/tilt/template.rb:209:in `evaluate_source'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/tilt-1.3.3/lib/tilt/template.rb:144:in `cached_evaluate'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/tilt-1.3.3/lib/tilt/template.rb:127:in `evaluate'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/tilt-1.3.3/lib/tilt/haml.rb:24:in `evaluate'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/tilt-1.3.3/lib/tilt/template.rb:76:in `render'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:575:in `render'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:475:in `haml'
+ /Users/scottsansovich/trd/app.rb:176:in `block in <top (required)>'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:1175:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:1175:in `block in compile!'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:739:in `instance_eval'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:739:in `route_eval'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:723:in `block (2 levels) in route!'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:773:in `block in process_route'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:770:in `catch'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:770:in `process_route'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:722:in `block in route!'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:721:in `each'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:721:in `route!'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:857:in `dispatch!'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:659:in `block in call!'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:823:in `block in invoke'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:823:in `catch'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:823:in `invoke'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:659:in `call!'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:644:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/session/abstract/id.rb:205:in `context'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/session/abstract/id.rb:200:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/head.rb:9:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/commonlogger.rb:20:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/showexceptions.rb:21:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/methodoverride.rb:21:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:1295:in `block in call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:1326:in `synchronize'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:1295:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/lint.rb:48:in `_call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/lint.rb:36:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/showexceptions.rb:24:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/commonlogger.rb:20:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/shotgun-0.9/lib/shotgun/loader.rb:86:in `proceed_as_child'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/shotgun-0.9/lib/shotgun/loader.rb:31:in `call!'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/shotgun-0.9/lib/shotgun/loader.rb:18:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/shotgun-0.9/lib/shotgun/favicon.rb:12:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/shotgun-0.9/lib/shotgun/static.rb:14:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/builder.rb:134:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/handler/webrick.rb:59:in `service'
+ /Users/scottsansovich/.rvm/rubies/ruby-1.9.2-p318/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+ /Users/scottsansovich/.rvm/rubies/ruby-1.9.2-p318/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+ /Users/scottsansovich/.rvm/rubies/ruby-1.9.2-p318/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread' ~ (0.001112) SELECT "id", "type", "email", "password", "salt", "verification_key", "is_verified" FROM "users" WHERE "id" = 1 LIMIT 1
+ ~ (0.001840) SELECT "id", "type", "email", "password", "salt", "verification_key", "is_verified", "name", "secondary_email", "birthday", "school", "major", "minor", "gpa", "gender", "interest1", "interest2", "interest3", "class", "resume", "photo", "has_done_stages", "is_employer" FROM "users" WHERE ("type" IN ('Student') AND "email" = 'ssansovich@gmail.com') ORDER BY "id" LIMIT 1
+ ~ (0.001392) INSERT INTO "users" ("email", "password", "salt", "verification_key", "is_verified", "type", "name", "has_done_stages", "is_employer") VALUES ('ssansovich@gmail.com', 'bda0ca3775582c9a1e3d7378da63c12d8ac15012828da656dc033ac96a59980c', 'uWpRkf', '3vkWNqQPhE2lOaKL2v6yqDDU2lCr1JRl', FALSE, 'Student', 'Scott Sansovich', FALSE, FALSE) RETURNING "id"
+I, [2012-11-26T02:06:52.696044 #4182]  INFO -- : #<Student @id=1 @email="ssansovich@gmail.com" @password="bda0ca3775582c9a1e3d7378da63c12d8ac15012828da656dc033ac96a59980c" @salt="uWpRkf" @verification_key="3vkWNqQPhE2lOaKL2v6yqDDU2lCr1JRl" @is_verified=false @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded> @has_done_stages=<not loaded> @is_employer=<not loaded>>
+I, [2012-11-26T02:06:52.696436 #4182]  INFO -- : #<Student @id=1 @email="ssansovich@gmail.com" @password="bda0ca3775582c9a1e3d7378da63c12d8ac15012828da656dc033ac96a59980c" @salt="uWpRkf" @verification_key="3vkWNqQPhE2lOaKL2v6yqDDU2lCr1JRl" @is_verified=false @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded> @has_done_stages=<not loaded> @is_employer=<not loaded>>
+I, [2012-11-26T02:06:52.696614 #4182]  INFO -- : {"action"=>"education", "school"=>"", "major"=>"", "minor"=>"", "class"=>"a", "gpa"=>""}
+I, [2012-11-26T02:07:11.402122 #4185]  INFO -- : #<Student @id=1 @email="ssansovich@gmail.com" @password="bda0ca3775582c9a1e3d7378da63c12d8ac15012828da656dc033ac96a59980c" @salt="uWpRkf" @verification_key="3vkWNqQPhE2lOaKL2v6yqDDU2lCr1JRl" @is_verified=false @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded> @has_done_stages=<not loaded> @is_employer=<not loaded>>
+I, [2012-11-26T02:07:11.402553 #4185]  INFO -- : #<Student @id=1 @email="ssansovich@gmail.com" @password="bda0ca3775582c9a1e3d7378da63c12d8ac15012828da656dc033ac96a59980c" @salt="uWpRkf" @verification_key="3vkWNqQPhE2lOaKL2v6yqDDU2lCr1JRl" @is_verified=false @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded> @has_done_stages=<not loaded> @is_employer=<not loaded>>
+I, [2012-11-26T02:07:11.402744 #4185]  INFO -- : {"action"=>"work", "position"=>"", "place"=>"", "start_date"=>"a", "end_date"=>"", "desc"=>""}
+I, [2012-11-26T02:16:40.797766 #4218]  INFO -- : #<Student @id=1 @email="ssansovich@gmail.com" @password="bda0ca3775582c9a1e3d7378da63c12d8ac15012828da656dc033ac96a59980c" @salt="uWpRkf" @verification_key="3vkWNqQPhE2lOaKL2v6yqDDU2lCr1JRl" @is_verified=false @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded> @has_done_stages=<not loaded> @is_employer=<not loaded>>
+I, [2012-11-26T02:16:40.798138 #4218]  INFO -- : #<Student @id=1 @email="ssansovich@gmail.com" @password="bda0ca3775582c9a1e3d7378da63c12d8ac15012828da656dc033ac96a59980c" @salt="uWpRkf" @verification_key="3vkWNqQPhE2lOaKL2v6yqDDU2lCr1JRl" @is_verified=false @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded> @has_done_stages=<not loaded> @is_employer=<not loaded>>
+I, [2012-11-26T02:16:40.798292 #4218]  INFO -- : {"action"=>"education", "school"=>"", "major"=>"", "minor"=>"", "class"=>"2a", "gpa"=>""}
