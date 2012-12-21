@@ -16,10 +16,11 @@ spec/reports
 test/tmp
 test/version_tmp
 tmp
+*.swp
+*.swo
+design
 
 # YARD artifacts
 .yardoc
 _yardoc
 doc/
-*.swp
-*.swo
