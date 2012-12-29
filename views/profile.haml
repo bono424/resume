@@ -19,13 +19,12 @@
     .span9
       %div{:class => "alert alert-success"}= @success
 %br/
-%h1= @user.name
-%br/
-
 .row
   .alert.alert-warning.span8
     Complete all the fields below so that employers can find you easily!
 
+%h1= @user.name
+%br/
 
 /education
 %form{:method => "POST", :action => "#"}
@@ -43,23 +42,23 @@
         .row
           .span2.bold School
           .span3
-            %input{:type => "text", :value => "#{@user.school}", :name => "school"}
+            %input{:type => "text", :name => "school"}
         .row
           .span2.bold Major
           .span3
-            %input{:type => "text", :value => "#{@user.major}", :name => "major"}
+            %input{:type => "text", :name => "major"}
         .row
           .span2.bold Minor
           .span3
-            %input{:type => "text", :value => "#{@user.minor}", :name => "minor"}
+            %input{:type => "text", :name => "minor"}
         .row
           .span2.bold Class
           .span3
-            %input{:type => "text", :value => "#{@user.class}", :name => "class"}
+            %input{:type => "text", :name => "class"}
         .row
           .span2.bold GPA
           .span3
-            %input{:type => "text", :value => "#{@user.gpa}", :name => "gpa"}
+            %input{:type => "text", :name => "gpa"}
 
         .row{:class => "button"}
           .span5
@@ -82,7 +81,7 @@
         .row
           .span2.bold Class
           .span3
-            %input{:type => "text", :value => "#{@user.class}", :name => "class"}
+            %input{:type => "text", :value => "#{@user.class.strftime('%Y')}", :name => "class"}
         .row
           .span2.bold GPA
           .span3
@@ -110,7 +109,7 @@
         - unless @user.class.nil?
           .row.clearfix
             .span2.bold Class year
-            .span3= @user.class
+            .span3= @user.class.strftime('%Y')
 
         - unless @user.gpa.nil?
           .row
@@ -142,11 +141,12 @@
             %span.gray at
             %strong= exp.place
           .pull-right
-            = "#{exp.start_date.strftime('%B %Y')} to #{exp.end_date.strftime('%B %Y')}"
             %a{:class => "remove", :href => "profile/delete/work/#{exp.id}"}
               %i{:class => "icon-remove"}
         .row.span8
-          .gray= exp.desc
+          .gray= "#{exp.start_date.strftime('%B %Y')} to #{exp.end_date.strftime('%B %Y')}"
+        .row.span8
+          = exp.desc
       %br/
 
   / work experience add form
@@ -197,11 +197,12 @@
             %span.gray at
             %strong= extracurricular.place
           .pull-right
-            = "#{extracurricular.start_date.strftime('%B %Y')} to #{extracurricular.end_date.strftime('%B %Y')}"
             %a{:class => "remove", :href => "profile/delete/extracurricular/#{extracurricular.id}"}
               %i{:class => "icon-remove"}
         .row.span8
-          .gray= extracurricular.desc
+          .gray= "#{extracurricular.start_date.strftime('%B %Y')} to #{extracurricular.end_date.strftime('%B %Y')}"
+        .row.span8
+          = extracurricular.desc
       %br/
 
   / extracurricular add form
@@ -309,7 +310,7 @@
 /upload resume 
 %form{:method => "POST", :action => "/upload", :enctype => "multipart/form-data"}
   .row
-    .span2
+    .span5
       %h4 Upload resume (PDF only)
       - if @user.resume.nil?
         %p Currently no resume uploaded.
