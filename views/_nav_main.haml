@@ -52,9 +52,9 @@
 
 - elsif @user.type == Employer
   - if @user.photo.nil?
-    %img{:src => "/images/companylogos/nologo.png", :class => "profilepic"}
+    %img{:src => "/images/anon.png", :class => "profilepic"}
   - else
-    %img{:src => "/images/companylogos/#{@user.photo}", :class => "profilepic"}
+    %img{:src => "https://trd-assets.s3.amazonaws.com/#{@user.photo}", :class => "profilepic"}
   %ul{:class => "nav nav-list"}
     %li{:class => "nav-header"}= @user.name
     %li

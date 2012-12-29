@@ -15,7 +15,7 @@
 %br
 .row
   .span3
-    %img{:src => "/images/companylogos/#{@user.photo}"}
+    %img{:src => "https://trd-assets.s3.amazonaws.com/#{@user.photo}" }
   .span5
     %h1= @user.name
     %a{:href => "#{@user.url}"}= @user.url
@@ -33,16 +33,68 @@
     #about
       %p= @user.description
       .row
-        .span4
+        .span5
           %b= @user.name
           %p
             =@user.address
             %br
             = "#{@user.city}, #{@user.state} #{@user.zipcode}"
-        .span4
+        .span5
           %b Founded
           %br= @user.founded
-    
+        - if @user.school.nil? && @user.major.nil? && @user.minor.nil? && @user.class.nil? && @user.gpa.nil?
+          #education-edit.span8{:style => "display:block;"}
+            .row
+              .span2.bold School
+              .span3
+                %input{:type => "text", :value => "#{@user.school}", :name => "school"}
+            .row
+              .span2.bold Major
+              .span3
+                %input{:type => "text", :value => "#{@user.major}", :name => "major"}
+            .row
+              .span2.bold Minor
+              .span3
+                %input{:type => "text", :value => "#{@user.minor}", :name => "minor"}
+            .row
+              .span2.bold Class
+              .span3
+                %input{:type => "text", :value => "#{@user.class}", :name => "class"}
+            .row
+              .span2.bold GPA
+              .span3
+                %input{:type => "text", :value => "#{@user.gpa}", :name => "gpa"}
+
+            .row{:class => "button"}
+              .span5
+                %button{:type => "submit", :class => "btn btn-success"} Save these changes
+
+        - else
+          #education-edit.span8{:style => "display:none;"}
+            .row
+              .span2.bold School
+              .span3
+                %input{:type => "text", :value => "#{@user.school}", :name => "school"}
+            .row
+              .span2.bold Major
+              .span3
+                %input{:type => "text", :value => "#{@user.major}", :name => "major"}
+            .row
+              .span2.bold Minor
+              .span3
+                %input{:type => "text", :value => "#{@user.minor}", :name => "minor"}
+            .row
+              .span2.bold Class
+              .span3
+                %input{:type => "text", :value => "#{@user.class}", :name => "class"}
+            .row
+              .span2.bold GPA
+              .span3
+                %input{:type => "text", :value => "#{@user.gpa}", :name => "gpa"}
+            .row{:class => "button"}
+              .span5
+                %button{:type => "submit", :class => "btn btn-success"} Save these changes
+
     - if @user.is_employer
       %form{:method => "POST", :action => "#"}
         %input{:type => "hidden", :name => "action", :value => "info"}

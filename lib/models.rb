@@ -60,10 +60,11 @@ class Employer < User
   property :description,  String, :length => 1024
   property :handle,       String
   property :address,      String
-  property :city,        String
+  property :city,         String
   property :state,        String
   property :zipcode,      String
   property :phone,        String
+  property :photo,        String
 
   has n, :postings
 end
