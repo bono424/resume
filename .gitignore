@@ -19,6 +19,7 @@ tmp
 *.swp
 *.swo
 design
+sinatra.log
 
 # YARD artifacts
 .yardoc

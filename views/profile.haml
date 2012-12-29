@@ -295,11 +295,28 @@
 %hr
 
 /upload photo
-%form{:method => "POST", :action => "/uploadphoto", :enctype => "multipart/form-data"}
+%form{:method => "POST", :action => "/upload", :enctype => "multipart/form-data"}
   .row
     .span5
       %h4 Upload new profile picture
+      %input{:name => 'action', :value => 'photo', :type => 'hidden'}
       %br/
-      %input{:name => 'photo', :type => 'file'}
+      %input{:name => 'file', :type => 'file'}
+      %br/
+      %button{:type => "submit", :class => "btn btn-success"} Upload
+  %br
+
+/upload resume 
+%form{:method => "POST", :action => "/upload", :enctype => "multipart/form-data"}
+  .row
+    .span2
+      %h4 Upload resume (PDF only)
+      - if @user.resume.nil?
+        %p Currently no resume uploaded.
+      - else
+        %a{:href => "https://trd-assets.s3.amazonaws.com/#{@user.resume}", :target => "_blank"} View current resume
+        %br
+      %input{:name => 'action', :value => 'resume', :type => 'hidden'}
+      %input{:name => 'file', :type => 'file'}
       %br/
       %button{:type => "submit", :class => "btn btn-success"} Upload

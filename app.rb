@@ -121,25 +121,53 @@ post '/' do
   end
 end
 
-post '/uploadphoto' do
-    unless params['photo'] && (tmpfile = params['photo'][:tempfile]) && (name = params['photo'][:filename])
-        haml :index, :layout => :'layouts/index'
+post '/upload' do
+    @interests = all_interests
+    begin
+        unless params['file'] && (tmpfile = params['file'][:tempfile]) && (name = params['file'][:filename])
+            redirect '/profile' unless @user.nil?
+        end
+
+        # generate name and determine filetype
+        ext = File.extname(params['file'][:filename])
+        name = "#{(Time.now.to_i.to_s + Time.now.usec.to_s).ljust(16, '0')}#{ext}"
+
+        case params[:action]
+        when 'photo'
+            unless ext.eql?('.jpg') or ext.eql?('.png') or ext.eql?('.gif') or ext.eql?('.jpeg')
+                raise TrdError.new("Profile images must be of type .jpg, .png, or .gif")
+            end
+            while blk = tmpfile.read(65536)
+                AWS::S3::Base.establish_connection!(
+                :access_key_id     => settings.s3_key,
+                :secret_access_key => settings.s3_secret)
+                AWS::S3::S3Object.store(name,open(tmpfile),settings.bucket,:access => :public_read)     
+            end
+            # if successful, set user as profile image
+            @user.update(:photo => name) 
+
+        when 'resume'
+            unless ext.eql?('.pdf')
+                raise TrdError.new("Resumes must be of type .pdf") 
+            end
+            while blk = tmpfile.read(65536)
+                AWS::S3::Base.establish_connection!(
+                :access_key_id     => settings.s3_key,
+                :secret_access_key => settings.s3_secret)
+                AWS::S3::S3Object.store(name,open(tmpfile),settings.bucket,:access => :public_read)     
+            end
+            # if successful, set user as profile image
+            @user.update(:resume=> name) 
+        end
+
+
+
+        haml :profile, :layout => :'layouts/application'
+    rescue TrdError => e
+        @error = e.message
+        @success = nil
+        haml :profile, :layout => :'layouts/application'
     end
-
-    # generate image name
-    name = "#{(Time.now.to_i.to_s + Time.now.usec.to_s).ljust(16, '0')}#{File.extname(params['photo'][:filename])}"
-
-    while blk = tmpfile.read(65536)
-        AWS::S3::Base.establish_connection!(
-        :access_key_id     => settings.s3_key,
-        :secret_access_key => settings.s3_secret)
-        AWS::S3::S3Object.store(name,open(tmpfile),settings.bucket,:access => :public_read)     
-    end
-
-    # if successful, set user as profile image
-    @user.update(:photo => name) 
-
-    redirect '/profile' unless @user.nil?
 end
 
 get '/verify/:key' do
