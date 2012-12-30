@@ -18,7 +18,7 @@
           .span7
             %a{:href => "/employers/#{emp.handle}"}
               %b= emp.name
-            %p= emp.description
+            %p= emp.description.gsub("\n","<br >")
             %div
               %a{:href => "#{emp.url}"}
                 Visit website

@@ -1,0 +1,77 @@
+%h1 Employer plans
+%br
+
+- unless @error.nil?
+  .row
+    .span9{:class => "alert alert-error"}= @error
+
+.row
+  .span9
+    %h2 About
+    %p
+      The Resume Drop is a platform that connects students and employers. The site was launched in January 2012 at Harvard, Yale, and Princeton. We saw over 1,000 profiles created and 600 resumes submitted in the first month of operation. The platform is growing quickly, and several top firms have signed up.
+
+    %h2 How it works
+    %p
+      Students sign up and create a profile. Students submit information such as school, graduation year, industry interests, major/concentration, and GPA. Students also upload a PDF version of their resumes.
+    %p
+      Employers who sign up post job openings and sort through students based on the information that the students submit (school, GPA, interests, graduation year, etc.) Employers can also access students' resumes and create profiles that students can view to learn more about an employer.
+
+    %h2 Summary
+    %ul
+      %li Connect <strong>directly</strong> with top talent
+      %li Make your recruiting <strong>more targeted</strong> and <strong>hassle-free</strong>
+      %li Sort candidates by criteria such as school, graduation year, GPA, concentration/major, and industry interest
+      %li Maintain continuous access to candidate's resumes
+      %li Build <strong>customized</strong> resume books
+      %li Witness an <strong>increase</strong> in applications
+%br
+
+
+
+.row
+  .span7
+    %table{:class => "table table-bordered"}
+      %thead
+        %tr
+          %th Plans
+          %th Executive
+          %th Standard
+          %th Starter
+      %tbody
+        %tr
+          %td Monthly
+          %td $500/mo
+          %td $300/mo
+          %td $150/mo
+        %tr
+          %td Job Postings
+          %td Unlimited!
+          %td 15/mo
+          %td 5/mo
+        %tr
+          %td Access to PDF Resumes
+          %td Unlimited!
+          %td 250/mo
+          %td 50/mo
+        %tr
+          %td 100% Satisfaction Guarantee
+          %td Yes
+          %td Yes
+          %td Yes
+        %tr
+          %td Job Pages
+          %td Yes
+          %td Yes
+          %td Yes
+        %tr
+          %td Employer Profile
+          %td Yes
+          %td Yes
+          %td Yes
+        %tr
+          %td Customizable Candidate Search
+          %td Yes
+          %td Yes
+          %td Yes
+

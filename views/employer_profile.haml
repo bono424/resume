@@ -5,8 +5,8 @@
     $("#" + section + "-update").show();
   }
 
-  function addListing() {
-    $("#listing-add").show();
+  function addposting() {
+    $("#posting-add").show();
   }
 
 .row
@@ -102,14 +102,14 @@
 .row
   .span9
     %h2
-      Job and Internship Listings
-      %a.edit{:onClick => "addListing()"}
+      Job and Internship postings
+      %a.edit{:onClick => "addposting()"}
         %i{:class => "icon-plus"}
 %br
 
-  #listing-info
+  #posting-info
   - if @user.postings.nil?
-    %p No job listings are currently available.
+    %p No job postings are currently available.
   - else
     - @user.postings.each do |post|
       .row
@@ -134,12 +134,12 @@
             Delete this entry
       %br
 
-  / listing add form
-  #listing-add{:style => "display:none"}
+  / posting add form
+  #posting-add{:style => "display:none"}
     %form{:method => "POST", :action => "#"}
-      %input{:type => "hidden", :name => "action", :value => "listing"}
+      %input{:type => "hidden", :name => "action", :value => "posting"}
       %hr
-      %h4 Add a listing
+      %h4 Add a posting
       %br
       .row
         .span2
