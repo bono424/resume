@@ -120,3 +120,203 @@ I, [2012-12-29T12:25:27.507138 #13896]  INFO -- : {"action"=>"extracurricular", 
 I, [2012-12-29T12:37:04.019677 #14119]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded> @has_done_stages=<not loaded> @is_employer=<not loaded>>
 I, [2012-12-29T12:37:04.035385 #14119]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded> @has_done_stages=<not loaded> @is_employer=<not loaded>>
 I, [2012-12-29T12:37:04.035663 #14119]  INFO -- : {"action"=>"education", "school"=>"", "major"=>"", "minor"=>"", "class"=>"", "gpa"=>""}
+views/employer_profile.haml:136: warning: else without rescue is useless
+I, [2012-12-29T20:42:46.614759 #14810]  INFO -- : #<Employer @id=1 @email="ssansovich@gmail.com" @password="bda0ca3775582c9a1e3d7378da63c12d8ac15012828da656dc033ac96a59980c" @salt="uWpRkf" @verification_key="3vkWNqQPhE2lOaKL2v6yqDDU2lCr1JRl" @is_verified=true @type=Employer @is_employer=<not loaded> @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded>>
+I, [2012-12-29T20:42:46.615207 #14810]  INFO -- : #<Employer @id=1 @email="ssansovich@gmail.com" @password="bda0ca3775582c9a1e3d7378da63c12d8ac15012828da656dc033ac96a59980c" @salt="uWpRkf" @verification_key="3vkWNqQPhE2lOaKL2v6yqDDU2lCr1JRl" @is_verified=true @type=Employer @is_employer=<not loaded> @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded>>
+I, [2012-12-29T20:42:46.615393 #14810]  INFO -- : {"address"=>"", "city"=>"", "state"=>"", "zipcode"=>"", "description"=>""}
+views/employer_profile.haml:136: warning: else without rescue is useless
+views/employer_profile.haml:136: warning: else without rescue is useless
+I, [2012-12-29T20:43:47.851477 #14825]  INFO -- : #<Employer @id=1 @email="ssansovich@gmail.com" @password="bda0ca3775582c9a1e3d7378da63c12d8ac15012828da656dc033ac96a59980c" @salt="uWpRkf" @verification_key="3vkWNqQPhE2lOaKL2v6yqDDU2lCr1JRl" @is_verified=true @type=Employer @is_employer=<not loaded> @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded>>
+I, [2012-12-29T20:43:47.869816 #14825]  INFO -- : #<Employer @id=1 @email="ssansovich@gmail.com" @password="bda0ca3775582c9a1e3d7378da63c12d8ac15012828da656dc033ac96a59980c" @salt="uWpRkf" @verification_key="3vkWNqQPhE2lOaKL2v6yqDDU2lCr1JRl" @is_verified=true @type=Employer @is_employer=<not loaded> @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded>>
+I, [2012-12-29T20:43:47.870106 #14825]  INFO -- : {"action"=>"about", "address"=>"", "city"=>"", "state"=>"", "zipcode"=>"", "description"=>""}
+views/employer_profile.haml:136: warning: else without rescue is useless
+I, [2012-12-29T20:52:34.424928 #14889]  INFO -- : #<Employer @id=1 @email="ssansovich@gmail.com" @password="bda0ca3775582c9a1e3d7378da63c12d8ac15012828da656dc033ac96a59980c" @salt="uWpRkf" @verification_key="3vkWNqQPhE2lOaKL2v6yqDDU2lCr1JRl" @is_verified=true @type=Employer @is_employer=<not loaded> @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded>>
+I, [2012-12-29T20:52:34.439603 #14889]  INFO -- : #<Employer @id=1 @email="ssansovich@gmail.com" @password="bda0ca3775582c9a1e3d7378da63c12d8ac15012828da656dc033ac96a59980c" @salt="uWpRkf" @verification_key="3vkWNqQPhE2lOaKL2v6yqDDU2lCr1JRl" @is_verified=true @type=Employer @is_employer=<not loaded> @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded>>
+I, [2012-12-29T20:52:34.439896 #14889]  INFO -- : {"action"=>"about", "address"=>"", "city"=>"", "state"=>"", "zipcode"=>"", "description"=>""}
+I, [2012-12-29T20:53:46.804649 #14902]  INFO -- : #<Employer @id=1 @email="ssansovich@gmail.com" @password="bda0ca3775582c9a1e3d7378da63c12d8ac15012828da656dc033ac96a59980c" @salt="uWpRkf" @verification_key="3vkWNqQPhE2lOaKL2v6yqDDU2lCr1JRl" @is_verified=true @type=Employer @is_employer=<not loaded> @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded>>
+I, [2012-12-29T20:53:46.822490 #14902]  INFO -- : #<Employer @id=1 @email="ssansovich@gmail.com" @password="bda0ca3775582c9a1e3d7378da63c12d8ac15012828da656dc033ac96a59980c" @salt="uWpRkf" @verification_key="3vkWNqQPhE2lOaKL2v6yqDDU2lCr1JRl" @is_verified=true @type=Employer @is_employer=<not loaded> @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded>>
+I, [2012-12-29T20:53:46.822782 #14902]  INFO -- : {"action"=>"about", "address"=>"", "city"=>"", "state"=>"", "zipcode"=>"", "description"=>""}
+I, [2012-12-29T20:54:52.064513 #14915]  INFO -- : #<Employer @id=1 @email="ssansovich@gmail.com" @password="bda0ca3775582c9a1e3d7378da63c12d8ac15012828da656dc033ac96a59980c" @salt="uWpRkf" @verification_key="3vkWNqQPhE2lOaKL2v6yqDDU2lCr1JRl" @is_verified=true @type=Employer @is_employer=<not loaded> @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded>>
+I, [2012-12-29T20:54:52.160375 #14915]  INFO -- : #<Employer @id=1 @email="ssansovich@gmail.com" @password="bda0ca3775582c9a1e3d7378da63c12d8ac15012828da656dc033ac96a59980c" @salt="uWpRkf" @verification_key="3vkWNqQPhE2lOaKL2v6yqDDU2lCr1JRl" @is_verified=true @type=Employer @is_employer=<not loaded> @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded>>
+I, [2012-12-29T20:54:52.161449 #14915]  INFO -- : {"action"=>"about", "address"=>"", "city"=>"", "state"=>"", "zipcode"=>"", "description"=>""}
+I, [2012-12-29T20:56:01.447655 #14926]  INFO -- : #<Employer @id=1 @email="ssansovich@gmail.com" @password="bda0ca3775582c9a1e3d7378da63c12d8ac15012828da656dc033ac96a59980c" @salt="uWpRkf" @verification_key="3vkWNqQPhE2lOaKL2v6yqDDU2lCr1JRl" @is_verified=true @type=Employer @is_employer=<not loaded> @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded>>
+I, [2012-12-29T20:58:27.772898 #14948]  INFO -- : #<Employer @id=1 @email="ssansovich@gmail.com" @password="bda0ca3775582c9a1e3d7378da63c12d8ac15012828da656dc033ac96a59980c" @salt="uWpRkf" @verification_key="3vkWNqQPhE2lOaKL2v6yqDDU2lCr1JRl" @is_verified=true @type=Employer @is_employer=<not loaded> @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded>>
+I, [2012-12-29T21:00:55.500701 #14965]  INFO -- : #<Employer @id=1 @email="ssansovich@gmail.com" @password="bda0ca3775582c9a1e3d7378da63c12d8ac15012828da656dc033ac96a59980c" @salt="uWpRkf" @verification_key="3vkWNqQPhE2lOaKL2v6yqDDU2lCr1JRl" @is_verified=true @type=Employer @is_employer=<not loaded> @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded>>
+I, [2012-12-29T21:07:03.506192 #15008]  INFO -- : #<Employer @id=1 @email="ssansovich@gmail.com" @password="bda0ca3775582c9a1e3d7378da63c12d8ac15012828da656dc033ac96a59980c" @salt="uWpRkf" @verification_key="3vkWNqQPhE2lOaKL2v6yqDDU2lCr1JRl" @is_verified=true @type=Employer @is_employer=<not loaded> @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded>>
+I, [2012-12-29T21:18:50.299306 #15094]  INFO -- : #<Employer @id=1 @email="ssansovich@gmail.com" @password="bda0ca3775582c9a1e3d7378da63c12d8ac15012828da656dc033ac96a59980c" @salt="uWpRkf" @verification_key="3vkWNqQPhE2lOaKL2v6yqDDU2lCr1JRl" @is_verified=true @type=Employer @is_employer=<not loaded> @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded>>
+I, [2012-12-29T21:19:45.228968 #15111]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded> @has_done_stages=<not loaded> @is_employer=<not loaded>>
+I, [2012-12-29T21:19:45.253690 #15111]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded> @has_done_stages=<not loaded> @is_employer=<not loaded>>
+I, [2012-12-29T21:19:45.254067 #15111]  INFO -- : {"action"=>"education", "school"=>"Harvard College", "major"=>"English", "minor"=>"Computer Science", "class"=>"2013", "gpa"=>"3.6"}
+I, [2012-12-29T21:20:43.572823 #15130]  INFO -- : #<Employer @id=1 @email="ssansovich@gmail.com" @password="bda0ca3775582c9a1e3d7378da63c12d8ac15012828da656dc033ac96a59980c" @salt="uWpRkf" @verification_key="3vkWNqQPhE2lOaKL2v6yqDDU2lCr1JRl" @is_verified=true @type=Employer @is_employer=<not loaded> @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded>>
+I, [2012-12-29T21:21:32.416914 #15137]  INFO -- : #<Employer @id=1 @email="ssansovich@gmail.com" @password="bda0ca3775582c9a1e3d7378da63c12d8ac15012828da656dc033ac96a59980c" @salt="uWpRkf" @verification_key="3vkWNqQPhE2lOaKL2v6yqDDU2lCr1JRl" @is_verified=true @type=Employer @is_employer=<not loaded> @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded>>
+I, [2012-12-29T21:21:45.545099 #15144]  INFO -- : #<Employer @id=1 @email="ssansovich@gmail.com" @password="bda0ca3775582c9a1e3d7378da63c12d8ac15012828da656dc033ac96a59980c" @salt="uWpRkf" @verification_key="3vkWNqQPhE2lOaKL2v6yqDDU2lCr1JRl" @is_verified=true @type=Employer @is_employer=<not loaded> @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded>>
+I, [2012-12-29T21:24:39.706661 #15169]  INFO -- : #<Employer @id=1 @email="ssansovich@gmail.com" @password="bda0ca3775582c9a1e3d7378da63c12d8ac15012828da656dc033ac96a59980c" @salt="uWpRkf" @verification_key="3vkWNqQPhE2lOaKL2v6yqDDU2lCr1JRl" @is_verified=true @type=Employer @is_employer=<not loaded> @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded>>
+I, [2012-12-29T21:30:52.457858 #15223]  INFO -- : #<Employer @id=1 @email="ssansovich@gmail.com" @password="bda0ca3775582c9a1e3d7378da63c12d8ac15012828da656dc033ac96a59980c" @salt="uWpRkf" @verification_key="3vkWNqQPhE2lOaKL2v6yqDDU2lCr1JRl" @is_verified=true @type=Employer @is_employer=<not loaded> @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded>>
+I, [2012-12-29T21:33:01.690539 #15236]  INFO -- : #<Employer @id=1 @email="ssansovich@gmail.com" @password="bda0ca3775582c9a1e3d7378da63c12d8ac15012828da656dc033ac96a59980c" @salt="uWpRkf" @verification_key="3vkWNqQPhE2lOaKL2v6yqDDU2lCr1JRl" @is_verified=true @type=Employer @is_employer=<not loaded> @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded>>
+I, [2012-12-29T21:33:43.850727 #15242]  INFO -- : #<Employer @id=1 @email="ssansovich@gmail.com" @password="bda0ca3775582c9a1e3d7378da63c12d8ac15012828da656dc033ac96a59980c" @salt="uWpRkf" @verification_key="3vkWNqQPhE2lOaKL2v6yqDDU2lCr1JRl" @is_verified=true @type=Employer @is_employer=<not loaded> @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded>>
+ ~ (0.001552) SELECT "id", "type", "email", "password", "salt", "verification_key", "is_verified", "name", "secondary_email", "birthday", "school", "major", "minor", "gpa", "gender", "interest1", "interest2", "interest3", "class", "resume", "photo", "has_done_stages", "is_employer" FROM "users" WHERE ("type" IN ('Student') AND "email" = 'ssansovich@gmail.com') ORDER BY "id" LIMIT 1
+ ~ (0.125765) INSERT INTO "users" ("email", "password", "salt", "verification_key", "is_verified", "type", "name", "has_done_stages", "is_employer") VALUES ('ssansovich@gmail.com', '3631f28ed0b8f6fdcb6676b5c732743c2eae4d139d63c391e63a97b6ce287946', 'MLGZdl', 'vegS3oQhyZHEkCpg5eXisMW0JBvzxhBM', FALSE, 'Student', 'Scott Sansovich', FALSE, FALSE) RETURNING "id"
+I, [2012-12-29T21:44:58.032713 #15319]  INFO -- : #<Employer @id=3 @email="ssansovich@gmail.com" @password="3631f28ed0b8f6fdcb6676b5c732743c2eae4d139d63c391e63a97b6ce287946" @salt="MLGZdl" @verification_key="vegS3oQhyZHEkCpg5eXisMW0JBvzxhBM" @is_verified=true @type=Employer @is_employer=<not loaded> @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded>>
+I, [2012-12-29T22:37:28.145408 #15671]  INFO -- : #<Employer @id=3 @email="ssansovich@gmail.com" @password="3631f28ed0b8f6fdcb6676b5c732743c2eae4d139d63c391e63a97b6ce287946" @salt="MLGZdl" @verification_key="vegS3oQhyZHEkCpg5eXisMW0JBvzxhBM" @is_verified=true @type=Employer @is_employer=<not loaded> @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded>>
+I, [2012-12-29T22:38:01.770815 #15676]  INFO -- : #<Employer @id=3 @email="ssansovich@gmail.com" @password="3631f28ed0b8f6fdcb6676b5c732743c2eae4d139d63c391e63a97b6ce287946" @salt="MLGZdl" @verification_key="vegS3oQhyZHEkCpg5eXisMW0JBvzxhBM" @is_verified=true @type=Employer @is_employer=<not loaded> @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded>>
+I, [2012-12-29T22:42:48.813789 #15699]  INFO -- : #<Employer @id=3 @email="ssansovich@gmail.com" @password="3631f28ed0b8f6fdcb6676b5c732743c2eae4d139d63c391e63a97b6ce287946" @salt="MLGZdl" @verification_key="vegS3oQhyZHEkCpg5eXisMW0JBvzxhBM" @is_verified=true @type=Employer @is_employer=<not loaded> @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded>>
+I, [2012-12-29T22:44:15.298120 #15713]  INFO -- : #<Employer @id=3 @email="ssansovich@gmail.com" @password="3631f28ed0b8f6fdcb6676b5c732743c2eae4d139d63c391e63a97b6ce287946" @salt="MLGZdl" @verification_key="vegS3oQhyZHEkCpg5eXisMW0JBvzxhBM" @is_verified=true @type=Employer @is_employer=<not loaded> @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded>>
+SyntaxError - views/employer_profile.haml:82: syntax error, unexpected ';', expecting ')'
+));}\n        </br>\n      </p>\...
+   ^
+views/employer_profile.haml:82: unknown regexp option - p
+views/employer_profile.haml:82: syntax error, unexpected $undefined
+...);}\n        </br>\n      </p>\n    </div>\n  </div>\n", -4,...
+...                               ^
+views/employer_profile.haml:82: unknown regexp options - dv
+views/employer_profile.haml:82: syntax error, unexpected $undefined
+...    </p>\n    </div>\n  </div>\n", -4, false);end
+...                               ^
+views/employer_profile.haml:84: syntax error, unexpected keyword_class, expecting keyword_do or '{' or '('
+...hamlout.push_text("  <div class='row'>\n    <div class='span...
+...                               ^
+views/employer_profile.haml:84: syntax error, unexpected $undefined
+...push_text("  <div class='row'>\n    <div class='span5'>\n   ...
+...                               ^
+views/employer_profile.haml:84: syntax error, unexpected keyword_class, expecting keyword_do or '{' or '('
+...iv class='row'>\n    <div class='span5'>\n      <p>\n       ...
+...                               ^
+views/employer_profile.haml:84: syntax error, unexpected $undefined
+...row'>\n    <div class='span5'>\n      <p>\n        <b>Locati...
+...                               ^
+views/employer_profile.haml:84: syntax error, unexpected $undefined
+...<div class='span5'>\n      <p>\n        <b>Location</b>\n   ...
+...                               ^
+views/employer_profile.haml:95: unknown regexp option - p
+views/employer_profile.haml:95: syntax error, unexpected $undefined
+..._hamlout.push_text("      </p>\n    </div>\n  </div>\n", -3,...
+...                               ^
+views/employer_profile.haml:95: unknown regexp options - dv
+views/employer_profile.haml:95: syntax error, unexpected $undefined
+...    </p>\n    </div>\n  </div>\n", -3, false);end
+...                               ^
+views/employer_profile.haml:96: syntax error, unexpected keyword_class, expecting keyword_do or '{' or '('
+...hamlout.push_text("  <div class='row'>\n", 1, false); unless...
+...                               ^
+views/employer_profile.haml:96: syntax error, unexpected $undefined
+...push_text("  <div class='row'>\n", 1, false); unless @user.f...
+...                               ^
+views/employer_profile.haml:97: syntax error, unexpected keyword_class, expecting keyword_do or '{' or '('
+...mlout.push_text("    <div class='span5'>\n      <b>Founded</...
+...                               ^
+views/employer_profile.haml:97: syntax error, unexpected $undefined
+..._text("    <div class='span5'>\n      <b>Founded</b>\n      ...
+...                               ^
+views/employer_profile.haml:99: unknown regexp options - br
+views/employer_profile.haml:99: syntax error, unexpected $undefined
+));}</br>\n    </div>\n", -1, false);end
+          ^
+views/employer_profile.haml:100: unknown regexp options - dv
+unmatched close parenthesis: /div>\n", -1, false);end
+_hamlout.push_text("  </i
+views/employer_profile.haml:100: syntax error, unexpected $undefined
+_hamlout.push_text("  </div>\n  <br>\n</div>\n<div class='...
+                             ^
+views/employer_profile.haml:100: syntax error, unexpected $undefined
+...ut.push_text("  </div>\n  <br>\n</div>\n<div class='row'>\n ...
+...                               ^
+views/employer_profile.haml:100: syntax error, unexpected $undefined
+...     <i class='icon-plus'></i>\n      </a>\n    </h2>\n  </d...
+...                               ^
+views/employer_profile.haml:100: unknown regexp option - h
+views/employer_profile.haml:100: syntax error, unexpected tINTEGER, expecting '}'
+...lus'></i>\n      </a>\n    </h2>\n  </div>\n</div>\n<br>\n  ...
+...                               ^
+views/employer_profile.haml:100: unknown regexp options - dv
+views/employer_profile.haml:100: syntax error, unexpected $undefined
+...>\n    </h2>\n  </div>\n</div>\n<br>\n  <div id='listing-inf...
+...                               ^
+views/employer_profile.haml:100: syntax error, unexpected $undefined
+... </h2>\n  </div>\n</div>\n<br>\n  <div id='listing-info'></d...
+...                               ^
+views/employer_profile.haml:100: syntax error, unexpected tIDENTIFIER, expecting keyword_do or '{' or '('
+...</div>\n</div>\n<br>\n  <div id='listing-info'></div>\n", -1...
+...                               ^
+views/employer_profile.haml:100: syntax error, unexpected '<'
+...br>\n  <div id='listing-info'></div>\n", -1, false);
+...                               ^
+views/employer_profile.haml:112: unknown regexp option - p
+unmatched close parenthesis: /div>\n", -1, false);
+
+
+
+
+
+
+
+
+
+
+ if @user.postings.nil?
+_hamlout.push_text("  <p>No job listings are currently available.</
+views/employer_profile.haml:112: syntax error, unexpected $undefined
+...s are currently available.</p>\n", 0, false);
+...                               ^
+views/employer_profile.haml:115: syntax error, unexpected keyword_class, expecting keyword_do or '{' or '('
+...hamlout.push_text("  <div class='row'>\n    <div class='span...
+...                               ^
+views/employer_profile.haml:115: syntax error, unexpected $undefined
+...push_text("  <div class='row'>\n    <div class='span8'>\n   ...
+...                               ^
+views/employer_profile.haml:115: syntax error, unexpected keyword_class, expecting keyword_do or '{' or '('
+...iv class='row'>\n    <div class='span8'>\n      <h4>#{_hamlo...
+...                               ^
+views/employer_profile.haml:115: syntax error, unexpected $undefined
+...row'>\n    <div class='span8'>\n      <h4>#{_hamlout.adjust_...
+...                               ^
+views/employer_profile.haml:141: syntax error, unexpected keyword_ensure, expecting $end:
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/tilt-1.3.3/lib/tilt/template.rb:209:in `instance_eval'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/tilt-1.3.3/lib/tilt/template.rb:209:in `evaluate_source'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/tilt-1.3.3/lib/tilt/template.rb:144:in `cached_evaluate'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/tilt-1.3.3/lib/tilt/template.rb:127:in `evaluate'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/tilt-1.3.3/lib/tilt/haml.rb:24:in `evaluate'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/tilt-1.3.3/lib/tilt/template.rb:76:in `render'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:575:in `render'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:475:in `haml'
+ /Users/scottsansovich/trd/app.rb:206:in `block in <top (required)>'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:1175:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:1175:in `block in compile!'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:739:in `instance_eval'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:739:in `route_eval'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:723:in `block (2 levels) in route!'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:773:in `block in process_route'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:770:in `catch'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:770:in `process_route'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:722:in `block in route!'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:721:in `each'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:721:in `route!'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:857:in `dispatch!'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:659:in `block in call!'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:823:in `block in invoke'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:823:in `catch'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:823:in `invoke'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:659:in `call!'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:644:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/session/abstract/id.rb:205:in `context'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/session/abstract/id.rb:200:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/head.rb:9:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/commonlogger.rb:20:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/showexceptions.rb:21:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/methodoverride.rb:21:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:1295:in `block in call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:1326:in `synchronize'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:1295:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/lint.rb:48:in `_call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/lint.rb:36:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/showexceptions.rb:24:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/commonlogger.rb:20:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/shotgun-0.9/lib/shotgun/loader.rb:86:in `proceed_as_child'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/shotgun-0.9/lib/shotgun/loader.rb:31:in `call!'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/shotgun-0.9/lib/shotgun/loader.rb:18:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/shotgun-0.9/lib/shotgun/favicon.rb:12:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/shotgun-0.9/lib/shotgun/static.rb:14:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/builder.rb:134:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/handler/webrick.rb:59:in `service'
+ /Users/scottsansovich/.rvm/rubies/ruby-1.9.2-p318/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+ /Users/scottsansovich/.rvm/rubies/ruby-1.9.2-p318/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+ /Users/scottsansovich/.rvm/rubies/ruby-1.9.2-p318/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'

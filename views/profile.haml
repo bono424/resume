@@ -146,7 +146,7 @@
         .row.span8
           .gray= "#{exp.start_date.strftime('%B %Y')} to #{exp.end_date.strftime('%B %Y')}"
         .row.span8
-          = exp.desc
+          = exp.desc.gsub("\n", "<br />")
       %br/
 
   / work experience add form
@@ -202,7 +202,7 @@
         .row.span8
           .gray= "#{extracurricular.start_date.strftime('%B %Y')} to #{extracurricular.end_date.strftime('%B %Y')}"
         .row.span8
-          = extracurricular.desc
+          = extracurricular.desc.gsub("\n", "<br />")
       %br/
 
   / extracurricular add form

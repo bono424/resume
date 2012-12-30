@@ -1,7 +1,8 @@
 :javascript
   function editSection(section) {
+    $("#" + section + "-new").hide();
     $("#" + section).hide();
-    $("#" + section + "-edit").show();
+    $("#" + section + "-update").show();
   }
 
   function addListing() {
@@ -16,117 +17,87 @@
 .row
   .span3
     %img{:src => "https://trd-assets.s3.amazonaws.com/#{@user.photo}" }
-  .span5
-    %h1= @user.name
-    %a{:href => "#{@user.url}"}= @user.url
-
 %br
 .row
-  .span6
-    %h2
-      About
+  .span5
+    %h1
+      = @user.name
       %a.edit{:href => "#", :onClick => "editSection('about')"}
         %i{:class => "icon-pencil"}
-%br
-.row
-  .span8
-    #about
-      %p= @user.description
-      .row
-        .span5
-          %b= @user.name
-          %p
+    %a{:href => "#{@user.url}"}= @user.url
+
+.row{:id => "about-forms"}
+  - if @user.address.nil? && @user.city.nil? && @user.state.nil? && @user.zipcode.nil? && @user.description.nil?
+    #about-new.span8{:style => "display:block;"}
+      %form{:method => "POST", :action => "#", :class => "form-horizontal"}
+        %input{:type => "hidden", :name => "action", :value => "about"}
+        %fieldset
+          %label Street address
+          %input{:type => "text", :value => "#{@user.address}", :name => "address"}
+          %label City
+          %input{:type => "text", :value => "#{@user.city}", :name => "city"}
+          .row
+            %label{:class => "span1"} State
+            %label{:class => "span2"} Zipcode
+          .row
+            .span1
+              %input{:type => "text", :value => "#{@user.state}", :name => "state", :class => "span1"}
+            .span2
+              %input{:type => "text", :value => "#{@user.zipcode}", :name => "zipcode", :class => "span2"}
+          %label About
+          %textarea{:name => "description", :value => "#{@user.description}", :class => "span5"}
+          %button{:type => "submit", :class => "btn btn-success"} Save these changes
+
+  - else
+    #about-update.span6{:style => "display:none;"}
+      %br
+      %form{:method => "POST", :action => "#"}
+        %input{:type => "hidden", :name => "action", :value => "about"}
+        %fieldset
+          %label Street address
+          %input{:type => "text", :value => "#{@user.address}", :name => "address"}
+          %label City
+          %input{:type => "text", :value => "#{@user.city}", :name => "city"}
+          .row
+            %label{:class => "span1"} State
+            %label{:class => "span2"} Zipcode
+          .row
+            .span1
+              %input{:type => "text", :value => "#{@user.state}", :name => "state", :class => "span1"}
+            .span2
+              %input{:type => "text", :value => "#{@user.zipcode}", :name => "zipcode", :class => "span2"}
+          %label About
+          %textarea{:name => "description", :class => "span5"} #{@user.description}
+          %button{:type => "submit", :class => "btn btn-success"} Save these changes
+
+#about
+  %br
+  - unless @user.description.nil?
+    .row
+      .span9
+        %p
+          %b About
+          %br
+            =@user.description.gsub("\n", "<br />")
+
+  - unless @user.address.nil? && (@user.city.nil? || @user.state.nil? || @user.zipcode.nil?)
+    .row
+      .span5
+        %p
+          %b Location
+          %br
+          - unless @user.address.nil?
             =@user.address
             %br
+          - unless @user.city.nil? || @user.state.nil? || @user.zipcode.nil?
             = "#{@user.city}, #{@user.state} #{@user.zipcode}"
-        .span5
-          %b Founded
-          %br= @user.founded
-        - if @user.school.nil? && @user.major.nil? && @user.minor.nil? && @user.class.nil? && @user.gpa.nil?
-          #education-edit.span8{:style => "display:block;"}
-            .row
-              .span2.bold School
-              .span3
-                %input{:type => "text", :value => "#{@user.school}", :name => "school"}
-            .row
-              .span2.bold Major
-              .span3
-                %input{:type => "text", :value => "#{@user.major}", :name => "major"}
-            .row
-              .span2.bold Minor
-              .span3
-                %input{:type => "text", :value => "#{@user.minor}", :name => "minor"}
-            .row
-              .span2.bold Class
-              .span3
-                %input{:type => "text", :value => "#{@user.class}", :name => "class"}
-            .row
-              .span2.bold GPA
-              .span3
-                %input{:type => "text", :value => "#{@user.gpa}", :name => "gpa"}
+  .row
+    - unless @user.founded.nil?
+      .span5
+        %b Founded
+        %br= @user.founded
 
-            .row{:class => "button"}
-              .span5
-                %button{:type => "submit", :class => "btn btn-success"} Save these changes
-
-        - else
-          #education-edit.span8{:style => "display:none;"}
-            .row
-              .span2.bold School
-              .span3
-                %input{:type => "text", :value => "#{@user.school}", :name => "school"}
-            .row
-              .span2.bold Major
-              .span3
-                %input{:type => "text", :value => "#{@user.major}", :name => "major"}
-            .row
-              .span2.bold Minor
-              .span3
-                %input{:type => "text", :value => "#{@user.minor}", :name => "minor"}
-            .row
-              .span2.bold Class
-              .span3
-                %input{:type => "text", :value => "#{@user.class}", :name => "class"}
-            .row
-              .span2.bold GPA
-              .span3
-                %input{:type => "text", :value => "#{@user.gpa}", :name => "gpa"}
-            .row{:class => "button"}
-              .span5
-                %button{:type => "submit", :class => "btn btn-success"} Save these changes
-
-    - if @user.is_employer
-      %form{:method => "POST", :action => "#"}
-        %input{:type => "hidden", :name => "action", :value => "info"}
-        #about-edit{:style => "display:none"}
-          %label Description
-          %textarea{:name => "description", :class => "span8"}
-            =@user.description
-          %br
-          %hr
-          %label
-            Address
-            %input{:type => "text", :value => "#{@user.address}", :name => "address"}
-          %label
-            City
-            %input{:type => "text", :value => "#{@user.city}", :name => "city"}
-          %label
-            State
-            %br
-            %input{:type => "text", :value => "#{@user.state}", :name => "state", :class => "span1"}
-          %label
-            Zipcode
-            %input{:type => "text", :value => "#{@user.zipcode}", :name => "zipcode", :class => "span1"}
-          %hr
-          %label Founded
-          %input{:type => "text", :value => "#{@user.founded}", :name => "founded"}
-          %br
-          %br
-          .row{:class => "button"}
-            .span5
-              %button{:type => "submit", :class => "btn btn-success"} Save these changes
-        
-%br
+  %br
 
 .row
   .span9
@@ -163,7 +134,7 @@
             Delete this entry
       %br
 
-    / listing add form
+  / listing add form
   #listing-add{:style => "display:none"}
     %form{:method => "POST", :action => "#"}
       %input{:type => "hidden", :name => "action", :value => "listing"}
