@@ -35,6 +35,15 @@ enable :sessions
 include Trd
 
 helpers do
+  def  title(str = nil)
+    # helper for formatting page title
+    if str
+      str + ' | The Resume Drop'
+    else
+      'The Resume Drop'
+    end
+  end
+
   def random_string(len)
     str = ''
     len.times do
@@ -91,6 +100,7 @@ before do
 end
 
 get '/' do
+  @title = title 'Welcome'
   redirect '/profile' unless @user.nil?
   haml :index, :layout => :'layouts/index'
 end
@@ -175,6 +185,7 @@ post '/upload' do
 end
 
 get '/verify/:key' do
+  @title = title 'Verify'
   begin
     redirect '/profile' unless @user.nil?
     e = TrdError.new("Invalid verification key.")
@@ -200,6 +211,7 @@ get '/verify/:key' do
 end
 
 get '/profile' do
+  @title = title @user.name
   @interests = all_interests
   redirect '/' if @user.nil?
   if @user.type == Employer
@@ -372,16 +384,9 @@ post '/login' do
   end
 end
 
-get '/update/1' do
-  begin
-
-  rescue
-
-  end
-end
-
 get '/employers/:handle' do
   @employer = Employer.first(:handle => params[:handle])
+  @title = title @employer.name
   raise Sinatra::NotFound if @employer.nil?
   haml :employer_page, :layout => :'layouts/application'
 end
@@ -396,6 +401,7 @@ get '/logout' do
 end
 
 get '/employers' do
+  @title = title 'Employers'
   begin
     employers = Employer.all(:is_verified => true, :is_employer => true)
     raise TrdError.new("Sorry, we have no companies listed.") if employers.length.zero?
@@ -408,11 +414,13 @@ get '/employers' do
   end
 end
 
-get '/plans' do
-  haml :plans, :layout => :'layouts/application'
+get '/pricing' do
+  @title = title 'Pricing'
+  haml :pricing, :layout => :'layouts/application'
 end
 
-get '/subscribe' do
+get '/subscribe/:plan' do
+  @title = title 'Subscribe'
   haml :subscribe, :layout => :'layouts/subscribe'
 end
 
@@ -454,14 +462,17 @@ end
 # Static pages.
 
 get '/about' do
+  @title = title 'About'
   haml :about, :layout => :'layouts/application'
 end
 
 get '/privacy' do
+  @title = title 'Privacy'
   haml :privacy, :layout => :'layouts/application'
 end
 
 get '/terms' do
+  @title = title 'Terms'
   haml :terms, :layout => :'layouts/application'
 end
 
@@ -475,6 +486,7 @@ error do
 end
 
 get '/search' do
+  @title = title 'Search'
   begin
     if @user.type == Employer
       if params.empty?
@@ -513,8 +525,4 @@ get '/search' do
       @error = e.message
       haml :search, :layout => :'layouts/application'
   end
-end
-
-get '/splash' do
-    haml :splash, :layout => :'layouts/index'
 end
