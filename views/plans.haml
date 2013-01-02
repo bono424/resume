@@ -1,4 +1,5 @@
-%h1 Employer plans
+%h1 Pricing
+
 %br
 
 - unless @error.nil?
@@ -7,17 +8,12 @@
 
 .row
   .span9
-    %h2 About
-    %p
-      The Resume Drop is a platform that connects students and employers. The site was launched in January 2012 at Harvard, Yale, and Princeton. We saw over 1,000 profiles created and 600 resumes submitted in the first month of operation. The platform is growing quickly, and several top firms have signed up.
-
     %h2 How it works
     %p
       Students sign up and create a profile. Students submit information such as school, graduation year, industry interests, major/concentration, and GPA. Students also upload a PDF version of their resumes.
     %p
       Employers who sign up post job openings and sort through students based on the information that the students submit (school, GPA, interests, graduation year, etc.) Employers can also access students' resumes and create profiles that students can view to learn more about an employer.
 
-    %h2 Summary
     %ul
       %li Connect <strong>directly</strong> with top talent
       %li Make your recruiting <strong>more targeted</strong> and <strong>hassle-free</strong>
@@ -25,53 +21,94 @@
       %li Maintain continuous access to candidate's resumes
       %li Build <strong>customized</strong> resume books
       %li Witness an <strong>increase</strong> in applications
+
+%hr
 %br
 
-
-
 .row
-  .span7
-    %table{:class => "table table-bordered"}
-      %thead
-        %tr
-          %th Plans
-          %th Executive
-          %th Standard
-          %th Starter
-      %tbody
-        %tr
-          %td Monthly
-          %td $500/mo
-          %td $300/mo
-          %td $150/mo
-        %tr
-          %td Job Postings
-          %td Unlimited!
-          %td 15/mo
-          %td 5/mo
-        %tr
-          %td Access to PDF Resumes
-          %td Unlimited!
-          %td 250/mo
-          %td 50/mo
-        %tr
-          %td 100% Satisfaction Guarantee
-          %td Yes
-          %td Yes
-          %td Yes
-        %tr
-          %td Job Pages
-          %td Yes
-          %td Yes
-          %td Yes
-        %tr
-          %td Employer Profile
-          %td Yes
-          %td Yes
-          %td Yes
-        %tr
-          %td Customizable Candidate Search
-          %td Yes
-          %td Yes
-          %td Yes
+  .span3{:class => "center"}
+    %h1 Starter
+    %h2{:class =>"green" } $150 a month
+    %p 
+      5 job listings per month <br />
+      Access to 50 resumes per month
+    %h1{:class => "gray"} +
+    %p
+      Create job listings <br /> Build an employer profile <br /> Conduct customizable searches
+    %br
+    %a{:href => "#", :class => "btn btn-large"} Get Starter
 
+  .span3{:class => "center"}
+    %h1 Standard
+    %h2{:class =>"green" } $300 a month
+    %p 
+      15 job listings per month <br />
+      Access to 250 resumes per month
+    %h1{:class => "gray"} +
+    %p
+      Create job listings <br /> Build an employer profile <br /> Conduct customizable searches
+    %br
+    %a{:href => "#", :class => "btn btn-large btn-primary"} Get Standard
+
+  .span3{:class => "center"}
+    %h1 Executive
+    %h2{:class =>"green" } $500 a month
+    %p 
+      Unlimited job listings<br />
+      Unlimited access to resumes
+    %h1{:class => "gray"} +
+    %p
+      Create job listings <br /> Build an employer profile <br /> Conduct customizable searches
+    %br
+    %a{:href => "#", :class => "btn btn-large btn-success"} Get Executive
+
+/
+  .row
+    .span7
+      %table{:class => "table table-bordered"}
+        %thead
+          %tr
+            %th
+              %h2 Plans
+            %th
+              %h2 Executive
+            %th
+              %h2 Standard
+            %th
+              %h2 Starter
+        %tbody
+          %tr
+            %td Monthly
+            %td{:class => "green"} $500/mo
+            %td{:class => "green"} $300/mo
+            %td{:class => "green"} $150/mo
+          %tr
+            %td Job Postings
+            %td Unlimited!
+            %td 15/mo
+            %td 5/mo
+          %tr
+            %td Access to PDF Resumes
+            %td Unlimited!
+            %td 250/mo
+            %td 50/mo
+          %tr
+            %td 100% Satisfaction Guarantee
+            %td Yes
+            %td Yes
+            %td Yes
+          %tr
+            %td Job Pages
+            %td Yes
+            %td Yes
+            %td Yes
+          %tr
+            %td Employer Profile
+            %td Yes
+            %td Yes
+            %td Yes
+          %tr
+            %td Customizable Candidate Search
+            %td Yes
+            %td Yes
+            %td Yes

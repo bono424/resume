@@ -14,7 +14,6 @@ set :s3_secret, 'grh33ZZZtUFsWEXy+z7nZ47PjXjUGRWq22F4/822'
 
 
 # Helpers
-require 'active_support'
 require './lib/render_partial'
 require File.expand_path('lib/exceptions', File.dirname(__FILE__))
 require File.expand_path('lib/notifications', File.dirname(__FILE__))
@@ -295,7 +294,7 @@ post '/profile' do
       when "about"
         description = nl2br(params[:description])
         @user.update(:description => params[:description], :address => params[:address], :city => params[:city], :state => params[:state], :zipcode => params[:zipcode])
-      when "listing"
+      when "posting"
         [:position, :place, :start_date, :end_date, :description, :class, :qualifications, :contact_name, :contact_email].each do |i|
           raise TrdError.new("Please enter all the fields.") if params[i].nil? || params[i] == ""
         end
@@ -409,6 +408,10 @@ get '/employers' do
   end
 end
 
+get '/plans' do
+  haml :plans, :layout => :'layouts/application'
+end
+
 get '/subscribe' do
   haml :subscribe, :layout => :'layouts/subscribe'
 end
@@ -419,7 +422,7 @@ post '/subscribe' do
     user = User.get(:email => params[:email])
     raise TrdError.new("This account is already registered. Please contact us at support@theresumedrop.com to delete this account.") unless user.nil?
 
-    Stripe.api_key = "pPUOTFfVZxBNBoDM9u3zY60XECyLzDFU"
+    Stripe.api_key = "sk_test_aR1DCWnDqi5OlkU04ZyH3tp3"
     Stripe::Customer.create(
       :description => "Customer for #{params[:email]}",
       :email => params[:email],

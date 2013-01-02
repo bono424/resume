@@ -30,13 +30,26 @@ EOS
     def self.send_verification_email(email, verification_key)
       # return if user.nil?
       to = email
-      from = "welcome@theresumedrop.com"
+      from = "The Resume Drop <welcome@theresumedrop.com>"
       link = "http://theresumedrop.com/verify/#{verification_key}"
       subject = "Welcome to The Resume Drop!"
       body = <<EOS
 Before you can log in, you have to confirm your email address. To confirm your email address, click here: #{link}
 
 Thanks,
+The Resume Drop Team
+EOS
+      body = <<EOS
+Welcome to The Resume Drop!
+
+Before you can start building your profile, you need to confirm your email address.  Just click this link below (or copy and paste it into your address bar):
+
+#{link}
+
+If you have any questions or suggestions, please let us know! Send an email to either scott@theresumedrop.com or damilare.sonoike@theresumedrop.com
+
+Good luck and have fun!
+
 The Resume Drop Team
 EOS
       Pony.mail(:to => 'ssansovich@gmail.com', :from => from, :subject => subject, :body => body)
