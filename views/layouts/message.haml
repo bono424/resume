@@ -3,32 +3,33 @@
   %head
     %meta{:'http-equiv' => "Content-Type", :content => "text/html; charset=utf-8"}
     %meta{:name => "lang", :content => "en"}
-    %title The Resume Drop
-    - unless @title.nil?
-      >
-      = @title
+    %title= @title || 'Error | The Resume Drop'
     %link{:href=>'/stylesheets/bootstrap/css/bootstrap.css', :rel => 'stylesheet', :media => "screen", :type => "text/css"}
     %link{:href=>'/stylesheets/msgstyle.css', :rel => 'stylesheet', :media => "screen", :type => "text/css"}
     %script{:type => "text/javascript", :src => "http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"}
+    %link{:rel => "shortcut icon", :type => "image/png", :href => "/images/favicon.png"}
   %body
     #top{:class => "navbar"}
       .navbar-inner
         .container
           .row{:class => "center"}
             %a{:href => "/"}
-              %img{:src => "/images/logomed.png", :title => "TRD logo", :class => "logo"}
+              %img{:src => "/images/logo.png", :title => "TRD logo", :class => "logo span4 offset4"}
 
     #content{:class => "container"}
       .row
         .span12{:class => "center"}
-          %img{:src => "/images/failbox.png", :class => "failimg"}
-          .alert{:class => "span9 offset1"}
-            - if !@success.nil?
+          - if !@success.nil?
+            %img{:src => "/images/plant.png", :class => "failimg"}
+            .alert{:class => "span9 offset1"}
               %h1{:class => "center"} Success!
-            - else
+              = yield
+          - else
+            %img{:src => "/images/failbox.png", :class => "failimg"}
+            .alert{:class => "span9 offset1"}
               %h1{:class => "center"} Oops, looks like something went wrong.
-            %br
-            = yield
+              = yield
+
 
     = partial :_footer
     = partial :_analytics

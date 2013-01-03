@@ -201,7 +201,7 @@ get '/verify/:key' do
     raise e if user.verification_key != params[:key]
 
     user.update(:is_verified => true)
-    @success = "User successfully verified. You can log in now."
+    @success = "User successfully verified. You can <a href='/'>log in</a> now."
     haml :verify, :layout => :'layouts/message'
   rescue TrdError => e
     @error = e.message
