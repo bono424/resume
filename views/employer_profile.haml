@@ -16,8 +16,19 @@
 %br
 .row
   .span3
-    %img{:src => "https://trd-assets.s3.amazonaws.com/#{@user.photo}" }
+    - if @user.photo.nil?
+      %form{:method => "POST", :action => "/upload", :enctype => "multipart/form-data"}
+        .row
+          .span5
+            %p No logo uploaded.
+            %input{:name => 'action', :value => 'photo', :type => 'hidden'}
+            %input{:name => 'file', :type => 'file'}
+            %br/
+            %button{:type => "submit", :class => "btn btn-success"} Upload
+    - else
+      %img{:src => "https://trd-assets.s3.amazonaws.com/#{@user.photo}" }
 %br
+
 .row
   .span5
     %h1

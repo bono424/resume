@@ -174,13 +174,19 @@ post '/upload' do
             @user.update(:resume=> name) 
         end
 
-
-
-        haml :profile, :layout => :'layouts/application'
+        if @user.type == Student
+            haml :profile, :layout => :'layouts/application'
+        else
+            haml :employer_profile, :layout => :'layouts/application'
+        end
     rescue TrdError => e
         @error = e.message
         @success = nil
-        haml :profile, :layout => :'layouts/application'
+        if @user.type == Student
+            haml :profile, :layout => :'layouts/application'
+        else
+            haml :employer_profile, :layout => :'layouts/application'
+        end
     end
 end
 
