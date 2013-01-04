@@ -65,6 +65,7 @@ class Employer < User
   property :zipcode,      String
   property :phone,        String
   property :photo,        String
+  property :account_id,   String
 
   has n, :postings
 end
