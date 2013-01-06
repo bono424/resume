@@ -16,6 +16,7 @@ gem "stripe", "~> 1.5.17"
 gem "rake", "~> 0.9.2.2"
 
 gem "aws-s3", "~> 0.6.3"
+gem "rmagick", "~> 2.13.1"
 
 group :production do
   # gems specifically for Heroku go here

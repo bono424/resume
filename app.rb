@@ -4,6 +4,7 @@ require 'haml'
 require 'stripe'
 require 'pony'
 require 'aws/s3'
+require 'rmagick'
 
 require 'logger'
 
@@ -136,57 +137,64 @@ post '/' do
 end
 
 post '/upload' do
-    begin
-        unless params['file'] && (tmpfile = params['file'][:tempfile]) && (name = params['file'][:filename])
-            redirect '/profile' unless @user.nil?
-        end
-
-        # generate name and determine filetype
-        ext = File.extname(params['file'][:filename])
-        name = "#{(Time.now.to_i.to_s + Time.now.usec.to_s).ljust(16, '0')}#{ext}"
-
-        case params[:action]
-        when 'photo'
-            unless ext.eql?('.jpg') or ext.eql?('.png') or ext.eql?('.gif') or ext.eql?('.jpeg')
-                raise TrdError.new("Profile images must be of type .jpg, .png, or .gif")
-            end
-            while blk = tmpfile.read(65536)
-                AWS::S3::Base.establish_connection!(
-                :access_key_id     => settings.s3_key,
-                :secret_access_key => settings.s3_secret)
-                AWS::S3::S3Object.store(name,open(tmpfile),settings.bucket,:access => :public_read)     
-            end
-            # if successful, set user as profile image
-            @user.update(:photo => name) 
-
-        when 'resume'
-            unless ext.eql?('.pdf')
-                raise TrdError.new("Resumes must be of type .pdf") 
-            end
-            while blk = tmpfile.read(65536)
-                AWS::S3::Base.establish_connection!(
-                :access_key_id     => settings.s3_key,
-                :secret_access_key => settings.s3_secret)
-                AWS::S3::S3Object.store(name,open(tmpfile),settings.bucket,:access => :public_read)     
-            end
-            # if successful, set user as profile image
-            @user.update(:resume=> name) 
-        end
-
-        if @user.type == Student
-            haml :student_profile, :layout => :'layouts/application'
-        else
-            haml :employer_profile, :layout => :'layouts/application'
-        end
-    rescue TrdError => e
-        @error = e.message
-        @success = nil
-        if @user.type == Student
-            haml :student_profile, :layout => :'layouts/application'
-        else
-            haml :employer_profile, :layout => :'layouts/application'
-        end
+  begin
+    unless params['file'] && (tmpfile = params['file'][:tempfile]) && (name = params['file'][:filename])
+        redirect '/profile' unless @user.nil?
     end
+
+    # generate name and determine filetype
+    ext = File.extname(params['file'][:filename])
+    name = "#{(Time.now.to_i.to_s + Time.now.usec.to_s).ljust(16, '0')}#{ext}"
+
+    case params[:action]
+    when 'photo'
+      unless ext.eql?('.jpg') or ext.eql?('.png') or ext.eql?('.gif') or ext.eql?('.jpeg')
+          raise TrdError.new("Profile images must be of type .jpg, .png, or .gif")
+      end
+      begin
+        #connect to s3
+        AWS::S3::Base.establish_connection!(
+        :access_key_id     => settings.s3_key,
+        :secret_access_key => settings.s3_secret)
+
+        #resize image before storing
+        img = Magick::Image.read(params['file'][:tempfile].path).first
+        img.resize_to_fill(300,300).write(name)
+
+        #store it
+        AWS::S3::S3Object.store(name,open(name),settings.bucket,:access => :public_read)     
+      rescue
+        raise TrdError.new("Upload to S3 failed.")
+      end
+      # if successful, set user as profile image
+      @user.update(:photo => name) 
+
+    when 'resume'
+      unless ext.eql?('.pdf')
+          raise TrdError.new("Resumes must be of type .pdf") 
+      end
+      begin
+          AWS::S3::Base.establish_connection!(
+          :access_key_id     => settings.s3_key,
+          :secret_access_key => settings.s3_secret)
+          AWS::S3::S3Object.store(name,open(tmpfile),settings.bucket,:access => :public_read)     
+      rescue
+        raise TrdError.new("Upload to S3 failed.")
+      end
+      # if successful, set user as profile image
+      @user.update(:resume=> name) 
+    end
+
+    redirect '/profile'
+  rescue TrdError => e
+      @error = e.message
+      @success = nil
+      if @user.type == Student
+          haml :student_profile, :layout => :'layouts/application'
+      else
+          haml :employer_profile, :layout => :'layouts/application'
+      end
+  end
 end
 
 get '/verify/:key' do
