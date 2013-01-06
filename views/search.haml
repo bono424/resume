@@ -49,14 +49,24 @@
 
 - if @results
   .row
-    .span7
+    .span8
       %table{:class => "table table-striped"}
-        - @results.each do |r|
+        %thead
           %tr
-            %td
-              %img{:src => "images/#{r.photo}", :class => "span1"}
-            %td= r.name
-            %td= r.school
-            %td= r.class
-            %td
-              %a{:href => "#"} View profile
+            %th
+            %th Name
+            %th School
+            %th Major
+            %th Minor
+            %th Class
+        %tbody
+          - @results.each do |r|
+            %tr
+              %td
+                %img{:src => "https://trd-assets.s3.amazonaws.com/#{r.photo}", :class => "span1"}
+              %td
+                %a{:href => "/profile/#{r.id}"}= r.name
+              %td= r.school
+              %td= r.major
+              %td= r.minor
+              %td= r.class.strftime("%Y")

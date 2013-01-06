@@ -1,0 +1,342 @@
+:javascript
+  function editSection(section) {
+    $("#" + section).hide();
+    $("#" + section + "-edit").show();
+  }
+
+  function editExp(section, method) {
+    if (method == 'add') {
+      $("#" + section + "-add").show();
+    }
+  }
+
+- unless @error.nil?
+  .row
+    .span9
+      %div{:class => "alert alert-error"}= @error
+- unless @success.nil?
+  .row
+    .span9
+      %div{:class => "alert alert-success"}= @success
+%br/
+
+.row
+  .alert.alert-warning.span6
+    Complete all the fields below so that employers can find you easily!
+
+%h1= @user.name
+- if @user.resume.nil?
+  %p Currently no resume uploaded.
+- else
+  %a{:href => "https://trd-assets.s3.amazonaws.com/#{@user.resume}", :target => "_blank"} View current resume
+%br/
+%br/
+
+/education
+%form{:method => "POST", :action => "#"}
+  %input{:type => "hidden", :name => "action", :value => "education"}
+  .row
+    .span5
+      %h2
+        Education
+        %a.edit{:href => "#", :onClick => "editSection('education')"}
+          %i{:class => "icon-pencil"}
+      %br/
+
+    - if @user.school.nil? && @user.major.nil? && @user.minor.nil? && @user.class.nil? && @user.gpa.nil?
+      #education-edit.span8{:style => "display:block;"}
+        .row
+          .span2.bold School
+          .span3
+            %input{:type => "text", :name => "school"}
+        .row
+          .span2.bold Major
+          .span3
+            %input{:type => "text", :name => "major"}
+        .row
+          .span2.bold Minor
+          .span3
+            %input{:type => "text", :name => "minor"}
+        .row
+          .span2.bold Class
+          .span3
+            %input{:type => "text", :name => "class"}
+        .row
+          .span2.bold GPA
+          .span3
+            %input{:type => "text", :name => "gpa"}
+
+        .row{:class => "button"}
+          .span5
+            %button{:type => "submit", :class => "btn btn-success"} Save these changes
+
+    - else
+      #education-edit.span8{:style => "display:none;"}
+        .row
+          .span2.bold School
+          .span3
+            %input{:type => "text", :value => "#{@user.school}", :name => "school"}
+        .row
+          .span2.bold Major
+          .span3
+            %input{:type => "text", :value => "#{@user.major}", :name => "major"}
+        .row
+          .span2.bold Minor
+          .span3
+            %input{:type => "text", :value => "#{@user.minor}", :name => "minor"}
+        .row
+          .span2.bold Class
+          .span3
+            %input{:type => "text", :value => "#{@user.class.strftime('%Y')}", :name => "class"}
+        .row
+          .span2.bold GPA
+          .span3
+            %input{:type => "text", :value => "#{@user.gpa}", :name => "gpa"}
+        .row{:class => "button"}
+          .span5
+            %button{:type => "submit", :class => "btn btn-success"} Save these changes
+
+      #education.span8
+        - unless @user.school.nil?
+          .row
+            .span2.bold School
+            .span3= @user.school
+
+        - unless @user.major.nil?
+          .row
+            .span2.bold Major
+            .span3= @user.major
+
+        - unless @user.minor.nil?
+          .row
+            .span2.bold Minor
+            .span3= @user.minor
+
+        - unless @user.class.nil?
+          .row.clearfix
+            .span2.bold Class year
+            .span3= @user.class.strftime('%Y')
+
+        - unless @user.gpa.nil?
+          .row
+            .span2.bold GPA
+            .span3= @user.gpa
+
+%hr
+
+/ work experience
+%form{:method => "POST", :action => "#"}
+  %input{:type => "hidden", :name => "action", :value => "work"}
+  .row
+    .span5
+      %h2
+        Work Experience
+        %a.edit{:onClick => "editExp('workexperience' ,'add')"}
+          %i{:class => "icon-plus"}
+  %br/
+
+  - if @experiences.nil?
+    .workexperience-info
+      %p No work experience information found.
+  -else
+    - @experiences.each do |exp|
+      - unless exp.deleted?
+        .row.workexperience-info
+          .row.span8
+            %span
+              %strong= exp.position
+              %span.gray at
+              %strong= exp.place
+            .pull-right
+              %a{:class => "remove", :href => "profile/delete/work/#{exp.id}"}
+                %i{:class => "icon-remove"}
+          .row.span8
+            .gray= "#{exp.start_date.strftime('%B %Y')} to #{exp.end_date.strftime('%B %Y')}"
+          .row.span8
+            = exp.desc.gsub("\n", "<br />")
+        %br/
+
+  / work experience add form
+  #workexperience-add{:style => "display:none"}
+    %hr
+    %h4 Add work experience
+    %br/
+    .row
+      .span2
+        %input{:type => "text", :placeholder => "Position", :name => "position", :class => "span2"}
+      .span2
+        %input{:type => "text", :placeholder => "Place", :name => "place", :class => "span2"}
+      .span2{:class => "input-prepend"}
+        %span{:class => "add-on"} Start
+        %input{:type => "text", :placeholder => "MM/YYYY", :name => "start_date", :class => "dateinput"}
+      .span2{:class => "input-prepend"}
+        %span{:class => "add-on"} End
+        %input{:type => "text", :placeholder => "MM/YYYY", :name => "end_date", :class => "dateinput"}
+      %br/
+      .span8
+        %textarea{:class => "span8", :name => "desc", :placeholder => "Description" }
+      %br/
+      .span5
+        %button{:type => "submit", :class => "btn btn-success"} Save changes
+
+%hr
+
+/ extra curriculars
+%form{:method => "POST", :action => "#"}
+  %input{:type => "hidden", :name => "action", :value => "extracurricular"}
+  .row
+    .span5
+      %h2
+        Extracurricular Activites
+        %a.edit{:onClick => "editExp('extracurricular' ,'add')"}
+          %i{:class => "icon-plus"}
+  %br/
+
+  - if @extracurriculars.nil?
+    .extracurricular-info
+      %p No extracurricular information found.
+  -else
+    - @extracurriculars.each do |extracurricular|
+      - unless extracurricular.deleted
+        .row.extracurricular-info
+          .row.span8
+            %span
+              %strong= extracurricular.position
+              %span.gray at
+              %strong= extracurricular.place
+            .pull-right
+              %a{:class => "remove", :href => "profile/delete/extracurricular/#{extracurricular.id}"}
+                %i{:class => "icon-remove"}
+          .row.span8
+            .gray= "#{extracurricular.start_date.strftime('%B %Y')} to #{extracurricular.end_date.strftime('%B %Y')}"
+          .row.span8
+            = extracurricular.desc.gsub("\n", "<br />")
+        %br/
+
+  / extracurricular add form
+  #extracurricular-add{:style => "display:none"}
+    %hr
+    %h4 Add an extracurricular activity
+    %br/
+    .row
+      .span2
+        %input{:type => "text", :placeholder => "Position", :name => "position", :class => "span2"}
+      .span2
+        %input{:type => "text", :placeholder => "Place", :name => "place", :class => "span2"}
+      .span2{:class => "input-prepend"}
+        %span{:class => "add-on"} Start
+        %input{:type => "text", :placeholder => "MM/YYYY", :name => "start_date", :class => "dateinput"}
+      .span2{:class => "input-prepend"}
+        %span{:class => "add-on"} End
+        %input{:type => "text", :placeholder => "MM/YYYY", :name => "end_date", :class => "dateinput"}
+      %br/
+      .span8
+        %textarea{:class => "span8", :name => "desc", :placeholder => "Description" }
+      %br/
+      .span5
+        %button{:type => "submit", :class => "btn btn-success"} Save changes
+
+%hr
+
+/ personal
+%form{:action => "#", :method => "POST"}
+  %input{:type => "hidden", :name => "action", :value => "personal"}
+  .row
+    .span5
+      %h2
+        Personal
+        %a.edit{:href => "#", :onClick => "editSection('personal')"}
+          %i{:class => "icon-pencil"}
+  %br/
+  #personal
+    .row
+      .bold.span2 Primary email
+      .span4= @user.email
+    - unless @user.secondary_email.nil?
+      .row
+        .bold.span2 Personal email
+        .span4= @user.secondary_email
+    - unless @user.interest1.nil? || @user.interest1 == ""
+      .row
+        .bold.span2 Interest one
+        .span4= @user.interest1
+    - unless @user.interest2.nil? || @user.interest2 == ""
+      .row
+        .bold.span2 Interest two
+        .span4= @user.interest2
+    - unless @user.interest3.nil? || @user.interest3 == ""
+      .row
+        .bold.span2 Interest three
+        .span4= @user.interest3
+
+  #personal-edit{:style => "display:none;"}
+    .row{:style => "padding-bottom:18px;"}
+      .span2.bold Primary email
+      .span4= @user.email
+    .row
+      .span2.bold Personal email
+      .span3
+        %input{:type => "text", :value => "#{@user.secondary_email}", :name => "secondary_email"}
+    .row
+      .span2.bold Interest one
+      .span3
+        %select{:name => "interest1"}
+          - if @user.interest1.nil? || @user.interest1 == ""
+            %option{:value => "", :selected => "selected"} Select
+          - else
+            %option{:value => "#{@user.interest1}"}= @user.interest1
+          - @interests.each do |i|
+            - unless @user.interest1 == i
+              %option{:value => "#{i}"}= i
+
+    .row
+      .span2.bold Interest two
+      .span3
+        %select{:name => "interest2"}
+          - if @user.interest2.nil? || @user.interest2 == ""
+            %option{:value => "", :selected => "selected"} Select
+          - else
+            %option{:value => "#{@user.interest2}"}= @user.interest2
+          - @interests.each do |i|
+            - unless @user.interest2 == i
+              %option{:value => "#{i}"}= i
+    .row
+      .span2.bold Interest three
+      .span3
+        %select{:name => "interest3"}
+          - if @user.interest3.nil? || @user.interest3 == ""
+            %option{:value => "", :selected => "selected"} Select
+          - else
+            %option{:value => "#{@user.interest3}"}= @user.interest3
+          - @interests.each do |i|
+            - unless @user.interest3 == i
+              %option{:value => "#{i}"}= i
+
+    .row{:class => "button"}
+      .span5
+        %button{:type => "submit", :class => "btn btn-success"} Save these changes
+
+%hr
+
+/upload photo
+%form{:method => "POST", :action => "/upload", :enctype => "multipart/form-data"}
+  .row
+    .span5
+      %strong Upload new profile picture
+      %br/
+      %input{:name => 'action', :value => 'photo', :type => 'hidden'}
+      %input{:name => 'file', :type => 'file'}
+      %br/
+      %button{:type => "submit", :class => "btn btn-success"} Upload
+  %br
+
+/upload resume 
+%form{:method => "POST", :action => "/upload", :enctype => "multipart/form-data"}
+  .row
+    .span5
+      %strong Upload resume (PDF only)
+      %br/
+      %input{:name => 'action', :value => 'resume', :type => 'hidden'}
+      %input{:name => 'file', :type => 'file'}
+      %br/
+      %button{:type => "submit", :class => "btn btn-success"} Upload

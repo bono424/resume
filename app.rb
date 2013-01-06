@@ -67,7 +67,7 @@ helpers do
 
   def redirect_students()
     redirect '/' if @user.nil?
-    raise Sinatra::NotFound unless @user.is_employer || @user.is_admin
+    raise Sinatra::NotFound unless (@user.type == Employer) || @user.is_admin
   end
 
   def all_interests()
@@ -136,7 +136,6 @@ post '/' do
 end
 
 post '/upload' do
-    @interests = all_interests
     begin
         unless params['file'] && (tmpfile = params['file'][:tempfile]) && (name = params['file'][:filename])
             redirect '/profile' unless @user.nil?
@@ -175,7 +174,7 @@ post '/upload' do
         end
 
         if @user.type == Student
-            haml :profile, :layout => :'layouts/application'
+            haml :student_profile, :layout => :'layouts/application'
         else
             haml :employer_profile, :layout => :'layouts/application'
         end
@@ -183,7 +182,7 @@ post '/upload' do
         @error = e.message
         @success = nil
         if @user.type == Student
-            haml :profile, :layout => :'layouts/application'
+            haml :student_profile, :layout => :'layouts/application'
         else
             haml :employer_profile, :layout => :'layouts/application'
         end
@@ -198,16 +197,27 @@ get '/verify/:key' do
     raise e if params[:key].nil?
     user = nil
 
-    user = Student.first(:verification_key => params[:key])
-    if user.nil?
-      user = Employer.first(:verification_key => params[:key])
-      raise e if user.nil?
-    end
+    user = User.first(:verification_key => params[:key])
 
+    raise e if user.nil?
     raise e if user.verification_key != params[:key]
 
-    user.update(:is_verified => true)
-    @success = "User successfully verified. You can <a href='/'>log in</a> now."
+    if user.type == Student
+      user.update(:is_verified => true)
+      @success = "You have successfully verified your account. You can now <a href='/'>log in</a>."
+    else
+      Stripe.api_key = "sk_test_aR1DCWnDqi5OlkU04ZyH3tp3"
+      c = Stripe::Customer.retrieve(user.account_id)
+      c.update_subscription(:plan => user.plan)
+
+      user.update(:is_verified => true)
+      @success = "You have successfully verified your account and your account has been charged. You can now <a href='/'>log in</a>."
+    end
+
+    haml :verify, :layout => :'layouts/message'
+  rescue Stripe::StripeError
+    @error = "We were unable to process your payment. Please email support@theresumedrop.com for more information."
+    @success = nil
     haml :verify, :layout => :'layouts/message'
   rescue TrdError => e
     @error = e.message
@@ -221,9 +231,12 @@ get '/profile' do
   @interests = all_interests
   redirect '/' if @user.nil?
   if @user.type == Employer
+    @postings = Posting.all(:employer_id => @user.id, :deadline.gt => Time.now, :deleted.not => 'true', :order => [ :deadline.asc ])
     haml :employer_profile, :layout => :'layouts/application'
   else
-    haml :profile, :layout => :'layouts/application'
+    @experiences = Experience.all(:student_id => @user.id, :deleted.not => 'true', :order => [ :end_date.desc ])
+    @extracurriculars = Extracurricular.all(:student_id => @user.id, :deleted.not => 'true', :order => [ :end_date.desc ])
+    haml :student_profile, :layout => :'layouts/application'
   end
 end
 
@@ -260,7 +273,7 @@ post '/profile' do
       when "personal"
         # make sure interests are valid
         [:interest1, :interest2, :interest3].each do |i|
-          unless all_interests.include? params[i] || params[i].nil?
+          unless (params[i] == "") || (all_interests.include? params[i])
             raise TrdError.new("Invalid interest selection: #{params[i]}. Please try again.")
           end
         end
@@ -302,7 +315,7 @@ post '/profile' do
         exp.save
         @user.save
       end
-      haml :profile, :layout => :'layouts/application'
+      haml :student_profile, :layout => :'layouts/application'
       
     else
       unless employer_actions.include? params[:action]
@@ -342,24 +355,58 @@ post '/profile' do
     @error= e.message
     @success = nil
     if @user.type == Student
-      haml :profile, :layout => :'layouts/application'
+      haml :student_profile, :layout => :'layouts/application'
     else
       haml :employer_profile, :layout => :'layouts/application'
     end
   end
 end
 
+get '/profile/:id' do
+  redirect '/' if @user.nil?
+
+  @profile_user = User.get(params[:id])
+  redirect '/profile' if @user.id == params[:id].to_i
+
+  if @user.type == Employer
+    @student = Student.get(params[:id])
+    raise TrdError.new("Sorry, this page does not exist.") if @student.nil?
+
+    @experiences = Experience.all(:student_id => @student.id)
+    @extracurriculars = Extracurricular.all(:student_id => @student.id)
+    @title = title @student.name
+    haml :other_student_profile, :layout => :'layouts/application'
+  else
+    @employer = Employer.first(:handle=> params[:id])
+    raise TrdError.new("Sorry, this page does not exist.") if @employer.nil?
+
+    @postings = Posting.all(:employer_id => @employer.id)
+    @title = title @employer.name
+    haml :other_employer_profile, :layout => :'layouts/application'
+  end
+end
+
 get '/profile/delete/:type/:id' do
-  if params[:type] == 'work'
-    Experience.get(params[:id]).destroy
+  begin
+    case params[:type]
+    when 'experience'
+      o = Experience.get(params[:id])
+      raise TrdError.new("We could not process that request.") unless o.student_id == @user.id
+      o.update(:deleted => true)
+    when 'extracurricular'
+      o = Extracurricular.get(params[:id])
+      raise TrdError.new("We could not process that request.") unless o.student_id == @user.id
+      o.update(:deleted => true)
+    when 'posting'
+      o = Posting.get(params[:id])
+      raise TrdError.new("We could not process that request.") unless o.employer_id == @user.id
+      o.update(:deleted => true)
+    end
+    redirect '/profile'
+  rescue TrdError => e
+    @error = e.message
+    haml :error, :layout => :'layouts/message'
   end
-  if params[:type] == 'extracurricular'
-    Extracurricular.get(params[:id]).destroy
-  end
-  if params[:type] == 'posting'
-    Posting.get(params[:id]).destroy
-  end
-  redirect to('/profile')
 end
 
 post '/login' do
@@ -390,13 +437,6 @@ post '/login' do
   end
 end
 
-get '/employers/:handle' do
-  @employer = Employer.first(:handle => params[:handle])
-  @title = title @employer.name
-  raise Sinatra::NotFound if @employer.nil?
-  haml :employer_page, :layout => :'layouts/application'
-end
-
 get '/fixtures' do
   Fixtures.generate
 end
@@ -409,7 +449,7 @@ end
 get '/employers' do
   @title = title 'Employers'
   begin
-    employers = Employer.all(:is_verified => true, :is_employer => true)
+    employers = Employer.all(:is_verified => true, :type => Employer)
     raise TrdError.new("Sorry, we have no companies listed.") if employers.length.zero?
     @employers = employers
     haml :employers, :layout => :'layouts/application'
@@ -420,9 +460,27 @@ get '/employers' do
   end
 end
 
+get '/jobs' do
+  @title = title 'Jobs'
+  begin
+    postings = Posting.all(:deadline.gt => Time.now, :deleted.not => 'true', :order => [ :deadline.asc ])
+    raise TrdError.new("Sorry, we have no jobs listed currently.") if postings.length.zero?
+    @postings = postings 
+    haml :jobs, :layout => :'layouts/application'
+  rescue TrdError => e
+    @error = e.message
+    @success = nil
+    haml :jobs, :layout => :'layouts/application'
+  end
+end
+
 get '/pricing' do
   @title = title 'Pricing'
   haml :pricing, :layout => :'layouts/application'
+end
+
+get '/subscribe' do
+  redirect '/pricing'
 end
 
 get '/subscribe/:plan' do
@@ -430,15 +488,15 @@ get '/subscribe/:plan' do
   haml :subscribe, :layout => :'layouts/subscribe'
 end
 
-post '/subscribe' do
+post '/subscribe/:plan' do
   begin
-    validate(params, [:token, :email, :name, :password, :handle, :url])
+    validate(params, [:token, :email, :name, :password, :handle, :url, :phone])
     user = User.get(:email => params[:email])
     raise TrdError.new("This account is already registered. Please contact us at support@theresumedrop.com to delete this account.") unless user.nil?
 
     Stripe.api_key = "sk_test_aR1DCWnDqi5OlkU04ZyH3tp3"
-    Stripe::Customer.create(
-      :description => "Customer for #{params[:email]}",
+    customer = Stripe::Customer.create(
+      :description => "Customer for #{params[:name]}",
       :email => params[:email],
       :card => params[:token]
     )
@@ -448,7 +506,8 @@ post '/subscribe' do
 
     verification_key = random_string(32)
 
-    Employer.create(:email => params[:email], :password => hash, :salt => salt, :verification_key => verification_key, :name => params[:name], :email => params[:email], :phone => params[:phone])
+    Employer.create(:email => params[:email], :password => hash, :salt => salt, :verification_key => verification_key, :name => params[:name], :email => params[:email], :phone => params[:phone], :account_id => customer.id, :plan => params[:plan], :handle => params[:handle], :url => params[:url])
+    Notifications.send_verification_email(params[:email], verification_key)
 
     @success = "You've successfully registered. Please wait to hear back from us to verify your account."
 
@@ -457,6 +516,23 @@ post '/subscribe' do
   rescue TrdError => e
     @error = e.message
     @success = nil
+    haml :subscribe, :layout => :'layouts/subscribe'
+  rescue Stripe::StripeError
+    @error = "We were unable to process your payment. Please email support@theresumedrop.com for more information."
+    @success = nil
+    haml :subscribe, :layout => :'layouts/subscribe'
+  end
+end
+
+get '/stripe_test' do
+  begin
+    Stripe.api_key = "sk_test_aR1DCWnDqi5OlkU04ZyH3tp3"
+    Stripe::Charge.create(
+        :amount => 1500, # $15.00 this time
+        :currency => "usd",
+        :customer => @user.account_id
+    )
+    @success = "You've charged the account."
     haml :subscribe, :layout => :'layouts/subscribe'
   rescue Stripe::StripeError
     @error = "We were unable to process your payment. Please email support@theresumedrop.com for more information."
@@ -519,7 +595,7 @@ get '/search' do
         if not params[:interest3] == 'Interest Three'
           @results = @results.all(:interest3 => "%#{params[:interest3]}%")
         end
-  
+
         # if no results found, show error.
         raise TrdError.new("Sorry, we couldn't find anything with the parameters you specified.") if @results.empty?
         haml :search, :layout => :'layouts/application'

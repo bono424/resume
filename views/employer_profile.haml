@@ -123,27 +123,28 @@
     %p No job postings are currently available.
   - else
     - @user.postings.each do |post|
-      .row
-        .span8
-          %h4= post.position
-          %p= post.description
-          %p
-            Duration:
-            %span= post.start_date.strftime("%B %d, %Y")
-            %span &mdash;
-            %span= post.end_date.strftime("%B %d, %Y")
-          - if post.class.nil?
-            %p All classes are being accepted.
-          - else
-            %p Minimum class year: #{post.class}
-          %p Qualifications expected: #{post.qualifications}
-          - if post.deadline < Date.today
-            %p.red Sorry, the deadline has already passed.
-          - else
-            %p.green= post.deadline.strftime("Deadline: %B %d, %Y")
-          %a{:class => "red", :href => "profile/delete/posting/#{post.id}"}
-            Delete this entry
-      %br
+      - unless post.deleted
+        .row
+          .span8
+            %h4= post.position
+            %p= post.description
+            %p
+              Duration:
+              %span= post.start_date.strftime("%B %d, %Y")
+              %span &mdash;
+              %span= post.end_date.strftime("%B %d, %Y")
+            - if post.class.nil?
+              %p All classes are being accepted.
+            - else
+              %p Minimum class year: #{post.class}
+            %p Qualifications expected: #{post.qualifications}
+            - if post.deadline < Date.today
+              %p.red Sorry, the deadline has already passed.
+            - else
+              %p.green= post.deadline.strftime("Deadline: %B %d, %Y")
+            %a{:class => "red", :href => "profile/delete/posting/#{post.id}"}
+              Delete this entry
+        %br
 
   / posting add form
   #posting-add{:style => "display:none"}

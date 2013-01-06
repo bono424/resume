@@ -1,0 +1,71 @@
+.row
+  .span3
+    - unless @employer.photo.nil?
+      %img{:src => "https://trd-assets.s3.amazonaws.com/#{@employer.photo}" }
+%br
+
+.row
+  .span5
+    %h1
+      = @employer.name
+    %a{:href => "#{@employer.url}"}= @employer.url
+
+#about
+  %br
+  - unless @employer.description.nil?
+    .row
+      .span9
+        %p
+          %b About
+          %br
+            =@employer.description.gsub("\n", "<br />")
+
+  - unless @employer.address.nil? && (@employer.city.nil? || @employer.state.nil? || @employer.zipcode.nil?)
+    .row
+      .span5
+        %p
+          %b Location
+          %br
+          - unless @employer.address.nil?
+            =@employer.address
+            %br
+          - unless @employer.city.nil? || @employer.state.nil? || @employer.zipcode.nil?
+            = "#{@employer.city}, #{@employer.state} #{@employer.zipcode}"
+  .row
+    - unless @employer.founded.nil?
+      .span5
+        %b Founded
+        %br= @employer.founded
+
+  %br
+
+.row
+  .span9
+    %h2
+      Job and Internship postings
+%br
+
+  #posting-info
+  - if @postings.length.zero?
+    %p No job postings are currently available.
+  - else
+    - @postings.each do |post|
+      .row
+        .span8
+          %h4= post.position
+          %p= post.description
+          %p
+            Duration:
+            %span= post.start_date.strftime("%B %d, %Y")
+            %span &mdash;
+            %span= post.end_date.strftime("%B %d, %Y")
+          - if post.class.nil?
+            %p All classes are being accepted.
+          - else
+            %p Minimum class year: #{post.class}
+          %p Qualifications expected: #{post.qualifications}
+          - if post.deadline < Date.today
+            %p.red Sorry, the deadline has already passed.
+          - else
+            %p.green= post.deadline.strftime("Deadline: %B %d, %Y")
+      %br

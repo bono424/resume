@@ -42,16 +42,13 @@ class Student < User
   property :interest3,        String
   property :class,            Date
   property :resume,           String
-  property :photo,               String
-  property :has_done_stages, Boolean, :default => false
-  property :is_employer, Boolean, :default => false
+  property :photo,            String
 
   has n, :experiences
   has n, :extracurriculars
 end
 
 class Employer < User
-  property :is_employer, Boolean, :default => true
   property :email,        String
   property :name,         String
   property :handle,       String
@@ -66,6 +63,8 @@ class Employer < User
   property :phone,        String
   property :photo,        String
   property :account_id,   String
+  property :plan,         String
+
 
   has n, :postings
 end
@@ -81,6 +80,7 @@ class Experience
   property :desc,            String, :length => 1024
   property :start_date,       Date
   property :end_date,         Date
+  property :deleted,          Boolean, :default => false
 end
 
 class Extracurricular
@@ -91,9 +91,10 @@ class Extracurricular
   property :id,               Serial, :key => true
   property :position,         String
   property :place,            String
-  property :desc,            String, :length => 1024
+  property :desc,             String, :length => 1024
   property :start_date,       Date
   property :end_date,         Date
+  property :deleted,          Boolean, :default => false
 end
 
 class Posting
@@ -112,6 +113,7 @@ class Posting
   property :qualifications, String
   property :contact_name,   String
   property :contact_email,  String
+  property :deleted,        Boolean, :default => false
 end
 
 class Subscription

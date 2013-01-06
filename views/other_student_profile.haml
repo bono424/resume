@@ -1,0 +1,126 @@
+.row
+  - unless @student.photo.nil?
+    .span1
+      %img{:src => "https://trd-assets.s3.amazonaws.com/#{@student.photo}"}
+  .span5
+    %h1= @student.name
+    - if @student.resume.nil?
+      %p Currently no resume uploaded.
+    - else
+      %a{:href => "https://trd-assets.s3.amazonaws.com/#{@student.resume}", :target => "_blank"} View current resume
+%hr
+
+/education
+.row
+  .span5
+    %h2
+      Education
+    %br/
+.row
+  #education.span8
+    - unless @student.school.nil?
+      .row
+        .span2.bold School
+        .span3= @student.school
+
+    - unless @student.major.nil?
+      .row
+        .span2.bold Major
+        .span3= @student.major
+
+    - unless @student.minor.nil?
+      .row
+        .span2.bold Minor
+        .span3= @student.minor
+
+    - unless @student.class.nil?
+      .row.clearfix
+        .span2.bold Class year
+        .span3= @student.class.strftime('%Y')
+
+    - unless @student.gpa.nil?
+      .row
+        .span2.bold GPA
+        .span3= @student.gpa
+%hr
+
+/ work experience
+.row
+  .span5
+    %h2
+      Work Experience
+    %br/
+
+.row
+  .span8
+    - if @experiences.length.zero?
+      .workexperience-info
+        %p No work experience information found.
+    -else
+      - @experiences.each do |exp|
+        .row.workexperience-info
+          .row.span8
+            %span.larger
+              %strong= exp.position
+              %span.gray at
+              %strong= exp.place
+          .row.span8
+            .gray= "#{exp.start_date.strftime('%B %Y')} to #{exp.end_date.strftime('%B %Y')}"
+          .row.span8
+            = exp.desc.gsub("\n", "<br />")
+        %br/
+%hr
+
+/ extracurriculars
+.row
+  .span5
+    %h2
+      Extracurricular Activites
+    %br/
+
+.row
+  .span8
+    - if @extracurriculars.length.zero?
+      .extracurricular-info
+        %p No extracurricular information found.
+    -else
+      - @extracurriculars.each do |extracurricular|
+        .row.extracurricular-info
+          .row.span8
+            %span.larger
+              %strong= extracurricular.position
+              %span.gray at
+              %strong= extracurricular.place
+          .row.span8
+            .gray= "#{extracurricular.start_date.strftime('%B %Y')} to #{extracurricular.end_date.strftime('%B %Y')}"
+          .row.span8
+            = extracurricular.desc.gsub("\n", "<br />")
+        %br/
+%hr
+
+/ personal
+.row
+  .span5
+    %h2
+      Personal
+    %br/
+.row
+  .bold.span2 Primary email
+  .span4= @student.email
+- unless @student.secondary_email.nil?
+  .row
+    .bold.span2 Personal email
+    .span4= @student.secondary_email
+- unless @student.interest1.nil?
+  .row
+    .bold.span2 Interest one
+    .span4= @student.interest1
+- unless @student.interest2.nil?
+  .row
+    .bold.span2 Interest two
+    .span4= @student.interest2
+- unless @student.interest3.nil?
+  .row
+    .bold.span2 Interest three
+    .span4= @student.interest3
+%hr

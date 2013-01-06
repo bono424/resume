@@ -326,3 +326,275 @@ I, [2012-12-30T17:00:50.498120 #16339]  INFO -- : #<Employer @id=3 @email="ssans
 I, [2012-12-30T17:03:29.031888 #16353]  INFO -- : #<Employer @id=3 @email="ssansovich@gmail.com" @password="3631f28ed0b8f6fdcb6676b5c732743c2eae4d139d63c391e63a97b6ce287946" @salt="MLGZdl" @verification_key="vegS3oQhyZHEkCpg5eXisMW0JBvzxhBM" @is_verified=true @type=Employer @is_employer=<not loaded> @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded>>
  ~ (0.001813) SELECT "id", "type", "email", "password", "salt", "verification_key", "is_verified", "name", "secondary_email", "birthday", "school", "major", "minor", "gpa", "gender", "interest1", "interest2", "interest3", "class", "resume", "photo", "has_done_stages", "is_employer" FROM "users" WHERE ("type" IN ('Student') AND "email" = 'scott@wonkytown.com') ORDER BY "id" LIMIT 1
  ~ (0.154346) INSERT INTO "users" ("email", "password", "salt", "verification_key", "is_verified", "type", "name", "has_done_stages", "is_employer") VALUES ('scott@wonkytown.com', '584aef76a610a9c320d474da5d7b2f0350f1c1221436b93a20a15bfd48092c4e', 'lMw65s', 'tHOXeV8dgbKgUyV1D6sG6DqmATds0uhF', FALSE, 'Student', 'Scott Sansovich', FALSE, FALSE) RETURNING "id"
+ ~ (0.001472) SELECT "id", "type", "email", "password", "salt", "verification_key", "is_verified" FROM "users" WHERE "id" = 3 LIMIT 1
+ ~ (0.001051) SELECT "id", "type", "email", "password", "salt", "verification_key", "is_verified" FROM "users" WHERE "id" = 3 LIMIT 1
+ ~ (0.001135) SELECT "id", "type", "email", "password", "salt", "verification_key", "is_verified" FROM "users" WHERE "id" = 3 LIMIT 1
+ ~ (0.001714) SELECT "id", "type", "email", "password", "salt", "verification_key", "is_verified" FROM "users" WHERE "id" = 3 LIMIT 1
+ ~ (0.000804) SELECT "id", "type", "is_employer", "name", "handle", "url", "founded", "description", "address", "city", "state", "zipcode", "phone", "photo", "account_id" FROM "users" WHERE "id" = 3 ORDER BY "id"
+ ~ (0.001147) SELECT "id", "type", "email", "password", "salt", "verification_key", "is_verified" FROM "users" WHERE "id" = 3 LIMIT 1
+ ~ (0.001462) SELECT "id", "type", "email", "password", "salt", "verification_key", "is_verified" FROM "users" WHERE "id" = 3 LIMIT 1
+ ~ (0.001308) SELECT "id", "type", "email", "password", "salt", "verification_key", "is_verified" FROM "users" WHERE "id" = 3 LIMIT 1
+ ~ (0.001535) INSERT INTO "users" ("email", "password", "salt", "verification_key", "is_verified", "type", "name", "phone", "account_id", "plan") VALUES ('ssansovich@gmail.com', '2c6fcc48200c5624d47f9b9173f18fff771cce8ff19edad17e6867d6bd3d5ee7', 'Ak8P5Z', 'E8LaAwb4KluZYGyViL14Com2Jbv7RamR', FALSE, 'Employer', 'The Resume Drop', '2483805384', 'cus_12s7LPJx1vQ505', 'standard') RETURNING "id"
+ ~ (0.001621) SELECT "id", "type", "email", "password", "salt", "verification_key", "is_verified" FROM "users" WHERE "id" = 3 LIMIT 1
+ ~ (0.024430) INSERT INTO "users" ("email", "password", "salt", "verification_key", "is_verified", "type", "name", "phone", "account_id", "plan") VALUES ('ssansovich@gmail.com', '30c82676b6196ffe0aa54a8d8c8c912bb889498fcd381b37289e13081ea70cae', 'n2jdUf', 'NTxQYJJjZhOZNe74FoPV2E0YqNeg1N8W', FALSE, 'Employer', 'The Resume Drop', '2483805384', 'cus_12s9yCUxWAWses', 'standard') RETURNING "id"
+ ~ (0.001236) SELECT "id", "type", "email", "password", "salt", "verification_key", "is_verified" FROM "users" WHERE "id" = 3 LIMIT 1
+ ~ (0.001132) SELECT "id", "type", "email", "password", "salt", "verification_key", "is_verified" FROM "users" WHERE "verification_key" = 'NTxQYJJjZhOZNe74FoPV2E0YqNeg1N8W' ORDER BY "id" LIMIT 1
+ ~ (0.000617) SELECT "id", "type", "name", "handle", "url", "founded", "description", "address", "city", "state", "zipcode", "phone", "photo", "account_id", "plan" FROM "users" WHERE "id" = 8 ORDER BY "id"
+ ~ (0.001105) SELECT "id", "type", "email", "password", "salt", "verification_key", "is_verified" FROM "users" WHERE "id" = 3 LIMIT 1
+ ~ (0.000851) SELECT "id", "type", "email", "password", "salt", "verification_key", "is_verified" FROM "users" WHERE "verification_key" = 'NTxQYJJjZhOZNe74FoPV2E0YqNeg1N8W' ORDER BY "id" LIMIT 1
+ ~ (0.000580) SELECT "id", "type", "name", "handle", "url", "founded", "description", "address", "city", "state", "zipcode", "phone", "photo", "account_id", "plan" FROM "users" WHERE "id" = 8 ORDER BY "id"
+I, [2013-01-05T14:06:31.201151 #6495]  INFO -- : #<Employer @id=8 @email="ssansovich@gmail.com" @password="30c82676b6196ffe0aa54a8d8c8c912bb889498fcd381b37289e13081ea70cae" @salt="n2jdUf" @verification_key="NTxQYJJjZhOZNe74FoPV2E0YqNeg1N8W" @is_verified=true @type=Employer @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded> @account_id=<not loaded> @plan=<not loaded>>
+I, [2013-01-05T14:46:09.898333 #6826]  INFO -- : #<Employer @id=8 @email="ssansovich@gmail.com" @password="30c82676b6196ffe0aa54a8d8c8c912bb889498fcd381b37289e13081ea70cae" @salt="n2jdUf" @verification_key="NTxQYJJjZhOZNe74FoPV2E0YqNeg1N8W" @is_verified=true @type=Employer @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded> @account_id=<not loaded> @plan=<not loaded>>
+I, [2013-01-05T14:46:40.191262 #6830]  INFO -- : #<Employer @id=8 @email="ssansovich@gmail.com" @password="30c82676b6196ffe0aa54a8d8c8c912bb889498fcd381b37289e13081ea70cae" @salt="n2jdUf" @verification_key="NTxQYJJjZhOZNe74FoPV2E0YqNeg1N8W" @is_verified=true @type=Employer @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded> @account_id=<not loaded> @plan=<not loaded>>
+ ~ (0.040072) INSERT INTO "users" ("email", "password", "salt", "verification_key", "is_verified", "type", "name", "handle", "url", "phone", "account_id", "plan") VALUES ('ssansovich@gmail.com', '1084e6db75f415f0ff1793e17082d0bca56ca8e04a6ada56a2d1120328835bf8', '8bFOnr', 'BJIDcltjefx7tvIut5PaxDYQXZEdgFTd', FALSE, 'Employer', 'Scott Sansovich', 'trd', 'theresumedrop.com', '2483805384', 'cus_13AVgEIEmIwifz', 'standard') RETURNING "id"
+ ~ (0.001414) SELECT "id", "type", "email", "password", "salt", "verification_key", "is_verified" FROM "users" WHERE "verification_key" = 'BJIDcltjefx7tvIut5PaxDYQXZEdgFTd' ORDER BY "id" LIMIT 1
+ ~ (0.000601) SELECT "id", "type", "name", "handle", "url", "founded", "description", "address", "city", "state", "zipcode", "phone", "photo", "account_id", "plan" FROM "users" WHERE "id" = 9 ORDER BY "id"
+I, [2013-01-05T22:29:25.933118 #1306]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-05T22:29:25.951067 #1306]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-05T22:29:25.951423 #1306]  INFO -- : {"action"=>"personal", "secondary_email"=>"scott.sansovich@gmail.com", "interest1"=>"Entrepreneurship", "interest2"=>"Technology", "interest3"=>"Education"}
+I, [2013-01-05T22:50:58.522357 #1763]  INFO -- : #<Employer @id=9 @email="ssansovich@gmail.com" @password="1084e6db75f415f0ff1793e17082d0bca56ca8e04a6ada56a2d1120328835bf8" @salt="8bFOnr" @verification_key="BJIDcltjefx7tvIut5PaxDYQXZEdgFTd" @is_verified=true @type=Employer @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded> @account_id=<not loaded> @plan=<not loaded>>
+I, [2013-01-05T22:58:17.271099 #1817]  INFO -- : #<Employer @id=9 @email="ssansovich@gmail.com" @password="1084e6db75f415f0ff1793e17082d0bca56ca8e04a6ada56a2d1120328835bf8" @salt="8bFOnr" @verification_key="BJIDcltjefx7tvIut5PaxDYQXZEdgFTd" @is_verified=true @type=Employer @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded> @account_id=<not loaded> @plan=<not loaded>>
+I, [2013-01-05T23:10:39.178477 #1878]  INFO -- : #<Employer @id=9 @email="ssansovich@gmail.com" @password="1084e6db75f415f0ff1793e17082d0bca56ca8e04a6ada56a2d1120328835bf8" @salt="8bFOnr" @verification_key="BJIDcltjefx7tvIut5PaxDYQXZEdgFTd" @is_verified=true @type=Employer @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded> @account_id=<not loaded> @plan=<not loaded>>
+I, [2013-01-05T23:12:55.020234 #1897]  INFO -- : #<Employer @id=9 @email="ssansovich@gmail.com" @password="1084e6db75f415f0ff1793e17082d0bca56ca8e04a6ada56a2d1120328835bf8" @salt="8bFOnr" @verification_key="BJIDcltjefx7tvIut5PaxDYQXZEdgFTd" @is_verified=true @type=Employer @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded> @account_id=<not loaded> @plan=<not loaded>>
+I, [2013-01-05T23:18:45.803795 #1939]  INFO -- : #<Employer @id=9 @email="ssansovich@gmail.com" @password="1084e6db75f415f0ff1793e17082d0bca56ca8e04a6ada56a2d1120328835bf8" @salt="8bFOnr" @verification_key="BJIDcltjefx7tvIut5PaxDYQXZEdgFTd" @is_verified=true @type=Employer @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded> @account_id=<not loaded> @plan=<not loaded>>
+I, [2013-01-05T23:21:16.508250 #1968]  INFO -- : #<Employer @id=9 @email="ssansovich@gmail.com" @password="1084e6db75f415f0ff1793e17082d0bca56ca8e04a6ada56a2d1120328835bf8" @salt="8bFOnr" @verification_key="BJIDcltjefx7tvIut5PaxDYQXZEdgFTd" @is_verified=true @type=Employer @name=<not loaded> @handle=<not loaded> @url=<not loaded> @founded=<not loaded> @description=<not loaded> @address=<not loaded> @city=<not loaded> @state=<not loaded> @zipcode=<not loaded> @phone=<not loaded> @photo=<not loaded> @account_id=<not loaded> @plan=<not loaded>>
+I, [2013-01-06T12:14:38.533939 #3308]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:14:38.542104 #3308]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:14:38.542390 #3308]  INFO -- : {"action"=>"work", "position"=>"Front-end Developer", "place"=>"New York, NY", "start_date"=>"12/2011", "end_date"=>"12/2012", "desc"=>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sagittis massa ac sapien bibendum varius. Sed eget massa elit. Integer orci felis, porta sed mollis eu, consequat id massa. Aliquam quis ante vel erat scelerisque consectetur. Suspendisse sed elit lectus, vestibulum facilisis enim. "}
+SyntaxError - views/student_profile.haml:289: unknown regexp options - lct
+unmatched close parenthesis: /option>\n", 0, false);end
+_hamlout.push_text("        </
+views/student_profile.haml:289: syntax error, unexpected $undefined
+...t.push_text("        </select>\n      </div>\n    </div>\n  ...
+...                               ^
+views/student_profile.haml:289: unknown regexp options - dv
+views/student_profile.haml:289: syntax error, unexpected $undefined
+...ect>\n      </div>\n    </div>\n    <div class='row'>\n     ...
+...                               ^
+views/student_profile.haml:289: syntax error, unexpected keyword_class, expecting keyword_do or '{' or '('
+...iv>\n    </div>\n    <div class='row'>\n      <div class='sp...
+...                               ^
+views/student_profile.haml:289: syntax error, unexpected $undefined
+... </div>\n    <div class='row'>\n      <div class='span2 bold...
+...                               ^
+views/student_profile.haml:289: syntax error, unexpected keyword_class, expecting keyword_do or '{' or '('
+... class='row'>\n      <div class='span2 bold'>Interest three<...
+...                               ^
+views/student_profile.haml:289: syntax error, unexpected tIDENTIFIER, expecting keyword_do or '{' or '('
+...ass='span2 bold'>Interest three</div>\n      <div class='spa...
+...                               ^
+views/student_profile.haml:294: unknown regexp options - pt
+views/student_profile.haml:294: syntax error, unexpected $undefined
+));}</option>\n", 0, false);end
+              ^
+views/student_profile.haml:295: unknown regexp options - dv
+views/student_profile.haml:295: syntax error, unexpected $undefined
+...       </select>\n      </div>\n    </div>\n    <div class='...
+...                               ^
+views/student_profile.haml:295: unknown regexp options - btt
+views/student_profile.haml:295: syntax error, unexpected $undefined
+...t'>Save these changes</button>\n      </div>\n    </div>\n  ...
+...                               ^
+views/student_profile.haml:295: unknown regexp options - dv
+views/student_profile.haml:295: syntax error, unexpected $undefined
+...ton>\n      </div>\n    </div>\n  </div>\n</form>\n<hr>\n<!-...
+...                               ^
+views/student_profile.haml:295: unknown regexp options - fr
+views/student_profile.haml:295: syntax error, unexpected $undefined
+...n    </div>\n  </div>\n</form>\n<hr>\n<!-- upload photo -->\...
+...                               ^
+views/student_profile.haml:295: syntax error, unexpected $undefined
+.../div>\n  </div>\n</form>\n<hr>\n<!-- upload photo -->\n<form...
+...                               ^
+views/student_profile.haml:295: syntax error, unexpected tIDENTIFIER, expecting keyword_do or '{' or '('
+.../form>\n<hr>\n<!-- upload photo -->\n<form action='/upload' ...
+...                               ^
+views/student_profile.haml:295: syntax error, unexpected $undefined, expecting keyword_do_LAMBDA or tLAMBEG
+...>\n<hr>\n<!-- upload photo -->\n<form action='/upload' encty...
+...                               ^
+views/student_profile.haml:295: syntax error, unexpected tIDENTIFIER, expecting keyword_do or '{' or '('
+... upload photo -->\n<form action='/upload' enctype='multipart...
+...                               ^
+views/student_profile.haml:295: syntax error, unexpected tIDENTIFIER, expecting '}'
+...n<form action='/upload' enctype='multipart/form-data' method...
+...                               ^
+views/student_profile.haml:295: syntax error, unexpected tIDENTIFIER, expecting '}'
+...pe='multipart/form-data' method='POST'>\n  <div class='row'>...
+...                               ^
+views/student_profile.haml:295: syntax error, unexpected $undefined
+...part/form-data' method='POST'>\n  <div class='row'>\n    <di...
+...                               ^
+views/student_profile.haml:295: syntax error, unexpected keyword_class, expecting keyword_do or '{' or '('
+...a' method='POST'>\n  <div class='row'>\n    <div class='span...
+...                               ^
+views/student_profile.haml:295: syntax error, unexpected $undefined
+...d='POST'>\n  <div class='row'>\n    <div class='span5'>\n   ...
+...                               ^
+views/student_profile.haml:295: syntax error, unexpected keyword_class, expecting keyword_do or '{' or '('
+...iv class='row'>\n    <div class='span5'>\n      <h4>Upload n...
+...                               ^
+views/student_profile.haml:295: syntax error, unexpected $undefined
+...row'>\n    <div class='span5'>\n      <h4>Upload new profile...
+...                               ^
+views/student_profile.haml:295: syntax error, unexpected tIDENTIFIER, expecting keyword_do or '{' or '('
+...='span5'>\n      <h4>Upload new profile picture</h4>\n      ...
+...                               ^
+views/student_profile.haml:295: unknown regexp options - btt
+views/student_profile.haml:295: syntax error, unexpected $undefined
+... type='submit'>Upload</button>\n    </div>\n  </div>\n  <br>...
+...                               ^
+views/student_profile.haml:295: unknown regexp options - dv
+views/student_profile.haml:295: syntax error, unexpected $undefined
+.../button>\n    </div>\n  </div>\n  <br>\n</form>\n<!-- upload...
+...                               ^
+views/student_profile.haml:295: syntax error, unexpected $undefined
+...\n    </div>\n  </div>\n  <br>\n</form>\n<!-- upload resume ...
+...                               ^
+views/student_profile.haml:295: unknown regexp options - plad
+views/student_profile.haml:295: syntax error, unexpected tSTRING_BEG, expecting '}'
+...ume -->\n<form action='/upload' enctype='multipart/form-data...
+...                               ^
+views/student_profile.haml:295: syntax error, unexpected tIDENTIFIER, expecting '}'
+...on='/upload' enctype='multipart/form-data' method='POST'>\n ...
+...                               ^
+views/student_profile.haml:295: syntax error, unexpected tSTRING_BEG, expecting keyword_do or '{' or '('
+...' enctype='multipart/form-data' method='POST'>\n  <div class...
+...                               ^
+views/student_profile.haml:295: syntax error, unexpected tCONSTANT, expecting '}'
+...ltipart/form-data' method='POST'>\n  <div class='row'>\n    ...
+...                               ^
+views/student_profile.haml:295: syntax error, unexpected tIDENTIFIER, expecting '}'
+...thod='POST'>\n  <div class='row'>\n    <div class='span5'>\n...
+...                               ^
+views/student_profile.haml:295: syntax error, unexpected tIDENTIFIER, expecting '}'
+...s='row'>\n    <div class='span5'>\n      <h4>Upload resume (...
+...                               ^
+views/student_profile.haml:322: syntax error, unexpected tIDENTIFIER, expecting '}'
+...text("      <input name='action' type='hidden' value='resume...
+...                               ^
+views/student_profile.haml:322: syntax error, unexpected tIDENTIFIER, expecting '}'
+...nput name='action' type='hidden' value='resume'>\n      <inp...
+...                               ^
+views/student_profile.haml:322: syntax error, unexpected tIDENTIFIER, expecting '}'
+...on' type='hidden' value='resume'>\n      <input name='file' ...
+...                               ^
+views/student_profile.haml:322: syntax error, unexpected tIDENTIFIER, expecting '}'
+...sume'>\n      <input name='file' type='file'>\n      <br>\n ...
+...                               ^
+views/student_profile.haml:322: syntax error, unexpected tIDENTIFIER, expecting '}'
+...  <input name='file' type='file'>\n      <br>\n      <button...
+...                               ^
+views/student_profile.haml:322: syntax error, unexpected tIDENTIFIER, expecting '}'
+... <br>\n      <button class='btn btn-success' type='submit'>U...
+...                               ^
+views/student_profile.haml:322: syntax error, unexpected tSTRING_BEG, expecting keyword_do or '{' or '('
+...<button class='btn btn-success' type='submit'>Upload</button...
+...                               ^
+views/student_profile.haml:322: syntax error, unexpected tIDENTIFIER, expecting '}'
+...='btn btn-success' type='submit'>Upload</button>\n    </div>...
+...                               ^
+views/student_profile.haml:322: unterminated string meets end of file
+views/student_profile.haml:322: syntax error, unexpected $end, expecting '}':
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/tilt-1.3.3/lib/tilt/template.rb:209:in `instance_eval'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/tilt-1.3.3/lib/tilt/template.rb:209:in `evaluate_source'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/tilt-1.3.3/lib/tilt/template.rb:144:in `cached_evaluate'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/tilt-1.3.3/lib/tilt/template.rb:127:in `evaluate'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/tilt-1.3.3/lib/tilt/haml.rb:24:in `evaluate'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/tilt-1.3.3/lib/tilt/template.rb:76:in `render'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:575:in `render'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:475:in `haml'
+ /Users/scottsansovich/trd/app.rb:240:in `block in <top (required)>'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:1175:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:1175:in `block in compile!'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:739:in `instance_eval'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:739:in `route_eval'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:723:in `block (2 levels) in route!'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:773:in `block in process_route'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:770:in `catch'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:770:in `process_route'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:722:in `block in route!'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:721:in `each'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:721:in `route!'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:857:in `dispatch!'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:659:in `block in call!'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:823:in `block in invoke'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:823:in `catch'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:823:in `invoke'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:659:in `call!'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:644:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/session/abstract/id.rb:205:in `context'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/session/abstract/id.rb:200:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/head.rb:9:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/commonlogger.rb:20:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/showexceptions.rb:21:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/methodoverride.rb:21:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:1295:in `block in call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:1326:in `synchronize'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/sinatra-1.2.8/lib/sinatra/base.rb:1295:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/lint.rb:48:in `_call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/lint.rb:36:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/showexceptions.rb:24:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/commonlogger.rb:20:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/shotgun-0.9/lib/shotgun/loader.rb:86:in `proceed_as_child'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/shotgun-0.9/lib/shotgun/loader.rb:31:in `call!'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/shotgun-0.9/lib/shotgun/loader.rb:18:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/shotgun-0.9/lib/shotgun/favicon.rb:12:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/shotgun-0.9/lib/shotgun/static.rb:14:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/builder.rb:134:in `call'
+ /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/handler/webrick.rb:59:in `service'
+ /Users/scottsansovich/.rvm/rubies/ruby-1.9.2-p318/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+ /Users/scottsansovich/.rvm/rubies/ruby-1.9.2-p318/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+ /Users/scottsansovich/.rvm/rubies/ruby-1.9.2-p318/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'I, [2013-01-06T12:27:26.224591 #3369]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:27:26.224978 #3369]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:27:26.225144 #3369]  INFO -- : {"action"=>"personal", "secondary_email"=>"scott.sansovich@gmail.com", "interest2"=>"Technology", "interest3"=>"Education"}
+I, [2013-01-06T12:34:48.536235 #3409]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:34:48.550737 #3409]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:34:48.551019 #3409]  INFO -- : {"action"=>"personal", "secondary_email"=>"scott.sansovich@gmail.com", "interest2"=>"Advertising / PR", "interest3"=>"Advertising / PR"}
+I, [2013-01-06T12:35:17.981948 #3417]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:35:17.982394 #3417]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:35:17.982602 #3417]  INFO -- : {"action"=>"personal", "secondary_email"=>"ssansovich@gmail.com", "interest2"=>"Advertising / PR", "interest3"=>"Advertising / PR"}
+I, [2013-01-06T12:36:01.770971 #3429]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:36:01.771331 #3429]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:36:01.771489 #3429]  INFO -- : {"action"=>"personal", "secondary_email"=>"ssansovich@gmail.com", "interest1"=>"Advertising / PR", "interest2"=>"Advertising / PR", "interest3"=>"Advertising / PR"}
+I, [2013-01-06T12:37:15.194921 #3442]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:37:15.195328 #3442]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:37:15.195488 #3442]  INFO -- : {"action"=>"personal", "secondary_email"=>"ssansovich@gmail.com", "interest1"=>"Education", "interest2"=>"Advertising / PR", "interest3"=>"Advertising / PR"}
+I, [2013-01-06T12:38:22.531583 #3455]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:38:22.531957 #3455]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:38:22.532145 #3455]  INFO -- : {"action"=>"personal", "secondary_email"=>"ssansovich@gmail.com", "interest1"=>"Real Estate", "interest2"=>"Non-Profit", "interest3"=>""}
+I, [2013-01-06T12:39:21.126722 #3472]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:39:21.127372 #3472]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:39:21.127548 #3472]  INFO -- : {"action"=>"personal", "secondary_email"=>"ssansovich@gmail.com", "interest1"=>"Entrepreneurship", "interest2"=>"", "interest3"=>""}
+I, [2013-01-06T12:40:03.078990 #3480]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:40:03.079372 #3480]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:40:03.079530 #3480]  INFO -- : {"action"=>"personal", "secondary_email"=>"ssansovich@gmail.com", "interest1"=>"Consulting", "interest2"=>"Education", "interest3"=>""}
+I, [2013-01-06T12:43:22.211490 #3498]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:43:22.211855 #3498]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:43:22.212032 #3498]  INFO -- : {"action"=>"personal", "secondary_email"=>"ssansovich@gmail.com", "interest1"=>"Advertising / PR", "interest2"=>"Consulting", "interest3"=>""}
+I, [2013-01-06T12:44:00.174695 #3506]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:44:00.175135 #3506]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:44:00.175297 #3506]  INFO -- : {"action"=>"personal", "secondary_email"=>"ssansovich@gmail.com", "interest1"=>"Advertising / PR", "interest2"=>"Consulting", "interest3"=>""}
+I, [2013-01-06T12:44:25.895042 #3510]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:44:25.895413 #3510]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:44:25.895571 #3510]  INFO -- : {"action"=>"personal", "secondary_email"=>"ssansovich@gmail.com", "interest1"=>"Advertising / PR", "interest2"=>"Education", "interest3"=>"Education"}
+I, [2013-01-06T12:45:09.156341 #3514]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:45:09.156713 #3514]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:45:09.156904 #3514]  INFO -- : {"action"=>"personal", "secondary_email"=>"ssansovich@gmail.com", "interest1"=>"Advertising / PR", "interest2"=>"Education", "interest3"=>"Education"}
+I, [2013-01-06T12:45:18.887820 #3518]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:45:18.888318 #3518]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:45:18.888485 #3518]  INFO -- : {"action"=>"personal", "secondary_email"=>"ssansovich@gmail.com", "interest1"=>"Consulting", "interest2"=>"Advertising / PR", "interest3"=>""}
+I, [2013-01-06T12:48:58.448840 #3535]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:48:58.457438 #3535]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:48:58.457709 #3535]  INFO -- : {"action"=>"personal", "secondary_email"=>"ssansovich@gmail.com", "interest1"=>"", "interest2"=>"Advertising / PR", "interest3"=>""}
+I, [2013-01-06T12:52:37.965958 #3547]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:52:37.984766 #3547]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:52:37.985054 #3547]  INFO -- : {"action"=>"personal", "secondary_email"=>"ssansovich@gmail.com", "interest1"=>"Advertising / PR", "interest2"=>"Consulting", "interest3"=>""}
+I, [2013-01-06T12:55:00.387027 #3560]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:55:00.395249 #3560]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T12:55:00.395629 #3560]  INFO -- : {"action"=>"personal", "secondary_email"=>"ssansovich@gmail.com", "interest1"=>"Consulting", "interest2"=>"Advertising / PR", "interest3"=>""}
+I, [2013-01-06T13:13:07.877962 #3634]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T13:13:07.886662 #3634]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T13:13:07.887006 #3634]  INFO -- : {"action"=>"personal", "secondary_email"=>"ssansovich@gmail.com", "interest1"=>"Entrepreneurship", "interest2"=>"Technology", "interest3"=>"Education"}
+I, [2013-01-06T13:14:13.198962 #3639]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T13:14:13.199333 #3639]  INFO -- : #<Student @id=2 @email="ssansovich@college.harvard.edu" @password="545beda96f6b5d422a7993d81aa23f16e87ed9c5391f8a08f156a5367562ad39" @salt="E7jdzl" @verification_key="hTSY3wXLzpkpdGWG2v6V1vYbn8Fcgu48" @is_verified=true @type=Student @name=<not loaded> @secondary_email=<not loaded> @birthday=<not loaded> @school=<not loaded> @major=<not loaded> @minor=<not loaded> @gpa=<not loaded> @gender=<not loaded> @interest1=<not loaded> @interest2=<not loaded> @interest3=<not loaded> @class=<not loaded> @resume=<not loaded> @photo=<not loaded>>
+I, [2013-01-06T13:14:13.199511 #3639]  INFO -- : {"action"=>"personal", "secondary_email"=>"ssansovich@gmail.com", "interest1"=>"Entrepreneurship", "interest2"=>"Technology", "interest3"=>"Education"}

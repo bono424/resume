@@ -1,4 +1,4 @@
-%h1 Company Profiles
+%h1 Employer Profiles
 %br
 %br
 .span9
@@ -7,20 +7,21 @@
       .span9{:class => "alert alert-error"}= @error
 
     - unless @employers.nil?
-      - @employers.each do |emp|
+      - @employers.each do |e|
         .row
           .span2
-          - if emp.photo.nil?
-            %img{:src => "/images/companylogos/nologo.png", :class => "span2 pull-left"}
-          - else
-            %a{:href => "/employers/#{emp.handle}"}
-              %img{:src => "/images/companylogos/#{emp.photo}", :class => "span2 pull-left"}
+            - if e.photo.nil?
+              %img{:src => "/images/companylogos/nologo.png"}
+            - else
+              %a{:href => "/employers/#{e.handle}"}
+                %img{:src => "https://trd-assets.s3.amazonaws.com/#{e.photo}"}
           .span7
-            %a{:href => "/employers/#{emp.handle}"}
-              %b= emp.name
-            %p= emp.description.gsub("\n","<br >")
+            %a{:href => "/profile/#{e.handle}"}
+              %b= e.name
+            - unless e.description.nil?
+              %p= e.description.gsub("\n","<br >")
             %div
-              %a{:href => "#{emp.url}"}
+              %a{:href => "http://www.#{e.url}", :target => "_blank"}
                 Visit website
             %br
             %br
