@@ -584,28 +584,36 @@ get '/search' do
       else
         
         # Generate query string. I know this sucks. Bear with me.
-        @results = Student.all(:name.like => "%#{params[:name]}%")
-        @results = @results.all(:school.like => "%#{params[:school]}%")
-        if not params[:class].empty?
-          @results = @results.all(:class => params[:class])
-        end
-        if not params[:gpa].empty?
-          @results = @results.all(:gpa => params[:gpa])
-        end
-        @results = @results.all(:major.like => "%#{params[:major]}%")
-        @results = @results.all(:minor.like => "%#{params[:minor]}%")
-        if not params[:interest1] == 'Interest One'
-          @results = @results.all(:interest1 => "%#{params[:interest1]}%")
-        end
-        if not params[:interest2] == 'Interest Two'
-          @results = @results.all(:interest2 => "%#{params[:interest2]}%")
-        end
-        if not params[:interest3] == 'Interest Three'
-          @results = @results.all(:interest3 => "%#{params[:interest3]}%")
-        end
+        @results = Student.all 
+        @results = @results.all(:conditions => ["name ILIKE ?", "%#{params[:name]}%"]) unless params[:name] == ""
+        @results = @results.all(:conditions => ["school ILIKE ?", "%#{params[:school]}%"]) unless params[:school] == ""
+        @results = @results.all(:conditions => ["class = ?", "%#{params[:class]}%"]) unless params[:class] == ""
+        @results = @results.all(:gpa.gte => params[:gpa]) unless params[:gpa] == ""
+        @results = @results.all(:conditions => ["major ILIKE ?", "%#{params[:major]}%"]) unless params[:major] == ""
+        @results = @results.all(:conditions => ["minor ILIKE ?", "%#{params[:minor]}%"]) unless params[:minor] == ""
+        @results = @results.all(:conditions => ["interest1 ILIKE ?", "%#{params[:interest]}%"]) unless params[:interest1] == ""
+        # @results = @results.all(:name.like => "%#{params[:name]}%")
+        # @results = @results.all(:school.like => "%#{params[:school]}%")
+        # if not params[:class].empty?
+        #   @results = @results.all(:class => params[:class])
+        # end
+        # if not params[:gpa].empty?
+        #   @results = @results.all(:gpa => params[:gpa])
+        # end
+        # @results = @results.all(:major.like => "%#{params[:major]}%")
+        # @results = @results.all(:minor.like => "%#{params[:minor]}%")
+        # if not params[:interest1] == 'Interest One'
+        #   @results = @results.all(:interest1 => "%#{params[:interest1]}%")
+        # end
+        # if not params[:interest2] == 'Interest Two'
+        #   @results = @results.all(:interest2 => "%#{params[:interest2]}%")
+        # end
+        # if not params[:interest3] == 'Interest Three'
+        #   @results = @results.all(:interest3 => "%#{params[:interest3]}%")
+        # end
 
         # if no results found, show error.
-        raise TrdError.new("Sorry, we couldn't find anything with the parameters you specified.") if @results.empty?
+        raise TrdError.new("Sorry, we couldn't find anything with the parameters you specified.") if @results.nil? || @results.empty?
         haml :search, :layout => :'layouts/application'
       end
     else

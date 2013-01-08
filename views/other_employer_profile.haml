@@ -16,7 +16,7 @@
     .row
       .span9
         %p
-          %b About
+          %strong About
           %br
             =@employer.description.gsub("\n", "<br />")
 
@@ -24,7 +24,7 @@
     .row
       .span5
         %p
-          %b Location
+          %strong Location
           %br
           - unless @employer.address.nil?
             =@employer.address
@@ -37,7 +37,7 @@
         %b Founded
         %br= @employer.founded
 
-  %br
+%hr
 
 .row
   .span9
@@ -52,7 +52,7 @@
     - @postings.each do |post|
       .row
         .span8
-          %h4= post.position
+          %strong= post.position
           %p= post.description
           %p
             Duration:

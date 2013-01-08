@@ -40,24 +40,32 @@
 .row{:id => "about-forms"}
   - if @user.address.nil? && @user.city.nil? && @user.state.nil? && @user.zipcode.nil? && @user.description.nil?
     #about-new.span8{:style => "display:block;"}
+      %br/
       %form{:method => "POST", :action => "#", :class => "form-horizontal"}
         %input{:type => "hidden", :name => "action", :value => "about"}
-        %fieldset
-          %label Street address
-          %input{:type => "text", :value => "#{@user.address}", :name => "address"}
-          %label City
-          %input{:type => "text", :value => "#{@user.city}", :name => "city"}
-          .row
-            %label{:class => "span1"} State
-            %label{:class => "span2"} Zipcode
-          .row
-            .span1
-              %input{:type => "text", :value => "#{@user.state}", :name => "state", :class => "span1"}
-            .span2
-              %input{:type => "text", :value => "#{@user.zipcode}", :name => "zipcode", :class => "span2"}
+        .control-group
+          %label{:class => "control-label"} Street address
+          .controls
+            %input{:type => "text", :value => "#{@user.address}", :name => "address"}
+        .control-group
+          %label{:class => "control-label"} City
+          .controls
+            %input{:type => "text", :value => "#{@user.city}", :name => "city"}
+        .control-group
+          %label{:class => "control-label"} State
+          .controls
+            %input{:type => "text", :value => "#{@user.state}", :name => "state", :class => "span1"}
+        .control-group
+          %label{:class => "control-label"} Zipcode
+          .controls
+            %input{:type => "text", :value => "#{@user.zipcode}", :name => "zipcode", :class => "span2"}
+        .control-group
           %label About
-          %textarea{:name => "description", :value => "#{@user.description}", :class => "span5"}
-          %button{:type => "submit", :class => "btn btn-success"} Save these changes
+          .controls
+            %textarea{:name => "description", :value => "#{@user.description}", :class => "span5"}
+            %br/
+            %br/
+            %button{:type => "submit", :class => "btn btn-success"} Save these changes
 
   - else
     #about-update.span6{:style => "display:none;"}
@@ -87,7 +95,7 @@
     .row
       .span9
         %p
-          %b About
+          %strong About
           %br
             =@user.description.gsub("\n", "<br />")
 
@@ -95,7 +103,7 @@
     .row
       .span5
         %p
-          %b Location
+          %strong Location
           %br
           - unless @user.address.nil?
             =@user.address
@@ -108,7 +116,7 @@
         %b Founded
         %br= @user.founded
 
-  %br
+%hr/
 
 .row
   .span9
@@ -126,7 +134,7 @@
       - unless post.deleted
         .row
           .span8
-            %h4= post.position
+            %strong= post.position
             %p= post.description
             %p
               Duration:
