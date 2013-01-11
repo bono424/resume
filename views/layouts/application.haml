@@ -1,17 +1,8 @@
 !!!
 %html{html_attrs}
   %head
-    %meta{:'http-equiv' => "Content-Type", :content => "text/html; charset=utf-8"}
-    %meta{:name => "lang", :content => "en"}
     %title= @title || 'The Resume Drop'
-    %link{:href=>'/stylesheets/bootstrap/css/bootstrap.css', :rel => 'stylesheet', :media => "screen", :type => "text/css"}
-    %link{:href=>'/stylesheets/pagestyle.css', :rel => 'stylesheet', :media => "screen", :type => "text/css"}
-
-    %link{:rel => "shortcut icon", :type => "image/png", :href => "/images/favicon.png"}
-
-    %link{:href => 'http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400', :rel => 'stylesheet', :type => 'text/css'}
-
-    %script{:type => "text/javascript", :src => "http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"}
+    = haml :_head
   %body
     #top{:class => "navbar"}
       .navbar-inner
@@ -21,9 +12,8 @@
               %img{:src => "/images/logo.png", :title => "TRD logo", :class => "logo"}
     .container
       #left{:class => "span2 well sidebar-nav"}
-        = partial :_nav_main
+        = haml :_nav_main
       #right{:class => "span9"}
         = yield
-    %footer
     = partial :_footer
-  = partial :_analytics
+    = partial :_analytics

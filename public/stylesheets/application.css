@@ -1,0 +1,119 @@
+/* ==== Common ==== */
+
+h1, h2, h3, h4, h5, h6 {
+    font-family:"Source Sans Pro", "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight:500;
+}
+
+.dateinput {
+  width: 90px;
+}
+
+.center {
+	text-align:center;
+}
+
+.larger {
+	font-size:1.3em;
+	position:relative;
+	bottom:3px;
+}
+
+/* ==== NAVIGATION ==== */
+
+.well {
+    box-shadow:0px 0px #ddd;
+    border:1px solid #ddd;
+}
+
+.nav-list {
+	padding:0px;
+}
+
+.profilepic {
+	padding:0px 0px 15px 0px;
+}
+
+/* ==== TOP ==== */
+
+.navbar {
+	margin:0px 0px 25px 0px;
+}
+
+.navbar-inner {
+  height:34px;
+	padding:10px 0px;
+  background: #fafafa;
+  border-bottom:1px solid #ddd;
+  box-shadow:0px 0px 1px #fff;:
+}
+
+.logo {
+  padding:5px 0px;
+}
+
+.navbar-inner button {
+  position:relative;
+  bottom:2px;
+}
+
+/* ===== BODY ===== */
+
+
+#right {
+	min-height:500px;
+}
+
+textarea {
+	height:80px;
+}
+
+.deadline {
+	font-weight:normal;
+	padding-left:20px;
+}
+
+.edit {
+	cursor:pointer;
+	position:relative;
+	top:10px;
+	left:10px;
+	opacity:0.5;
+}
+
+.edit:hover {
+	opacity:1.0;
+}
+
+#education {
+	line-height:2em;
+}
+
+.remove {
+	margin-left:15px;
+	opacity:0.4;
+}
+
+.remove:hover {
+	opacity:0.6;
+}
+
+/* ==== INDEX ==== */
+
+.hero-unit {
+  padding:0;
+  background-color:#fff;
+
+/* ==== Footer ==== */
+
+footer {
+	text-align:center;
+	width:520px;
+	margin:0px auto;
+}
+
+.copyright {
+	position:relative;
+	top:9px;
+	left:14px;
+}

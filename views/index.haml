@@ -2,19 +2,18 @@
   .row
     / leftpane
     .span5
-      %h1 Get noticed.
-      %h1 Get hired.
-      %h2 Top talent for the top spots.
-      %br
-      %br
-      %h4 Sign up now. It's free.
+      .hero-unit
+        %h1 Get noticed.
+        %h1 Get hired.
+        %h2 Top talent for the top spots.
+      %p <strong>Sign up now. It's free.</strong>
       - unless @error.nil?
         %br/
         %div{:class => "alert alert-error"}= @error
       - unless @success.nil?
         %br/
         %div{:class => "alert alert-success"}= @success
-      %form{:id => "register", :action => "/", :method => "POST"}
+      %form{:id => "register", :action => "#", :method => "POST"}
         %fieldset
           .control-group.warning
             .controls
