@@ -4,16 +4,18 @@
     %title= @title || 'The Resume Drop'
     = haml :_head
   %body
-    #top{:class => "navbar"}
-      .navbar-inner
-        .container
-          .span4
-            %a{:href => "/"}
-              %img{:src => "/images/logo.png", :title => "TRD logo", :class => "logo"}
-    .container
-      #left{:class => "span2 well sidebar-nav"}
-        = haml :_nav_main
-      #right{:class => "span9"}
-        = yield
+    #wrap
+      #top{:class => "navbar"}
+        .navbar-inner
+          .container
+            .span4
+              %a{:href => "/"}
+                %img{:src => "/images/logo.png", :title => "TRD logo", :class => "logo"}
+      .container
+        #left{:class => "span2 well sidebar-nav"}
+          = haml :_nav_main
+        #right{:class => "span9"}
+          = yield
+      #push
     = partial :_footer
     = partial :_analytics

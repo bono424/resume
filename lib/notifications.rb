@@ -28,7 +28,7 @@ EOS
     end
 
     def self.send_verification_email(email, verification_key)
-      # return if user.nil?
+      return if user.nil?
       to = email
       from = "The Resume Drop <welcome@theresumedrop.com>"
       link = "http://theresumedrop.com/verify/#{verification_key}"
@@ -52,7 +52,7 @@ Good luck and have fun!
 
 The Resume Drop Team
 EOS
-      Pony.mail(:to => email, :from => from, :subject => subject, :body => body)
+      Pony.mail(:to => to, :from => from, :subject => subject, :body => body)
     end
 
     def self.send_breakage_notification(user, e)

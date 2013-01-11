@@ -4,19 +4,20 @@
     %title= @title || 'The Resume Drop'
     = haml :_head
   %body
-    #top{:class => "navbar"}
-      .navbar-inner
-        .container
-          .row
-            .span4
-              %a{:href => "/"}
-                %img{:src => "/images/logo.png", :title => "TRD logo", :class => "logo"}
-            .span8
-              %form{:action => "/login", :method => "POST", :class => "form-inline pull-right"}
-                %input{:type => "text", :placeholder => "Email", :class => "span2", :name => "email"}
-                %input{:type => "password", :placeholder => "Password", :class => "span2", :name => "password"}
-                %button{:type => "submit", :class => "btn"} Log in
-    #content
-      = yield
-    = partial :_footer
-    = partial :_analytics
+    #wrap
+      #top{:class => "navbar"}
+        .navbar-inner
+          .container
+            .row
+              .span4
+                %a{:href => "/"}<
+                  %img{:src => "/images/logo.png", :title => "TRD logo", :class => "logo"}
+              .span8
+                %form{:action => "/login", :method => "POST", :class => "form-inline pull-right"}
+                  %input{:type => "text", :placeholder => "Email", :class => "span2", :name => "email"}
+                  %input{:type => "password", :placeholder => "Password", :class => "span2", :name => "password"}
+                  %button{:type => "submit", :class => "btn"} Log in
+      #content= yield
+      #push
+    = haml :_footer
+    = haml :_analytics

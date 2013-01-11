@@ -1,5 +1,9 @@
 /* ==== Common ==== */
 
+html, body {
+  height:100%;
+}
+
 h1, h2, h3, h4, h5, h6 {
     font-family:"Source Sans Pro", "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight:500;
@@ -103,17 +107,30 @@ textarea {
 .hero-unit {
   padding:0;
   background-color:#fff;
-
-/* ==== Footer ==== */
-
-footer {
-	text-align:center;
-	width:520px;
-	margin:0px auto;
 }
 
-.copyright {
-	position:relative;
-	top:9px;
-	left:14px;
+/* ==== FOOTER (sticky)==== */
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by it's height */
+  margin: 0 auto -60px;
 }
+
+/* Set the fixed height of the footer here */
+#push, footer {
+  height: 60px;
+}
+
+#footer {
+  height:20px;
+  padding:20px 0;
+}
+
+#footer a {
+  margin:0 14px;
+}
+

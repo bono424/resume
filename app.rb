@@ -59,7 +59,7 @@ helpers do
   end
 
   def validate(p, req)
-    req.each { |r| raise TrdError.new("Field '#{r}' missing.") if p[r].nil? }
+    req.each { |r| raise TrdError.new("#{r.capitalize} field missing.") if p[r].nil? || p[r] == "" }
   end
 
   def nl2br(s)
