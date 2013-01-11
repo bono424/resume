@@ -25,29 +25,8 @@ h1 {
     line-height:1.2em;
 }
 
-#register {
-    margin-top:10px;
-}
-
-#register input {
-	font-size:20px;
-    line-height:1.2em;
-	padding:10px;
-}
-
 .splash img {
     margin:20px 0px;
-}
-
-.cologo {
-	display:inline;
-	height:45px;
-	margin:0px 20px;
-}
-
-#morelogos {
-	font-size:1.7em;
-	padding:11px 13px;
 }
 
 /* ==== Footer ==== */

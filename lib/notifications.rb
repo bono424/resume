@@ -52,7 +52,7 @@ Good luck and have fun!
 
 The Resume Drop Team
 EOS
-      Pony.mail(:to => 'ssansovich@gmail.com', :from => from, :subject => subject, :body => body)
+      Pony.mail(:to => email, :from => from, :subject => subject, :body => body)
     end
 
     def self.send_breakage_notification(user, e)
