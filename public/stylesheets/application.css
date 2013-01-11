@@ -25,17 +25,9 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ==== NAVIGATION ==== */
 
-.well {
-    box-shadow:0px 0px #ddd;
-    border:1px solid #ddd;
-}
-
-.nav-list {
-	padding:0px;
-}
-
 .profilepic {
-	padding:0px 0px 15px 0px;
+  width:95%;
+  margin-bottom:10px;
 }
 
 /* ==== TOP ==== */
@@ -46,10 +38,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .navbar-inner {
   height:34px;
-	padding:10px 0px;
+	padding:10px 0px 6px 0px;
   background: #fafafa;
   border-bottom:1px solid #ddd;
-  box-shadow:0px 0px 1px #fff;:
 }
 
 .logo {

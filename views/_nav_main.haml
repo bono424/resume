@@ -1,5 +1,5 @@
-- if @user.nil?
-  %ul{:class => "nav nav-list"}
+%ul{:class => "nav nav-list well"}
+  - if @user.nil?
     %li{:class => "nav-header"} The Resume Drop
     %li
       %a{:href => "/"}
@@ -22,12 +22,12 @@
         %i{:class => "icon-eye-open"}
         Privacy
 
-- elsif @user.type == Student
-  - if @user.photo.nil?
-    %img{:src => "/images/anon.png", :class => "profilepic"}
-  - else
-    %img{:src => "https://trd-assets.s3.amazonaws.com/#{@user.photo}", :class => "profilepic"}
-  %ul{:class => "nav nav-list"}
+  - elsif @user.type == Student
+    %li
+      - if @user.photo.nil?
+        %img{:src => "/images/anon.png", :class => "profilepic img-polaroid"}
+      - else
+        %img{:src => "https://trd-assets.s3.amazonaws.com/#{@user.photo}", :class => "profilepic img-polaroid"}
     %li{:class => "nav-header"}= @user.name
     %li
       %a{:href => "/profile"}
@@ -50,12 +50,12 @@
         %i{:class => "icon-off"}
         Logout
 
-- elsif @user.type == Employer
-  - if @user.photo.nil?
-    %img{:src => "/images/anon.png", :class => "profilepic"}
-  - else
-    %img{:src => "https://trd-assets.s3.amazonaws.com/#{@user.photo}", :class => "profilepic"}
-  %ul{:class => "nav nav-list"}
+  - elsif @user.type == Employer
+    %li
+      - if @user.photo.nil?
+        %img{:src => "/images/anon.png", :class => "profilepic"}
+      - else
+        %img{:src => "https://trd-assets.s3.amazonaws.com/#{@user.photo}", :class => "profilepic"}
     %li{:class => "nav-header"}= @user.name
     %li
       %a{:href => "/profile"}
