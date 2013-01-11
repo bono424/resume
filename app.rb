@@ -4,7 +4,7 @@ require 'haml'
 require 'stripe'
 require 'pony'
 require 'aws/s3'
-require 'rmagick'
+require 'RMagick'
 
 require 'logger'
 
