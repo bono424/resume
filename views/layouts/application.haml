@@ -19,5 +19,6 @@
           #right{:class => "span9"}
             = yield
       #push
-    = partial :_footer
-    = partial :_analytics
+    = haml :_footer
+    %script{:type => "text/javascript", :src => "javascripts/application.js"}
+    = haml :_analytics

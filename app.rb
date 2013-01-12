@@ -108,7 +108,7 @@ end
 
 post '/' do
   begin
-    validate(params, [:password, :name, :email])
+    validate(params, [:name, :password, :email])
 
     # unless params[:email].end_with? ".edu"
     #   raise TrdError.new("Sorry, only students can register with The Resume Drop.")
@@ -266,17 +266,16 @@ post '/profile' do
       case params[:action]
       when "education"
         # validate inputs
-        if params[:gpa].is_a? Numeric
-          raise TrdError.new("Your GPA must be a number.")
-        end
-
         begin
             class_year = Date.strptime(params[:class], "%Y")
         rescue
             raise TrdError.new("Your class year must be a valid, numeric date (YYYY).")
         end
+        
+        # format gpa
+        params[:gpa].length > 4 ? gpa = "%1.2f" % params[:gpa] : gpa = params[:gpa]
 
-        @user.update(:school => params[:school], :major => params[:major], :minor => params[:minor], :class => class_year, :gpa => params[:gpa])
+        @user.update(:school => params[:school], :major => params[:major], :minor => params[:minor], :class => class_year, :gpa => gpa)
       
       when "personal"
         # make sure interests are valid

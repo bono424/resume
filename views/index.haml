@@ -15,34 +15,22 @@
         %div{:class => "alert alert-success"}= @success
       %form{:id => "register", :action => "#", :method => "POST"}
         %fieldset
-          .control-group.warning
+          .control-group
             .controls
-              %input{:type => "text", :placeholder => "Name", :class => "span3 warning", :name => "name"}
-              %span{:class => "help-inline"} Name is required.
-          .control-group.error
+              %input{:type => "text", :placeholder => "Name", :class => "span3", :name => "name"}
+              %span{:class => "help-inline hide"} Name is required.
+          .control-group
             .controls
               %input{:type => "text", :placeholder => "University Email", :class => "span3", :name => "email"}
-              %span{:class => "help-inline"} Email already used.
+              %span{:class => "help-inline hide"} Email is required.
           .control-group
             .controls
-              %input{:type => "password", :placeholder => "Password", :class => "password span3", :name => "password"}
-              %span{:class => "help-inline"} Password is required.
+              %input{:type => "password", :placeholder => "Password", :class => "span3", :name => "password"}
+              %span{:class => "help-inline hide"} Password is required.
           .control-group
             .controls
-              %input{:type => "submit", :value => "Sign up", :class => "btn btn-success btn-large"}
+              %button{:type => "submit", :class => "btn btn-success btn-large"} Sign up
 
     / rightpane
     .span7
       %img{:src => "/images/plant.png", :class => "splash span6"}
-  /
-    %br
-    .row
-      .span4
-        %h3 Why should I join?
-        %p The Resume Drop lets you create a digital resume so that employers can easily find you. If you've already crafted your resume, it will only take a few minutes to complete your profile here. You will also be able to see job and intership opportunities that employers have posted.
-      .span4
-        %h3 Who will see my profile?
-        %p Only employers will be able to see your profile, since potentially sensitive information like your GPA is often requested by employers. In no circumstance will your profile be viewable by other users. 
-      .span4
-        %h3 What kinds of organizations <br /> use The Resume Drop?
-        %p Short answer: many kinds. Small tech startups to tech giants like Oracle and Facebook, financial institutions and consulting firms. We're working hard to get more on board for all of you looking for more options!

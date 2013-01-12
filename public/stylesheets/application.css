@@ -17,10 +17,8 @@ h1, h2, h3, h4, h5, h6 {
 	text-align:center;
 }
 
-.larger {
-	font-size:1.3em;
-	position:relative;
-	bottom:3px;
+.hidden {
+  display:none;
 }
 
 /* ==== NAVIGATION ==== */
@@ -68,7 +66,7 @@ textarea {
 	padding-left:20px;
 }
 
-.edit {
+.edit-icon, .add-icon {
 	cursor:pointer;
 	position:relative;
 	top:10px;
@@ -76,12 +74,8 @@ textarea {
 	opacity:0.5;
 }
 
-.edit:hover {
+.edit-icon:hover, .add-icon:hover {
 	opacity:1.0;
-}
-
-#education {
-	line-height:2em;
 }
 
 .remove {
