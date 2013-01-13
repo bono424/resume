@@ -49,7 +49,7 @@
 
 - if @results
   .row
-    .span8
+    .span9
       %table{:class => "table table-striped"}
         %thead
           %tr
@@ -63,10 +63,10 @@
           - @results.each do |r|
             %tr
               %td
-                %img{:src => "https://trd-assets.s3.amazonaws.com/#{r.photo}", :class => "span1"}
+                %img{:src => "https://trd-assets.s3.amazonaws.com/#{h r.photo}", :class => "span1"}
               %td
-                %a{:href => "/profile/#{r.id}"}= r.name
-              %td= r.school
-              %td= r.major
-              %td= r.minor
-              %td= r.class.strftime("%Y")
+                %a{:href => "/profile/#{h r.id}"}=h r.name
+              %td=h r.school
+              %td=h r.major
+              %td=h r.minor
+              %td=h r.class.strftime("%Y")

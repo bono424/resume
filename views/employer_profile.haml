@@ -1,161 +1,125 @@
-:javascript
-  function editSection(section) {
-    $("#" + section + "-new").hide();
-    $("#" + section).hide();
-    $("#" + section + "-update").show();
-  }
-
-  function addposting() {
-    $("#posting-add").show();
-  }
-
-.row
-  .span9
-  - unless @error.nil?
-    %div{:class => "alert alert-error"}= @error
+- unless @error.nil?
+  .row
+    .span9
+      %div{:class => "alert alert-error"}= @error
 %br
 .row
   .span3
     - if @user.photo.nil?
-      %form{:method => "POST", :action => "/upload", :enctype => "multipart/form-data"}
-        .row
-          .span5
-            %p No logo uploaded.
+      .row
+        .span5
+          %p No logo uploaded.
+          %form{:method => "POST", :action => "/upload", :enctype => "multipart/form-data"}
             %input{:name => 'action', :value => 'photo', :type => 'hidden'}
-            %input{:name => 'file', :type => 'file'}
-            %br/
-            %button{:type => "submit", :class => "btn btn-success"} Upload
+            %input{:name => 'file', :type => 'file', :class => "file-upload"}
+            %a.btn-upload.btn
+              %i.icon-picture
+              Choose file
+            %button.btn.btn-success{:type => "submit"}
+              %i.icon-upload.icon-white
+              Upload
     - else
-      %img{:src => "https://trd-assets.s3.amazonaws.com/#{@user.photo}" }
+      %img{:src => "https://trd-assets.s3.amazonaws.com/#{h @user.photo}" }
 %br
 
-.row
-  .span5
-    %h1
-      = @user.name
-      %a.edit{:href => "#", :onClick => "editSection('about')"}
-        %i{:class => "icon-pencil"}
-    %a{:href => "#{@user.url}"}= @user.url
+#about
+  .row
+    .span5
+      %h1
+        = @user.name
+        %a.edit-icon
+          %i{:class => "icon-pencil"}
+      %p<
+        %a{:href => "#{h @user.url}"}=h @user.url
 
-.row{:id => "about-forms"}
-  - if @user.address.nil? && @user.city.nil? && @user.state.nil? && @user.zipcode.nil? && @user.description.nil?
-    #about-new.span8{:style => "display:block;"}
-      %br/
-      %form{:method => "POST", :action => "#", :class => "form-horizontal"}
-        %input{:type => "hidden", :name => "action", :value => "about"}
-        .control-group
-          %label{:class => "control-label"} Street address
-          .controls
-            %input{:type => "text", :value => "#{@user.address}", :name => "address"}
-        .control-group
-          %label{:class => "control-label"} City
-          .controls
-            %input{:type => "text", :value => "#{@user.city}", :name => "city"}
-        .control-group
-          %label{:class => "control-label"} State
-          .controls
-            %input{:type => "text", :value => "#{@user.state}", :name => "state", :class => "span1"}
-        .control-group
-          %label{:class => "control-label"} Zipcode
-          .controls
-            %input{:type => "text", :value => "#{@user.zipcode}", :name => "zipcode", :class => "span2"}
-        .control-group
-          %label About
-          .controls
-            %textarea{:name => "description", :value => "#{@user.description}", :class => "span5"}
-            %br/
-            %br/
+    - if @user.address.nil? && @user.city.nil? && @user.state.nil? && @user.zipcode.nil? && @user.description.nil?
+      .span8
+        %form{:method => "POST", :action => "#", :class => "form-horizontal"}
+          %input{:type => "hidden", :name => "action", :value => "about"}
+          .control-group
+            %label{:class => "control-label"} Street address
+            .controls
+              %input{:type => "text", :value => "#{h @user.address}", :name => "address"}
+          .control-group
+            %label{:class => "control-label"} City
+            .controls
+              %input{:type => "text", :value => "#{h @user.city}", :name => "city"}
+          .control-group
+            %label{:class => "control-label"} State
+            .controls
+              %input{:type => "text", :value => "#{h @user.state}", :name => "state", :class => "span1"}
+          .control-group
+            %label{:class => "control-label"} Zipcode
+            .controls
+              %input{:type => "text", :value => "#{h @user.zipcode}", :name => "zipcode", :class => "span2"}
+          .control-group
+            %label About
+            .controls
+              %textarea{:name => "description", :value => "#{h @user.description}", :class => "span5"}
+              %br/
+              %br/
+              %button{:type => "submit", :class => "btn btn-success"} Save these changes
+
+    - else
+      .edit.span6{:style => "display:none;"}
+        %br
+        %form{:method => "POST", :action => "#"}
+          %input{:type => "hidden", :name => "action", :value => "about"}
+          %fieldset
+            %label Street address
+            %input{:type => "text", :value => "#{h @user.address}", :name => "address"}
+            %label City
+            %input{:type => "text", :value => "#{h @user.city}", :name => "city"}
+            .row
+              %label{:class => "span1"} State
+              %label{:class => "span2"} Zipcode
+            .row
+              .span1
+                %input{:type => "text", :value => "#{h @user.state}", :name => "state", :class => "span1"}
+              .span2
+                %input{:type => "text", :value => "#{h @user.zipcode}", :name => "zipcode", :class => "span2"}
+            %label About
+            %textarea{:name => "description", :class => "span6"} #{h @user.description}
             %button{:type => "submit", :class => "btn btn-success"} Save these changes
 
-  - else
-    #about-update.span6{:style => "display:none;"}
-      %br
-      %form{:method => "POST", :action => "#"}
-        %input{:type => "hidden", :name => "action", :value => "about"}
-        %fieldset
-          %label Street address
-          %input{:type => "text", :value => "#{@user.address}", :name => "address"}
-          %label City
-          %input{:type => "text", :value => "#{@user.city}", :name => "city"}
-          .row
-            %label{:class => "span1"} State
-            %label{:class => "span2"} Zipcode
-          .row
-            .span1
-              %input{:type => "text", :value => "#{@user.state}", :name => "state", :class => "span1"}
-            .span2
-              %input{:type => "text", :value => "#{@user.zipcode}", :name => "zipcode", :class => "span2"}
-          %label About
-          %textarea{:name => "description", :class => "span5"} #{@user.description}
-          %button{:type => "submit", :class => "btn btn-success"} Save these changes
+    .info.span9
+      - unless @user.description.nil?
+        .row
+          .span9
+            %p
+              %strong About
+              %br
+                =h @user.description.gsub("\n", "<br />")
 
-#about
-  %br
-  - unless @user.description.nil?
-    .row
-      .span9
-        %p
-          %strong About
-          %br
-            =@user.description.gsub("\n", "<br />")
-
-  - unless @user.address.nil? && (@user.city.nil? || @user.state.nil? || @user.zipcode.nil?)
-    .row
-      .span5
-        %p
-          %strong Location
-          %br
-          - unless @user.address.nil?
-            =@user.address
-            %br
-          - unless @user.city.nil? || @user.state.nil? || @user.zipcode.nil?
-            = "#{@user.city}, #{@user.state} #{@user.zipcode}"
-  .row
-    - unless @user.founded.nil?
-      .span5
-        %b Founded
-        %br= @user.founded
+      - unless @user.address.nil? && (@user.city.nil? || @user.state.nil? || @user.zipcode.nil?)
+        .row
+          .span5
+            %p
+              %strong Location
+              %br
+              - unless @user.address.nil?
+                =h @user.address
+                %br
+              - unless @user.city.nil? || @user.state.nil? || @user.zipcode.nil?
+                = "#{h @user.city}, #{h @user.state} #{h @user.zipcode}"
+      .row
+        - unless @user.founded.nil?
+          .span5
+            %b Founded
+            %p=h @user.founded
 
 %hr/
 
+
+#posting
 .row
   .span9
     %h2
       Job and Internship postings
-      %a.edit{:onClick => "addposting()"}
-        %i{:class => "icon-plus"}
-%br
-
-  #posting-info
-  - if @user.postings.nil?
-    %p No job postings are currently available.
-  - else
-    - @user.postings.each do |post|
-      - unless post.deleted
-        .row
-          .span8
-            %strong= post.position
-            %p= post.description
-            %p
-              Duration:
-              %span= post.start_date.strftime("%B %d, %Y")
-              %span &mdash;
-              %span= post.end_date.strftime("%B %d, %Y")
-            - if post.class.nil?
-              %p All classes are being accepted.
-            - else
-              %p Minimum class year: #{post.class}
-            %p Qualifications expected: #{post.qualifications}
-            - if post.deadline < Date.today
-              %p.red Sorry, the deadline has already passed.
-            - else
-              %p.green= post.deadline.strftime("Deadline: %B %d, %Y")
-            %a{:class => "red", :href => "profile/delete/posting/#{post.id}"}
-              Delete this entry
-        %br
+      %i{:class => "icon-plus add-icon"}
 
   / posting add form
-  #posting-add{:style => "display:none"}
+  .add.span9{:style => "display:none"}
     %form{:method => "POST", :action => "#"}
       %input{:type => "hidden", :name => "action", :value => "posting"}
       %hr
@@ -195,3 +159,31 @@
         .span5
           %button{:type => "submit", :class => "btn btn-success"} Save changes
       %hr
+
+  .info.span9
+    - if @user.postings.nil?
+      %p No job postings are currently available.
+    - else
+      - @user.postings.each do |post|
+        - unless post.deleted
+          .row
+            .span8
+              %strong=h post.position
+              %p=h post.description
+              %p
+                Duration:
+                %span=h post.start_date.strftime("%B %d, %Y")
+                %span &mdash;
+                %span=h post.end_date.strftime("%B %d, %Y")
+              - if post.class.nil?
+                %p All classes are being accepted.
+              - else
+                %p Minimum class year: #{h post.class}
+              %p Qualifications expected: #{h post.qualifications}
+              - if post.deadline < Date.today
+                %p.text-warning This deadline has already passed.
+              - else
+                %p.text-info= post.deadline.strftime("Deadline: %B %d, %Y")
+              %a{:class => "text-error", :href => "profile/delete/posting/#{h post.id}"}
+                Delete this entry
+          %br

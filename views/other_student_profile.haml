@@ -1,13 +1,13 @@
 .row
   - unless @student.photo.nil?
     .span1
-      %img{:src => "https://trd-assets.s3.amazonaws.com/#{@student.photo}"}
+      %img{:src => "https://trd-assets.s3.amazonaws.com/#{h @student.photo}"}
   .span5
     %h1= @student.name
     - if @student.resume.nil?
       %p Currently no resume uploaded.
     - else
-      %a{:href => "https://trd-assets.s3.amazonaws.com/#{@student.resume}", :target => "_blank"} View current resume
+      %a{:href => "https://trd-assets.s3.amazonaws.com/#{h @student.resume}", :target => "_blank"} View current resume
 %hr
 
 /education
@@ -21,27 +21,27 @@
     - unless @student.school.nil?
       .row
         .span2.bold School
-        .span3= @student.school
+        .span3=h @student.school
 
     - unless @student.major.nil?
       .row
         .span2.bold Major
-        .span3= @student.major
+        .span3=h @student.major
 
     - unless @student.minor.nil?
       .row
         .span2.bold Minor
-        .span3= @student.minor
+        .span3=h @student.minor
 
     - unless @student.class.nil?
       .row.clearfix
         .span2.bold Class year
-        .span3= @student.class.strftime('%Y')
+        .span3=h @student.class.strftime('%Y')
 
     - unless @student.gpa.nil?
       .row
         .span2.bold GPA
-        .span3= @student.gpa
+        .span3=h @student.gpa
 %hr
 
 / work experience
@@ -61,13 +61,13 @@
         .row.workexperience-info
           .row.span8
             %span.larger
-              %strong= exp.position
-              %span.gray at
-              %strong= exp.place
+              %strong=h exp.position
+              %span.muted at
+              %strong=h exp.place
           .row.span8
-            .gray= "#{exp.start_date.strftime('%B %Y')} to #{exp.end_date.strftime('%B %Y')}"
+            .gray= "#{h exp.start_date.strftime('%B %Y')} to #{h exp.end_date.strftime('%B %Y')}"
           .row.span8
-            = exp.desc.gsub("\n", "<br />")
+            =h exp.desc.gsub("\n", "<br />")
         %br/
 %hr
 
@@ -88,13 +88,13 @@
         .row.extracurricular-info
           .row.span8
             %span.larger
-              %strong= extracurricular.position
+              %strong=h extracurricular.position
               %span.gray at
-              %strong= extracurricular.place
+              %strong=h extracurricular.place
           .row.span8
-            .gray= "#{extracurricular.start_date.strftime('%B %Y')} to #{extracurricular.end_date.strftime('%B %Y')}"
+            .gray= "#{h extracurricular.start_date.strftime('%B %Y')} to #{h extracurricular.end_date.strftime('%B %Y')}"
           .row.span8
-            = extracurricular.desc.gsub("\n", "<br />")
+            =h extracurricular.desc.gsub("\n", "<br />")
         %br/
 %hr
 
@@ -106,21 +106,21 @@
     %br/
 .row
   .bold.span2 Primary email
-  .span4= @student.email
+  .span4=h @student.email
 - unless @student.secondary_email.nil?
   .row
     .bold.span2 Personal email
-    .span4= @student.secondary_email
+    .span4=h @student.secondary_email
 - unless @student.interest1.nil?
   .row
     .bold.span2 Interest one
-    .span4= @student.interest1
+    .span4=h @student.interest1
 - unless @student.interest2.nil?
   .row
     .bold.span2 Interest two
-    .span4= @student.interest2
+    .span4=h @student.interest2
 - unless @student.interest3.nil?
   .row
     .bold.span2 Interest three
-    .span4= @student.interest3
+    .span4=h @student.interest3
 %hr
