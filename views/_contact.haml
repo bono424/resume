@@ -16,5 +16,5 @@
         %input{:type => "hidden", :name => "email", :value => "#{h @user.email}"}
       %textarea{:name => "body", :placeholder => "Enter your message here..."}
     .modal-footer
-      %button{:class => "btn", "data-dismiss" => "modal", "aria-hidden" => "true"} Close
-      %button{:class => "btn btn-primary"} Send
+      -# %button{:class => "btn", "data-dismiss" => "modal", "aria-hidden" => "true"} Close
+      %button#submit-contact{:class => "btn btn-primary"} Send

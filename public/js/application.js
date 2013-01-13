@@ -57,8 +57,10 @@ $('.file-upload').change(function() {
 // contact
 
 $('#contact > form').submit(function() {
+  $('#submit-contact').addClass('disabled').html('<i class="icon-spinner icon-spin">')
   $.post($(this).attr('action'), $(this).serialize(), function(data){
     $('.modal-body').html("<h1>Thanks!</h1><p>We'll get back to you as soon as possible.</p>");
+    $('.modal-footer').html("<button class='btn btn-success disabled'>Sent!</button>");
   }, "text");
   return false;
 });
