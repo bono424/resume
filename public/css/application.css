@@ -73,15 +73,16 @@ textarea {
 
 .edit-icon, .add-icon {
 	cursor:pointer;
-	position:relative;
-	top:13px;
-	left:10px;
 	opacity:0.5;
   -webkit-transition: all .3s ease-in-out;
   -moz-transition: all .3s ease-in-out;
   -o-transition: all .3s ease-in-out;
   -ms-transition: all .3s ease-in-out;
   transition: all .3s ease-in-out;
+  position:absolute;
+  font-size:0.6em;
+  margin-left:15px;
+  line-height:2.4em;
 }
 
 .edit-icon {
