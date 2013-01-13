@@ -1,14 +1,14 @@
 .row
   .span3
     - unless @employer.photo.nil?
-      %img{:src => "https://trd-assets.s3.amazonaws.com/#{@employer.photo}" }
+      %img{:src => "https://trd-assets.s3.amazonaws.com/#{h @employer.photo}" }
 %br
 
 .row
   .span5
     %h1
-      = @employer.name
-    %a{:href => "#{@employer.url}"}= @employer.url
+      =h  @employer.name
+    %a{:href => "#{h @employer.url}"}=h  @employer.url
 
 #about
   %br
@@ -18,7 +18,7 @@
         %p
           %strong About
           %br
-            =@employer.description.gsub("\n", "<br />")
+            =h @employer.description.gsub("\n", "<br />")
 
   - unless @employer.address.nil? && (@employer.city.nil? || @employer.state.nil? || @employer.zipcode.nil?)
     .row
@@ -27,15 +27,15 @@
           %strong Location
           %br
           - unless @employer.address.nil?
-            =@employer.address
+            =h @employer.address
             %br
           - unless @employer.city.nil? || @employer.state.nil? || @employer.zipcode.nil?
-            = "#{@employer.city}, #{@employer.state} #{@employer.zipcode}"
+            = "#{h @employer.city}, #{h @employer.state} #{h @employer.zipcode}"
   .row
     - unless @employer.founded.nil?
       .span5
         %b Founded
-        %br= @employer.founded
+        %br=h  @employer.founded
 
 %hr
 
@@ -52,20 +52,20 @@
     - @postings.each do |post|
       .row
         .span8
-          %strong= post.position
-          %p= post.description
+          %strong=h  post.position
+          %p=h  post.description
           %p
             Duration:
-            %span= post.start_date.strftime("%B %d, %Y")
-            %span &mdash;
-            %span= post.end_date.strftime("%B %d, %Y")
+            %span=h  post.start_date.strftime("%B %d, %Y")
+            %span.muted &mdash;
+            %span=h  post.end_date.strftime("%B %d, %Y")
           - if post.class.nil?
             %p All classes are being accepted.
           - else
-            %p Minimum class year: #{post.class}
-          %p Qualifications expected: #{post.qualifications}
+            %p Minimum class year: #{h post.class}
+          %p Qualifications expected: #{h post.qualifications}
           - if post.deadline < Date.today
-            %p.red Sorry, the deadline has already passed.
+            %p.text-warning Sorry, the deadline has already passed.
           - else
-            %p.green= post.deadline.strftime("Deadline: %B %d, %Y")
+            %p.text-info=h  post.deadline.strftime("Deadline: %B %d, %Y")
       %br

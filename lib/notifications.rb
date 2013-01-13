@@ -5,27 +5,10 @@ require 'pony'
 module Trd
   class Notifications
     DEV = '"Scott Sansovich" <ssansovich@gmail.com>'
+    SUPPORT = '"Scott Sansovich" <ssansovich@gmail.com>'
     SIGNUP = '"Scott Sansovich" <ssansovich@gmail.com>'
     ALL = '"Scott Sansovich" <ssansovich@gmail.com>'
     FROM = '"Resume Drop" <info@theresumedrop.com>'
-
-    def self.pony_send_test()
-        Pony.mail(:to => 'ssansovich@gmail.com', :from => FROM, :subject => 'hi', :body => 'Hello there.')
-    end
-
-    def self.send_subscription_notification(s)
-      subject = "[TheResumeDrop] Subscription notification"
-      body = <<EOS
-Greetings!
-
-New subscription on TheResumeDrop! Here are the details:
-#{s.attributes}
-
-Love,
-TheResumeDrop bot
-EOS
-      email(ALL, "bot@theresumedrop.com", subject, body)
-    end
 
     def self.send_verification_email(email, verification_key)
       return if user.nil?
@@ -53,6 +36,24 @@ Good luck and have fun!
 The Resume Drop Team
 EOS
       Pony.mail(:to => to, :from => from, :subject => subject, :body => body)
+    end
+
+    def self.send_contact_email(from, message)
+      return if from.nil? || from.empty? || message.nil? || message.empty?
+      subject = "[TheResumeDrop] Message from #{from}"
+
+      body =<<EOS
+From: #{from}
+----------------------------------------------------------------------
+Message:
+
+#{message}
+----------------------------------------------------------------------
+
+Love,
+TheResumeDrop bot
+EOS
+      Pony.mail(:to => SUPPORT, :from => "bot@theresumedrop.com", :subject => subject, :body => body)
     end
 
     def self.send_breakage_notification(user, e)

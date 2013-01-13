@@ -57,6 +57,11 @@ h1, h2, h3, h4, h5, h6 {
 	min-height:500px;
 }
 
+.student-profile-pic {
+  position:relative;
+  top:12px;
+}
+
 textarea {
 	height:80px;
 }
@@ -69,7 +74,7 @@ textarea {
 .edit-icon, .add-icon {
 	cursor:pointer;
 	position:relative;
-	top:10px;
+	top:13px;
 	left:10px;
 	opacity:0.5;
   -webkit-transition: all .3s ease-in-out;
@@ -144,3 +149,17 @@ textarea {
   margin:0 14px;
 }
 
+/* ==== CONTACT ==== */
+
+#contact-button {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  padding:12px 16px;
+  outline:none;
+}
+
+.modal-body textarea {
+  width:97%;
+  height:200px;
+}

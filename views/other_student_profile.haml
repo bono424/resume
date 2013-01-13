@@ -1,7 +1,7 @@
 .row
   - unless @student.photo.nil?
     .span1
-      %img{:src => "https://trd-assets.s3.amazonaws.com/#{h @student.photo}"}
+      %img{:src => "https://trd-assets.s3.amazonaws.com/#{h @student.photo}", :class => "img-polaroid student-profile-pic"}
   .span5
     %h1= @student.name
     - if @student.resume.nil?
@@ -15,7 +15,6 @@
   .span5
     %h2
       Education
-    %br/
 .row
   #education.span8
     - unless @student.school.nil?
@@ -49,7 +48,6 @@
   .span5
     %h2
       Work Experience
-    %br/
 
 .row
   .span8
@@ -76,7 +74,6 @@
   .span5
     %h2
       Extracurricular Activites
-    %br/
 
 .row
   .span8
@@ -103,7 +100,7 @@
   .span5
     %h2
       Personal
-    %br/
+
 .row
   .bold.span2 Primary email
   .span4=h @student.email

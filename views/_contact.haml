@@ -1,0 +1,20 @@
+%a#contact-button{:href => "#contact", :role => "button", :class => "btn btn-primary", "data-toggle" => "modal"}
+  %i.icon-envelope.icon-white
+
+<!-- Modal -->
+#contact.modal.hide.fade{:tabindex =>"-1", :role => "dialog", "aria-labelledby" => "contactLabel", "aria-hidden" => "true"}
+  %form{:method => "POST", :action => "contact"}
+    .modal-header
+      %button{:type => "button", :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true"} ×
+      %h2#contactLabel Send us a message
+      %h3.muted We'd love to hear from you!
+    .modal-body
+      - if @user.nil?
+        %label.control-label Your email address
+        %input{:type => "text", :name => "email", :placeholder => "Email"}
+      - else
+        %input{:type => "hidden", :name => "email", :value => "#{h @user.email}"}
+      %textarea{:name => "body", :placeholder => "Enter your message here..."}
+    .modal-footer
+      %button{:class => "btn", "data-dismiss" => "modal", "aria-hidden" => "true"} Close
+      %button{:class => "btn btn-primary"} Send
