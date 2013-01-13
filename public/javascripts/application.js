@@ -53,3 +53,12 @@ $('.file-upload').change(function() {
   $(this).siblings('.btn-upload').addClass('btn-inverse').html('<i class="icon-ok icon-white"></i> File selected');
   $(this).siblings('.btn-upload i').addClass('icon-white'); // and the icon...
 });
+
+// contact
+
+$('#contact > form').submit(function() {
+  $.post($(this).attr('action'), $(this).serialize(), function(data){
+    $('.modal-body').html("<h1>Thanks!</h1><p>We'll get back to you as soon as possible.</p>");
+  }, "text");
+  return false;
+});

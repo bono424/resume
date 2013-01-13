@@ -720,3 +720,21 @@ Haml::SyntaxError - Illegal nesting: content can't be both given on the same lin
  /Users/scottsansovich/.rvm/rubies/ruby-1.9.2-p318/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
  /Users/scottsansovich/.rvm/rubies/ruby-1.9.2-p318/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread' ~ (0.001473) SELECT "id", "type", "email", "password", "salt", "verification_key", "is_verified" FROM "users" WHERE "id" = 2 LIMIT 1
 ssansovich@college.harvard.edu
+ ~ (0.001095) SELECT "id", "type", "email", "password", "salt", "verification_key", "is_verified" FROM "users" WHERE "id" = 2 LIMIT 1
+ssansovich@college.harvard.edu
+ ~ (0.001250) SELECT "id", "type", "email", "password", "salt", "verification_key", "is_verified" FROM "users" WHERE "id" = 2 LIMIT 1
+ssansovich@college.harvard.edu
+ ~ (0.001115) SELECT "id", "type", "email", "password", "salt", "verification_key", "is_verified" FROM "users" WHERE "id" = 2 LIMIT 1
+ssansovich@college.harvard.edu
+ ~ (0.001087) SELECT "id", "type", "email", "password", "salt", "verification_key", "is_verified" FROM "users" WHERE "id" = 2 LIMIT 1
+ssansovich@college.harvard.edu
+ ~ (0.001302) SELECT "id", "type", "email", "password", "salt", "verification_key", "is_verified" FROM "users" WHERE "id" = 2 LIMIT 1
+ssansovich@college.harvard.edu
+ ~ (0.001192) SELECT "id", "type", "email", "password", "salt", "verification_key", "is_verified" FROM "users" WHERE "id" = 2 LIMIT 1
+ssansovich@college.harvard.edu
+ ~ (0.001477) SELECT "id", "type", "email", "password", "salt", "verification_key", "is_verified" FROM "users" WHERE "id" = 2 LIMIT 1
+ssansovich@college.harvard.edu
+ ~ (0.001104) SELECT "id", "type", "email", "password", "salt", "verification_key", "is_verified" FROM "users" WHERE "id" = 2 LIMIT 1
+ssansovich@college.harvard.edu
+ ~ (0.001083) SELECT "id", "type", "email", "password", "salt", "verification_key", "is_verified" FROM "users" WHERE "id" = 2 LIMIT 1
+ssansovich@college.harvard.edu

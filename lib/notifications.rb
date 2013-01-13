@@ -52,7 +52,7 @@ Message:\n
 Love,\n
 TheResumeDrop bot
 EOS
-      Pony.mail(:to => SUPPORT, :from => "bot@theresumedrop.com", :subject => subject, :body => body)
+      Pony.mail(:to => SUPPORT, :from => "'TRD Bot' <bot@theresumedrop.com>", :subject => subject, :body => body)
     end
 
     def self.send_breakage_notification(user, e)
