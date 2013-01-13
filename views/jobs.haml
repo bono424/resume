@@ -19,7 +19,7 @@
           - @postings.each do |p|
             %tr
               %td
-                %a{:href => "/profile/#{p.employer.handle}"}= p.employer.name
-              %td= p.position
-              %td= p.place
-              %td= p.deadline.strftime("%B %d, %Y")
+                %a{:href => "/profile/#{h p.employer.handle}"}=h p.employer.name
+              %td=h p.position
+              %td=h p.place
+              %td=h p.deadline.strftime("%B %d, %Y")

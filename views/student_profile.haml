@@ -63,15 +63,15 @@
           %fieldset
             %input{:type => "hidden", :name => "action", :value => "education"}
             %label School
-            %input{:type => "text", :value => "#{@user.school}", :name => "school"}
+            %input{:type => "text", :value => "#{h @user.school}", :name => "school"}
             %label Major
-            %input{:type => "text", :value => "#{@user.major}", :name => "major"}
+            %input{:type => "text", :value => "#{h @user.major}", :name => "major"}
             %label Minor
-            %input{:type => "text", :value => "#{@user.minor}", :name => "minor"}
+            %input{:type => "text", :value => "#{h @user.minor}", :name => "minor"}
             %label Class
-            %input{:type => "text", :value => "#{@user.class.strftime('%Y')}", :name => "class"}
+            %input{:type => "text", :value => "#{h @user.class.strftime('%Y')}", :name => "class"}
             %label GPA
-            %input{:type => "text", :value => "#{@user.gpa}", :name => "gpa"}
+            %input{:type => "text", :value => "#{h @user.gpa}", :name => "gpa"}
             %button{:type => "submit", :class => "btn btn-success"} Save these changes
 
     .info.span5
@@ -79,23 +79,23 @@
         - unless @user.school.nil?
           %tr
             %th School
-            %td= @user.school
+            %td=h @user.school
         - unless @user.major.nil?
           %tr
             %th Major
-            %td= @user.major
+            %td=h @user.major
         - unless @user.minor.nil?
           %tr
             %th Minor
-            %td= @user.minor
+            %td=h @user.minor
         - unless @user.class.nil?
           %tr
             %th Class
-            %td= @user.class.strftime('%Y');
+            %td=h @user.class.strftime('%Y');
         - unless @user.gpa.nil?
           %tr
             %th GPA
-            %td= @user.gpa
+            %td=h @user.gpa
           
 %hr
 
@@ -118,16 +118,16 @@
               .row
                 .span8
                   %span
-                    %strong= e.position
+                    %strong=h e.position
                     %span.muted at
-                    %strong= e.place
+                    %strong=h e.place
                   .pull-right
-                    %a{:class => "remove", :href => "profile/delete/work/#{e.id}"}
+                    %a{:class => "remove", :href => "profile/delete/work/#{h e.id}"}
                       %i{:class => "icon-remove"}
                 .span8
-                  .muted= "#{e.start_date.strftime('%B %Y')} to #{e.end_date.strftime('%B %Y')}"
+                  .muted= "#{h e.start_date.strftime('%B %Y')} to #{h e.end_date.strftime('%B %Y')}"
                 .span8
-                  = e.desc.gsub("\n", "<br />")
+                  =h e.desc.gsub("\n", "<br />")
               %br/
 
       / work experience add form
@@ -174,16 +174,16 @@
               .row
                 .span8
                   %span
-                    %strong= e.position
+                    %strong=h e.position
                     %span.muted at
-                    %strong= e.place
+                    %strong=h e.place
                   .pull-right
-                    %a{:class => "remove", :href => "profile/delete/extracurricular/#{e.id}"}
+                    %a{:class => "remove", :href => "profile/delete/extracurricular/#{h e.id}"}
                       %i{:class => "icon-remove"}
                 .span8
-                  .muted= "#{e.start_date.strftime('%B %Y')} to #{e.end_date.strftime('%B %Y')}"
+                  .muted= "#{h e.start_date.strftime('%B %Y')} to #{h e.end_date.strftime('%B %Y')}"
                 .span8
-                  = e.desc.gsub("\n", "<br />")
+                  =h e.desc.gsub("\n", "<br />")
               %br/
 
       / extracurricular add form
@@ -225,32 +225,32 @@
         %table.table.table-condensed
           %tr
             %th Primary email
-            %td= @user.email
+            %td=h @user.email
           - unless @user.secondary_email.nil?
             %tr
               %th Personal email
-              %td= @user.secondary_email
+              %td=h @user.secondary_email
           - unless @user.interest1.nil? || @user.interest1 == ""
             %tr
               %th Interest one
-              %td= @user.interest1
+              %td=h @user.interest1
           - unless @user.interest2.nil? || @user.interest2 == ""
             %tr
               %th Interest two
-              %td= @user.interest2
+              %td=h @user.interest2
           - unless @user.interest3.nil? || @user.interest3 == ""
             %tr
               %th Interest three
-              %td= @user.interest3
+              %td=h @user.interest3
 
       .edit.span9{:style => "display:none;"}
         .row{:style => "padding-bottom:18px;"}
           .span2 Primary email
-          .span4= @user.email
+          .span4=h @user.email
         .row
           .span2.bold Personal email
           .span3
-            %input{:type => "text", :value => "#{@user.secondary_email}", :name => "secondary_email"}
+            %input{:type => "text", :value => "#{h @user.secondary_email}", :name => "secondary_email"}
         .row
           .span2.bold Interest one
           .span3
@@ -258,10 +258,10 @@
               - if @user.interest1.nil? || @user.interest1 == ""
                 %option{:value => "", :selected => "selected"} Select
               - else
-                %option{:value => "#{@user.interest1}"}= @user.interest1
+                %option{:value => "#{h @user.interest1}"}=h @user.interest1
               - @interests.each do |i|
                 - unless @user.interest1 == i
-                  %option{:value => "#{i}"}= i
+                  %option{:value => "{i}"}= i
 
         .row
           .span2.bold Interest two
@@ -270,7 +270,7 @@
               - if @user.interest2.nil? || @user.interest2 == ""
                 %option{:value => "", :selected => "selected"} Select
               - else
-                %option{:value => "#{@user.interest2}"}= @user.interest2
+                %option{:value => "#{h @user.interest2}"}=h @user.interest2
               - @interests.each do |i|
                 - unless @user.interest2 == i
                   %option{:value => "#{i}"}= i
@@ -281,7 +281,7 @@
               - if @user.interest3.nil? || @user.interest3 == ""
                 %option{:value => "", :selected => "selected"} Select
               - else
-                %option{:value => "#{@user.interest3}"}= @user.interest3
+                %option{:value => "#{h @user.interest3}"}=h @user.interest3
               - @interests.each do |i|
                 - unless @user.interest3 == i
                   %option{:value => "#{i}"}= i
