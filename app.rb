@@ -611,6 +611,7 @@ end
 
 post '/contact' do
   @user.nil? ? email = params[:email] : email = @user.email
+  puts email
   message = params[:message]
   Notifications.send_contact_email(email, message)
 end

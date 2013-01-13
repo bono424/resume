@@ -39,7 +39,6 @@ EOS
     end
 
     def self.send_contact_email(from, message)
-      return if from.nil? || from.empty? || message.nil? || message.empty?
       subject = "[TheResumeDrop] Message from #{from}"
 
       body =<<EOS

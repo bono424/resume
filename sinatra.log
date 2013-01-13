@@ -718,4 +718,5 @@ Haml::SyntaxError - Illegal nesting: content can't be both given on the same lin
  /Users/scottsansovich/.rvm/gems/ruby-1.9.2-p318@sinatra-bootstrap/gems/rack-1.4.1/lib/rack/handler/webrick.rb:59:in `service'
  /Users/scottsansovich/.rvm/rubies/ruby-1.9.2-p318/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
  /Users/scottsansovich/.rvm/rubies/ruby-1.9.2-p318/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
- /Users/scottsansovich/.rvm/rubies/ruby-1.9.2-p318/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+ /Users/scottsansovich/.rvm/rubies/ruby-1.9.2-p318/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread' ~ (0.001473) SELECT "id", "type", "email", "password", "salt", "verification_key", "is_verified" FROM "users" WHERE "id" = 2 LIMIT 1
+ssansovich@college.harvard.edu
