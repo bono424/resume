@@ -19,7 +19,8 @@ $('.edit-icon').click(function() {
 });
 
 $('.add-icon').click(function() {
-  $(this).parents('.row').children('.add').toggle();
+  $(this).parents('.row').children('.add').slideToggle();
+  $(this).toggleClass('add-cancel');
 });
 
 // input validations
@@ -40,4 +41,15 @@ $('form').submit(function() {
     } 
   });
   return true;
+});
+
+// file upload
+
+$('.btn-upload').click(function() {
+  $(this).siblings('.file-upload').trigger('click');
+});
+
+$('.file-upload').change(function() {
+  $(this).siblings('.btn-upload').addClass('btn-inverse').html('<i class="icon-ok icon-white"></i> File selected');
+  $(this).siblings('.btn-upload i').addClass('icon-white'); // and the icon...
 });

@@ -22,95 +22,81 @@
 
 /education
 #education
-  %form{:method => "POST", :action => "#"}
-    %input{:type => "hidden", :name => "action", :value => "education"}
-    .row
-      .span5
-        %h2
-          Education
-          %a.edit-icon
-            %i{:class => "icon-pencil"}
-        %br/
+  .row
+    .span9
+      %h2
+        Education
+        %a.edit-icon
+          %i{:class => "icon-pencil"}
 
-      - if @user.school.nil? && @user.major.nil? && @user.minor.nil? && @user.class.nil? && @user.gpa.nil?
-        .span5.edit{:style => "display:block;"}
-          .row
-            .span2.bold School
-            .span3
-              %input{:type => "text", :name => "school"}
-          .row
-            .span2.bold Major
-            .span3
-              %input{:type => "text", :name => "major"}
-          .row
-            .span2.bold Minor
-            .span3
-              %input{:type => "text", :name => "minor"}
-          .row
-            .span2.bold Class
-            .span3
-              %input{:type => "text", :name => "class"}
-          .row
-            .span2.bold GPA
-            .span3
-              %input{:type => "text", :name => "gpa"}
-
-          .row{:class => "button"}
-            .span5
+    - if @user.school.nil? && @user.major.nil? && @user.minor.nil? && @user.class.nil? && @user.gpa.nil?
+      .span5.edit{:style => "display:block;"}
+        %form{:method => "POST", :action => "#", :class => ""}
+          %input{:type => "hidden", :name => "action", :value => "education"}
+          .control-group
+            %label.control-label School
+            .controls
+              %input{:type => "text", :placeholder => "School", :name => "school"}
+          .control-group
+            %label.control-label Major
+            .controls
+              %input{:type => "text", :placeholder => "Major", :name => "major"}
+          .control-group
+            %label.control-label Minor
+            .controls
+              %input{:type => "text", :placeholder => "Minor", :name => "minor"}
+          .control-group
+            %label.control-label Class
+            .controls
+              %input{:type => "text", :placeholder => "Class", :name => "class"}
+          .control-group
+            %label.control-label GPA
+            .controls
+              %input{:type => "text", :placeholder => "GPA", :name => "gpa"}
+          .control-group
+            .controls
               %button{:type => "submit", :class => "btn btn-success"} Save these changes
 
-      - else
-        .edit.span8{:style => "display:none;"}
-          .row
-            .span2.bold School
-            .span3
-              %input{:type => "text", :value => "#{@user.school}", :name => "school"}
-          .row
-            .span2.bold Major
-            .span3
-              %input{:type => "text", :value => "#{@user.major}", :name => "major"}
-          .row
-            .span2.bold Minor
-            .span3
-              %input{:type => "text", :value => "#{@user.minor}", :name => "minor"}
-          .row
-            .span2.bold Class
-            .span3
-              %input{:type => "text", :value => "#{@user.class.strftime('%Y')}", :name => "class"}
-          .row
-            .span2.bold GPA
-            .span3
-              %input{:type => "text", :value => "#{@user.gpa}", :name => "gpa"}
-          .row{:class => "button"}
-            .span5
-              %button{:type => "submit", :class => "btn btn-success"} Save these changes
+    - else
+      .edit.span3{:style => "display:none;"}
+        %form{:method => "POST", :action => "#", :class => ""}
+          %fieldset
+            %input{:type => "hidden", :name => "action", :value => "education"}
+            %label School
+            %input{:type => "text", :value => "#{@user.school}", :name => "school"}
+            %label Major
+            %input{:type => "text", :value => "#{@user.major}", :name => "major"}
+            %label Minor
+            %input{:type => "text", :value => "#{@user.minor}", :name => "minor"}
+            %label Class
+            %input{:type => "text", :value => "#{@user.class.strftime('%Y')}", :name => "class"}
+            %label GPA
+            %input{:type => "text", :value => "#{@user.gpa}", :name => "gpa"}
+            %button{:type => "submit", :class => "btn btn-success"} Save these changes
 
-      .info.span8
+    .info.span5
+      %table.table.table-condensed
         - unless @user.school.nil?
-          .row
-            .span2.bold School
-            .span3= @user.school
-
+          %tr
+            %th School
+            %td= @user.school
         - unless @user.major.nil?
-          .row
-            .span2.bold Major
-            .span3= @user.major
-
+          %tr
+            %th Major
+            %td= @user.major
         - unless @user.minor.nil?
-          .row
-            .span2.bold Minor
-            .span3= @user.minor
-
+          %tr
+            %th Minor
+            %td= @user.minor
         - unless @user.class.nil?
-          .row.clearfix
-            .span2.bold Class year
-            .span3= @user.class.strftime('%Y')
-
+          %tr
+            %th Class
+            %td= @user.class.strftime('%Y');
         - unless @user.gpa.nil?
-          .row
-            .span2.bold GPA
-            .span3= @user.gpa
-
+          %tr
+            %th GPA
+            %td= @user.gpa
+          
 %hr
 
 / work experience
@@ -121,8 +107,7 @@
       .span5
         %h2
           Work Experience
-          %a.add-icon
-            %i{:class => "icon-plus"}
+          %i{:class => "icon-plus add-icon"}
 
       .info.span9
         - if @experiences.nil?
@@ -178,8 +163,7 @@
       .span5
         %h2
           Extracurricular Activites
-          %a.add-icon
-            %i{:class => "icon-plus"}
+          %i{:class => "icon-plus add-icon"}
 
       .info.span9
         - if @extracurriculars.nil?
@@ -237,26 +221,27 @@
           Personal
           %a.edit-icon
             %i{:class => "icon-pencil"}
-      .info.span9
-        .row
-          .span2 Primary email
-          .span4= @user.email
-        - unless @user.secondary_email.nil?
-          .row
-            .span2 Personal email
-            .span4= @user.secondary_email
-        - unless @user.interest1.nil? || @user.interest1 == ""
-          .row
-            .span2 Interest one
-            .span4= @user.interest1
-        - unless @user.interest2.nil? || @user.interest2 == ""
-          .row
-            .span2 Interest two
-            .span4= @user.interest2
-        - unless @user.interest3.nil? || @user.interest3 == ""
-          .row
-            .span2 Interest three
-            .span4= @user.interest3
+      .info.span5
+        %table.table.table-condensed
+          %tr
+            %th Primary email
+            %td= @user.email
+          - unless @user.secondary_email.nil?
+            %tr
+              %th Personal email
+              %td= @user.secondary_email
+          - unless @user.interest1.nil? || @user.interest1 == ""
+            %tr
+              %th Interest one
+              %td= @user.interest1
+          - unless @user.interest2.nil? || @user.interest2 == ""
+            %tr
+              %th Interest two
+              %td= @user.interest2
+          - unless @user.interest3.nil? || @user.interest3 == ""
+            %tr
+              %th Interest three
+              %td= @user.interest3
 
       .edit.span9{:style => "display:none;"}
         .row{:style => "padding-bottom:18px;"}
@@ -308,24 +293,31 @@
 %hr
 
 /upload photo
-%form{:method => "POST", :action => "/upload", :enctype => "multipart/form-data"}
-  .row
-    .span5
-      %strong Upload new profile picture
-      %br/
+.row
+  .span5
+    %p
+      %strong Upload profile picture
+    %form{:method => "POST", :action => "/upload", :enctype => "multipart/form-data"}
       %input{:name => 'action', :value => 'photo', :type => 'hidden'}
-      %input{:name => 'file', :type => 'file'}
-      %br/
-      %button{:type => "submit", :class => "btn btn-success"} Upload
-  %br
+      %input{:name => 'file', :type => 'file', :class => "file-upload"}
+      %a.btn-upload.btn
+        %i.icon-picture
+        Choose file 
+      %button.btn.btn-success{:type => "submit"}
+        %i.icon-upload.icon-white
+        Upload
 
 /upload resume 
-%form{:method => "POST", :action => "/upload", :enctype => "multipart/form-data"}
-  .row
-    .span5
+.row
+  .span5
+    %p
       %strong Upload resume (PDF only)
-      %br/
+    %form{:method => "POST", :action => "/upload", :enctype => "multipart/form-data"}
       %input{:name => 'action', :value => 'resume', :type => 'hidden'}
-      %input{:name => 'file', :type => 'file'}
-      %br/
-      %button{:type => "submit", :class => "btn btn-success"} Upload
+      %input{:name => 'file', :type => 'file', :class => "file-upload"}
+      %a.btn-upload.btn
+        %i.icon-file
+        Choose file 
+      %button.btn.btn-success{:type => "submit"}
+        %i.icon-upload.icon-white
+        Upload

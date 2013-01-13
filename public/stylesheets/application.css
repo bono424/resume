@@ -72,10 +72,29 @@ textarea {
 	top:10px;
 	left:10px;
 	opacity:0.5;
+  -webkit-transition: all .3s ease-in-out;
+  -moz-transition: all .3s ease-in-out;
+  -o-transition: all .3s ease-in-out;
+  -ms-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
 }
 
-.edit-icon:hover, .add-icon:hover {
+.edit-icon {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.add-cancel {
 	opacity:1.0;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 .remove {
@@ -85,6 +104,12 @@ textarea {
 
 .remove:hover {
 	opacity:0.6;
+}
+
+/* ==== UPLOAD DISPLAY ==== */
+
+.file-upload {
+  display:none;
 }
 
 /* ==== INDEX ==== */
