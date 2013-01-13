@@ -42,14 +42,14 @@ EOS
       subject = "[TheResumeDrop] Message from #{from}"
 
       body =<<EOS
-From: #{from}
-----------------------------------------------------------------------
-Message:
+From: #{from} \n
+----------------------------------------------------------------------\n\n
 
-#{message}
-----------------------------------------------------------------------
+Message:\n
+#{message} \n
+----------------------------------------------------------------------\n\n
 
-Love,
+Love,\n
 TheResumeDrop bot
 EOS
       Pony.mail(:to => SUPPORT, :from => "bot@theresumedrop.com", :subject => subject, :body => body)
