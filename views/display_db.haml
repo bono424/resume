@@ -1,0 +1,16 @@
+- unless @error.nil?
+  %table
+    %tr
+      %td= @error.id
+      %td= @error.name
+      %td= @error.school
+
+%table
+  - @users.each do |u|
+    %tr
+      %td= u.id
+      %td= u.name
+      %td= u.school
+      %td= u.gpa
+      - unless u.class.nil?
+        %td= u.class.strftime('%Y')

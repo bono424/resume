@@ -29,14 +29,13 @@ class User
 end
 
 class Student < User
-  property :name,             String
-  property :secondary_email,  String
+  property :name,             String, :length => 256
+  property :secondary_email,  String, :length => 256
   property :birthday,         Date
-  property :school,           String
-  property :major,            String
-  property :minor,            String
+  property :school,           String, :length => 256
+  property :major,            String, :length => 256
+  property :minor,            String, :length => 256
   property :gpa,              Float
-  property :gender,           String
   property :interest1,        String
   property :interest2,        String
   property :interest3,        String
@@ -52,7 +51,7 @@ class Employer < User
   property :email,        String
   property :name,         String
   property :handle,       String
-  property :url,          String
+  property :url,          String, :length => 256
   property :founded,      Integer
   property :description,  String, :length => 1024
   property :handle,       String

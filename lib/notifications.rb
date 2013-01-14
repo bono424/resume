@@ -55,6 +55,26 @@ EOS
       Pony.mail(:to => SUPPORT, :from => "'TRD Bot' <bot@theresumedrop.com>", :subject => subject, :body => body)
     end
 
+    def self.send_welcomeback_email(to, v_key, name)
+      subject = "The NEW Resume Drop is here!"
+
+      body =<<EOS
+Hi #{name},
+
+We've been hard at work revamping The Resume Drop. We're proud to say that the new version is now online. We hope you'll find it a lot easier to create your profile and find great opportunities.
+
+To visit your profile, go to the link below (it's unique to you):
+
+http://www.theresumedrop.com/welcomeback/#{v_key}
+
+If you have suggestions, questions, or just want to say hi, please email us at hello@theresumedrop.com
+
+Glad to be back!\n
+The Resume Drop Team
+EOS
+      Pony.mail(:to => to, :from => "'The Resume Drop' <welcome@theresumedrop.com>", :subject => subject, :body => body)
+    end
+
     def self.send_breakage_notification(user, e)
       return if e.nil?
       subject = "[TheResumeDrop] Breakage notification"
@@ -77,28 +97,5 @@ EOS
       email(DEV, "bot@theresumedrop.com", subject, body)
     end
 
-    def self.send_signup_notification(user)
-      subject = "[TheResumeDrop] Sign-up notification"
-      body = <<EOS
-Greetings!
-
-New sign up on TheResumeDrop! Here's the user:
-#{user.attributes}
-
-Love,
-TheResumeDrop bot
-EOS
-      email(SIGNUP, "bot@theresumedrop.com", subject, body)
-    end
-    private
-
-    def self.email(to, from, subject, body)
-      mail = Mail.new
-      mail[:from] = from
-      mail[:to] = to
-      mail[:subject] = subject
-      mail[:body] = body
-      mail.deliver!
-    end
   end
 end
