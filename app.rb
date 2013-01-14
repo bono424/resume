@@ -684,8 +684,12 @@ get '/sendwelcomeback' do
   all.each do |u|
     u.email
     u.verification_key
-    u.name
-    Notifications.send_welcomeback_email(u.email, u.verification_key, u.name)
+    name = "there"
+    unless u.name.nil?
+      name = u.name.split
+      name = name[0]
+    end
+    Notifications.send_welcomeback_email(u.email, u.verification_key, name)
   end
   "Sent! Maybe..."
 end
