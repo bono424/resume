@@ -735,3 +735,7 @@ get '/sendwelcomeback' do
   end
   "Sent! Maybe..."
 end
+
+get '/frontpage' do
+  haml :frontpage
+end
