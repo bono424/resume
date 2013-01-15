@@ -1,8 +1,8 @@
 %h1 Job postings
 %br
 
-.row
-  - unless @error.nil?
+- unless @error.nil?
+  .row
     .span9{:class => "alert alert-error"}= @error
 
 .row

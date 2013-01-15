@@ -25,7 +25,7 @@
   - elsif @user.type == Student
     %li
       - if @user.photo.nil?
-        %img{:src => "/images/anon.png", :class => "profilepic img-polaroid"}
+        %img{:src => "/img/anon.png", :class => "profilepic img-polaroid"}
       - else
         %img{:src => "https://trd-assets.s3.amazonaws.com/#{@user.photo}", :class => "profilepic img-polaroid"}
     %li{:class => "nav-header"}= @user.name
@@ -53,7 +53,7 @@
   - elsif @user.type == Employer
     %li
       - if @user.photo.nil?
-        %img{:src => "/images/anon.png", :class => "profilepic"}
+        %img{:src => "/img/nologo.png", :class => "profilepic"}
       - else
         %img{:src => "https://trd-assets.s3.amazonaws.com/#{@user.photo}", :class => "profilepic"}
     %li{:class => "nav-header"}= @user.name

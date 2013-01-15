@@ -63,11 +63,12 @@ Hi #{name},
 
 We've been hard at work revamping The Resume Drop. We're proud to say that the new version is now online. We hope you'll find it a lot easier to create your profile and find great opportunities.
 
-To visit your profile, go to the link below (it's unique to you):\r http://www.theresumedrop.com/welcomeback/#{v_key}
+To visit your profile, go to the link below (it's unique to you):
+http://www.theresumedrop.com/welcomeback/#{v_key}
 
 If you have suggestions, questions, or just want to say hi, please email us at hello@theresumedrop.com
 
-Glad to be back!\r The Resume Drop Team
+The Resume Drop Team
 EOS
       Pony.mail(:to => to, :from => "'The Resume Drop' <welcome@theresumedrop.com>", :subject => subject, :body => body)
     end

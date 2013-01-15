@@ -1,0 +1,30 @@
+- if @success.nil?
+  %h1 Welcome back!
+  %p.muted Please verify your name and choose your new password
+- else
+  %h1.text-success Success!
+%br/
+
+- unless @error.nil?
+  .alert= @error
+
+- if @success.nil?
+  %form{:method => "POST", :action => "#", :class => "form-horizontal"}
+    .control-group
+      %label.control-label Name
+      .controls
+        %input{:type => "text", :placeholder => "Name", :value => "#{@user.name}", :name => "name"}
+    .control-group
+      %label.control-label Password
+      .controls
+        %input{:type => "password", :placeholder => "Password", :name => "password"}
+    .control-group
+      %label.control-label Password (again)
+      .controls
+        %input{:type => "password", :placeholder => "Password (again)", :name => "password2"}
+    .control-group
+      .controls
+        %button{:type => "submit", :class => "btn btn-primary btn-large"} Submit
+- else 
+  .alert.alert-success
+    = @success

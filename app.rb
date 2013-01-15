@@ -239,6 +239,49 @@ get '/verify/:key' do
   end
 end
 
+get '/welcomeback/:key' do
+  @title = title 'Welcome back!'
+  begin
+    redirect '/profile' unless @user.nil?
+
+    @user = User.first(:verification_key => params[:key])
+    raise nil if @user.nil?
+
+    haml :welcomeback, :layout => :'layouts/panel'
+  rescue
+    @error = "Invalid verification key."
+    @success = nil
+    haml :error, :layout => :'layouts/message'
+  end
+end
+
+post '/welcomeback/:key' do
+  begin
+    @user = User.first(:verification_key => params[:key])
+    raise nil if @user.nil?
+    raise nil if @user.type == Employer
+    
+    e = validate(params, [:name, :password, :password2])
+
+    if params[:password].eql? params[:password2]
+      pass = hash(params[:password], @user.salt)
+      v_key = random_string(32)
+      @user.update({:is_verified => true, :password => pass, :name => params[:name], :verification_key => v_key})
+    else
+      raise e = TrdError.new("Passwords do not match.")
+    end
+
+    @success = "You can now <a href='/'>log in</a>."
+    @error = nil
+    haml :welcomeback, :layout => :'layouts/panel'
+  rescue TrdError => e
+    @success = nil
+    @error = e.message
+    haml :welcomeback, :layout => :'layouts/panel'
+  end
+end
+
+
 get '/profile' do
   @title = title @user.name
   @interests = all_interests
@@ -260,11 +303,8 @@ post '/profile' do
     student_actions = %w{personal work education extracurricular}
     employer_actions = %w{about posting}
 
-    look(@user)
 
     if @user.type == Student
-      look(@user)
-      look(params)
       unless student_actions.include? params[:action]
           raise TrdError.new("Sorry, an error occured.")
       end
@@ -632,6 +672,7 @@ get '/database' do
   info = CSV.parse(info_csv, :headers => true)
 
   users.each do |u|
+  # TODO: Don't create duplicates!
     if u['Is_employer'] != "1"
       user = Student.new
       user.email = u['Email']
@@ -679,6 +720,7 @@ get '/database' do
 end
 
 get '/sendwelcomeback' do
+  # TODO: Don't send duplicate emails!
   all = Student.all
 
   all.each do |u|
