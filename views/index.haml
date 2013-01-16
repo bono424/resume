@@ -1,36 +1,22 @@
-.container
-  .row
-    / leftpane
-    .span5
-      .hero-unit
-        %h1 Get noticed.
-        %h1 Get hired.
-        %h2 Top talent for the top spots.
-      %p <strong>Sign up now. It's free.</strong>
-      - unless @error.nil?
-        %br/
-        %div{:class => "alert alert-error"}= @error
-      - unless @success.nil?
-        %br/
-        %div{:class => "alert alert-success"}= @success
-      %form{:id => "register", :action => "#", :method => "POST"}
-        %fieldset
-          .control-group
-            .controls
-              %input{:type => "text", :placeholder => "Name", :class => "span3", :name => "name"}
-              %span{:class => "help-inline hide"} Name is required.
-          .control-group
-            .controls
-              %input{:type => "text", :placeholder => "University Email", :class => "span3", :name => "email"}
-              %span{:class => "help-inline hide"} Email is required.
-          .control-group
-            .controls
-              %input{:type => "password", :placeholder => "Password", :class => "span3", :name => "password"}
-              %span{:class => "help-inline hide"} Password is required.
-          .control-group
-            .controls
-              %button{:type => "submit", :class => "btn btn-success btn-large"} Sign up
-
-    / rightpane
-    .span7
-      %img{:src => "/img/plant.png", :class => "splash span6"}
+.span5
+  %h1 Get noticed. <br/ >Get hired.
+  %h3 Top talent for the top spots.
+.span4.offset3#register
+  %form{:id => "register", :action => "#", :method => "POST"}
+    %h4 Sign up now. It's free.
+    %fieldset
+      .control-group
+        .controls
+          %input.input-large{:type => "text", :placeholder => "Name", :name => "name"}
+          %span{:class => "help-block hide"} Name is required.
+      .control-group
+        .controls
+          %input.input-large{:type => "text", :placeholder => "University Email", :name => "email"}
+          %span{:class => "help-block hide"} Email is required.
+      .control-group
+        .controls
+          %input.input-large{:type => "password", :placeholder => "Password", :name => "password"}
+          %span{:class => "help-block hide"} Password is required.
+      .control-group
+        .controls
+          %button{:type => "submit", :class => "btn btn-success btn-large"} Sign up

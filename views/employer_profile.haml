@@ -28,7 +28,7 @@
         = @user.name
         %i.edit-icon.icon-pencil
       %p<
-        %a{:href => "#{h @user.url}"}=h @user.url
+        %a{:href => "http://#{h @user.url}", :target => "_blank"}=h @user.url
 
     - if @user.address.nil? && @user.city.nil? && @user.state.nil? && @user.zipcode.nil? && @user.description.nil?
       .alert.alert-warning.span6

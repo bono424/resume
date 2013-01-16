@@ -3,21 +3,25 @@
   %head
     %title= @title || 'The Resume Drop'
     = haml :_head
-  %body
+  %body#index
+    %img{:src => "/img/corbis2.jpg", :id => "bg"}
     #wrap
-      .navbar.navbar-static-top
-        .navbar-inner
-          .container
-            .row
-              .span4
-                %a{:href => "/"}<
-                  %img{:src => "/img/logo.png", :title => "TRD logo", :class => "logo"}
-              .span8
-                %form{:action => "/login", :method => "POST", :class => "form-inline pull-right"}
-                  %input{:type => "text", :placeholder => "Email", :class => "span2", :name => "email"}
-                  %input{:type => "password", :placeholder => "Password", :class => "span2", :name => "password"}
-                  %button{:type => "submit", :class => "btn"} Log in
-      #content= yield
+      #top
+        .container
+          .row
+            .span4
+              %a{:href => "/"}<
+                %img{:src => "/img/logo.png", :title => "TRD logo"}
+            .span8
+              %form{:action => "/login", :method => "POST", :class => "form-inline pull-right"}
+                %input{:type => "text", :placeholder => "Email", :class => "span2", :name => "email"}
+                %input{:type => "password", :placeholder => "Password", :class => "span2", :name => "password"}
+                %button{:type => "submit", :class => "btn"} Log in
+
+      .container
+        .row#main
+          = yield
+
       #push
     = haml :_footer
     %script{:type => "text/javascript", :src => "/js/application.js"}
