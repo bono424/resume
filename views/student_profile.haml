@@ -57,15 +57,30 @@
           %fieldset
             %input{:type => "hidden", :name => "action", :value => "education"}
             %label School
-            %input{:type => "text", :value => "#{h @user.school}", :name => "school"}
+            - if @user.school.nil?
+              %input{:type => "text", :placeholder => "School", :name => "school"}
+            - else
+              %input{:type => "text", :value => "#{h @user.school}", :placeholder => "School",:name => "school"}
             %label Major
-            %input{:type => "text", :value => "#{h @user.major}", :name => "major"}
+            - if @user.major.nil?
+              %input{:type => "text", :placeholder => "Major", :name => "major"}
+            - else
+              %input{:type => "text", :value => "#{h @user.major}", :placeholder => "Major", :name => "major"}
             %label Minor
-            %input{:type => "text", :value => "#{h @user.minor}", :name => "minor"}
+            - if @user.minor.nil?
+              %input{:type => "text", :placeholder => "Minor", :name => "minor"}
+            - else
+              %input{:type => "text", :value => "#{h @user.minor}", :placeholder => "Minor", :name => "minor"}
             %label Class
-            %input{:type => "text", :value => "#{h @user.class.strftime('%Y')}", :name => "class"}
+            - if @user.class.nil?
+              %input{:type => "text", :placeholder => "Class (YYYY)", :name => "class"}
+            - else
+              %input{:type => "text", :value => "#{h @user.class.strftime('%Y')}", :placeholder => "Class (YYYY)", :name => "class"}
             %label GPA
-            %input{:type => "text", :value => "#{h @user.gpa}", :name => "gpa"}
+            - if @user.gpa.nil?
+              %input{:type => "text", :placeholder => "GPA", :name => "gpa"}
+            - else
+              %input{:type => "text", :value => "#{h @user.gpa}", :name => "gpa", :placeholder => "GPA"}
             %button{:type => "submit", :class => "btn btn-success"} Save these changes
 
     .info.span5

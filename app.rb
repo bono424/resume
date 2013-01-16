@@ -69,6 +69,10 @@ helpers do
     req.each { |r| raise TrdError.new("#{r.capitalize} field missing.") if p[r].nil? || p[r] == "" }
   end
 
+  def numeric?(s)
+    true if Float(s) rescue false
+  end
+
   def nl2br(s)
         s.gsub(/\n/, '<br>')
   end
@@ -263,7 +267,6 @@ get '/profile' do
   redirect '/' if @user.nil?
   if @user.type == Employer
     @postings = Posting.all(:employer_id => @user.id, :deadline.gt => Time.now, :deleted.not => 'true', :order => [ :deadline.asc ])
-    # @postings = Posting.all
     haml :employer_profile, :layout => :'layouts/application'
   else
     @experiences = Experience.all(:student_id => @user.id, :deleted.not => 'true', :order => [ :end_date.desc ])
@@ -286,17 +289,32 @@ post '/profile' do
       end
       case params[:action]
       when "education"
-        # validate inputs
-        begin
-            class_year = Date.strptime(params[:class], "%Y")
-        rescue
-            raise TrdError.new("Your class year must be a valid, numeric date (YYYY).")
-        end
-        
-        # format gpa
-        params[:gpa].length > 4 ? gpa = "%1.2f" % params[:gpa] : gpa = params[:gpa]
+        params[:school].empty? || params[:school].nil? ? @user.school = nil : @user.school = params[:school]
+        params[:major].empty? || params[:major].nil? ? @user.major = nil : @user.major = params[:major]
+        params[:minor].empty? || params[:minor].nil? ? @user.minor = nil : @user.minor = params[:minor]
 
-        @user.update(:school => params[:school], :major => params[:major], :minor => params[:minor], :class => class_year, :gpa => gpa)
+        if params[:class].nil? || params[:class].empty?
+          @user.class = nil
+        elsif not numeric?(params[:class])
+          raise TrdError.new("Your class year must be a numeric date (YYYY).")
+        else
+          begin
+            @user.class = Date.strptime(params[:class], "%Y")
+          rescue
+            raise TrdError.new("Your class year must be a valid date (YYYY).")
+          end
+        end
+
+        if params[:gpa].nil? || params[:gpa].empty?
+          @user.gpa = nil
+        elsif not numeric?(params[:gpa])
+          raise TrdError.new("Your GPA must be a number.")
+        else
+            params[:gpa].length > 3 ? @user.gpa = "%1.2f" % params[:gpa] : @user.gpa = "%1.1f" % params[:gpa]
+        end
+
+        # @user.update(:school => params[:school], :major => params[:major], :minor => params[:minor], :class => class_year, :gpa => gpa)
+        @user.save
       
       when "personal"
         # make sure interests are valid
@@ -347,6 +365,11 @@ post '/profile' do
         exp.save
         @user.save
       end
+
+      # lastly retrieve exp and currics
+      @experiences = Experience.all(:student_id => @user.id, :deleted.not => 'true', :order => [ :end_date.desc ])
+      @extracurriculars = Extracurricular.all(:student_id => @user.id, :deleted.not => 'true', :order => [ :end_date.desc ])
+
       haml :student_profile, :layout => :'layouts/application'
       
     else
@@ -380,6 +403,9 @@ post '/profile' do
         posting.save
         @user.save
       end
+      
+      #retrieve postings
+      @postings = Posting.all(:employer_id => @user.id, :deadline.gt => Time.now, :deleted.not => 'true', :order => [ :deadline.asc ])
 
       haml :employer_profile, :layout => :'layouts/application'
     end
@@ -387,8 +413,11 @@ post '/profile' do
     @error= e.message
     @success = nil
     if @user.type == Student
+      @experiences = Experience.all(:student_id => @user.id, :deleted.not => 'true', :order => [ :end_date.desc ])
+      @extracurriculars = Extracurricular.all(:student_id => @user.id, :deleted.not => 'true', :order => [ :end_date.desc ])
       haml :student_profile, :layout => :'layouts/application'
     else
+      @postings = Posting.all(:employer_id => @user.id, :deadline.gt => Time.now, :deleted.not => 'true', :order => [ :deadline.asc ])
       haml :employer_profile, :layout => :'layouts/application'
     end
   end
