@@ -29,59 +29,66 @@
       .alert.alert-warning.span6
         Complete all the fields below so that employers can find you easily!
       .span5.edit{:style => "display:block;"}
-        %form{:method => "POST", :action => "#", :class => ""}
+        %form{:method => "POST", :action => "#"}
           %input{:type => "hidden", :name => "action", :value => "education"}
           .row
             %strong.span2 School
             %input.span3{:type => "text", :placeholder => "School", :name => "school"}
           .row
             %strong.span2 Major
-            %input{:type => "text", :placeholder => "Major", :name => "major"}
+            %input.span3{:type => "text", :placeholder => "Major", :name => "major"}
           .row
             %strong.span2 Minor
-            %input{:type => "text", :placeholder => "Minor", :name => "minor"}
+            %input.span3{:type => "text", :placeholder => "Minor", :name => "minor"}
           .row
             %strong.span2 Class
-            %input{:type => "text", :placeholder => "Class", :name => "class"}
+            %input.span3{:type => "text", :placeholder => "Class", :name => "class"}
           .row
             %strong.span2 GPA
-            %input{:type => "text", :placeholder => "GPA", :name => "gpa"}
+            %input.span3{:type => "text", :placeholder => "GPA", :name => "gpa"}
           .row
             .span4.offset2
               .row
                 %button{:type => "submit", :class => "btn btn-success"} Save these changes
 
     - else
-      .edit.span3{:style => "display:none;"}
-        %form{:method => "POST", :action => "#", :class => ""}
-          %fieldset
-            %input{:type => "hidden", :name => "action", :value => "education"}
-            %label School
+      .edit.span5{:style => "display:none;"}
+        %form{:method => "POST", :action => "#"}
+          %input{:type => "hidden", :name => "action", :value => "education"}
+          .row
+            %strong.span2 School
             - if @user.school.nil?
-              %input{:type => "text", :placeholder => "School", :name => "school"}
+              %input.span3{:type => "text", :placeholder => "School", :name => "school"}
             - else
               %input{:type => "text", :value => "#{h @user.school}", :placeholder => "School",:name => "school"}
-            %label Major
+          .row
+            %strong.span2 Major
             - if @user.major.nil?
-              %input{:type => "text", :placeholder => "Major", :name => "major"}
+              %input.span3{:type => "text", :placeholder => "Major", :name => "major"}
             - else
-              %input{:type => "text", :value => "#{h @user.major}", :placeholder => "Major", :name => "major"}
-            %label Minor
+              %input.span3{:type => "text", :value => "#{h @user.major}", :placeholder => "Major", :name => "major"}
+          .row
+            %strong.span2 Minor
             - if @user.minor.nil?
-              %input{:type => "text", :placeholder => "Minor", :name => "minor"}
+              %input.span3{:type => "text", :placeholder => "Minor", :name => "minor"}
             - else
-              %input{:type => "text", :value => "#{h @user.minor}", :placeholder => "Minor", :name => "minor"}
-            %label Class
+              %input.span3{:type => "text", :value => "#{h @user.minor}", :placeholder => "Minor", :name => "minor"}
+          .row
+            %strong.span2 Class
             - if @user.class.nil?
-              %input{:type => "text", :placeholder => "Class (YYYY)", :name => "class"}
+              %input.span3{:type => "text", :placeholder => "Class (YYYY)", :name => "class"}
             - else
-              %input{:type => "text", :value => "#{h @user.class.strftime('%Y')}", :placeholder => "Class (YYYY)", :name => "class"}
-            %label GPA
+              %input.span3{:type => "text", :value => "#{h @user.class.strftime('%Y')}", :placeholder => "Class (YYYY)", :name => "class"}
+          .row
+            %strong.span2 GPA
             - if @user.gpa.nil?
-              %input{:type => "text", :placeholder => "GPA", :name => "gpa"}
+              %input.span3{:type => "text", :placeholder => "GPA", :name => "gpa"}
             - else
-              %input{:type => "text", :value => "#{h @user.gpa}", :name => "gpa", :placeholder => "GPA"}
-            %button{:type => "submit", :class => "btn btn-success"} Save these changes
+              %input.span3{:type => "text", :value => "#{h @user.gpa}", :name => "gpa", :placeholder => "GPA"}
+          .row
+            .span3.offset2
+              .row
+                %button{:type => "submit", :class => "btn btn-success"} Save these changes
 
     .info.span5
       %table.table.table-condensed
