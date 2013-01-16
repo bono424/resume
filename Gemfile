@@ -8,6 +8,7 @@ gem "sass", "~> 3.1.1"
 gem "datamapper", "~> 1.2.0"
 gem "dm-postgres-adapter", "~> 1.2.0"
 gem "do_postgres", "~> 0.10.10"
+gem "will_paginate", "~> 3.0.4"
 
 gem "grid-coordinates", "~> 1.1.4"
 

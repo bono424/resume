@@ -17,7 +17,7 @@
         position:relative;
         bottom:2px;
       } 
-      #content {
+      #main {
         margin-top:30px;
       }
       #register form {
@@ -49,7 +49,7 @@
                 %button{:type => "submit", :class => "btn"} Log in
 
       .container 
-        .row#content
+        .row#main
           .span5
             %h1 Get noticed. <br/ >Get hired.
             %h3 Top talent for the top spots.
@@ -60,18 +60,21 @@
                 .control-group
                   .controls
                     %input.input-large{:type => "text", :placeholder => "Name", :name => "name"}
-                    %span{:class => "help-inline hide"} Name is required.
+                    %span{:class => "help-block hide"} Name is required.
                 .control-group
                   .controls
                     %input.input-large{:type => "text", :placeholder => "University Email", :name => "email"}
-                    %span{:class => "help-inline hide"} Email is required.
+                    %span{:class => "help-block hide"} Email is required.
                 .control-group
                   .controls
                     %input.input-large{:type => "password", :placeholder => "Password", :name => "password"}
-                    %span{:class => "help-inline hide"} Password is required.
+                    %span{:class => "help-block hide"} Password is required.
                 .control-group
                   .controls
                     %button{:type => "submit", :class => "btn btn-success btn-large"} Sign up
+
+        .row#info
+        
       #push
 
     = haml :_footer

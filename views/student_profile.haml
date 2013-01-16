@@ -8,9 +8,6 @@
       %div{:class => "alert alert-success"}= @success
 %br/
 
-.row
-  .alert.alert-warning.span6
-    Complete all the fields below so that employers can find you easily!
 
 %h1= @user.name
 - if @user.resume.nil?
@@ -26,35 +23,33 @@
     .span9
       %h2
         Education
-        %i.edit-icon{:class => "icon-pencil"}
+        %i.edit-icon.icon-pencil
 
     - if @user.school.nil? && @user.major.nil? && @user.minor.nil? && @user.class.nil? && @user.gpa.nil?
+      .alert.alert-warning.span6
+        Complete all the fields below so that employers can find you easily!
       .span5.edit{:style => "display:block;"}
         %form{:method => "POST", :action => "#", :class => ""}
           %input{:type => "hidden", :name => "action", :value => "education"}
-          .control-group
-            %label.control-label School
-            .controls
-              %input{:type => "text", :placeholder => "School", :name => "school"}
-          .control-group
-            %label.control-label Major
-            .controls
-              %input{:type => "text", :placeholder => "Major", :name => "major"}
-          .control-group
-            %label.control-label Minor
-            .controls
-              %input{:type => "text", :placeholder => "Minor", :name => "minor"}
-          .control-group
-            %label.control-label Class
-            .controls
-              %input{:type => "text", :placeholder => "Class", :name => "class"}
-          .control-group
-            %label.control-label GPA
-            .controls
-              %input{:type => "text", :placeholder => "GPA", :name => "gpa"}
-          .control-group
-            .controls
-              %button{:type => "submit", :class => "btn btn-success"} Save these changes
+          .row
+            %strong.span2 School
+            %input.span3{:type => "text", :placeholder => "School", :name => "school"}
+          .row
+            %strong.span2 Major
+            %input{:type => "text", :placeholder => "Major", :name => "major"}
+          .row
+            %strong.span2 Minor
+            %input{:type => "text", :placeholder => "Minor", :name => "minor"}
+          .row
+            %strong.span2 Class
+            %input{:type => "text", :placeholder => "Class", :name => "class"}
+          .row
+            %strong.span2 GPA
+            %input{:type => "text", :placeholder => "GPA", :name => "gpa"}
+          .row
+            .span4.offset2
+              .row
+                %button{:type => "submit", :class => "btn btn-success"} Save these changes
 
     - else
       .edit.span3{:style => "display:none;"}
@@ -133,8 +128,9 @@
         %hr
 
       .info.span9
-        - if @experiences.nil?
-          %p No work experience information found.
+        - if @experiences.length.zero?
+          .row
+            .alert.alert-warning.span6 You haven't added any extracurriculars.
         -else
           - @experiences.each do |e|
             - unless e.deleted?
@@ -190,8 +186,9 @@
         %hr
 
       .info.span9
-        - if @extracurriculars.nil?
-          %p No extracurricular information found.
+        - if @extracurriculars.length.zero?
+          .row
+            .alert.alert-warning.span6 You haven't added any extracurriculars.
         -else
           - @extracurriculars.each do |e|
             - unless e.deleted
@@ -248,11 +245,11 @@
           .span2 Primary email
           .span4=h @user.email
         .row
-          .span2.bold Personal email
+          %strong.span2 Personal email
           .span3
             %input{:type => "text", :value => "#{h @user.secondary_email}", :name => "secondary_email"}
         .row
-          .span2.bold Interest one
+          %strong.span2 Interest one
           .span3
             %select{:name => "interest1"}
               - if @user.interest1.nil? || @user.interest1 == ""
@@ -261,10 +258,10 @@
                 %option{:value => "#{h @user.interest1}"}=h @user.interest1
               - @interests.each do |i|
                 - unless @user.interest1 == i
-                  %option{:value => "{i}"}= i
+                  %option{:value => "#{i}"}= i
 
         .row
-          .span2.bold Interest two
+          %strong.span2 Interest two
           .span3
             %select{:name => "interest2"}
               - if @user.interest2.nil? || @user.interest2 == ""
@@ -275,7 +272,7 @@
                 - unless @user.interest2 == i
                   %option{:value => "#{i}"}= i
         .row
-          .span2.bold Interest three
+          %strong.span2 Interest three
           .span3
             %select{:name => "interest3"}
               - if @user.interest3.nil? || @user.interest3 == ""
@@ -286,8 +283,8 @@
                 - unless @user.interest3 == i
                   %option{:value => "#{i}"}= i
 
-        .row{:class => "button"}
-          .span5
+        .row
+          .span5.offset2
             %button{:type => "submit", :class => "btn btn-success"} Save these changes
 
 %hr

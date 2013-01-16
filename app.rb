@@ -5,6 +5,8 @@ require 'stripe'
 require 'pony'
 require 'aws/s3'
 require 'RMagick'
+require 'will_paginate'
+require 'will_paginate/data_mapper'
 
 require 'csv'
 
@@ -78,6 +80,22 @@ helpers do
 
   def all_interests()
     ['Advertising / PR', 'Consulting', 'Education', 'Entrepreneurship', 'Finance', 'Government / Military', 'Healthcare', 'Media / Entertainment', 'Non-Profit', 'Other', 'Real Estate', 'Technology']
+  end
+
+  def gen_paginate_html(results, cur_page, per_page = 50)
+    html = "<div class='btn-toolbar'>"
+      html+= "<div class='btn-group'>"
+    total = results.length
+    num_pages = (total/50).floor + 1
+    if num_pages <= 5
+      1.upto(num_pages) do |i|
+        i == cur_page ? html+= "<a href='#' class='btn disabled'>#{i}</a>" : html += "<a href='#' class='btn'>#{i}</a>"
+      end
+    elsif num_pages > 5
+      "<h1>More than 5 pages</h1>" 
+    end
+    html += "</div></div>"
+    html
   end
 end
 
@@ -239,55 +257,13 @@ get '/verify/:key' do
   end
 end
 
-get '/welcomeback/:key' do
-  @title = title 'Welcome back!'
-  begin
-    redirect '/profile' unless @user.nil?
-
-    @user = User.first(:verification_key => params[:key])
-    raise nil if @user.nil?
-
-    haml :welcomeback, :layout => :'layouts/panel'
-  rescue
-    @error = "Invalid verification key."
-    @success = nil
-    haml :error, :layout => :'layouts/message'
-  end
-end
-
-post '/welcomeback/:key' do
-  begin
-    @user = User.first(:verification_key => params[:key])
-    raise nil if @user.nil?
-    raise nil if @user.type == Employer
-    
-    e = validate(params, [:name, :password, :password2])
-
-    if params[:password].eql? params[:password2]
-      pass = hash(params[:password], @user.salt)
-      v_key = random_string(32)
-      @user.update({:is_verified => true, :password => pass, :name => params[:name], :verification_key => v_key})
-    else
-      raise e = TrdError.new("Passwords do not match.")
-    end
-
-    @success = "You can now <a href='/'>log in</a>."
-    @error = nil
-    haml :welcomeback, :layout => :'layouts/panel'
-  rescue TrdError => e
-    @success = nil
-    @error = e.message
-    haml :welcomeback, :layout => :'layouts/panel'
-  end
-end
-
-
 get '/profile' do
   @title = title @user.name
   @interests = all_interests
   redirect '/' if @user.nil?
   if @user.type == Employer
     @postings = Posting.all(:employer_id => @user.id, :deadline.gt => Time.now, :deleted.not => 'true', :order => [ :deadline.asc ])
+    # @postings = Posting.all
     haml :employer_profile, :layout => :'layouts/application'
   else
     @experiences = Experience.all(:student_id => @user.id, :deleted.not => 'true', :order => [ :end_date.desc ])
@@ -330,7 +306,11 @@ post '/profile' do
           end
         end
         # updatasaurus
-        @user.update(:secondary_email => params[:secondary_email], :interest1 => params[:interest1], :interest2 => params[:interest2], :interest3 => params[:interest3])
+        if params[:secondary_email].empty? || params[:secondary_email].nil?
+          @user.update(:interest1 => params[:interest1], :interest2 => params[:interest2], :interest3 => params[:interest3])
+        else
+          @user.update(:secondary_email => params[:secondary_email], :interest1 => params[:interest1], :interest2 => params[:interest2], :interest3 => params[:interest3])
+        end
         
       when "work"
         [:position, :place, :start_date, :end_date, :desc].each do |i|
@@ -629,14 +609,16 @@ get '/search' do
       else
         
         # Generate query string. I know this sucks. Bear with me.
-        @results = Student.all 
-        @results = @results.all(:conditions => ["name ILIKE ?", "%#{params[:name]}%"]) unless params[:name] == ""
-        @results = @results.all(:conditions => ["school ILIKE ?", "%#{params[:school]}%"]) unless params[:school] == ""
-        @results = @results.all(:conditions => ["class = ?", "%#{params[:class]}%"]) unless params[:class] == ""
-        @results = @results.all(:gpa.gte => params[:gpa]) unless params[:gpa] == ""
-        @results = @results.all(:conditions => ["major ILIKE ?", "%#{params[:major]}%"]) unless params[:major] == ""
-        @results = @results.all(:conditions => ["minor ILIKE ?", "%#{params[:minor]}%"]) unless params[:minor] == ""
-        @results = @results.all(:conditions => ["interest1 ILIKE ?", "%#{params[:interest]}%"]) unless params[:interest1] == ""
+        @results = Student.all(:name.not => "")
+        @results = @results.all(:conditions => ["name ILIKE ?", "%#{params[:name]}%"]) unless params[:name].empty?
+        @results = @results.all(:conditions => ["school ILIKE ?", "%#{params[:school]}%"]) unless params[:school].empty?
+        @results = @results.all(:conditions => ["class = ?", "%#{DateTime.strptime(params[:class],'%Y')}%"]) unless params[:class].empty?
+        @results = @results.all(:gpa.gte => params[:gpa]) unless params[:gpa].empty?
+        @results = @results.all(:conditions => ["major ILIKE ?", "%#{params[:major]}%"]) unless params[:major].empty?
+        @results = @results.all(:conditions => ["minor ILIKE ?", "%#{params[:minor]}%"]) unless params[:minor].empty?
+        # @results = @results.all(:conditions => ["interest1 ILIKE ?", "%#{params[:interest]}%"]) unless params[:interest1] == ""
+
+        @results = @results.paginate(:page => params[:page], :per_page => 30)
 
         # if no results found, show error.
         raise TrdError.new("Sorry, we couldn't find anything with the parameters you specified.") if @results.nil? || @results.empty?
@@ -666,8 +648,8 @@ get '/database' do
   # fullname = names[0][1] + " " + names[0][3]
   # email = users[0][1]
 
-  users_csv = File.read('test.csv')
-  info_csv = File.read('info.csv')
+  users_csv = File.read('design/users.csv')
+  info_csv = File.read('design/info.csv')
   users = CSV.parse(users_csv, :headers => true)
   info = CSV.parse(info_csv, :headers => true)
 
@@ -734,6 +716,48 @@ get '/sendwelcomeback' do
     Notifications.send_welcomeback_email(u.email, u.verification_key, name)
   end
   "Sent! Maybe..."
+end
+
+get '/welcomeback/:key' do
+  @title = title 'Welcome back!'
+  begin
+    redirect '/profile' unless @user.nil?
+
+    @user = User.first(:verification_key => params[:key])
+    raise nil if @user.nil?
+
+    haml :welcomeback, :layout => :'layouts/panel'
+  rescue
+    @error = "Invalid verification key."
+    @success = nil
+    haml :error, :layout => :'layouts/message'
+  end
+end
+
+post '/welcomeback/:key' do
+  begin
+    @user = User.first(:verification_key => params[:key])
+    raise nil if @user.nil?
+    raise nil if @user.type == Employer
+    
+    e = validate(params, [:name, :password, :password2])
+
+    if params[:password].eql? params[:password2]
+      pass = hash(params[:password], @user.salt)
+      v_key = random_string(32)
+      @user.update({:is_verified => true, :password => pass, :name => params[:name], :verification_key => v_key})
+    else
+      raise e = TrdError.new("Passwords do not match.")
+    end
+
+    @success = "You can now <a href='/'>log in</a>."
+    @error = nil
+    haml :welcomeback, :layout => :'layouts/panel'
+  rescue TrdError => e
+    @success = nil
+    @error = e.message
+    haml :welcomeback, :layout => :'layouts/panel'
+  end
 end
 
 get '/frontpage' do

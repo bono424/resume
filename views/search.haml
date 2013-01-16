@@ -1,56 +1,65 @@
-.span9
 - unless @error.nil?
-  %div{:class => "alert alert-error"}= @error
+  .row
+    .span9
+      .alert.alert-error= @error
+
 %h1 Search Candidates
-%br
-%h2 Include any and all information you would like to select for.
-%br
 
-%form{:method => "GET", :action => "#"}
-  .row
-    .span3
-      %input{:name => "school", :type => "text", :placeholder => "School"}
+- if @results.nil?
+  %h2.muted Include any and all information you would like to select for.
   %br
-  .row
-    .span2
-      %input{:name => "class", :type => "text", :placeholder => "Class", :class => "span1"}
-  %br    
-  .row
-    .span3
-      %input{:name => "name", :type => "text", :placeholder => "Name"}
-  %br    
-  .row
-    .span3
-      %input{:name => "major", :type => "text", :placeholder => "Major"}
-    .span3
-      %input{:name => "minor", :type => "text", :placeholder => "Minor"}
-  %br
-  .row
-    .span2
-      %input{:name => "gpa", :type => "text", :placeholder => "Minimum GPA", :class => "span2"}
-  %br
-  .row
-    .span3
-      %select{:name => "interest1"}
-        %option Interest One
-        - @interests.each do |i|
-          %option{:value => '#{i}'}= i
-    .span3
-      %select{:name => "interest2"}
-        %option Interest Two
-        - @interests.each do |i|
-          %option{:value => '#{i}'}= i
-    .span3
-      %select{:name => "interest3"}
-        %option Interest Three
-        - @interests.each do |i|
-          %option{:value => '#{i}'}= i
-  %br
-  .row
-    .span3
-      %button{:type => "submit", :class => "btn btn-success btn-large"} Search
+  %form{:method => "GET", :action => "#"}
+    .row
+      .span3
+        %input{:name => "school", :type => "text", :placeholder => "School"}
+      .span3
+        %input{:name => "name", :type => "text", :placeholder => "Name"}
+      %br
+    .row
+      .span3
+        %input{:name => "class", :type => "text", :placeholder => "Class"}
+      .span3
+        %input{:name => "gpa", :type => "text", :placeholder => "Minimum GPA"}
+      %br    
+    .row
+      .span3
+        %input{:name => "major", :type => "text", :placeholder => "Major"}
+      .span3
+        %input{:name => "minor", :type => "text", :placeholder => "Minor"}
+      %br
 
-- if @results
+    -#
+      .row
+        .span3
+          %select{:name => "interest1"}
+            %option Interest One
+            - @interests.each do |i|
+              %option{:value => '#{i}'}= i
+        .span3
+          %select{:name => "interest2"}
+            %option Interest Two
+            - @interests.each do |i|
+              %option{:value => '#{i}'}= i
+        .span3
+          %select{:name => "interest3"}
+            %option Interest Three
+            - @interests.each do |i|
+              %option{:value => '#{i}'}= i
+        %br
+
+    .row
+      .span3
+        %button{:type => "submit", :class => "btn btn-success btn-large"} Search
+
+- unless @results.nil?
+  .row
+    .span12
+      %a{:href => url("/search")}
+        %i.icon-arrow-left
+        Perform another search
+      %br/
+      %br/
+
   .row
     .span9
       %table{:class => "table table-striped"}
@@ -65,11 +74,32 @@
         %tbody
           - @results.each do |r|
             %tr
-              %td
-                %img{:src => "https://trd-assets.s3.amazonaws.com/#{h r.photo}", :class => "span1"}
+              - unless r.photo.nil?
+                %td
+                  %img{:src => "https://trd-assets.s3.amazonaws.com/#{h r.photo}", :style => "width:50px;"}
+              - else
+                %td
+                  %img{:src => "/img/anon.png", :style => "width:50px"}
               %td
                 %a{:href => "/profile/#{h r.id}"}=h r.name
-              %td=h r.school
-              %td=h r.major
-              %td=h r.minor
-              %td=h r.class.strftime("%Y")
+              - unless r.school.nil?
+                %td=h r.school
+              - else
+                %td N/A
+              - unless r.major.nil?
+                %td=h r.major
+              - else
+                %td N/A
+              - unless r.minor.nil?
+                %td=h r.minor
+              - else
+                %td N/A
+              - unless r.class.nil?
+                %td=h r.class.strftime("%Y")
+              - else
+                %td N/A
+
+  .row
+    .span12
+      .pagination
+        = will_paginate @results

@@ -4,7 +4,7 @@
     %title= @title || "The Resume Drop"
     = haml :_head
     %script{:type => "text/javascript", :src => "https://js.stripe.com/v1/"}
-    %script{:type => "text/javascript", :src => "/javascripts/payments.js"}
+    %script{:type => "text/javascript", :src => "/js/payments.js"}
 
   %body
     #top{:class => "navbar"}
@@ -12,7 +12,7 @@
         .container
           .span4
             %a{:href => "/"}
-              %img{:src => "/images/logo.png", :title => "TRD logo", :class => "logo"}
+              %img{:src => "/img/logo.png", :title => "TRD logo", :class => "logo"}
     .container
       #left{:class => "span2 well sidebar-nav"}
         = partial :_nav_main
