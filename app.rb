@@ -384,11 +384,16 @@ post '/profile' do
       end
       case params[:action]
       when "about"
-        description = nl2br(params[:description])
-        @user.update(:description => params[:description], :address => params[:address], :city => params[:city], :state => params[:state], :zipcode => params[:zipcode])
+        params[:description].nil? || params[:description].empty? ? @user.description = nil : @user.description = nl2br(params[:description])
+        params[:address].nil? || params[:address].empty? ? @user.address = nil : @user.address = params[:address]
+        params[:city].nil? || params[:city].empty? ? @user.city = nil : @user.city = params[:city]
+        params[:state].nil? || params[:state].empty? ? @user.state = nil : @user.state = params[:state]
+        params[:zipcode].nil? || params[:zipcode].empty? ? @user.zipcode = nil : @user.zipcode = params[:zipcode]
+        @user.save
+
       when "posting"
         [:position, :place, :start_date, :end_date, :description, :class, :qualifications, :contact_name, :contact_email].each do |i|
-          raise TrdError.new("Please enter all the fields.") if params[i].nil? || params[i] == ""
+          raise TrdError.new("Please enter all the fields.") if params[i].nil? || params[i].empty?
         end
         posting = @user.postings.new
         posting.position = params[:position]
