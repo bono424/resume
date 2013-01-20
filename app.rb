@@ -203,7 +203,6 @@ post '/upload' do
         :access_key_id     => settings.s3_key,
         :secret_access_key => settings.s3_secret)
         AWS::S3::S3Object.store(name,open(tmpfile),settings.bucket,:access => :public_read)     
-        FileUtils.rm name
       rescue
         raise TrdError.new("Upload to S3 failed.")
       end
