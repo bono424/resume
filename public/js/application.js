@@ -15,15 +15,22 @@ $(window).load(function() {
   theWindow.resize(resizeBg).trigger("resize");
 });
 
-$("#register").submit(function() {
-  var inputs = $('#register').serializeArray();
+$("#register form").submit(function() {
+  var inputs = $(this).serializeArray();
+  var fail = false;
   $.each(inputs, function(i, input) {
     if (input.value == "") { 
-      $('input[name='+input.name+']').parents('.control-group').addClass('warning');
-      $('input[name='+input.name+']').siblings('.help-inline').show();
-      return false;
+      $('input[name='+input.name+']').parents('.control-group').addClass('error');
+      $('input[name='+input.name+']').siblings('.help-block').show(200);
+      fail = true
     } 
+    else {
+      $('input[name='+input.name+']').parents('.control-group').removeClass('error');
+      $('input[name='+input.name+']').siblings('.help-block').hide(200);
+      fail = fail || false;
+    }
   });
+  if (fail) { return false };
 });
 
 // profiles

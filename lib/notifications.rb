@@ -11,7 +11,6 @@ module Trd
     FROM = '"Resume Drop" <info@theresumedrop.com>'
 
     def self.send_verification_email(email, verification_key)
-      return if user.nil?
       to = email
       from = "The Resume Drop <welcome@theresumedrop.com>"
       link = "http://theresumedrop.com/verify/#{verification_key}"

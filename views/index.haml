@@ -2,21 +2,26 @@
   %h1 Get noticed. <br/ >Get hired.
   %h3 Top talent for the top spots.
 .span4.offset3#register
-  %form{:id => "register", :action => "#", :method => "POST"}
+  - if @success
+    .alert.alert-success= @success
+  - if @error
+    .alert.alert-warning= @error
+
+  %form{:action => "#", :method => "POST"}
     %h4 Sign up now. It's free.
     %fieldset
       .control-group
         .controls
-          %input.input-large{:type => "text", :placeholder => "Name", :name => "name"}
-          %span{:class => "help-block hide"} Name is required.
+          %input.input-large{:type => "text", :placeholder => "Full name", :name => "name"}
+          .help-block.hide Name is required.
       .control-group
         .controls
-          %input.input-large{:type => "text", :placeholder => "University Email", :name => "email"}
-          %span{:class => "help-block hide"} Email is required.
+          %input.input-large{:type => "text", :placeholder => "University email", :name => "email"}
+          .help-block.hide Email is required.
       .control-group
         .controls
           %input.input-large{:type => "password", :placeholder => "Password", :name => "password"}
-          %span{:class => "help-block hide"} Password is required.
+          .help-block.hide Password is required.
       .control-group
         .controls
           %button{:type => "submit", :class => "btn btn-success btn-large"} Sign up

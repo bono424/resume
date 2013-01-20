@@ -148,7 +148,7 @@ post '/' do
     # end
 
     @user = Student.first(:email => params[:email])
-    raise TrdError.new("Email is already registered.") unless @user.nil?
+    raise TrdError.new("Looks like that email is already registered.") unless @user.nil?
 
     salt = random_string(6)
     hash = hash(params[:password], salt)
@@ -575,7 +575,6 @@ post '/subscribe/:plan' do
 
     @success = "You've successfully registered. Please wait to hear back from us to verify your account."
 
-    # Notifications.send_subscription_notification(s)
     haml :subscribe, :layout => :'layouts/subscribe'
   rescue TrdError => e
     @error = e.message
