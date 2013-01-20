@@ -170,7 +170,7 @@ post '/upload' do
       # unless ext.eql?('.jpg') or ext.eql?('.png') or ext.eql?('.gif') or ext.eql?('.jpeg')
       #     raise e = TrdError.new("Profile images must be of type .jpg, .png, or .gif")
       # end
-      raise e = TrdError.new("File must be an image.") unless tmpfile.format
+      raise e = TrdError.new("File must be an image.") unless tmpfile.format == 'NULL'
       begin
         #connect to s3
         AWS::S3::Base.establish_connection!(
