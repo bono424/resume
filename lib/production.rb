@@ -26,7 +26,7 @@ if ENV['RACK_ENV'] == 'production'
     }
   }
 else
-  set :bucket, 'trd_assets'
+  set :bucket, 'trd-assets'
   set :s3_key, 'AKIAIQGNVCLXSVJ6JI4Q'
   set :s3_secret, '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'
   set :session_secret, 'manjusri'
