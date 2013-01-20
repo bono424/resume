@@ -16,7 +16,6 @@ $(window).load(function() {
 });
 
 $("#register").submit(function() {
-  console.log($(this).serializeArray());
   var inputs = $('#register').serializeArray();
   $.each(inputs, function(i, input) {
     if (input.value == "") { 
@@ -46,17 +45,25 @@ function isNumber(n) {
 }
 
 $('form').submit(function() {
-  console.log($(this).serializeArray());
   var inputs = $(this).serializeArray();
+  var fail = false;
   $.each(inputs, function(i, input) {
     if (input.name == "class") { 
-      isNumber(input.value) && input.value.length == 4 ? alert("valid") : alert("invalid");
+      if (!isNumber(input.value) || input.value.length != 4) {
+        $('input[name='+input.name+']').parents('.control-group').addClass('warning');
+        $('input[name='+input.name+']').siblings('.help-inline').removeClass('hide');
+        fail = true;
+      }
     } 
     if (input.name == "gpa") { 
-      isNumber(input.value) ? alert("valid") : alert("invalid");
+      if (!isNumber(input.value)) {
+        $('input[name='+input.name+']').parents('.control-group').addClass('warning');
+        $('input[name='+input.name+']').siblings('.help-inline').removeClass('hide');
+        fail = true;
+      }
     } 
   });
-  return true;
+  if (fail) { return false; }
 });
 
 // file upload

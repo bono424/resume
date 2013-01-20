@@ -6,8 +6,6 @@
   .row
     .span9
       %div{:class => "alert alert-success"}= @success
-%br/
-
 
 %h1= @user.name
 - if @user.resume.nil?
@@ -43,6 +41,7 @@
           .row
             %strong.span2 Class
             %input.span3{:type => "text", :placeholder => "Class", :name => "class"}
+            %span.help-inline Class year must be in the form YYYY.
           .row
             %strong.span2 GPA
             %input.span3{:type => "text", :placeholder => "GPA", :name => "gpa"}
@@ -52,39 +51,41 @@
                 %button{:type => "submit", :class => "btn btn-success"} Save these changes
 
     - else
-      .edit.span5{:style => "display:none;"}
-        %form{:method => "POST", :action => "#"}
+      .edit.span7{:style => "display:none;"}
+        %form{:method => "POST", :action => "#", :class => "form-inline"}
           %input{:type => "hidden", :name => "action", :value => "education"}
-          .row
+          .row.control-group
             %strong.span2 School
             - if @user.school.nil?
               %input.span3{:type => "text", :placeholder => "School", :name => "school"}
             - else
               %input{:type => "text", :value => "#{h @user.school}", :placeholder => "School",:name => "school"}
-          .row
+          .row.control-group
             %strong.span2 Major
             - if @user.major.nil?
               %input.span3{:type => "text", :placeholder => "Major", :name => "major"}
             - else
               %input.span3{:type => "text", :value => "#{h @user.major}", :placeholder => "Major", :name => "major"}
-          .row
+          .row.control-group
             %strong.span2 Minor
             - if @user.minor.nil?
               %input.span3{:type => "text", :placeholder => "Minor", :name => "minor"}
             - else
               %input.span3{:type => "text", :value => "#{h @user.minor}", :placeholder => "Minor", :name => "minor"}
-          .row
+          .row.control-group
             %strong.span2 Class
             - if @user.class.nil?
               %input.span3{:type => "text", :placeholder => "Class (YYYY)", :name => "class"}
             - else
               %input.span3{:type => "text", :value => "#{h @user.class.strftime('%Y')}", :placeholder => "Class (YYYY)", :name => "class"}
-          .row
+            %span.help-inline.hide Must be in the form YYYY
+          .row.control-group
             %strong.span2 GPA
             - if @user.gpa.nil?
               %input.span3{:type => "text", :placeholder => "GPA", :name => "gpa"}
             - else
               %input.span3{:type => "text", :value => "#{h @user.gpa}", :name => "gpa", :placeholder => "GPA"}
+            %span.help-inline.hide Must be a number
           .row
             .span3.offset2
               .row
@@ -150,7 +151,7 @@
         %hr
 
       .info.span9
-        - if @experiences.length.zero?
+        - if @experiences.nil? || @experiences.length.zero?
           .row
             .alert.alert-warning.span6 You haven't added any extracurriculars.
         -else
@@ -208,7 +209,7 @@
         %hr
 
       .info.span9
-        - if @extracurriculars.length.zero?
+        - if @extracurriculars.nil? || @extracurriculars.length.zero?
           .row
             .alert.alert-warning.span6 You haven't added any extracurriculars.
         -else

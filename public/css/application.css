@@ -102,6 +102,10 @@ form strong {
   line-height:2.1em;
 }
 
+.form-inline .row {
+  margin-bottom:10px;
+}
+
 .deadline {
 	font-weight:normal;
 	padding-left:20px;

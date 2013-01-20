@@ -108,23 +108,29 @@ configure do
     LOGGER = Logger.new("sinatra.log")
 end
  
-helpers do
-    def logger
-        LOGGER
-    end
-    def look(object)
-        if not ENV['RACK_ENV'] == 'production'
-            logger.info "#{object.inspect}"
-        else
-            puts "#{object.inspect}"
-        end
-    end
-end
-
 before do
-  @success, @error = nil
+  @success = nil
+
+  # preserve session error, else reset
+  unless session[:error].nil?
+    @error = session[:error]
+    session[:error] = nil
+  else
+    @error = nil
+  end
+
   user_id = session[:user]
   @user = User.get(user_id)
+end
+
+before '/profile' do
+  if @user.type == Student
+    @experiences = Experience.all(:student_id => @user.id, :deleted.not => 'true', :order => [ :end_date.desc ])
+    @extracurriculars = Extracurricular.all(:student_id => @user.id, :deleted.not => 'true', :order => [ :end_date.desc ])
+    @interests = all_interests
+  else
+    @postings = Posting.all(:employer_id => @user.id, :deadline.gt => Time.now, :deleted.not => 'true', :order => [ :deadline.asc ])
+  end
 end
 
 get '/' do
@@ -176,7 +182,7 @@ post '/upload' do
     case params[:action]
     when 'photo'
       unless ext.eql?('.jpg') or ext.eql?('.png') or ext.eql?('.gif') or ext.eql?('.jpeg')
-          raise TrdError.new("Profile images must be of type .jpg, .png, or .gif")
+          raise e = TrdError.new("Profile images must be of type .jpg, .png, or .gif")
       end
       begin
         #connect to s3
@@ -186,25 +192,32 @@ post '/upload' do
 
         #resize image before storing
         img = Magick::Image.read(params['file'][:tempfile].path).first
-        img.resize_to_fill(300,300).write(name)
+        if @user.type == Student
+          img.resize_to_fill(300,300).write(name)
+        else
+          img.resize_to_fit(300).write(name)
+        end
 
         #store it
         AWS::S3::S3Object.store(name,open(name),settings.bucket,:access => :public_read)     
+        FileUtils.rm name
+
       rescue
-        raise TrdError.new("Upload to S3 failed.")
+        raise e = TrdError.new("Upload to S3 failed.")
       end
       # if successful, set user as profile image
       @user.update(:photo => name) 
 
     when 'resume'
       unless ext.eql?('.pdf')
-          raise TrdError.new("Resumes must be of type .pdf") 
+        raise e = TrdError.new("Resumes must be of type .pdf") 
       end
       begin
-          AWS::S3::Base.establish_connection!(
-          :access_key_id     => settings.s3_key,
-          :secret_access_key => settings.s3_secret)
-          AWS::S3::S3Object.store(name,open(tmpfile),settings.bucket,:access => :public_read)     
+        AWS::S3::Base.establish_connection!(
+        :access_key_id     => settings.s3_key,
+        :secret_access_key => settings.s3_secret)
+        AWS::S3::S3Object.store(name,open(tmpfile),settings.bucket,:access => :public_read)     
+        FileUtils.rm name
       rescue
         raise TrdError.new("Upload to S3 failed.")
       end
@@ -214,13 +227,14 @@ post '/upload' do
 
     redirect '/profile'
   rescue TrdError => e
-      @error = e.message
-      @success = nil
-      if @user.type == Student
-          haml :student_profile, :layout => :'layouts/application'
-      else
-          haml :employer_profile, :layout => :'layouts/application'
-      end
+    @error = e.message
+    @success = nil
+    if @user.type == Student
+      session[:error] = e.message
+      redirect '/profile'
+    else
+      haml :employer_profile, :layout => :'layouts/application'
+    end
   end
 end
 
@@ -263,14 +277,10 @@ end
 
 get '/profile' do
   @title = title @user.name
-  @interests = all_interests
   redirect '/' if @user.nil?
   if @user.type == Employer
-    @postings = Posting.all(:employer_id => @user.id, :deadline.gt => Time.now, :deleted.not => 'true', :order => [ :deadline.asc ])
     haml :employer_profile, :layout => :'layouts/application'
   else
-    @experiences = Experience.all(:student_id => @user.id, :deleted.not => 'true', :order => [ :end_date.desc ])
-    @extracurriculars = Extracurricular.all(:student_id => @user.id, :deleted.not => 'true', :order => [ :end_date.desc ])
     haml :student_profile, :layout => :'layouts/application'
   end
 end
@@ -366,10 +376,6 @@ post '/profile' do
         @user.save
       end
 
-      # lastly retrieve exp and currics
-      @experiences = Experience.all(:student_id => @user.id, :deleted.not => 'true', :order => [ :end_date.desc ])
-      @extracurriculars = Extracurricular.all(:student_id => @user.id, :deleted.not => 'true', :order => [ :end_date.desc ])
-
       haml :student_profile, :layout => :'layouts/application'
       
     else
@@ -404,9 +410,6 @@ post '/profile' do
         @user.save
       end
       
-      #retrieve postings
-      @postings = Posting.all(:employer_id => @user.id, :deadline.gt => Time.now, :deleted.not => 'true', :order => [ :deadline.asc ])
-
       haml :employer_profile, :layout => :'layouts/application'
     end
   rescue TrdError => e
@@ -433,15 +436,15 @@ get '/profile/:id' do
     @student = Student.get(params[:id])
     raise TrdError.new("Sorry, this page does not exist.") if @student.nil?
 
-    @experiences = Experience.all(:student_id => @student.id)
-    @extracurriculars = Extracurricular.all(:student_id => @student.id)
+    @experiences = Experience.all(:student_id => @student.id, :deleted.not => 'true', :order => [ :end_date.desc ])
+    @extracurriculars = Extracurricular.all(:student_id => @student.id, :deleted.not => 'true', :order => [ :end_date.desc ])
     @title = title @student.name
     haml :other_student_profile, :layout => :'layouts/application'
   else
     @employer = Employer.first(:handle=> params[:id])
     raise TrdError.new("Sorry, this page does not exist.") if @employer.nil?
 
-    @postings = Posting.all(:employer_id => @employer.id)
+    @postings = Posting.all(:employer_id => @employer.id, :deadline.gt => Time.now, :deleted.not => 'true', :order => [ :deadline.asc ])
     @title = title @employer.name
     haml :other_employer_profile, :layout => :'layouts/application'
   end
@@ -455,7 +458,7 @@ get '/profile/delete/:type/:id' do
       raise TrdError.new("We could not process that request.") unless o.student_id == @user.id
       o.update(:deleted => true)
     when 'extracurricular'
-      o = Extracurricular.get(params[:id])
+      o = Extracurricular.get(params[:id], )
       raise TrdError.new("We could not process that request.") unless o.student_id == @user.id
       o.update(:deleted => true)
     when 'posting'

@@ -63,7 +63,7 @@
               %span.muted at
               %strong=h exp.place
           .row.span8
-            .gray= "#{h exp.start_date.strftime('%B %Y')} to #{h exp.end_date.strftime('%B %Y')}"
+            .muted= "#{h exp.start_date.strftime('%B %Y')} to #{h exp.end_date.strftime('%B %Y')}"
           .row.span8
             =h exp.desc.gsub("\n", "<br />")
         %br/

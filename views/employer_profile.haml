@@ -186,3 +186,16 @@
               %a{:class => "text-error", :href => "profile/delete/posting/#{h post.id}"}
                 Delete this entry
           %br
+
+.row
+  .span6
+    %h3 Upload new logo
+    %form{:method => "POST", :action => "/upload", :enctype => "multipart/form-data"}
+      %input{:name => 'action', :value => 'photo', :type => 'hidden'}
+      %input{:name => 'file', :type => 'file', :class => "file-upload"}
+      %a.btn-upload.btn
+        %i.icon-picture
+        Choose file
+      %button.btn.btn-success{:type => "submit"}
+        %i.icon-upload.icon-white
+        Upload
