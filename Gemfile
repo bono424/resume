@@ -1,7 +1,6 @@
 source "http://rubygems.org"
 
-gem "sinatra", "~> 1.2.3"
-gem "shotgun", "~> 0.9"
+gem "sinatra", "~> 1.3.3"
 gem "haml", "~> 3.1.1"
 gem "sass", "~> 3.1.1"
 
@@ -9,8 +8,6 @@ gem "datamapper", "~> 1.2.0"
 gem "dm-postgres-adapter", "~> 1.2.0"
 gem "do_postgres", "~> 0.10.10"
 gem "will_paginate", :git => "http://github.com/ssansovich/will_paginate.git"
-
-gem "grid-coordinates", "~> 1.1.4"
 
 gem "pony", "~> 1.4"
 gem "stripe", "~> 1.5.17"

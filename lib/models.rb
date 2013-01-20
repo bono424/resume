@@ -1,21 +1,11 @@
-require 'data_mapper'
-require 'digest/sha2'
+# Requires in production.rb
+# require 'data_mapper'
+# require 'digest/sha2'
 
 # Just log to STDOUT for now.
 DataMapper::Logger.new($stdout, :debug)
 
 include Trd
-
-# todo(siddarth): make sure that DM can be easily migrated
-# to mongo or SQL without major changes.
-if (ENV["RACK_ENV"] == "production")
- DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://localhost/trd_test")
-else
-  # DataMapper.setup( :default, "sqlite3://#{Dir.pwd}/trd.test.db" )
- DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://localhost/trd_test")
-end
-
-DataMapper::Model.raise_on_save_failure = true
 
 class User
   include DataMapper::Resource

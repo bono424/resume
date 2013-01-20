@@ -10,23 +10,14 @@ require 'will_paginate/data_mapper'
 
 require 'csv'
 
-require 'logger'
-
-# s3
-set :bucket, 'trd-assets'
-set :s3_key, 'AKIAIQGNVCLXSVJ6JI4Q'
-set :s3_secret, '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'
-
-
 # Helpers
 require './lib/render_partial'
+require File.expand_path('lib/production', File.dirname(__FILE__))
 require File.expand_path('lib/exceptions', File.dirname(__FILE__))
 require File.expand_path('lib/notifications', File.dirname(__FILE__))
 require File.expand_path('lib/fixtures', File.dirname(__FILE__))
 require File.expand_path('lib/models', File.dirname(__FILE__))
 
-require File.expand_path('lib/mail', File.dirname(__FILE__))
-# require File.expand_path('lib/production', File.dirname(__FILE__))
 # Set Sinatra variables
 set :app_file, __FILE__
 set :root, File.dirname(__FILE__)
@@ -103,11 +94,6 @@ helpers do
   end
 end
 
-# used for debugging
-configure do
-    LOGGER = Logger.new("sinatra.log")
-end
- 
 before do
   @success = nil
 
@@ -255,7 +241,7 @@ get '/verify/:key' do
       user.update(:is_verified => true)
       @success = "You have successfully verified your account. You can now <a href='/'>log in</a>."
     else
-      Stripe.api_key = "sk_test_aR1DCWnDqi5OlkU04ZyH3tp3"
+      Stripe.api_key = settings.stripe_key
       c = Stripe::Customer.retrieve(user.account_id)
       c.update_subscription(:plan => user.plan)
 
