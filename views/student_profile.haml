@@ -26,25 +26,26 @@
     - if @user.school.nil? && @user.major.nil? && @user.minor.nil? && @user.class.nil? && @user.gpa.nil?
       .alert.alert-warning.span6
         Complete all the fields below so that employers can find you easily!
-      .span5.edit{:style => "display:block;"}
-        %form{:method => "POST", :action => "#"}
+      .span7.edit{:style => "display:block;"}
+        %form{:method => "POST", :action => "#", :class => "form-inline"}
           %input{:type => "hidden", :name => "action", :value => "education"}
-          .row
+          .row.control-group
             %strong.span2 School
             %input.span3{:type => "text", :placeholder => "School", :name => "school"}
-          .row
+          .row.control-group
             %strong.span2 Major
             %input.span3{:type => "text", :placeholder => "Major", :name => "major"}
-          .row
+          .row.control-group
             %strong.span2 Minor
             %input.span3{:type => "text", :placeholder => "Minor", :name => "minor"}
-          .row
+          .row.control-group
             %strong.span2 Class
             %input.span3{:type => "text", :placeholder => "Class", :name => "class"}
-            %span.help-inline Class year must be in the form YYYY.
-          .row
+            .help-inline.hide Must be in the form YYYY.
+          .row.control-group
             %strong.span2 GPA
             %input.span3{:type => "text", :placeholder => "GPA", :name => "gpa"}
+            .help-inline.hide Must be a valid number.
           .row
             .span4.offset2
               .row

@@ -55,14 +55,14 @@ $('form').submit(function() {
   var inputs = $(this).serializeArray();
   var fail = false;
   $.each(inputs, function(i, input) {
-    if (input.name == "class") { 
+    if (input.name == "class" && input.value != "") { 
       if (!isNumber(input.value) || input.value.length != 4) {
         $('input[name='+input.name+']').parents('.control-group').addClass('warning');
         $('input[name='+input.name+']').siblings('.help-inline').removeClass('hide');
         fail = true;
       }
     } 
-    if (input.name == "gpa") { 
+    if (input.name == "gpa" && input.value != "") { 
       if (!isNumber(input.value)) {
         $('input[name='+input.name+']').parents('.control-group').addClass('warning');
         $('input[name='+input.name+']').siblings('.help-inline').removeClass('hide');
