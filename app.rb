@@ -170,7 +170,6 @@ post '/upload' do
       # unless ext.eql?('.jpg') or ext.eql?('.png') or ext.eql?('.gif') or ext.eql?('.jpeg')
       #     raise e = TrdError.new("Profile images must be of type .jpg, .png, or .gif")
       # end
-      raise e = TrdError.new("File must be an image.") unless tmpfile.format == 'NULL'
       begin
         #connect to s3
         AWS::S3::Base.establish_connection!(
@@ -179,6 +178,7 @@ post '/upload' do
 
         #resize image before storing
         img = Magick::Image.read(params['file'][:tempfile].path).first
+        raise e = TrdError.new("File must be an image.") unless img.format == 'NULL'
         if @user.type == Student
           img.resize_to_fill(300,300).write(name)
         else
