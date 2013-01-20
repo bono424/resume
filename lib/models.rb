@@ -2,6 +2,8 @@
 # require 'data_mapper'
 # require 'digest/sha2'
 
+require 'dm-timestamps'
+
 # Just log to STDOUT for now.
 DataMapper::Logger.new($stdout, :debug)
 
@@ -16,6 +18,8 @@ class User
   property :verification_key,   String
   property :is_verified,        Boolean, :default => false
   property :type,               Discriminator
+  property :created_at,         DateTime
+  property :updated_at,         DateTime
 end
 
 class Student < User
