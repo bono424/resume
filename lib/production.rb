@@ -5,9 +5,9 @@ require 'pony'
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://localhost/trd_test")
 
 if ENV['RACK_ENV'] == 'production'
-  set :bucket, ENV['S3_BUCKET_NAME']
-  set :s3_key, ENV['AWS_ACCESS_KEY_ID']
-  set :s3_secret, ENV['AWS_SECRET_ACCESS_KEY']
+  set :bucket, ENV['S3_BUCKET_NAME'] || 'trd_assets'
+  set :s3_key, ENV['AWS_ACCESS_KEY_ID'] || 'AKIAIQGNVCLXSVJ6JI4Q'
+  set :s3_secret, ENV['AWS_SECRET_ACCESS_KEY'] || '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'
 
   set :stripe_key, ENV['STRIPE_SECRET_KEY']
 

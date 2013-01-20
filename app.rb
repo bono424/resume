@@ -164,6 +164,7 @@ post '/upload' do
     # generate name and determine filetype
     ext = File.extname(params['file'][:filename])
     name = "#{(Time.now.to_i.to_s + Time.now.usec.to_s).ljust(16, '0')}#{ext}"
+    tmpname = "#{RAILS_ROOT}/tmp/#{name}"
 
     case params[:action]
     when 'photo'
@@ -180,13 +181,13 @@ post '/upload' do
         img = Magick::Image.read(params['file'][:tempfile].path).first
         raise e = TrdError.new("File must be an image.") unless img.format == 'NULL'
         if @user.type == Student
-          img.resize_to_fill(300,300).write(name)
+          img.resize_to_fill(300,300).write(tmpname)
         else
-          img.resize_to_fit(300).write(name)
+          img.resize_to_fit(300).write(tmpname)
         end
 
         #store it
-        AWS::S3::S3Object.store(name,img,settings.bucket,:access => :public_read)     
+        AWS::S3::S3Object.store(name,open(tmpname),settings.bucket,:access => :public_read)     
         FileUtils.rm name
 
       rescue
