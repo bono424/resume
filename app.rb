@@ -471,24 +471,22 @@ post '/login' do
     user = User.first(:email => params[:email])
 
     # make sure email is valid
-    if user.nil?
-      raise TrdError.new("Invalid login credentials.")
-    end
+    raise nil if user.nil?
 
     # check password
     pass = hash(params[:password], user.salt)
-    raise TrdError.new("Invalid login credentials.") if pass != user.password
+    raise nil if pass != user.password
 
     # make sure user is verified
-    raise TrdError.new("User is not verified.") unless user.is_verified
+    raise nil unless user.is_verified
 
     # insert info into sessions
     session[:user] = user.id
     redirect '/profile'
   rescue TrdError => e
-    @error = e.message
+    @error = "Something went wrong while trying to log you in. Please try again."
     @success = nil
-    haml :index, :layout => :'layouts/index'
+    haml :login, :layout => :'layouts/panel'
   end
 end
 
