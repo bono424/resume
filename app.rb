@@ -1,4 +1,5 @@
 require 'rubygems'
+require 'bundler/setup'
 require 'sinatra'
 require 'haml'
 require 'stripe'
@@ -164,34 +165,32 @@ post '/upload' do
     # generate name and determine filetype
     ext = File.extname(params['file'][:filename])
     name = "#{(Time.now.to_i.to_s + Time.now.usec.to_s).ljust(16, '0')}#{ext}"
-    tmpname = "#{RAILS_ROOT}/tmp/#{name}"
+    # ENV['RACK_ENV'] == 'production' ? tmpname = "#{RAILS_ROOT}/tmp/#{name}" : tmpname=name
 
     case params[:action]
     when 'photo'
       # unless ext.eql?('.jpg') or ext.eql?('.png') or ext.eql?('.gif') or ext.eql?('.jpeg')
       #     raise e = TrdError.new("Profile images must be of type .jpg, .png, or .gif")
       # end
-      begin
         #connect to s3
         AWS::S3::Base.establish_connection!(
         :access_key_id     => settings.s3_key,
         :secret_access_key => settings.s3_secret)
 
         #resize image before storing
-        img = Magick::Image.read(params['file'][:tempfile].path).first
-        raise e = TrdError.new("File must be an image.") unless img.format == 'NULL'
-        if @user.type == Student
-          img.resize_to_fill(300,300).write(tmpname)
-        else
-          img.resize_to_fit(300).write(tmpname)
+        begin
+          img = Magick::Image.read(params['file'][:tempfile].path).first
+        rescue
+          raise e = TrdError.new("File must be an image.")
         end
 
-        #store it
-        AWS::S3::S3Object.store(name,open(tmpname),settings.bucket,:access => :public_read)     
-        FileUtils.rm name
+        @user.type == Student ? img.resize_to_fill(300,300).write(name) : img.resize_to_fit(300).write(name)
 
+      begin
+        #store it
+        AWS::S3::S3Object.store(name,open(name),settings.bucket,:access => :public_read)     
       rescue
-        raise e = TrdError.new("Upload to S3 failed.")
+        raise e = TrdError.new("Upload failed. Please try again.")
       end
       # if successful, set user as profile image
       @user.update(:photo => name) 
