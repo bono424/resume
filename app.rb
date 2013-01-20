@@ -186,7 +186,7 @@ post '/upload' do
         end
 
         #store it
-        AWS::S3::S3Object.store(name,open(name),settings.bucket,:access => :public_read)     
+        AWS::S3::S3Object.store(name,img,settings.bucket,:access => :public_read)     
         FileUtils.rm name
 
       rescue
