@@ -27,7 +27,7 @@
       - if @user.photo.nil?
         %img{:src => "/img/anon.png", :class => "profilepic img-polaroid"}
       - else
-        %img{:src => "https://trd-assets.s3.amazonaws.com/#{@user.photo}", :class => "profilepic img-polaroid"}
+        %img#photo{:src => "https://trd-assets.s3.amazonaws.com/#{@user.photo}", :class => "profilepic img-polaroid"}
     %li{:class => "nav-header"}= @user.name
     %li
       %a{:href => "/profile"}
@@ -55,7 +55,7 @@
       - if @user.photo.nil?
         %img{:src => "/img/nologo.png", :class => "profilepic"}
       - else
-        %img{:src => "https://trd-assets.s3.amazonaws.com/#{@user.photo}", :class => "profilepic"}
+        %img#photo{:src => "https://trd-assets.s3.amazonaws.com/#{@user.photo}"}
     %li{:class => "nav-header"}= @user.name
     %li
       %a{:href => "/profile"}

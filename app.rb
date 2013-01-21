@@ -189,6 +189,7 @@ post '/upload/:action' do
       begin
         #store it
         AWS::S3::S3Object.store(name,open(name),settings.bucket,:access => :public_read)     
+        File.delete(name) unless ENV['RACK_ENV'] == 'production'
       rescue
         raise e = TrdError.new("Upload failed. Please try again.")
       end

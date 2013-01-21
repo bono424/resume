@@ -2,24 +2,6 @@
   .row
     .span9
       %div{:class => "alert alert-error"}= @error
-%br
-.row
-  .span3
-    - if @user.photo.nil?
-      .row
-        .span5
-          %p No logo uploaded.
-          %form{:method => "POST", :action => "/upload", :enctype => "multipart/form-data"}
-            %input{:name => 'action', :value => 'photo', :type => 'hidden'}
-            %input{:name => 'file', :type => 'file', :class => "file-upload"}
-            %a.btn-upload.btn
-              %i.icon-picture
-              Choose file
-            %button.btn.btn-success{:type => "submit"}
-              %i.icon-upload.icon-white
-              Upload
-    - else
-      %img{:src => "https://trd-assets.s3.amazonaws.com/#{h @user.photo}" }
 
 #about
   .row
@@ -205,16 +187,10 @@
                 Delete this entry
           %br
 
-- unless @user.photo.nil?
-  .row
-    .span6
-      %h3 Upload new logo
-      %form{:method => "POST", :action => "/upload", :enctype => "multipart/form-data"}
-        %input{:name => 'action', :value => 'photo', :type => 'hidden'}
-        %input{:name => 'file', :type => 'file', :class => "file-upload"}
-        %a.btn-upload.btn
-          %i.icon-picture
-          Choose file
-        %button.btn.btn-success{:type => "submit"}
-          %i.icon-upload.icon-white
-          Upload
+.row
+  .span10
+    %h3 Upload new logo
+  .span2
+    %a#upload-photo.btn{:style => "width:120px;"}
+      %i.icon-picture
+      Upload logo

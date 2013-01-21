@@ -96,7 +96,7 @@ var photoUpload = $('#upload-photo').upload({
     $('#upload-photo').removeClass('btn-inverse');
     $('#upload-photo').addClass('btn-success');
     $('#upload-photo').html("<i class='icon-ok icon-white'> Complete!");
-    $('.profilepic').attr('src', 'https://trd-assets.s3.amazonaws.com/'+response);
+    $('#photo').attr('src', 'https://trd-assets.s3.amazonaws.com/'+response);
   },
   onSelect: function() {
     $('#upload-photo').addClass('btn-inverse');
