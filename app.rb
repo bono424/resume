@@ -156,7 +156,7 @@ post '/' do
   end
 end
 
-post '/upload' do
+post '/upload/:action' do
   begin
     unless params['file'] && (tmpfile = params['file'][:tempfile]) && (name = params['file'][:filename])
         redirect '/profile' unless @user.nil?
@@ -194,6 +194,9 @@ post '/upload' do
       end
       # if successful, set user as profile image
       @user.update(:photo => name) 
+      
+      # send result to ajax
+      @user.photo
 
     when 'resume'
       unless ext.eql?('.pdf')
@@ -209,9 +212,11 @@ post '/upload' do
       end
       # if successful, set user as profile image
       @user.update(:resume=> name) 
+
+      # send result to ajax
+      @user.resume
     end
 
-    redirect '/profile'
   rescue TrdError => e
     @error = e.message
     @success = nil

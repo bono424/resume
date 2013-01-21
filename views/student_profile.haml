@@ -8,11 +8,12 @@
       %div{:class => "alert alert-success"}= @success
 
 %h1= @user.name
-- if @user.resume.nil?
-  %p Currently no resume uploaded.
-- else
-  %a{:href => "https://trd-assets.s3.amazonaws.com/#{@user.resume}", :target => "_blank"} View current resume
-%br/
+.row
+  .span6#resume
+    - if @user.resume.nil?
+      %p Currently no resume uploaded.
+    - else
+      %a{:href => "https://trd-assets.s3.amazonaws.com/#{@user.resume}", :target => "_blank"} View current resume
 %br/
 
 /education
@@ -313,32 +314,17 @@
 
 %hr
 
+.row
+  .span5
+    %h2 Uploads
 /upload photo
 .row
-  .span5
-    %p
-      %strong Upload profile picture
-    %form{:method => "POST", :action => "/upload", :enctype => "multipart/form-data"}
-      %input{:name => 'action', :value => 'photo', :type => 'hidden'}
-      %input{:name => 'file', :type => 'file', :class => "file-upload"}
-      %a.btn-upload.btn
-        %i.icon-picture
-        Choose file 
-      %button.btn.btn-success{:type => "submit"}
-        %i.icon-upload.icon-white
-        Upload
-
-/upload resume 
-.row
-  .span5
-    %p
-      %strong Upload resume (PDF only)
-    %form{:method => "POST", :action => "/upload", :enctype => "multipart/form-data"}
-      %input{:name => 'action', :value => 'resume', :type => 'hidden'}
-      %input{:name => 'file', :type => 'file', :class => "file-upload"}
-      %a.btn-upload.btn
-        %i.icon-file
-        Choose file 
-      %button.btn.btn-success{:type => "submit"}
-        %i.icon-upload.icon-white
-        Upload
+  .span2
+    %a#upload-photo.btn{:style => "width:120px;"}
+      %i.icon-picture
+      Upload photo
+  .span2
+    %a#upload-resume.btn{:style => "width:120px;"}
+      %i.icon-file
+      Upload resume
+%br/

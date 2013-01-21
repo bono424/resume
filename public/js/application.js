@@ -75,18 +75,58 @@ $('form').submit(function() {
 
 // file upload
 
-$('.btn-upload').click(function() {
-  $(this).siblings('.file-upload').trigger('click');
+// $('.btn-upload').click(function() {
+//   $(this).siblings('.file-upload').trigger('click');
+// });
+// 
+// $('.file-upload').change(function() {
+//   $(this).siblings('.btn-upload').addClass('btn-inverse').html('<i class="icon-ok icon-white"></i> File selected');
+//   $(this).siblings('.btn-upload i').addClass('icon-white'); // and the icon...
+// });
+// 
+var photoUpload = $('#upload-photo').upload({
+  name: 'file',
+  action: '/upload/photo',
+  onSubmit: function() {
+    $('#upload-photo').addClass('btn-inverse');
+    $('#upload-photo').html("<i class='icon-ok icon-white'> Uploading...");
+  },
+  onComplete: function(response) {
+    alert(response);
+    $('#upload-photo').removeClass('btn-inverse');
+    $('#upload-photo').addClass('btn-success');
+    $('#upload-photo').html("<i class='icon-ok icon-white'> Complete!");
+    $('.profilepic').attr('src', 'https://trd-assets.s3.amazonaws.com/'+response);
+  },
+  onSelect: function() {
+    $('#upload-photo').addClass('btn-inverse');
+    $('#upload-photo').html("<i class='icon-ok icon-white'> Uploading...");
+  }
 });
 
-$('.file-upload').change(function() {
-  $(this).siblings('.btn-upload').addClass('btn-inverse').html('<i class="icon-ok icon-white"></i> File selected');
-  $(this).siblings('.btn-upload i').addClass('icon-white'); // and the icon...
+var resumeUpload = $('#upload-resume').upload({
+  name: 'file',
+  action: '/upload/resume',
+  onSubmit: function() {
+    $('#upload-resume').addClass('btn-inverse');
+    $('#upload-resume').html("<i class='icon-ok icon-white'> Uploading...");
+  },
+  onComplete: function(response) {
+    alert(response);
+    $('#upload-resume').removeClass('btn-inverse');
+    $('#upload-resume').addClass('btn-success');
+    $('#upload-resume').html("<i class='icon-ok icon-white'> Complete!");
+    $('#resume').html('<a href = "https://trd-assets.s3.amazonaws.com/'+response+'" target = "_blank">View current resume</a>');
+  },
+  onSelect: function() {
+    $('#upload-resume').addClass('btn-inverse');
+    $('#upload-resume').html("<i class='icon-ok icon-white'> Uploading...");
+  }
 });
-
 // contact
 
 $('#contact > form').submit(function() {
+
   $('#submit-contact').addClass('disabled').html('<i class="icon-spinner icon-spin">')
   $.post($(this).attr('action'), $(this).serialize(), function(data){
     $('.modal-body').html("<h1>Thanks!</h1><p>We'll get back to you as soon as possible.</p>");
