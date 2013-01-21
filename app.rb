@@ -477,7 +477,7 @@ post '/login' do
     user = User.first(:email => params[:email])
 
     # make sure email is valid
-    raise nil if user.nil?
+    raise e = TrdError.new("Oops.") if user.nil?
 
     # check password
     pass = hash(params[:password], user.salt)
@@ -635,7 +635,7 @@ get '/search' do
       else
         
         # Generate query string. I know this sucks. Bear with me.
-        @results = Student.all(:name.not => "")
+        @results = Student.all( :is_verified => true)
         @results = @results.all(:conditions => ["name ILIKE ?", "%#{params[:name]}%"]) unless params[:name].empty?
         @results = @results.all(:conditions => ["school ILIKE ?", "%#{params[:school]}%"]) unless params[:school].empty?
         @results = @results.all(:conditions => ["class = ?", "%#{DateTime.strptime(params[:class],'%Y')}%"]) unless params[:class].empty?
@@ -667,23 +667,15 @@ post '/contact' do
 end
 
 get '/database' do
-
-
-  # users = CSV.read("test.csv")
-  # names = CSV.read("names.csv")
-  # fullname = names[0][1] + " " + names[0][3]
-  # email = users[0][1]
-
-  users_csv = File.read('design/users.csv')
-  info_csv = File.read('design/info.csv')
+  users_csv = File.read('users.csv')
+  info_csv = File.read('info.csv')
   users = CSV.parse(users_csv, :headers => true)
   info = CSV.parse(info_csv, :headers => true)
 
   users.each do |u|
   # TODO: Don't create duplicates!
     if u['Is_employer'] != "1"
-      user = Student.new
-      user.email = u['Email']
+      user = Student.first_or_create(:email => u['Email'])
       user.salt = random_string(6)
       user.verification_key = random_string(32)
       user.type = Student
@@ -712,6 +704,7 @@ get '/database' do
           unless row['Class'].nil? || row['Class'].empty? || row['Class'] == "0"
             user.class = Date.strptime(row['Class'], '%Y') rescue nil
           end
+          user.is_verified = true;
         end
       end
       begin
