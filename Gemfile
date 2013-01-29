@@ -3,6 +3,7 @@ source "http://rubygems.org"
 gem "sinatra", "~> 1.3.3"
 gem "haml", "~> 3.1.1"
 gem "sass", "~> 3.1.1"
+gem "tux", "~> 0.3.0"
 
 gem "datamapper", "~> 1.2.0"
 gem "dm-postgres-adapter", "~> 1.2.0"

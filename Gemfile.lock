@@ -13,6 +13,7 @@ GEM
       mime-types
       xml-simple
     bcrypt-ruby (3.0.1)
+    bond (0.4.3)
     builder (3.1.4)
     data_objects (0.10.11)
       addressable (~> 2.1)
@@ -80,8 +81,18 @@ GEM
     rack (1.4.4)
     rack-protection (1.3.2)
       rack
+    rack-test (0.6.2)
+      rack (>= 1.0)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    ripl (0.7.0)
+      bond (~> 0.4.2)
+    ripl-multi_line (0.3.0)
+      ripl (>= 0.3.6)
+    ripl-rack (0.2.0)
+      rack (>= 1.0)
+      rack-test (>= 0.5)
+      ripl (>= 0.3.5)
     rmagick (2.13.1)
     sass (3.1.21)
     sinatra (1.3.3)
@@ -95,6 +106,11 @@ GEM
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
+    tux (0.3.0)
+      ripl (>= 0.3.5)
+      ripl-multi_line (>= 0.2.4)
+      ripl-rack (>= 0.2.0)
+      sinatra (>= 1.2.1)
     uuidtools (2.1.3)
     xml-simple (1.1.2)
 
@@ -114,4 +130,5 @@ DEPENDENCIES
   sass (~> 3.1.1)
   sinatra (~> 1.3.3)
   stripe (~> 1.5.17)
+  tux (~> 0.3.0)
   will_paginate!
