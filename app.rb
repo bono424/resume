@@ -31,59 +31,6 @@ enable :sessions
 
 include Trd
 
-def db
-  users_csv = File.read('users.csv')
-  info_csv = File.read('info.csv')
-  users = CSV.parse(users_csv, :headers => true)
-  info = CSV.parse(info_csv, :headers => true)
-
-  users.each do |u|
-    if u['Is_employer'] != "1"
-      user = Student.first_or_create(:email => u['Email'])
-      user.salt = random_string(6)
-      user.verification_key = random_string(32)
-      user.type = Student
-
-      info.each do |row| 
-        if row['UID'] == u['UID']
-          user.name = "#{row['First']} #{row['Last']}" unless  row['First'].nil? || row['Last'].nil? || row['First'].empty? || row['Last'].empty?
-          unless row['School'].nil? || row['School'].empty?
-            user.school = row['School'] unless String.try_convert(row['School']).nil?
-          end
-          unless row['Major'].nil? || row['Major'].empty?
-            if row['Major'].is_a? String
-              user.major = row['Major']
-            end
-          end
-          unless row['Minor'].nil? || row['Minor'].empty?
-            if row['Minor'].is_a? String
-              user.minor = row['Minor']
-            end
-          end
-          unless row['GPA'].nil? || row['GPA'] == "0" || row['GPA'].empty?
-            s = row['GPA'].to_f
-            gpa = "%1.2f" % s
-            user.gpa = gpa
-          end
-          unless row['Class'].nil? || row['Class'].empty? || row['Class'] == "0"
-            user.class = Date.strptime(row['Class'], '%Y') rescue nil
-          end
-          user.is_verified = true;
-        end
-      end
-      begin
-        puts user
-        user.save
-      rescue
-        @error = user
-        @users = Student.all
-        haml :display_db
-      end
-    end
-  end
-  @users = Student.all
-end
-
 helpers do
   include Rack::Utils
   alias_method :h, :escape_html
@@ -146,6 +93,59 @@ helpers do
     html += "</div></div>"
     html
   end
+
+def db
+  users_csv = File.read('users.csv')
+  info_csv = File.read('info.csv')
+  users = CSV.parse(users_csv, :headers => true)
+  info = CSV.parse(info_csv, :headers => true)
+
+  users.each do |u|
+    if u['Is_employer'] != "1"
+      user = Student.first_or_create(:email => u['Email'])
+      user.salt = random_string(6)
+      user.verification_key = random_string(32)
+      user.type = Student
+
+      info.each do |row| 
+        if row['UID'] == u['UID']
+          user.name = "#{row['First']} #{row['Last']}" unless  row['First'].nil? || row['Last'].nil? || row['First'].empty? || row['Last'].empty?
+          unless row['School'].nil? || row['School'].empty?
+            user.school = row['School'] unless String.try_convert(row['School']).nil?
+          end
+          unless row['Major'].nil? || row['Major'].empty?
+            if row['Major'].is_a? String
+              user.major = row['Major']
+            end
+          end
+          unless row['Minor'].nil? || row['Minor'].empty?
+            if row['Minor'].is_a? String
+              user.minor = row['Minor']
+            end
+          end
+          unless row['GPA'].nil? || row['GPA'] == "0" || row['GPA'].empty?
+            s = row['GPA'].to_f
+            gpa = "%1.2f" % s
+            user.gpa = gpa
+          end
+          unless row['Class'].nil? || row['Class'].empty? || row['Class'] == "0"
+            user.class = Date.strptime(row['Class'], '%Y') rescue nil
+          end
+          user.is_verified = true;
+        end
+      end
+      begin
+        user.save
+        puts "#{user.id} | #{user.email} | #{user.name}"
+      rescue
+        @error = user
+        @users = Student.all
+        haml :display_db
+      end
+    end
+  end
+  @users = Student.all
+end
 end
 
 before do
