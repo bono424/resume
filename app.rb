@@ -31,6 +31,10 @@ enable :sessions
 
 include Trd
 
+def db
+  puts "Hello, db"
+end
+
 helpers do
   include Rack::Utils
   alias_method :h, :escape_html
