@@ -8,7 +8,7 @@ module Trd
     SUPPORT = '"Scott Sansovich" <ssansovich@gmail.com>'
     SIGNUP = '"Scott Sansovich" <ssansovich@gmail.com>'
     ALL = '"Scott Sansovich" <ssansovich@gmail.com>'
-    FROM = '"Resume Drop" <info@theresumedrop.com>'
+    FROM = '"The Resume Drop" <hello@theresumedrop.com>'
 
     def self.send_verification_email(email, verification_key)
       to = email
@@ -20,7 +20,7 @@ Before you can start building your profile, you need to confirm your email addre
 
 #{link}
 
-If you have any questions or suggestions, please let us know! Send an email to either scott@theresumedrop.com or damilare@theresumedrop.com
+If you have any questions or suggestions, please email us at hello@theresumedrop.com
 
 Good luck and have fun!
 
@@ -52,13 +52,14 @@ EOS
       body =<<EOS
 Hi #{name},
 
-We've been hard at work revamping The Resume Drop. We're proud to say that the new version is now online. We hope you'll find it a lot easier to create your profile and find great opportunities.
+Thanks for joining The Resume Drop. We've been hard at work improving The Resume Drop. We're proud to say that the new version is now online. We hope you'll find it a lot easier to create your profile and find great opportunities.
 
 To visit your profile, go to the link below (it's unique to you):
 http://www.theresumedrop.com/welcomeback/#{v_key}
 
 If you have suggestions, questions, or just want to say hi, please email us at hello@theresumedrop.com
 
+Thanks!
 The Resume Drop Team
 EOS
       Pony.mail(:to => to, :from => "'The Resume Drop' <welcome@theresumedrop.com>", :subject => subject, :body => body)

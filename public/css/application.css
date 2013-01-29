@@ -154,6 +154,10 @@ form strong {
   display:none;
 }
 
+a.btn {
+  cursor:pointer;
+}
+
 /* ==== INDEX ==== */
 
 .hero-unit {

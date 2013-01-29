@@ -130,9 +130,9 @@ post '/' do
   begin
     validate(params, [:name, :password, :email])
 
-    # unless params[:email].end_with? ".edu"
-    #   raise TrdError.new("Sorry, only students can register with The Resume Drop.")
-    # end
+    unless params[:email].end_with? ".edu"
+      raise TrdError.new("Sorry, only students can register with The Resume Drop. If you are an employer, please see our <a href='/pricing'>pricing page</a>.")
+    end
 
     @user = Student.first(:email => params[:email])
     raise TrdError.new("Looks like that email is already registered.") unless @user.nil?
@@ -481,10 +481,10 @@ post '/login' do
 
     # check password
     pass = hash(params[:password], user.salt)
-    raise nil if pass != user.password
+    raise e = TrdError.new("Nope.") if pass != user.password
 
     # make sure user is verified
-    raise nil unless user.is_verified
+    raise e = TrdError.new("Nope.") unless user.is_verified
 
     # insert info into sessions
     session[:user] = user.id
@@ -661,7 +661,6 @@ end
 
 post '/contact' do
   @user.nil? ? email = params[:email] : email = @user.email
-  puts email
   message = params[:message]
   Notifications.send_contact_email(email, message)
 end
@@ -720,14 +719,13 @@ get '/database' do
   haml :display_db
 end
 
-get '/sendwelcomeback' do
-  # TODO: Don't send duplicate emails!
+get '/sendwb' do
   all = Student.all
 
   all.each do |u|
     u.email
     u.verification_key
-    name = "there"
+    name = "there" # "Hi there"
     unless u.name.nil?
       name = u.name.split
       name = name[0]
@@ -763,6 +761,7 @@ post '/welcomeback/:key' do
 
     if params[:password].eql? params[:password2]
       pass = hash(params[:password], @user.salt)
+      #reset verification key to invalidate link
       v_key = random_string(32)
       @user.update({:is_verified => true, :password => pass, :name => params[:name], :verification_key => v_key})
     else
@@ -776,9 +775,8 @@ post '/welcomeback/:key' do
     @success = nil
     @error = e.message
     haml :welcomeback, :layout => :'layouts/panel'
+  rescue
+    @error = "Please try again."
+    haml :error, :layout => :'layouts/message'
   end
-end
-
-get '/frontpage' do
-  haml :frontpage
 end
