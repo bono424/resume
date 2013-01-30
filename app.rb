@@ -730,7 +730,7 @@ end
 
 post '/contact' do
   @user.nil? ? email = params[:email] : email = @user.email
-  message = params[:message]
+  message = params[:body]
   Notifications.send_contact_email(email, message)
 end
 
