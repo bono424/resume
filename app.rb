@@ -622,6 +622,7 @@ post '/subscribe/:plan' do
     user = User.get(:email => params[:email])
     raise TrdError.new("This account is already registered. Please contact us at support@theresumedrop.com to delete this account.") unless user.nil?
 
+    Stripe.api_key = settings.stripe_key
     customer = Stripe::Customer.create(
       :description => "Customer for #{params[:name]}",
       :email => params[:email],
