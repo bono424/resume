@@ -162,7 +162,37 @@ def db
   end
   @users = Student.all
 end
+
+def upload_resumes
+  users_csv = File.read('users.csv')
+  info_csv = File.read('info.csv')
+  users = CSV.parse(users_csv, :headers => true)
+  info = CSV.parse(info_csv, :headers => true)
+
+  users.each do |u|
+    user = Student.first(:email => u['Email'])
+    puts user
+    info.each do |i|
+      unless i['Resume'] == ""
+        old_resume_name = i['Resume'] 
+        user.resume = "#{random_string(32)}.pdf"
+        puts old_resume_name
+        puts user.resume
+        begin
+          AWS::S3::Base.establish_connection!(
+          :access_key_id     => 'AKIAIQGNVCLXSVJ6JI4Q',
+          :secret_access_key => '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')
+          AWS::S3::S3Object.rename old_resume_name, user.resume, 'trd-assets', :access => :public_read
+          user.save
+        rescue
+          raise TrdError.new("Upload to S3 failed.")
+        end
+      end
+    end
+  end
 end
+
+end #end helpers
 
 before do
   @success = nil
@@ -233,7 +263,7 @@ post '/upload/:action' do
 
     # generate name and determine filetype
     ext = File.extname(params['file'][:filename])
-    name = "#{(Time.now.to_i.to_s + Time.now.usec.to_s).ljust(16, '0')}#{ext}"
+    name = "#{random_string(32)}#{ext}"
     # ENV['RACK_ENV'] == 'production' ? tmpname = "#{RAILS_ROOT}/tmp/#{name}" : tmpname=name
 
     case params[:action]

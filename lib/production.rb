@@ -4,6 +4,10 @@ require 'pony'
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://localhost/trd_test")
 
+Bucket.enable_logging_for(
+      'trd-assets', 'target_bucket' => 'trd-logs'
+)
+
 if ENV['RACK_ENV'] == 'production'
   set :bucket, ENV['S3_BUCKET_NAME']
   set :s3_key, ENV['AWS_ACCESS_KEY_ID']
@@ -27,7 +31,6 @@ if ENV['RACK_ENV'] == 'production'
     }
   }
 else
-  set :bucket, 'trd-assets'
   set :session_secret, 'manjusri'
   set :stripe_key, 'sk_test_aR1DCWnDqi5OlkU04ZyH3tp3'
   DataMapper::Model.raise_on_save_failure = true
