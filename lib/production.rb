@@ -4,18 +4,18 @@ require 'pony'
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://localhost/trd_test")
 
-AWS::S3::Base.establish_connection!(
-:access_key_id     => settings.s3_key,
-:secret_access_key => settings.s3_secret)
-AWS::S3::Bucket.enable_logging_for(
-      'trd-assets', 'target_bucket' => 'trd-logs'
-)
-
 if ENV['RACK_ENV'] == 'production'
   set :bucket, ENV['S3_BUCKET_NAME']
   set :s3_key, ENV['AWS_ACCESS_KEY_ID']
   set :s3_secret, ENV['AWS_SECRET_ACCESS_KEY']
   set :session_secret, 'manjusri'
+
+  AWS::S3::Base.establish_connection!(
+  :access_key_id     => settings.s3_key,
+  :secret_access_key => settings.s3_secret)
+  AWS::S3::Bucket.enable_logging_for(
+        'trd-assets', 'target_bucket' => 'trd-logs'
+  )
 
   set :stripe_key, ENV['STRIPE_SECRET_KEY']
 
