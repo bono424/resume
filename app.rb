@@ -183,7 +183,9 @@ def upload_resumes
             AWS::S3::Base.establish_connection!(
             :access_key_id     => 'AKIAIQGNVCLXSVJ6JI4Q',
             :secret_access_key => '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')
-            AWS::S3::S3Object.rename old_resume_name, user.resume, 'trd-assets', :access => :public_read
+            if AWS::S3::S3Object.exists? old_resume_name
+              AWS::S3::S3Object.rename old_resume_name, user.resume, 'trd-assets', :access => :public_read
+            end
             user.save
           rescue
             raise TrdError.new("Upload to S3 failed.")
