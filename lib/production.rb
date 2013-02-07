@@ -4,6 +4,9 @@ require 'pony'
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://localhost/trd_test")
 
+AWS::S3::Base.establish_connection!(
+:access_key_id     => settings.s3_key,
+:secret_access_key => settings.s3_secret)
 AWS::S3::Bucket.enable_logging_for(
       'trd-assets', 'target_bucket' => 'trd-logs'
 )
