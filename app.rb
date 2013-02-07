@@ -173,19 +173,21 @@ def upload_resumes
     user = Student.first(:email => u['Email'])
     puts user
     info.each do |i|
-      unless i['Resume'] == ""
-        old_resume_name = i['Resume'] 
-        user.resume = "#{random_string(32)}.pdf"
-        puts old_resume_name
-        puts user.resume
-        begin
-          AWS::S3::Base.establish_connection!(
-          :access_key_id     => 'AKIAIQGNVCLXSVJ6JI4Q',
-          :secret_access_key => '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')
-          AWS::S3::S3Object.rename old_resume_name, user.resume, 'trd-assets', :access => :public_read
-          user.save
-        rescue
-          raise TrdError.new("Upload to S3 failed.")
+      if u['UID'] == i['UID']
+        unless i['Resume'] == ""
+          old_resume_name = i['Resume'] 
+          user.resume = "#{random_string(32)}.pdf"
+          puts old_resume_name
+          puts user.resume
+          begin
+            AWS::S3::Base.establish_connection!(
+            :access_key_id     => 'AKIAIQGNVCLXSVJ6JI4Q',
+            :secret_access_key => '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')
+            AWS::S3::S3Object.rename old_resume_name, user.resume, 'trd-assets', :access => :public_read
+            user.save
+          rescue
+            raise TrdError.new("Upload to S3 failed.")
+          end
         end
       end
     end
