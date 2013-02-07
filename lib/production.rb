@@ -4,7 +4,7 @@ require 'pony'
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://localhost/trd_test")
 
-Bucket.enable_logging_for(
+AWS::S3::Bucket.enable_logging_for(
       'trd-assets', 'target_bucket' => 'trd-logs'
 )
 
