@@ -522,15 +522,15 @@ get '/profile/delete/:type/:id' do
     when 'experience'
       o = Experience.get(params[:id])
       raise TrdError.new("We could not process that request.") unless o.student_id == @user.id
-      o.update(:deleted => true)
+      o.update(:deleted => 't')
     when 'extracurricular'
       o = Extracurricular.get(params[:id], )
       raise TrdError.new("We could not process that request.") unless o.student_id == @user.id
-      o.update(:deleted => true)
+      o.update(:deleted => 't')
     when 'posting'
       o = Posting.get(params[:id])
       raise TrdError.new("We could not process that request.") unless o.employer_id == @user.id
-      o.update(:deleted => true)
+      o.update(:deleted => 't')
     end
     redirect '/profile'
   rescue TrdError => e
