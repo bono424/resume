@@ -46,6 +46,25 @@ EOS
       Pony.mail(:to => SUPPORT, :from => "'TRD Bot' <bot@theresumedrop.com>", :subject => subject, :body => body)
     end
 
+    def self.send_payment_receipt(to, v_key, name)
+      subject = "The NEW Resume Drop is here!"
+
+      body =<<EOS
+Hi #{name},
+
+Thanks for joining The Resume Drop. We've been hard at work improving The Resume Drop. We're proud to say that the new version is now online. We hope you'll find it a lot easier to create your profile and find great opportunities.
+
+To visit your profile, go to the link below (it's unique to you):
+http://www.theresumedrop.com/welcomeback/#{v_key}
+
+If you have suggestions, questions, or just want to say hi, please email us at hello@theresumedrop.com
+
+Thanks!
+The Resume Drop Team
+EOS
+      Pony.mail(:to => to, :from => "'The Resume Drop' <welcome@theresumedrop.com>", :subject => subject, :body => body)
+    end
+
     def self.send_welcomeback_email(to, v_key, name)
       subject = "The NEW Resume Drop is here!"
 

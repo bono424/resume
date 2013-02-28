@@ -10,6 +10,7 @@ require 'will_paginate'
 require 'will_paginate/data_mapper'
 
 require 'csv'
+require 'json'
 
 # Helpers
 require './lib/render_partial'
@@ -683,22 +684,16 @@ post '/subscribe/:plan' do
   end
 end
 
-get '/stripe_test' do
-  begin
-    Stripe.api_key = "sk_test_aR1DCWnDqi5OlkU04ZyH3tp3"
-    Stripe::Charge.create(
-        :amount => 1500, # $15.00 this time
-        :currency => "usd",
-        :customer => @user.account_id
-    )
-    @success = "You've charged the account."
-    haml :subscribe, :layout => :'layouts/subscribe'
-  rescue Stripe::StripeError
-    @error = "We were unable to process your payment. Please email support@theresumedrop.com for more information."
-    @success = nil
-    haml :subscribe, :layout => :'layouts/subscribe'
-  end
+post '/stripe/webhook' do
+  Stripe.api_key = settings.stripe_key
+
+  # Retrieve the request's body and parse it as JSON
+  event_json = JSON.parse(request.body.read)
+
+  # Do something with event_json
+  event_json
 end
+
 
 # Static pages.
 

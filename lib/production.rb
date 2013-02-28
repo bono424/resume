@@ -1,7 +1,7 @@
 require 'data_mapper'
 require 'digest/sha2'
 require 'pony'
-
+DataMapper::Logger.new($stdout, :debug)
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://localhost/trd_test")
 
 if ENV['RACK_ENV'] == 'production'
