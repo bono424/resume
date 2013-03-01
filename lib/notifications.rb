@@ -51,19 +51,18 @@ EOS
       body =<<EOS
 Hi #{name},
 
-This is a receipt for The Resume Drop subscription. This is only a receipt, no
+This is a receipt for your subscription with The Resume Drop. This is only a receipt, no
 payment is due. If you have any questions, please contact us anytime at
 support@theresumedrop.com. Thank you for your business!
 
--------------------------------------------------
-THE RESUMEDROP RECEIPT - #{date}
+THE RESUME DROP RECEIPT - #{date}\n
 
-User: #{to}
-Plan: #{plan}
-Amount: USD $#{amount}
+User: #{to}\n
+Plan: #{plan}\n
+Amount: USD #{amount}
 
-The Resume Drop
 
+Thank you!
 EOS
       Pony.mail(:to => DEV, :from => SUPPORT, :subject => subject, :body => body)
     end
