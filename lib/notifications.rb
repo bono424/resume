@@ -43,26 +43,30 @@ Message:\n
 Love,\n
 TheResumeDrop bot
 EOS
-      Pony.mail(:to => SUPPORT, :from => "'TRD Bot' <bot@theresumedrop.com>", :subject => subject, :body => body)
+      Pony.mail(:to => SUPPORT, :from => "'TRD Bot' <support@theresumedrop.com>", :subject => subject, :body => body)
     end
 
-    def self.send_payment_receipt(to, v_key, name)
-      subject = "The NEW Resume Drop is here!"
+    def self.send_payment_receipt(to, date, time, amount, name, plan)
+      subject = "[The Resume Drop] Payment Receipt"
 
       body =<<EOS
 Hi #{name},
 
-Thanks for joining The Resume Drop. We've been hard at work improving The Resume Drop. We're proud to say that the new version is now online. We hope you'll find it a lot easier to create your profile and find great opportunities.
+This is a receipt for The Resume Drop subscription. This is only a receipt, no
+payment is due. If you have any questions, please contact us anytime at
+support@theresumedrop.com. Thank you for your business!
 
-To visit your profile, go to the link below (it's unique to you):
-http://www.theresumedrop.com/welcomeback/#{v_key}
+-------------------------------------------------
+THE RESUMEDROP RECEIPT - #{date}
 
-If you have suggestions, questions, or just want to say hi, please email us at hello@theresumedrop.com
+User: #{to}
+Plan: #{plan}
+Amount: USD $#{amount}
 
-Thanks!
-The Resume Drop Team
+The Resume Drop
+
 EOS
-      Pony.mail(:to => to, :from => "'The Resume Drop' <welcome@theresumedrop.com>", :subject => subject, :body => body)
+      Pony.mail(:to => to, :from => SUPPORT, :subject => subject, :body => body)
     end
 
     def self.send_welcomeback_email(to, v_key, name)
