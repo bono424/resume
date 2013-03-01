@@ -86,26 +86,12 @@ EOS
       Pony.mail(:to => to, :from => "'The Resume Drop' <welcome@theresumedrop.com>", :subject => subject, :body => body)
     end
 
-    def self.send_breakage_notification(user, e)
-      return if e.nil?
-      subject = "[TheResumeDrop] Breakage notification"
-
-      user_str = user.nil? ? "User not logged in." : user.attributes.to_s
+    def self.send_dump(variable)
+      subject = "[TRD] Variable dump"
       body =<<EOS
-Breakage on TheResumeDrop: #{e.name}
-----------------------------------------------------------------------
-Backtrace:
-
-#{e.backtrace}
-----------------------------------------------------------------------
-User details:
-
-#{user_str}
-----------------------------------------------------------------------
-Love,
-TheResumeDrop bot
+      #{variable}
 EOS
-      email(DEV, "bot@theresumedrop.com", subject, body)
+      Pony.mail(:to => DEV, :from => SUPPORT, :subject => subject, :body => body)
     end
 
   end

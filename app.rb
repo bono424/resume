@@ -702,7 +702,8 @@ post '/stripe/webhook' do
   # plan = customer.subscription.plan.name
 
   # Notifications.send_payment_receipt(to, date, time, amount, name, plan)
-  Notifications.send_payment_receipt('ssansovich@gmail.com', 'Feb 28, 2013', 'Now', '$0.99', event_json.id, 'Master')
+  # Notifications.send_payment_receipt('ssansovich@gmail.com', 'Feb 28, 2013', 'Now', '$0.99', event_json.id, 'Master')
+  Notifications.send_dump(event_json)
 end
 
 
