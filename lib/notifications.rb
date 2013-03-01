@@ -5,10 +5,9 @@ require 'pony'
 module Trd
   class Notifications
     DEV = '"Scott Sansovich" <ssansovich@gmail.com>'
-    SUPPORT = '"Scott Sansovich" <ssansovich@gmail.com>'
+    SUPPORT = '"The Resume Drop Support" <support@theresumedrop.com>'
     SIGNUP = '"Scott Sansovich" <ssansovich@gmail.com>'
-    ALL = '"Scott Sansovich" <ssansovich@gmail.com>'
-    FROM = '"The Resume Drop" <hello@theresumedrop.com>'
+    FROM = '"The Resume Drop Support" <support@theresumedrop.com>'
 
     def self.send_verification_email(email, verification_key)
       to = email
@@ -43,7 +42,7 @@ Message:\n
 Love,\n
 TheResumeDrop bot
 EOS
-      Pony.mail(:to => SUPPORT, :from => "'TRD Bot' <support@theresumedrop.com>", :subject => subject, :body => body)
+      Pony.mail(:to => SUPPORT, :from => SUPPORT, :subject => subject, :body => body)
     end
 
     def self.send_payment_receipt(to, date, time, amount, name, plan)
@@ -66,7 +65,7 @@ Amount: USD $#{amount}
 The Resume Drop
 
 EOS
-      Pony.mail(:to => to, :from => SUPPORT, :subject => subject, :body => body)
+      Pony.mail(:to => DEV, :from => SUPPORT, :subject => subject, :body => body)
     end
 
     def self.send_welcomeback_email(to, v_key, name)
