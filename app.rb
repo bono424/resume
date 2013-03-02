@@ -690,31 +690,31 @@ post '/stripe/webhook' do
   # Retrieve the request's body and parse it as JSON
   event_json = JSON.parse(request.body.read)
 
-  begin
-    customer = Stripe::Customer.retrieve(event_json['data']['object']['customer'])
-  rescue
-    email = "support@theresumedrop.com"
-  end
+  if event_json['type'] == 'charge.succeeded'
+    begin
+      customer = Stripe::Customer.retrieve(event_json['data']['object']['customer'])
+    rescue
+      email = "support@theresumedrop.com"
+    end
 
-  if customer.nil?
-    to = 'ssansovich@gmail.com'
-    name = 'ssansovich@gmail.com'
-    date = Time.at(event_json['data']['object']['created'])
-    date = date.strftime('%B %e, %Y')
-    amount = '.2f' % event_json['data']['object']['amount']
-    plan = 'Check'
-  Notifications.send_dump(event_json)
-  else
-    to = customer['email']
-    name = customer['email']
-    plan = customer['data']['object']['plan']['name']
-    date = Time.at(event_json['data']['object']['created'])
-    date = date.strftime('%B %e, %Y')
-    amount = '.2f' % event_json['data']['object']['amount']
-  end
+    if customer.nil?
+      to = 'ssansovich@gmail.com'
+      date = Time.at(event_json['data']['object']['created'])
+      date = date.strftime('%B %e, %Y')
+      amount = '%.2f' % (event_json['data']['object']['amount'] / 100.0 )
+      plan = 'Check'
+      Notifications.send_dump(event_json)
+    else
+      to = customer['email']
+      name = customer['email']
+      plan = customer['data']['object']['plan']['name']
+      date = Time.at(event_json['data']['object']['created'])
+      date = date.strftime('%B %e, %Y')
+      amount = '%.2f' % (event_json['data']['object']['amount'] / 100.0 )
+    end
 
-  Notifications.send_payment_receipt(to, date, amount, name, plan)
-  # Notifications.send_payment_receipt('ssansovich@gmail.com', 'Feb 28, 2013', 'Now', '$0.99', event_json.id, 'Master')
+    Notifications.send_payment_receipt(to, date, amount, plan)
+  end
 end
 
 
