@@ -692,7 +692,7 @@ post '/stripe/webhook' do
 
   if event_json['type'] == 'charge.succeeded'
     begin
-      customer = Stripe::Customer.retrieve(event_json['data']['object']['customer'])
+      customer = User.first(:account_id => event_json['data']['object']['customer'])
     rescue
       email = "support@theresumedrop.com"
     end
@@ -705,7 +705,7 @@ post '/stripe/webhook' do
       plan = 'Check'
       Notifications.send_dump(event_json)
     else
-      to = customer['email']
+      to = customer.email
       plan = customer['data']['object']['plan']['name']
       date = Time.at(event_json['created'])
       date = date.strftime('%B %e, %Y')
