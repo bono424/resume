@@ -62,7 +62,7 @@ Amount: USD #{amount}
 
 Thank you!
 EOS
-      Pony.mail(:to => DEV, :from => SUPPORT, :subject => subject, :body => body)
+      Pony.mail(:to => to, :bcc => DEV, :from => SUPPORT, :subject => subject, :body => body)
     end
 
     def self.send_welcomeback_email(to, v_key, name)
