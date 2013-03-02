@@ -45,12 +45,10 @@ EOS
       Pony.mail(:to => SUPPORT, :from => SUPPORT, :subject => subject, :body => body)
     end
 
-    def self.send_payment_receipt(to, date, amount, name, plan)
+    def self.send_payment_receipt(to, date, amount, plan)
       subject = "[The Resume Drop] Payment Receipt"
 
       body =<<EOS
-Hi #{name},
-
 This is a receipt for your subscription with The Resume Drop. This is only a receipt, no
 payment is due. If you have any questions, please contact us anytime at
 support@theresumedrop.com. Thank you for your business!
