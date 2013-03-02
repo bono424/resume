@@ -690,18 +690,16 @@ post '/stripe/webhook' do
   # Retrieve the request's body and parse it as JSON
   event_json = JSON.parse(request.body.read)
 
-  # customer = Stripe::Customer.retrieve(event_json.data.object.customer)
+  customer = Stripe::Customer.retrieve(event_json['data']['object']['customer'])
 
-  # user = Users.first(:email => customer.email)
-  # 
-  # to = user.email
-  # date = Time.at(event_json.data.object.date)
-  # date = date.('%B %e, %Y')
-  # amount = '.2f' % event_json.data.object.total
-  # name = user.name
-  # plan = customer.subscription.plan.name
+  to = customer['email']
+  date = Time.at(event_json['data']['object']['created'])
+  date = date.('%B %e, %Y')
+  amount = '.2f' % event_json['data']['object']['amount']
+  name = customer['email']
+  plan = customer['data']['object']['plan']['name']
 
-  # Notifications.send_payment_receipt(to, date, time, amount, name, plan)
+  Notifications.send_payment_receipt(to, date, time, amount, name, plan)
   # Notifications.send_payment_receipt('ssansovich@gmail.com', 'Feb 28, 2013', 'Now', '$0.99', event_json.id, 'Master')
   Notifications.send_dump(event_json)
 end
