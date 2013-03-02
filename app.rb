@@ -692,7 +692,7 @@ post '/stripe/webhook' do
 
   if event_json['type'] == 'charge.succeeded'
     begin
-      customer = User.first(:account_id => event_json['data']['object']['customer'])
+      customer = Employer.first(:account_id => event_json['data']['object']['customer'])
     rescue
       email = "support@theresumedrop.com"
     end
@@ -702,7 +702,7 @@ post '/stripe/webhook' do
       date = Time.at(event_json['data']['object']['created'])
       date = date.strftime('%B %e, %Y')
       amount = '%.2f' % (event_json['data']['object']['amount'] / 100.0 )
-      plan = 'Check'
+      plan = 'Something went wrong'
       Notifications.send_dump(event_json)
     else
       to = customer.email
