@@ -690,11 +690,11 @@ post '/stripe/webhook' do
   # Retrieve the request's body and parse it as JSON
   event_json = JSON.parse(request.body.read)
 
-  # begin
-  #   customer = Stripe::Customer.retrieve(event_json['data']['object']['customer'])
-  # rescue
-  #   customer['email'] = "support@theresumedrop.com"
-  # end
+  begin
+    customer = Stripe::Customer.retrieve(event_json['data']['object']['customer'])
+  rescue
+    customer['email'] = "support@theresumedrop.com"
+  end
 
   to = 'ssansovich@gmail.com'
   name = 'ssansovich@gmail.com'
