@@ -713,7 +713,7 @@ post '/stripe/webhook' do
     amount = '.2f' % event_json['data']['object']['amount']
   end
 
-  Notifications.send_payment_receipt(to, date, time, amount, name, plan)
+  Notifications.send_payment_receipt(to, date, amount, name, plan)
   # Notifications.send_payment_receipt('ssansovich@gmail.com', 'Feb 28, 2013', 'Now', '$0.99', event_json.id, 'Master')
 end
 
