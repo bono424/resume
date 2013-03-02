@@ -699,7 +699,7 @@ post '/stripe/webhook' do
   to = 'ssansovich@gmail.com'
   name = 'ssansovich@gmail.com'
   date = Time.at(event_json['data']['object']['created'])
-  date = date.('%B %e, %Y')
+  date = date.strftime('%B %e, %Y')
   amount = '.2f' % event_json['data']['object']['amount']
   name = customer['email']
   plan = customer['data']['object']['plan']['name']
