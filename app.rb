@@ -706,9 +706,8 @@ post '/stripe/webhook' do
       Notifications.send_dump(event_json)
     else
       to = customer['email']
-      name = customer['email']
       plan = customer['data']['object']['plan']['name']
-      date = Time.at(event_json['data']['object']['created'])
+      date = Time.at(event_json['created'])
       date = date.strftime('%B %e, %Y')
       amount = '%.2f' % (event_json['data']['object']['amount'] / 100.0 )
     end
