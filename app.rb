@@ -10,6 +10,7 @@ require 'will_paginate'
 require 'will_paginate/data_mapper'
 
 require 'csv'
+require 'json'
 
 # Helpers
 require './lib/render_partial'
@@ -93,7 +94,108 @@ helpers do
     html += "</div></div>"
     html
   end
+
+def send_wb
+  all = Student.all
+
+  all.each do |u|
+    u.email
+    u.verification_key
+    name = "there" # "Hi there"
+    unless u.name.nil?
+      name = u.name.split
+      name = name[0]
+    end
+    Notifications.send_welcomeback_email(u.email, u.verification_key, name)
+    puts "#{u.id} | #{u.name} | #{u.email}"
+  end
 end
+
+def db
+  users_csv = File.read('users.csv')
+  info_csv = File.read('info.csv')
+  users = CSV.parse(users_csv, :headers => true)
+  info = CSV.parse(info_csv, :headers => true)
+
+  users.each do |u|
+    if u['Is_employer'] != "1"
+      user = Student.first_or_create(:email => u['Email'])
+      user.salt = random_string(6)
+      user.verification_key = random_string(32)
+      user.type = Student
+
+      info.each do |row| 
+        if row['UID'] == u['UID']
+          user.name = "#{row['First']} #{row['Last']}" unless  row['First'].nil? || row['Last'].nil? || row['First'].empty? || row['Last'].empty?
+          unless row['School'].nil? || row['School'].empty?
+            user.school = row['School'] unless String.try_convert(row['School']).nil?
+          end
+          unless row['Major'].nil? || row['Major'].empty?
+            if row['Major'].is_a? String
+              user.major = row['Major']
+            end
+          end
+          unless row['Minor'].nil? || row['Minor'].empty?
+            if row['Minor'].is_a? String
+              user.minor = row['Minor']
+            end
+          end
+          unless row['GPA'].nil? || row['GPA'] == "0" || row['GPA'].empty?
+            s = row['GPA'].to_f
+            gpa = "%1.2f" % s
+            user.gpa = gpa
+          end
+          unless row['Class'].nil? || row['Class'].empty? || row['Class'] == "0"
+            user.class = Date.strptime(row['Class'], '%Y') rescue nil
+          end
+          user.is_verified = true;
+        end
+      end
+      begin
+        user.save
+        puts "#{user.id} | #{user.email} | #{user.name}"
+      rescue
+        @error = user
+        @users = Student.all
+        haml :display_db
+      end
+    end
+  end
+  @users = Student.all
+end
+
+def upload_resumes
+  users_csv = File.read('users.csv')
+  info_csv = File.read('info.csv')
+  users = CSV.parse(users_csv, :headers => true)
+  info = CSV.parse(info_csv, :headers => true)
+
+  users.each do |u|
+    user = Student.first(:email => u['Email'])
+    info.each do |i|
+      if u['UID'] == i['UID']
+        unless i['Resume'].nil? || i['Resume'].empty?
+          old_resume_name = i['Resume'] 
+          user.resume = "#{random_string(32)}.pdf"
+          puts "USER: #{user.name}  |  OLD: #{old_resume_name}  |  NEW #{user.resume}"
+          begin
+            AWS::S3::Base.establish_connection!(
+            :access_key_id     => 'AKIAIQGNVCLXSVJ6JI4Q',
+            :secret_access_key => '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')
+            if AWS::S3::S3Object.exists? old_resume_name, 'trd-assets'
+              AWS::S3::S3Object.rename old_resume_name, user.resume, 'trd-assets', :access => :public_read
+              user.save
+            end
+          rescue TrdError => e
+            puts e
+          end
+        end
+      end
+    end
+  end
+end
+
+end #end helpers
 
 before do
   @success = nil
@@ -164,7 +266,7 @@ post '/upload/:action' do
 
     # generate name and determine filetype
     ext = File.extname(params['file'][:filename])
-    name = "#{(Time.now.to_i.to_s + Time.now.usec.to_s).ljust(16, '0')}#{ext}"
+    name = "#{random_string(32)}#{ext}"
     # ENV['RACK_ENV'] == 'production' ? tmpname = "#{RAILS_ROOT}/tmp/#{name}" : tmpname=name
 
     case params[:action]
@@ -553,7 +655,7 @@ post '/subscribe/:plan' do
     user = User.get(:email => params[:email])
     raise TrdError.new("This account is already registered. Please contact us at support@theresumedrop.com to delete this account.") unless user.nil?
 
-    Stripe.api_key = "sk_test_aR1DCWnDqi5OlkU04ZyH3tp3"
+    Stripe.api_key = settings.stripe_key
     customer = Stripe::Customer.create(
       :description => "Customer for #{params[:name]}",
       :email => params[:email],
@@ -582,22 +684,38 @@ post '/subscribe/:plan' do
   end
 end
 
-get '/stripe_test' do
-  begin
-    Stripe.api_key = "sk_test_aR1DCWnDqi5OlkU04ZyH3tp3"
-    Stripe::Charge.create(
-        :amount => 1500, # $15.00 this time
-        :currency => "usd",
-        :customer => @user.account_id
-    )
-    @success = "You've charged the account."
-    haml :subscribe, :layout => :'layouts/subscribe'
-  rescue Stripe::StripeError
-    @error = "We were unable to process your payment. Please email support@theresumedrop.com for more information."
-    @success = nil
-    haml :subscribe, :layout => :'layouts/subscribe'
+post '/stripe/webhook' do
+  Stripe.api_key = settings.stripe_key
+
+  # Retrieve the request's body and parse it as JSON
+  event_json = JSON.parse(request.body.read)
+
+  if event_json['type'] == 'charge.succeeded'
+    begin
+      customer = Employer.first(:account_id => event_json['data']['object']['customer'])
+    rescue
+      email = "support@theresumedrop.com"
+    end
+
+    if customer.nil?
+      to = 'ssansovich@gmail.com'
+      date = Time.at(event_json['data']['object']['created'])
+      date = date.strftime('%B %e, %Y')
+      amount = '%.2f' % (event_json['data']['object']['amount'] / 100.0 )
+      plan = 'Something went wrong'
+      Notifications.send_dump(event_json)
+    else
+      to = customer.email
+      plan = customer.plan
+      date = Time.at(event_json['created'])
+      date = date.strftime('%B %e, %Y')
+      amount = '%.2f' % (event_json['data']['object']['amount'] / 100.0 )
+    end
+
+    Notifications.send_payment_receipt(to, date, amount, plan)
   end
 end
+
 
 # Static pages.
 
@@ -661,78 +779,8 @@ end
 
 post '/contact' do
   @user.nil? ? email = params[:email] : email = @user.email
-  message = params[:message]
+  message = params[:body]
   Notifications.send_contact_email(email, message)
-end
-
-get '/database' do
-  users_csv = File.read('users.csv')
-  info_csv = File.read('info.csv')
-  users = CSV.parse(users_csv, :headers => true)
-  info = CSV.parse(info_csv, :headers => true)
-
-  users.each do |u|
-  # TODO: Don't create duplicates!
-    if u['Is_employer'] != "1"
-      user = Student.first_or_create(:email => u['Email'])
-      user.salt = random_string(6)
-      user.verification_key = random_string(32)
-      user.type = Student
-
-      info.each do |row| 
-        if row['UID'] == u['UID']
-          user.name = "#{row['First']} #{row['Last']}" unless  row['First'].nil? || row['Last'].nil? || row['First'].empty? || row['Last'].empty?
-          unless row['School'].nil? || row['School'].empty?
-            user.school = row['School'] unless String.try_convert(row['School']).nil?
-          end
-          unless row['Major'].nil? || row['Major'].empty?
-            if row['Major'].is_a? String
-              user.major = row['Major']
-            end
-          end
-          unless row['Minor'].nil? || row['Minor'].empty?
-            if row['Minor'].is_a? String
-              user.minor = row['Minor']
-            end
-          end
-          unless row['GPA'].nil? || row['GPA'] == "0" || row['GPA'].empty?
-            s = row['GPA'].to_f
-            gpa = "%1.2f" % s
-            user.gpa = gpa
-          end
-          unless row['Class'].nil? || row['Class'].empty? || row['Class'] == "0"
-            user.class = Date.strptime(row['Class'], '%Y') rescue nil
-          end
-          user.is_verified = true;
-        end
-      end
-      begin
-        user.save
-      rescue
-        @error = user
-        @users = Student.all
-        haml :display_db
-      end
-    end
-  end
-  @users = Student.all
-  haml :display_db
-end
-
-get '/sendwb' do
-  all = Student.all
-
-  all.each do |u|
-    u.email
-    u.verification_key
-    name = "there" # "Hi there"
-    unless u.name.nil?
-      name = u.name.split
-      name = name[0]
-    end
-    Notifications.send_welcomeback_email(u.email, u.verification_key, name)
-  end
-  "Sent! Maybe..."
 end
 
 get '/welcomeback/:key' do

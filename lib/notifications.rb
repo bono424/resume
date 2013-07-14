@@ -5,10 +5,9 @@ require 'pony'
 module Trd
   class Notifications
     DEV = '"Scott Sansovich" <ssansovich@gmail.com>'
-    SUPPORT = '"Scott Sansovich" <ssansovich@gmail.com>'
+    SUPPORT = '"The Resume Drop Support" <support@theresumedrop.com>'
     SIGNUP = '"Scott Sansovich" <ssansovich@gmail.com>'
-    ALL = '"Scott Sansovich" <ssansovich@gmail.com>'
-    FROM = '"The Resume Drop" <hello@theresumedrop.com>'
+    FROM = '"The Resume Drop Support" <support@theresumedrop.com>'
 
     def self.send_verification_email(email, verification_key)
       to = email
@@ -43,7 +42,27 @@ Message:\n
 Love,\n
 TheResumeDrop bot
 EOS
-      Pony.mail(:to => SUPPORT, :from => "'TRD Bot' <bot@theresumedrop.com>", :subject => subject, :body => body)
+      Pony.mail(:to => SUPPORT, :from => SUPPORT, :subject => subject, :body => body)
+    end
+
+    def self.send_payment_receipt(to, date, amount, plan)
+      subject = "[The Resume Drop] Payment Receipt"
+
+      body =<<EOS
+This is a receipt for your subscription with The Resume Drop. This is only a receipt, no
+payment is due. If you have any questions, please contact us anytime at
+support@theresumedrop.com. Thank you for your business!
+
+THE RESUME DROP RECEIPT - #{date}\n
+
+User: #{to}\n
+Plan: #{plan}\n
+Amount: USD #{amount}
+
+
+Thank you!
+EOS
+      Pony.mail(:to => to, :bcc => DEV, :from => SUPPORT, :subject => subject, :body => body)
     end
 
     def self.send_welcomeback_email(to, v_key, name)
@@ -65,26 +84,12 @@ EOS
       Pony.mail(:to => to, :from => "'The Resume Drop' <welcome@theresumedrop.com>", :subject => subject, :body => body)
     end
 
-    def self.send_breakage_notification(user, e)
-      return if e.nil?
-      subject = "[TheResumeDrop] Breakage notification"
-
-      user_str = user.nil? ? "User not logged in." : user.attributes.to_s
+    def self.send_dump(variable)
+      subject = "[TRD] Variable dump"
       body =<<EOS
-Breakage on TheResumeDrop: #{e.name}
-----------------------------------------------------------------------
-Backtrace:
-
-#{e.backtrace}
-----------------------------------------------------------------------
-User details:
-
-#{user_str}
-----------------------------------------------------------------------
-Love,
-TheResumeDrop bot
+      #{variable}
 EOS
-      email(DEV, "bot@theresumedrop.com", subject, body)
+      Pony.mail(:to => DEV, :from => SUPPORT, :subject => subject, :body => body)
     end
 
   end

@@ -20,7 +20,6 @@ tmp
 *.swo
 design
 sinatra.log
-*.csv
 
 # YARD artifacts
 .yardoc

@@ -1,7 +1,7 @@
 require 'data_mapper'
 require 'digest/sha2'
 require 'pony'
-
+DataMapper::Logger.new($stdout, :debug)
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://localhost/trd_test")
 
 if ENV['RACK_ENV'] == 'production'
@@ -9,6 +9,13 @@ if ENV['RACK_ENV'] == 'production'
   set :s3_key, ENV['AWS_ACCESS_KEY_ID']
   set :s3_secret, ENV['AWS_SECRET_ACCESS_KEY']
   set :session_secret, 'manjusri'
+
+  AWS::S3::Base.establish_connection!(
+  :access_key_id     => settings.s3_key,
+  :secret_access_key => settings.s3_secret)
+  AWS::S3::Bucket.enable_logging_for(
+        'trd-assets', 'target_bucket' => 'trd-logs'
+  )
 
   set :stripe_key, ENV['STRIPE_SECRET_KEY']
 
@@ -27,7 +34,6 @@ if ENV['RACK_ENV'] == 'production'
     }
   }
 else
-  set :bucket, 'trd-assets'
   set :session_secret, 'manjusri'
   set :stripe_key, 'sk_test_aR1DCWnDqi5OlkU04ZyH3tp3'
   DataMapper::Model.raise_on_save_failure = true
