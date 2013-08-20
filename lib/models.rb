@@ -20,6 +20,7 @@ class User
   property :type,               Discriminator
   property :created_at,         DateTime
   property :updated_at,         DateTime
+  property :display,            Boolean, :default => true
 end
 
 class Student < User

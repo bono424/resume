@@ -6,18 +6,19 @@
 
 - unless @employers.nil?
   - @employers.each do |e|
-    .row
-      .span2
-        - if e.photo.nil?
-          %img{:src => "/images/companylogos/nologo.png"}
-        - else
-          %a{:href => "/employers/#{h e.handle}"}
-            %img{:src => "https://trd-assets.s3.amazonaws.com/#{h e.photo}"}
-      .span7
-        %a{:href => "/profile/#{h e.handle}"}
-          %b=h e.name
-        - unless e.description.nil?
-          %p=h e.description.gsub("\n","<br >")
-        %div
-          %a{:href => "http://www.#{h e.url}", :target => "_blank"}
-            Visit website
+    - if e.display
+      .row
+        .span2
+          - if e.photo.nil?
+            %img{:src => "/images/companylogos/nologo.png"}
+          - else
+            %a{:href => "/employers/#{h e.handle}"}
+              %img{:src => "https://trd-assets.s3.amazonaws.com/#{h e.photo}"}
+        .span7
+          %a{:href => "/profile/#{h e.handle}"}
+            %b=h e.name
+          - unless e.description.nil?
+            %p=h e.description.gsub("\n","<br >")
+          %div
+            %a{:href => "#{h e.url}", :target => "_blank"}
+              Visit website

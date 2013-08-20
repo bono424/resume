@@ -16,7 +16,7 @@ gem "pony", "~> 1.4"
 gem "stripe", "~> 1.5.17"
 
 gem "aws-s3", "~> 0.6.3"
-gem "rmagick", "~> 2.13.1", :require => 'RMagick'
+gem "rmagick", "~> 2.13.2", :require => 'RMagick'
 
 group :production do
   # gems specifically for Heroku go here

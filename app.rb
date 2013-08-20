@@ -195,6 +195,31 @@ def upload_resumes
   end
 end
 
+def create_trial_employer(email, name)
+  begin
+    @user = Employer.first(:email => email)
+    raise TrdError.new("Looks like that email is already registered.") unless @user.nil?
+
+    salt = random_string(6)
+    hash = hash("foobar", salt)
+
+    verification_key = random_string(32)
+
+    # Create profile and send email
+    user = Employer.create(:email => email, :password => hash, :salt => salt, :verification_key => verification_key, :name => name)
+    # Notifications.send_verification_email(user.email, user.verification_key)
+
+    #bypass normal registration stuff
+    user.display = false
+    user.is_verified = true
+    user.save
+
+    puts "You've successfully registered. Check your email for a verification email."
+  rescue TrdError => e
+    puts e.message
+  end
+end
+
 end #end helpers
 
 before do
