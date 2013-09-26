@@ -870,7 +870,7 @@ post '/forgotpassword' do
   haml :forgotpassword, :layout => :'layouts/panel'
 end
 
-get '/passwordreset' do
+get '/passwordreset/:k' do
   @title = title 'Password Reset'
   begin
     @user = User.first(:verification_key => params[:k])
@@ -884,7 +884,7 @@ get '/passwordreset' do
   haml :passwordreset, :layout => :'layouts/panel'
 end
 
-post '/passwordreset' do
+post '/passwordreset/:k' do
   begin
     @user = User.first(:verification_key => params[:k])
     raise "That is an invalid URL." if @user.nil?
