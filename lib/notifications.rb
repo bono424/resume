@@ -90,7 +90,7 @@ EOS
       body =<<EOS
 Hi #{name},
 
-We've received your request to reset your password. To do so, please visit the following link:
+We've received your request to reset your password. To do so, please visit the following link:\n
 http://www.theresumedrop.com/passwordreset/#{key}
 
 If you believe you have received this message in error, please ignore this message. No action is required on your part.
