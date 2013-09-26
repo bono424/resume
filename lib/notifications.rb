@@ -84,6 +84,23 @@ EOS
       Pony.mail(:to => to, :from => "'The Resume Drop' <welcome@theresumedrop.com>", :subject => subject, :body => body)
     end
 
+    def self.send_password_recovery(to, key, name)
+      subject = "The Resume Drop Password Recovery"
+
+      body =<<EOS
+Hi #{name},
+
+We've received your request to reset your password. To do so, please visit the following link:
+http://www.theresumedrop.com/passwordreset/#{key}
+
+If you believe you have received this message in error, please ignore this message. No action is required on your part.
+
+Thanks!
+The Resume Drop Team
+EOS
+      Pony.mail(:to => to, :from => SUPPORT, :subject => subject, :body => body)
+    end
+
     def self.send_dump(variable)
       subject = "[TRD] Variable dump"
       body =<<EOS

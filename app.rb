@@ -853,3 +853,38 @@ post '/welcomeback/:key' do
     haml :error, :layout => :'layouts/message'
   end
 end
+
+get '/passwordreset' do
+  @title = title 'Password Reset'
+  begin
+    @user = User.first(:verification_key => params[:k])
+    raise nil if @user.nil?
+  rescue
+    @error = "That is an invalid URL. If you pasted the URL from an email, please make sure you copied the entire link."
+    haml :error, :layout => :'layouts/message'
+  end
+
+  @k = params[:k]
+  haml :passwordreset, :layout => :'layouts/panel'
+end
+
+post '/passwordreset' do
+  begin
+    @user = User.first(:verification_key => params[:k])
+    raise "That is an invalid URL." if @user.nil?
+
+    raise p = TrdError.new("Those passwords do not match. Please try again") unless params[:pass1] == params[:pass2]
+    @user.password = hash(params[:pass1], @user.salt)
+    @user.save
+    @success = "Your password has been changed. You can now log in at the <a href='http://www.theresumedrop.com'>homepage</a>."
+
+    haml :passwordreset, :layout => :"layouts/panel"
+  rescue TrdError => p
+    @success = nil
+    @message = p.message
+    haml :passwordreset, :layout => :"layouts/panel"
+  rescue Exception => e
+    @error = e.message
+    haml :error, :layout => :'layouts/message'
+  end
+end
