@@ -854,6 +854,22 @@ post '/welcomeback/:key' do
   end
 end
 
+get '/forgotpassword' do
+  haml :forgotpassword, :layout => :'layouts/panel'
+end
+
+post '/forgotpassword' do
+  @user = User.first(:email => params[:email])
+  puts params[:email]
+  unless @user.nil?
+    Notifications.send_password_recovery(@user.email,@user.verification_key,@user.name)
+    @success = "Please check your email for a link to reset your password."
+  else
+    @message = "That email does not appear to be in our database. Please try again."
+  end
+  haml :forgotpassword, :layout => :'layouts/panel'
+end
+
 get '/passwordreset' do
   @title = title 'Password Reset'
   begin
