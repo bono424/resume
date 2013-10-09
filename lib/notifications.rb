@@ -95,7 +95,7 @@ http://www.theresumedrop.com/passwordreset/#{key}
 
 If you believe you have received this message in error, please ignore this message. No action is required on your part.
 
-Thanks!
+Thanks!\n
 The Resume Drop Team
 EOS
       Pony.mail(:to => to, :from => SUPPORT, :subject => subject, :body => body)

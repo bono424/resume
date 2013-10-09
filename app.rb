@@ -778,7 +778,7 @@ get '/search' do
       else
         
         # Generate query string. I know this sucks. Bear with me.
-        @results = Student.all( :is_verified => true)
+        @results = Student.all( :is_verified => true, :display => true)
         @results = @results.all(:conditions => ["name ILIKE ?", "%#{params[:name]}%"]) unless params[:name].empty?
         @results = @results.all(:conditions => ["school ILIKE ?", "%#{params[:school]}%"]) unless params[:school].empty?
         @results = @results.all(:conditions => ["class = ?", "%#{DateTime.strptime(params[:class],'%Y')}%"]) unless params[:class].empty?
