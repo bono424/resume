@@ -12,7 +12,7 @@
           - if e.photo.nil?
             %img{:src => "/images/companylogos/nologo.png"}
           - else
-            %a{:href => "/employers/#{h e.handle}"}
+            %a{:href => "/profile/#{h e.handle}"}
               %img{:src => "https://trd-assets.s3.amazonaws.com/#{h e.photo}"}
         .span7
           %a{:href => "/profile/#{h e.handle}"}
