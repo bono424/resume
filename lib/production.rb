@@ -13,9 +13,6 @@ if ENV['RACK_ENV'] == 'production'
   AWS::S3::Base.establish_connection!(
   :access_key_id     => settings.s3_key,
   :secret_access_key => settings.s3_secret)
-  AWS::S3::Bucket.enable_logging_for(
-        'trdrop-assets', 'target_bucket' => 'trd-logs'
-  )
 
   set :stripe_key, ENV['STRIPE_SECRET_KEY']
 
