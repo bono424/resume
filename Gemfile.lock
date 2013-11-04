@@ -1,5 +1,5 @@
 GIT
-  remote: http://github.com/ssansovich/will_paginate.git
+  remote: git@github.com:ssansovich/will_paginate.git
   revision: 1a8307bc5fccffdba18fd7e16aa2a676d65321d5
   specs:
     will_paginate (3.0.4)

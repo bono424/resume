@@ -10,7 +10,7 @@ gem "dm-postgres-adapter", "~> 1.2.0"
 gem "do_postgres", "~> 0.10.10"
 gem "dm-timestamps", "~> 1.2.0"
 
-gem "will_paginate", :git => "git@github.com/ssansovich/will_paginate.git"
+gem "will_paginate", :git => "git@github.com:ssansovich/will_paginate.git"
 
 gem "pony", "~> 1.4"
 gem "stripe", "~> 1.5.17"
