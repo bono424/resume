@@ -180,7 +180,7 @@ def upload_resumes
           puts "USER: #{user.name}  |  OLD: #{old_resume_name}  |  NEW #{user.resume}"
           begin
             AWS::S3::Base.establish_connection!(
-            :access_key_id     => ENV['AWS_ACCESS_KEY_ID']
+            :access_key_id     => ENV['AWS_ACCESS_KEY_ID'],
             :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY'])
             if AWS::S3::S3Object.exists? old_resume_name, 'trdrop-assets'
               AWS::S3::S3Object.rename old_resume_name, user.resume, 'trdrop-assets', :access => :public_read
