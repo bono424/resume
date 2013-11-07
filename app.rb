@@ -557,7 +557,7 @@ get '/profile/:id' do
   redirect '/profile' if @user.id == params[:id].to_i
 
   if @user.type == Employer
-    @student = Student.get(params[:id])
+    @student = Student.get(params[:id].to_i)
     raise TrdError.new("Sorry, this page does not exist.") if @student.nil?
 
     @experiences = Experience.all(:student_id => @student.id, :deleted.not => 'true', :order => [ :end_date.desc ])
