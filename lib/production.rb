@@ -18,6 +18,7 @@ if ENV['RACK_ENV'] == 'production'
 
   DataMapper::Model.raise_on_save_failure = false 
 
+  =begin
   Pony.options = {
     :via => :smtp,
     :via_options => {
@@ -30,13 +31,14 @@ if ENV['RACK_ENV'] == 'production'
       :enable_starttls_auto => true
     }
   }
+  =end
 else
   set :session_secret, 'manjusri'
-  set :stripe_key, 'sk_test_aR1DCWnDqi5OlkU04ZyH3tp3'
+  set :stripe_key, 'sk_test_4YpFppsWInTw4StJOGH60h8v'
   DataMapper::Model.raise_on_save_failure = true
 
   Pony.options = {
-    :to => 'Scott Sansovich <ssansovich@gmail.com>',
+    :to => 'Jonathan Colak <jonathan@colak.com.au>',
     :via => :sendmail
   }
 end
