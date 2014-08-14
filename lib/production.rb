@@ -5,10 +5,10 @@ DataMapper::Logger.new($stdout, :debug)
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://localhost/trd_test")
 
 if ENV['RACK_ENV'] == 'production'
-  #set :bucket, ENV['S3_BUCKET_NAME']
-  #set :s3_key, ENV['AWS_ACCESS_KEY_ID']
-  #set :s3_secret, ENV['AWS_SECRET_ACCESS_KEY']
-  #set :session_secret, 'manjusri'
+  set :bucket, ENV['S3_BUCKET_NAME']
+  set :s3_key, ENV['AWS_ACCESS_KEY_ID']
+  set :s3_secret, ENV['AWS_SECRET_ACCESS_KEY']
+  set :session_secret, 'queensland'
 
   #AWS::S3::Base.establish_connection!(
   #:access_key_id     => settings.s3_key,
@@ -33,7 +33,7 @@ if ENV['RACK_ENV'] == 'production'
   }
   
 else
-  set :session_secret, 'manjusri'
+  set :session_secret, 'queensland'
   set :stripe_key, 'sk_test_4YpFppsWInTw4StJOGH60h8v'
   DataMapper::Model.raise_on_save_failure = true
 
