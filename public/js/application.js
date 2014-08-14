@@ -92,7 +92,6 @@ var photoUpload = $('#upload-photo').upload({
     $('#upload-photo').html("<i class='icon-ok icon-white'> Uploading...");
   },
   onComplete: function(response) {
-    alert(response);
     $('#upload-photo').removeClass('btn-inverse');
     $('#upload-photo').addClass('btn-success');
     $('#upload-photo').html("<i class='icon-ok icon-white'> Complete!");
