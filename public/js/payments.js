@@ -1,5 +1,5 @@
 // this identifies your website in the createToken call below
-Stripe.setPublishableKey('pk_test_4YpFm6fKhAYSBCft70ZMjaxX');
+Stripe.setPublishableKey('pk_test_4ZdXGJgd8bwdzkab94bkIX9W');
 
 function stripeResponseHandler(status, response) {
     if (response.error) {

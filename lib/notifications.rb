@@ -4,7 +4,7 @@ require 'pony'
 
 module Trd
   class Notifications
-    DEV = '"TRD Dev <trd@colak.com.au>'
+    DEV = '"TRD Dev <trd@mygrad.com.au>'
     SUPPORT = '"The Resume Drop Support" <support@colak.com.au>'
     SIGNUP = '"Jonathan Colak" <colak.dev@gmail.com>'
     FROM = '"The Resume Drop Support" <support@colak.com.au>'
