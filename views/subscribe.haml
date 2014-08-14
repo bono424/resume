@@ -21,12 +21,12 @@
       .row
         .span6
           %input{:name => "url", :type => "text", :placeholder => "Company website"}
-          %p{:class => "help-block"} Ex. http://www.theresumedrop.com
+          %p{:class => "help-block"} Ex. http://www.mygrad.com.au
       %br
       .row
         .span6
           %input{:name => "handle", :type => "text", :placeholder => "Handle"}
-          %p{:class => "help-block"} Ex. http://www.theresumedrop.com/employers/YOUR_HANDLE
+          %p{:class => "help-block"} Ex. http://www.mygrad.com.au/employers/YOUR_HANDLE
       %br
       .row
         .span6
@@ -66,13 +66,13 @@
       - if params[:plan] == 'starter'
         %h3 Selected: Starter
         %h4{:class => 'green'} $150/mo
-        %p The Starter plan allows you to check out what The Resume Drop is all about. <strong>You are limited to 5 job postings and 50 PDF resumes per month.</strong>
+        %p The Starter plan allows you to check out what MyGrad is all about. <strong>You are limited to 5 job postings and 50 PDF resumes per month.</strong>
         %p You will be able to build a company profile and make customized searches for candidates.
         %p You can <a href="/pricing">upgrade now</a> or at anytime. The choice is yours!
       - if params[:plan] == 'standard'
         %h3 Selected: Standard
         %h4{:class => 'green'} $300/mo
-        %p The Standard plan gives most companies the flexibility they need to get the most out of The Resume Drop. <strong>You are still limited to 15 job postings and 250 PDF resumes per month.</strong>
+        %p The Standard plan gives most companies the flexibility they need to get the most out of MyGrad. <strong>You are still limited to 15 job postings and 250 PDF resumes per month.</strong>
         %p You will be able to build a company profile and make customized searches for candidates.
         %p You can <a href="/pricing">upgrade now</a> or at anytime. The choice is yours!
       - if params[:plan] == 'executive'

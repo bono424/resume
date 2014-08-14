@@ -1,13 +1,13 @@
 .row
   - unless @student.photo.nil?
     .span1
-      %img{:src => "https://trd-assets.s3.amazonaws.com/#{h @student.photo}", :class => "img-polaroid student-profile-pic"}
+      %img{:src => "https://mygrad-assets.s3.amazonaws.com/#{h @student.photo}", :class => "img-polaroid student-profile-pic"}
   .span5
     %h1= @student.name
     - if @student.resume.nil?
       %p Currently no resume uploaded.
     - else
-      %a{:href => "https://trd-assets.s3.amazonaws.com/#{h @student.resume}", :target => "_blank"} View current resume
+      %a{:href => "https://mygrad-assets.s3.amazonaws.com/#{h @student.resume}", :target => "_blank"} View current resume
 %hr
 
 /education

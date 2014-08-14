@@ -5,31 +5,31 @@ require 'pony'
 module Trd
   class Notifications
     DEV = '"TRD Dev <trd@mygrad.com.au>'
-    SUPPORT = '"The Resume Drop Support" <support@colak.com.au>'
-    SIGNUP = '"Jonathan Colak" <colak.dev@gmail.com>'
-    FROM = '"The Resume Drop Support" <support@colak.com.au>'
+    SUPPORT = '"MyGrad Support" <support@mygrad.com.au>'
+    SIGNUP = '"Jonathan Colak" <jonathan@colak.com.au>'
+    FROM = '"MyGrad Support" <support@mygrad.com.au>'
 
     def self.send_verification_email(email, verification_key)
       to = email
-      from = "The Resume Drop <welcome@colak.com.au>"
-      link = "http://colak.com.au/verify/#{verification_key}"
-      subject = "Welcome to The Resume Drop!"
+      from = "MyGrad <welcome@mygrad.com.au>"
+      link = "http://mygrad.com.au/verify/#{verification_key}"
+      subject = "Welcome to MyGrad!"
       body = <<EOS
 Before you can start building your profile, you need to confirm your email address.  Just click this link below (or copy and paste it into your address bar):
 
 #{link}
 
-If you have any questions or suggestions, please email us at hello@colak.com.au
+If you have any questions or suggestions, please email us at hello@mygrad.com.au
 
 Good luck and have fun!
 
-The Resume Drop Team
+MyGrad Team
 EOS
       Pony.mail(:to => to, :from => from, :subject => subject, :body => body)
     end
 
     def self.send_contact_email(from, message)
-      subject = "[TheResumeDrop] Message from #{from}"
+      subject = "[mygrad] Message from #{from}"
 
       body =<<EOS
 From: #{from} \n
@@ -40,20 +40,20 @@ Message:\n
 ----------------------------------------------------------------------\n\n
 
 Love,\n
-TheResumeDrop bot
+mygrad bot
 EOS
       Pony.mail(:to => SUPPORT, :from => SUPPORT, :subject => subject, :body => body)
     end
 
     def self.send_payment_receipt(to, date, amount, plan)
-      subject = "[The Resume Drop] Payment Receipt"
+      subject = "[MyGrad] Payment Receipt"
 
       body =<<EOS
-This is a receipt for your subscription with The Resume Drop. This is only a receipt, no
+This is a receipt for your subscription with MyGrad. This is only a receipt, no
 payment is due. If you have any questions, please contact us anytime at
-support@colak.com.au. Thank you for your business!
+support@mygrad.com.au. Thank you for your business!
 
-THE RESUME DROP RECEIPT - #{date}\n
+MyGrad RECEIPT - #{date}\n
 
 User: #{to}\n
 Plan: #{plan}\n
@@ -71,32 +71,32 @@ EOS
       body =<<EOS
 Hi #{name},
 
-Thanks for joining The Resume Drop. We've been hard at work improving The Resume Drop. We're proud to say that the new version is now online. We hope you'll find it a lot easier to create your profile and find great opportunities.
+Thanks for joining MyGrad. We've been hard at work improving MyGrad. We're proud to say that the new version is now online. We hope you'll find it a lot easier to create your profile and find great opportunities.
 
 To visit your profile, go to the link below (it's unique to you):
-http://www.colak.com.au/welcomeback/#{v_key}
+http://www.mygrad.com.au/welcomeback/#{v_key}
 
-If you have suggestions, questions, or just want to say hi, please email us at hello@colak.com.au
+If you have suggestions, questions, or just want to say hi, please email us at hello@mygrad.com.au
 
 Thanks!
-The Resume Drop Team
+MyGrad Team
 EOS
-      Pony.mail(:to => to, :from => "'The Resume Drop' <welcome@colak.com.au>", :subject => subject, :body => body)
+      Pony.mail(:to => to, :from => "'MyGrad' <welcome@mygrad.com.au>", :subject => subject, :body => body)
     end
 
     def self.send_password_recovery(to, key, name)
-      subject = "The Resume Drop Password Recovery"
+      subject = "MyGrad Password Recovery"
 
       body =<<EOS
 Hi #{name},
 
 We've received your request to reset your password. To do so, please visit the following link:\n
-http://www.colak.com.au/passwordreset/#{key}
+http://www.mygrad.com.au/passwordreset/#{key}
 
 If you believe you have received this message in error, please ignore this message. No action is required on your part.
 
 Thanks!\n
-The Resume Drop Team
+MyGrad Team
 EOS
       Pony.mail(:to => to, :from => SUPPORT, :subject => subject, :body => body)
     end

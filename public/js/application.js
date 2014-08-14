@@ -95,7 +95,7 @@ var photoUpload = $('#upload-photo').upload({
     $('#upload-photo').removeClass('btn-inverse');
     $('#upload-photo').addClass('btn-success');
     $('#upload-photo').html("<i class='icon-ok icon-white'> Complete!");
-    $('#photo').attr('src', 'https://trd-assets.s3.amazonaws.com/'+response);
+    $('#photo').attr('src', 'https://mygrad-assets.s3.amazonaws.com/'+response);
   },
   onSelect: function() {
     $('#upload-photo').addClass('btn-inverse');
@@ -115,7 +115,7 @@ var resumeUpload = $('#upload-resume').upload({
     $('#upload-resume').removeClass('btn-inverse');
     $('#upload-resume').addClass('btn-success');
     $('#upload-resume').html("<i class='icon-ok icon-white'> Complete!");
-    $('#resume').html('<a href = "https://trd-assets.s3.amazonaws.com/'+response+'" target = "_blank">View current resume</a>');
+    $('#resume').html('<a href = "https://mygrad-assets.s3.amazonaws.com/'+response+'" target = "_blank">View current resume</a>');
   },
   onSelect: function() {
     $('#upload-resume').addClass('btn-inverse');

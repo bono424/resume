@@ -1,6 +1,6 @@
 %ul{:class => "nav nav-list well"}
   - if @user.nil?
-    %li{:class => "nav-header"} The Resume Drop
+    %li{:class => "nav-header"} MyGrad
     %li
       %a{:href => "/"}
         %i{:class => "icon-home"}
@@ -23,7 +23,7 @@
       - if @user.photo.nil?
         %img{:src => "/img/anon.png", :class => "profilepic img-polaroid"}
       - else
-        %img#photo{:src => "https://trd-assets.s3.amazonaws.com/#{@user.photo}", :class => "profilepic img-polaroid"}
+        %img#photo{:src => "https://mygrad-assets.s3.amazonaws.com/#{@user.photo}", :class => "profilepic img-polaroid"}
     %li{:class => "nav-header"}= @user.name
     %li
       %a{:href => "/profile"}
@@ -51,7 +51,7 @@
       - if @user.photo.nil?
         %img{:src => "/img/nologo.png", :class => "profilepic"}
       - else
-        %img#photo{:src => "https://trd-assets.s3.amazonaws.com/#{@user.photo}"}
+        %img#photo{:src => "https://mygrad-assets.s3.amazonaws.com/#{@user.photo}"}
     %li{:class => "nav-header"}= @user.name
     %li
       %a{:href => "/profile"}

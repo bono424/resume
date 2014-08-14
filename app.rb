@@ -39,9 +39,9 @@ helpers do
   def  title(str = nil)
     # helper for formatting page title
     if str
-      str + ' | The Resume Drop'
+      str + ' | MyGrad'
     else
-      'The Resume Drop'
+      'MyGrad'
     end
   end
 
@@ -258,7 +258,7 @@ post '/' do
     validate(params, [:name, :password, :email])
 
     unless params[:email].end_with? ".edu"
-      raise TrdError.new("Sorry, only students can register with The Resume Drop. If you are an employer, please see our <a href='/pricing'>pricing page</a>.")
+      raise TrdError.new("Sorry, only students can register with MyGrad. If you are an employer, please see our <a href='/pricing'>pricing page</a>.")
     end
 
     @user = Student.first(:email => params[:email])
@@ -384,7 +384,7 @@ get '/verify/:key' do
 
     haml :verify, :layout => :'layouts/message'
   rescue Stripe::StripeError
-    @error = "We were unable to process your payment. Please email support@theresumedrop.com for more information."
+    @error = "We were unable to process your payment. Please email support@mygrad.com.au for more information."
     @success = nil
     haml :verify, :layout => :'layouts/message'
   rescue TrdError => e
@@ -678,7 +678,7 @@ post '/subscribe/:plan' do
   begin
     validate(params, [:token, :email, :name, :password, :handle, :url, :phone])
     user = User.get(:email => params[:email])
-    raise TrdError.new("This account is already registered. Please contact us at support@theresumedrop.com to delete this account.") unless user.nil?
+    raise TrdError.new("This account is already registered. Please contact us at support@mygrad.com.au to delete this account.") unless user.nil?
 
     Stripe.api_key = settings.stripe_key
     customer = Stripe::Customer.create(
@@ -703,7 +703,7 @@ post '/subscribe/:plan' do
     @success = nil
     haml :subscribe, :layout => :'layouts/subscribe'
   rescue Stripe::StripeError
-    @error = "We were unable to process your payment. Please email support@theresumedrop.com for more information."
+    @error = "We were unable to process your payment. Please email support@mygrad.com.au for more information."
     @success = nil
     haml :subscribe, :layout => :'layouts/subscribe'
   end
@@ -719,7 +719,7 @@ post '/stripe/webhook' do
     begin
       customer = Employer.first(:account_id => event_json['data']['object']['customer'])
     rescue
-      email = "support@theresumedrop.com"
+      email = "support@mygrad.com.au"
     end
 
     if customer.nil?
@@ -892,7 +892,7 @@ post '/passwordreset/:k' do
     raise p = TrdError.new("Those passwords do not match. Please try again") unless params[:pass1] == params[:pass2]
     @user.password = hash(params[:pass1], @user.salt)
     @user.save
-    @success = "Your password has been changed. You can now log in at the <a href='http://www.theresumedrop.com'>homepage</a>."
+    @success = "Your password has been changed. You can now log in at the <a href='http://www.mygrad.com.au'>homepage</a>."
 
     haml :passwordreset, :layout => :"layouts/panel"
   rescue TrdError => p
