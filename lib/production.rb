@@ -10,9 +10,9 @@ if ENV['RACK_ENV'] == 'production'
   set :s3_secret, ENV['AWS_SECRET_ACCESS_KEY']
   set :session_secret, 'queensland'
 
-  #AWS::S3::Base.establish_connection!(
-  #:access_key_id     => settings.s3_key,
-  #:secret_access_key => settings.s3_secret)
+  AWS::S3::Base.establish_connection!(
+  :access_key_id     => settings.s3_key,
+  :secret_access_key => settings.s3_secret)
 
   set :stripe_key, ENV['STRIPE_SECRET_KEY']
 
